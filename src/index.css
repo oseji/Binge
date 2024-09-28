@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Inter;
+  src: url("/fonts/Inter_18pt-Regular.ttf");
+}
+
+.App {
+  @apply bg-black text-white font-Inter;
+}
+
+/* HeroSection */
+.HeroSection,
+.favorites {
+  @apply min-h-screen;
+}
+
+header {
+  @apply flex flex-row items-center justify-between py-2 px-10;
+}
+
+.headerList {
+  @apply flex flex-row items-center gap-4;
+}
+
+/* Favourites */
+.favoritesSection {
+  @apply px-10 py-5;
+}
+
+.favoritesGrp {
+  @apply flex flex-row items-center gap-4 justify-center;
+}
+
+.favoritesBox {
+  @apply p-3 h-[480px] w-[380px] bg-yellow-300;
+}
+
+/* Features */
+.featuresSection {
+  @apply px-10 py-5;
+}
+
+.featuresGrp {
+  @apply flex flex-row items-center gap-4 justify-center;
+}
+
+/* Pricing */
+.pricingSection {
+  @apply px-10 py-5;
+}
+
+.pricingGrp {
+  @apply flex flex-row items-center gap-4 justify-center;
+}
+
+.pricingCard {
+  @apply p-3 h-[480px] w-[380px] bg-yellow-300;
+}
+
+/* Footer */
+footer {
+  @apply pt-10;
+}
+
+.footerCol {
+  @apply flex flex-col items-start gap-3;
+}
+
+.footerCol > p {
+  @apply capitalize;
+}
+
+.footerColHeading {
+  @apply text-[#9B51E0];
+}
+
+.footerIconsGrp {
+  @apply flex flex-row items-center gap-6;
+}
+
+.footerIcon {
+  @apply w-6 h-6;
+}
