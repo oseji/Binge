@@ -1,27 +1,55 @@
+import film1 from "../assets/film1.png";
+import film2 from "../assets/film2.png";
+import film3 from "../assets/film3.png";
+
+type favMediaType = {
+  heading: string;
+  subHeading: string;
+  image: string;
+}[];
+
 const Favorites = () => {
+  const favMedia: favMediaType = [
+    {
+      heading: "New & Classics",
+      subHeading: "Series",
+      image: film1,
+    },
+    {
+      heading: "Popular",
+      subHeading: "Movie",
+      image: film2,
+    },
+    {
+      heading: "New & Classics",
+      subHeading: "Series",
+      image: film3,
+    },
+  ];
+
   return (
     <section className="favoritesSection">
-      <h1>Watch your Favourites</h1>
+      <h1 className="sectionHeading">
+        Watch your <span className=" text-[#9B51E0]">Favourites</span>
+      </h1>
 
-      <p>
+      <p className="sectionSubHeading">
         Lorem ipsum dolor sit amet consectetur. Aenean augue e u bibendum morbi.
       </p>
 
       <div className="favoritesGrp">
-        <div className="favoritesBox">
-          <h2 className="favoritesBoxHeading">New &Classics</h2>
-          <p>Series</p>
-        </div>
-
-        <div className="favoritesBox">
-          <h2 className="favoritesBoxHeading">New &Classics</h2>
-          <p>Series</p>
-        </div>
-
-        <div className="favoritesBox">
-          <h2 className="favoritesBoxHeading">New &Classics</h2>
-          <p>Series</p>
-        </div>
+        {favMedia.map((element, index) => (
+          <div
+            className="favoritesBox"
+            key={index}
+            style={{
+              backgroundImage: `url("src/assets/film${index + 1}.png")`,
+            }}
+          >
+            <h2 className={`favoritesBoxHeading`}>{element.heading}</h2>
+            <p>{element.subHeading}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

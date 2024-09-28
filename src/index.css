@@ -8,7 +8,15 @@
 }
 
 .App {
-  @apply bg-black text-white font-Inter;
+  @apply bg-black text-white font-Inter max-w-[100vw];
+}
+
+.sectionHeading {
+  @apply text-center text-4xl font-semibold pb-2;
+}
+
+.sectionSubHeading {
+  @apply text-center;
 }
 
 /* HeroSection */
@@ -25,39 +33,72 @@ header {
   @apply flex flex-row items-center gap-4;
 }
 
+.headerList > li {
+  @apply cursor-pointer;
+}
+
+.heroSectionBtns {
+  @apply w-[490px] rounded-md py-5;
+}
+
 /* Favourites */
 .favoritesSection {
-  @apply px-10 py-5;
+  @apply px-10 py-5 min-h-screen;
 }
 
 .favoritesGrp {
-  @apply flex flex-row items-center gap-4 justify-center;
+  @apply flex flex-row items-center gap-4 justify-center mt-10;
 }
 
 .favoritesBox {
-  @apply p-3 h-[480px] w-[380px] bg-yellow-300;
+  @apply p-3 h-[480px] w-[420px] bg-contain bg-no-repeat;
 }
 
 /* Features */
 .featuresSection {
-  @apply px-10 py-5;
+  @apply px-10 py-5 min-h-screen;
 }
 
 .featuresGrp {
-  @apply flex flex-row items-center gap-4 justify-center;
+  @apply flex flex-row items-center gap-4 justify-center mt-10;
+}
+
+.featureImg {
+  @apply w-[428px] h-[302px];
+}
+
+.featureHeading {
+  @apply text-2xl font-semibold my-2;
 }
 
 /* Pricing */
 .pricingSection {
-  @apply px-10 py-5;
+  @apply px-10 py-5 min-h-screen;
 }
 
 .pricingGrp {
-  @apply flex flex-row items-center gap-4 justify-center;
+  @apply flex flex-row items-center gap-4 justify-center mt-10;
 }
 
 .pricingCard {
-  @apply p-3 h-[480px] w-[380px] bg-yellow-300;
+  @apply p-10 h-[480px] w-[380px] bg-yellow-300;
+}
+
+.pricingBtn {
+  @apply w-full py-5 rounded-md outline;
+}
+
+/* Questions */
+.questionsSection {
+  @apply px-10 py-5;
+}
+
+.questionBox {
+  @apply flex flex-row justify-between items-center p-2 border-b border-white;
+}
+
+.questionBox > img {
+  @apply cursor-pointer;
 }
 
 /* Footer */

@@ -5,8 +5,11 @@ import feature3 from "../assets/feature3.png";
 const Features = () => {
   return (
     <section className="featuresSection">
-      <h1>Our Prominent Features</h1>
-      <p>
+      <h1 className="sectionHeading">
+        Our Prominent <span className=" text-[#9B51E0]">Features</span>
+      </h1>
+
+      <p className="sectionSubHeading">
         Lorem ipsum dolor sit amet consectetur. Aenean augue e u bibendum morbi.
       </p>
 

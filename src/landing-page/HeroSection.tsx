@@ -18,19 +18,22 @@ const HeroSection = () => {
         </ul>
       </header>
 
-      <div className=" text-center">
-        <h1>Welcome to Binge!</h1>
-        <p>
+      <div className=" text-center mt-28">
+        <h1 className="sectionHeading">
+          Welcome to Bin<span className=" text-[#9B51E0]">ge!</span>
+        </h1>
+
+        <p className="sectionSubHeading w-[435px] mx-auto">
           Lorem ipsum dolor sit amet consectetur. Aenean augue e u bibendum
           morbi.
         </p>
 
-        <div className=" flex flex-col items-center gap-3">
-          <button className=" bg-white px-4 py-2 rounded-md">
+        <div className=" flex flex-col items-center gap-3 mt-5">
+          <button className="heroSectionBtns bg-[#9B51E0] rounded-md">
             Wanna Join Binge? Sign Up
           </button>
 
-          <button className=" bg-white px-4 py-2 rounded-md">
+          <button className="heroSectionBtns bg-transparent text-[#9B51E0] outline-[#9B51E0] outline ">
             Start 7-day Free Trial
           </button>
         </div>
