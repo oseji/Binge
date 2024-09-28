@@ -1,6 +1,6 @@
 import proCheckbox from "../assets/pro-checkbox.png";
-import premiumCheckbox from "../assets/premium-checkbox.png";
-import orgCheckbox from "../assets/org-checkbox.png";
+// import premiumCheckbox from "../assets/premium-checkbox.png";
+// import orgCheckbox from "../assets/org-checkbox.png";
 
 type pricingType = {
   heading: string;
@@ -39,10 +39,10 @@ const Pricing = () => {
 
       <div className="pricingGrp">
         {pricingObject.map((element, index) => (
-          <div className="pricingCard">
-            <h1 className="pricingName">Professional</h1>
+          <div className="pricingCard" key={index}>
+            <h1 className="pricingName">{element.heading}</h1>
 
-            <h3 className="price">3,000</h3>
+            <h3 className="price">{element.price}</h3>
 
             <p>
               Lorem ipsum dolor sit amet consectetur. Iaculis quam rhoncus
