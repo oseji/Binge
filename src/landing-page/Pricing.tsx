@@ -49,108 +49,122 @@ const Pricing = () => {
             }`}
             key={index}
           >
-            <div className=" flex flex-col items-start gap-5">
-              <h1 className="pricingName" key={index}>
-                {element.heading}
-              </h1>
+            {index === 0 ? (
+              <div className=" p-2 mb-6"></div>
+            ) : index === 1 ? (
+              <div className=" text-center font-semibold p-2 bg-[#9B51E0] text-black">
+                Most Popular
+              </div>
+            ) : index === 2 ? (
+              <div className=" text-center font-semibold p-2 bg-[#B42318] text-white">
+                Best Deals
+              </div>
+            ) : null}
 
-              <h3 className=" text-white">
-                ₦{" "}
-                <span className=" text-4xl font-bold">
-                  {element.price.toLocaleString()}
-                </span>
-                /month
-              </h3>
+            <div className=" flex flex-col justify-between gap-3 p-8">
+              <div className=" flex flex-col items-start gap-5">
+                <h1 className="pricingName" key={index}>
+                  {element.heading}
+                </h1>
 
-              <p className=" text-white">
-                Lorem ipsum dolor sit amet consectetur. Iaculis quam rhoncus
-                scelerisque .
-              </p>
-            </div>
+                <h3 className=" text-white">
+                  ₦{" "}
+                  <span className=" text-4xl font-bold">
+                    {element.price.toLocaleString()}
+                  </span>
+                  /month
+                </h3>
 
-            <button
-              className={`pricingBtn ${
-                index === 0
-                  ? " outline outline-[#F2994A] text-[#F2994A]"
-                  : index === 1
-                  ? "bg-[#9B51E0] text-white"
-                  : "bg-[#B42318] text-white"
-              }`}
-            >
-              Free 7-days Trial
-            </button>
-
-            <div>
-              <h3 className=" mb-3">Core Features</h3>
-
-              <div className="checkBoxGrp">
-                <img
-                  src={
-                    index === 0
-                      ? proCheckbox
-                      : index === 1
-                      ? premiumCheckbox
-                      : orgCheckbox
-                  }
-                  alt="checkbox"
-                />
-                <p>Rich Member Profile</p>
+                <p className=" text-white text-sm">
+                  Lorem ipsum dolor sit amet consectetur. Iaculis quam rhoncus
+                  scelerisque .
+                </p>
               </div>
 
-              <div className="checkBoxGrp">
-                <img
-                  src={
-                    index === 0
-                      ? proCheckbox
-                      : index === 1
-                      ? premiumCheckbox
-                      : orgCheckbox
-                  }
-                  alt="checkbox"
-                />
-                <p>Rich Member Profile</p>
-              </div>
+              <button
+                className={`pricingBtn ${
+                  index === 0
+                    ? " outline outline-[#F2994A] text-[#F2994A]"
+                    : index === 1
+                    ? "bg-[#9B51E0] text-white"
+                    : "bg-[#B42318] text-white"
+                }`}
+              >
+                Free 7-days Trial
+              </button>
 
-              <div className="checkBoxGrp">
-                <img
-                  src={
-                    index === 0
-                      ? proCheckbox
-                      : index === 1
-                      ? premiumCheckbox
-                      : orgCheckbox
-                  }
-                  alt="checkbox"
-                />
-                <p>Rich Member Profile</p>
-              </div>
+              <div>
+                <h3 className=" mb-3">Core Features</h3>
 
-              <div className="checkBoxGrp">
-                <img
-                  src={
-                    index === 0
-                      ? proCheckbox
-                      : index === 1
-                      ? premiumCheckbox
-                      : orgCheckbox
-                  }
-                  alt="checkbox"
-                />
-                <p>Rich Member Profile</p>
-              </div>
+                <div className="checkBoxGrp">
+                  <img
+                    src={
+                      index === 0
+                        ? proCheckbox
+                        : index === 1
+                        ? premiumCheckbox
+                        : orgCheckbox
+                    }
+                    alt="checkbox"
+                  />
+                  <p>Rich Member Profile</p>
+                </div>
 
-              <div className="checkBoxGrp">
-                <img
-                  src={
-                    index === 0
-                      ? proCheckbox
-                      : index === 1
-                      ? premiumCheckbox
-                      : orgCheckbox
-                  }
-                  alt="checkbox"
-                />
-                <p>Rich Member Profile</p>
+                <div className="checkBoxGrp">
+                  <img
+                    src={
+                      index === 0
+                        ? proCheckbox
+                        : index === 1
+                        ? premiumCheckbox
+                        : orgCheckbox
+                    }
+                    alt="checkbox"
+                  />
+                  <p>Rich Member Profile</p>
+                </div>
+
+                <div className="checkBoxGrp">
+                  <img
+                    src={
+                      index === 0
+                        ? proCheckbox
+                        : index === 1
+                        ? premiumCheckbox
+                        : orgCheckbox
+                    }
+                    alt="checkbox"
+                  />
+                  <p>Rich Member Profile</p>
+                </div>
+
+                <div className="checkBoxGrp">
+                  <img
+                    src={
+                      index === 0
+                        ? proCheckbox
+                        : index === 1
+                        ? premiumCheckbox
+                        : orgCheckbox
+                    }
+                    alt="checkbox"
+                  />
+                  <p>Rich Member Profile</p>
+                </div>
+
+                <div className="checkBoxGrp">
+                  <img
+                    src={
+                      index === 0
+                        ? proCheckbox
+                        : index === 1
+                        ? premiumCheckbox
+                        : orgCheckbox
+                    }
+                    alt="checkbox"
+                  />
+                  <p>Rich Member Profile</p>
+                </div>
               </div>
             </div>
           </div>
