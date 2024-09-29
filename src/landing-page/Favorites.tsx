@@ -46,8 +46,12 @@ const Favorites = () => {
               backgroundImage: `url("src/assets/film${index + 1}.png")`,
             }}
           >
-            <h2 className={`favoritesBoxHeading`}>{element.heading}</h2>
-            <p>{element.subHeading}</p>
+            <div className=" absolute w-full h-full top-0 left-0 bg-black bg-opacity-40"></div>
+
+            <div className=" absolute">
+              <h2 className=" font-semibold">{element.heading}</h2>
+              <p>{element.subHeading}</p>
+            </div>
           </div>
         ))}
       </div>

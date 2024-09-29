@@ -51,7 +51,7 @@ header {
 }
 
 .favoritesBox {
-  @apply p-3 h-[480px] w-[420px] bg-contain bg-no-repeat;
+  @apply p-3 h-[480px] w-[420px] bg-contain bg-no-repeat relative;
 }
 
 /* Features */
@@ -81,11 +81,19 @@ header {
 }
 
 .pricingCard {
-  @apply p-10 h-[480px] w-[380px] bg-yellow-300;
+  @apply p-10 h-[520px] w-[380px]  rounded-md outline flex flex-col justify-between;
+}
+
+.pricingName {
+  @apply text-2xl font-semibold;
 }
 
 .pricingBtn {
-  @apply w-full py-5 rounded-md outline;
+  @apply w-full py-5 my-5 rounded-md;
+}
+
+.checkBoxGrp {
+  @apply flex flex-row items-center gap-3 text-white;
 }
 
 /* Questions */

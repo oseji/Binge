@@ -18,8 +18,8 @@ const HeroSection = () => {
         </ul>
       </header>
 
-      <div className=" text-center mt-28">
-        <h1 className="sectionHeading">
+      <div className=" text-center min-h-[80dvh] flex flex-col justify-center">
+        <h1 className=" text-center text-5xl font-semibold pb-2">
           Welcome to Bin<span className=" text-[#9B51E0]">ge!</span>
         </h1>
 
