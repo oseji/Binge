@@ -1,6 +1,12 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
 import film1 from "../assets/film1.png";
 import film2 from "../assets/film2.png";
 import film3 from "../assets/film3.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type favMediaType = {
   heading: string;
@@ -27,10 +33,37 @@ const Favorites = () => {
     },
   ];
 
+  const animateRef = useRef(null);
+
+  useEffect(() => {
+    gsap.set(animateRef.current, { y: -60 });
+
+    if (animateRef.current) {
+      gsap.fromTo(
+        animateRef.current,
+        { y: -60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+
+          scrollTrigger: {
+            trigger: animateRef.current,
+            start: "top bottom",
+            end: "top 20%",
+            scrub: 0.8,
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
     <section className="favoritesSection">
       <h1 className="sectionHeading">
-        Watch your <span className=" text-[#9B51E0]">Favourites</span>
+        Watch your{" "}
+        <span className=" text-[#9B51E0]" ref={animateRef}>
+          Favourites
+        </span>
       </h1>
 
       <p className="sectionSubHeading">

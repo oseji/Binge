@@ -1,6 +1,30 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
 import logo from "../assets/Binge.svg";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const HeroSection = () => {
+  const animateRef = useRef(null);
+
+  useEffect(() => {
+    console.log(animateRef.current);
+
+    if (animateRef.current) {
+      gsap.fromTo(
+        animateRef.current,
+        { y: -60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+        }
+      );
+    }
+  }, []);
+
   return (
     <section className="HeroSection">
       <header>
@@ -20,7 +44,10 @@ const HeroSection = () => {
 
       <div className=" text-center min-h-[80dvh] flex flex-col justify-center">
         <h1 className=" text-center text-5xl font-semibold pb-2">
-          Welcome to Bin<span className=" text-[#9B51E0]">ge!</span>
+          Welcome to Bin
+          <span className=" text-[#9B51E0] inline-block" ref={animateRef}>
+            ge!
+          </span>
         </h1>
 
         <p className="sectionSubHeading w-[435px] mx-auto">
