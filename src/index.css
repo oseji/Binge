@@ -20,8 +20,7 @@
 }
 
 /* HeroSection */
-.HeroSection,
-.favorites {
+.HeroSection {
   @apply min-h-screen;
 }
 
@@ -38,12 +37,12 @@ header {
 }
 
 .heroSectionBtns {
-  @apply w-[490px] rounded-md py-5;
+  @apply w-[490px] rounded-md py-5 hover:scale-x-105 transition ease-in-out duration-200;
 }
 
 /* Favourites */
 .favoritesSection {
-  @apply px-10 py-5 min-h-screen;
+  @apply px-10 py-10 min-h-screen;
 }
 
 .favoritesGrp {
@@ -56,7 +55,7 @@ header {
 
 /* Features */
 .featuresSection {
-  @apply px-10 py-5 min-h-screen;
+  @apply px-10 py-10 min-h-screen;
 }
 
 .featuresGrp {
@@ -73,7 +72,7 @@ header {
 
 /* Pricing */
 .pricingSection {
-  @apply px-10 py-5 min-h-screen;
+  @apply px-10 py-10 min-h-screen;
 }
 
 .pricingGrp {
@@ -81,7 +80,7 @@ header {
 }
 
 .pricingCard {
-  @apply p-10 h-[520px] w-[380px]  rounded-md outline flex flex-col justify-between;
+  @apply h-[520px] w-[380px]  rounded-md outline;
 }
 
 .pricingName {
@@ -89,24 +88,40 @@ header {
 }
 
 .pricingBtn {
-  @apply w-full py-5 my-5 rounded-md;
+  @apply w-full py-5 my-5 rounded-md hover:scale-110 transition ease-in-out duration-200;
 }
 
 .checkBoxGrp {
   @apply flex flex-row items-center gap-3 text-white;
 }
 
+.checkBoxGrp > img {
+  @apply h-5;
+}
+
+.checkBoxGrp > p {
+  @apply text-sm;
+}
+
 /* Questions */
 .questionsSection {
-  @apply px-10 py-5;
+  @apply px-10 py-10;
+}
+
+.questionGrp {
+  @apply py-3;
 }
 
 .questionBox {
-  @apply flex flex-row justify-between items-center p-2 border-b border-white;
+  @apply flex flex-row justify-between items-center p-0 border-b border-white;
 }
 
 .questionBox > img {
   @apply cursor-pointer;
+}
+
+.questionBox > p {
+  @apply transition ease-in-out duration-200;
 }
 
 /* Footer */

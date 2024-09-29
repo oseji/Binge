@@ -1,6 +1,12 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
 import proCheckbox from "../assets/pro-checkbox.png";
 import premiumCheckbox from "../assets/premium-checkbox.png";
 import orgCheckbox from "../assets/org-checkbox.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type pricingType = {
   heading: string;
@@ -27,10 +33,39 @@ const Pricing = () => {
     },
   ];
 
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    // gsap.set(headingRef.current, { x: 60 });
+
+    if (headingRef.current) {
+      gsap.fromTo(
+        headingRef.current,
+        { scale: 0.4, opacity: 0, rotate: -90 },
+        {
+          scale: 1,
+          opacity: 1,
+          rotate: 0,
+
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 80%",
+            end: "top 20%",
+            scrub: 2,
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
     <section className="pricingSection">
       <h1 className="sectionHeading">
-        Affordable <span className=" text-[#9B51E0]">Plans</span> For You
+        Affordable{" "}
+        <span className=" text-[#9B51E0] inline-block" ref={headingRef}>
+          Plans
+        </span>{" "}
+        For You
       </h1>
 
       <p className="sectionSubHeading">

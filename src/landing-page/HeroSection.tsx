@@ -7,14 +7,12 @@ import logo from "../assets/Binge.svg";
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
-  const animateRef = useRef(null);
+  const headingRef = useRef(null);
 
   useEffect(() => {
-    console.log(animateRef.current);
-
-    if (animateRef.current) {
+    if (headingRef.current) {
       gsap.fromTo(
-        animateRef.current,
+        headingRef.current,
         { y: -60, opacity: 0 },
         {
           y: 0,
@@ -42,10 +40,10 @@ const HeroSection = () => {
         </ul>
       </header>
 
-      <div className=" text-center min-h-[80dvh] flex flex-col justify-center">
+      <div className=" text-center min-h-[100dvh] flex flex-col justify-center">
         <h1 className=" text-center text-5xl font-semibold pb-2">
           Welcome to Bin
-          <span className=" text-[#9B51E0] inline-block" ref={animateRef}>
+          <span className=" text-[#9B51E0] inline-block" ref={headingRef}>
             ge!
           </span>
         </h1>

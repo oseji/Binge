@@ -33,24 +33,24 @@ const Favorites = () => {
     },
   ];
 
-  const animateRef = useRef(null);
+  const headingRef = useRef(null);
 
   useEffect(() => {
-    gsap.set(animateRef.current, { y: -60 });
+    // gsap.set(headingRef.current, { x: 60 });
 
-    if (animateRef.current) {
+    if (headingRef.current) {
       gsap.fromTo(
-        animateRef.current,
-        { y: -60, opacity: 0 },
+        headingRef.current,
+        { x: 60, opacity: 0 },
         {
-          y: 0,
+          x: 0,
           opacity: 1,
 
           scrollTrigger: {
-            trigger: animateRef.current,
-            start: "top bottom",
+            trigger: headingRef.current,
+            start: "top 80%",
             end: "top 20%",
-            scrub: 0.8,
+            scrub: 2,
           },
         }
       );
@@ -61,7 +61,7 @@ const Favorites = () => {
     <section className="favoritesSection">
       <h1 className="sectionHeading">
         Watch your{" "}
-        <span className=" text-[#9B51E0]" ref={animateRef}>
+        <span className=" text-[#9B51E0] inline-block" ref={headingRef}>
           Favourites
         </span>
       </h1>
@@ -79,7 +79,7 @@ const Favorites = () => {
               backgroundImage: `url("src/assets/film${index + 1}.png")`,
             }}
           >
-            <div className=" absolute w-full h-full top-0 left-0 bg-black bg-opacity-40"></div>
+            <div className=" absolute w-full h-full top-0 left-0 bg-black bg-opacity-45"></div>
 
             <div className=" absolute">
               <h2 className=" font-semibold">{element.heading}</h2>
