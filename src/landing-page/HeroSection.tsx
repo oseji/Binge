@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
 import logo from "../assets/Binge.svg";
-import bacg from "../assets/heroSection-bg.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
