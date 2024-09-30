@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import SplitType from "split-type";
 
 import film1 from "../assets/film1.png";
 import film2 from "../assets/film2.png";
@@ -36,15 +37,20 @@ const Favorites = () => {
   const headingRef = useRef(null);
 
   useEffect(() => {
-    // gsap.set(headingRef.current, { x: 60 });
-
     if (headingRef.current) {
-      gsap.fromTo(
-        headingRef.current,
-        { x: 60, opacity: 0 },
+      const text = new SplitType(headingRef.current, { types: "chars,words" });
+
+      const tl = gsap.timeline();
+
+      tl.fromTo(
+        text.chars,
+        { scale: 0.2, opacity: 0, y: -20 },
         {
-          x: 0,
+          scale: 1,
           opacity: 1,
+          y: 0,
+          stagger: 1,
+          duration: 1,
 
           scrollTrigger: {
             trigger: headingRef.current,

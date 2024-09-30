@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import SplitType from "split-type";
 
 import proCheckbox from "../assets/pro-checkbox.png";
 import premiumCheckbox from "../assets/premium-checkbox.png";
@@ -36,16 +37,20 @@ const Pricing = () => {
   const headingRef = useRef(null);
 
   useEffect(() => {
-    // gsap.set(headingRef.current, { x: 60 });
-
     if (headingRef.current) {
-      gsap.fromTo(
-        headingRef.current,
-        { scale: 0.4, opacity: 0, rotate: -90 },
+      const text = new SplitType(headingRef.current, { types: "chars,words" });
+
+      const tl = gsap.timeline();
+
+      tl.fromTo(
+        text.chars,
+        { scale: 0.2, opacity: 0, y: -20 },
         {
           scale: 1,
           opacity: 1,
-          rotate: 0,
+          y: 0,
+          stagger: 1,
+          duration: 1,
 
           scrollTrigger: {
             trigger: headingRef.current,
