@@ -3,16 +3,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import SplitType from "split-type";
 
-import film1 from "../assets/film1.png";
-import film2 from "../assets/film2.png";
-import film3 from "../assets/film3.png";
-
 gsap.registerPlugin(ScrollTrigger);
 
 type favMediaType = {
   heading: string;
   subHeading: string;
-  image: string;
 }[];
 
 const Favorites = () => {
@@ -20,17 +15,14 @@ const Favorites = () => {
     {
       heading: "New & Classics",
       subHeading: "Series",
-      image: film1,
     },
     {
       heading: "Popular",
       subHeading: "Movie",
-      image: film2,
     },
     {
       heading: "New & Classics",
       subHeading: "Series",
-      image: film3,
     },
   ];
 
@@ -82,7 +74,7 @@ const Favorites = () => {
             className="favoritesBox"
             key={index}
             style={{
-              backgroundImage: `url("src/assets/film${index + 1}.png")`,
+              backgroundImage: `url("/film${index + 1}.png")`,
             }}
           >
             <div className=" absolute w-full h-full top-0 left-0 bg-black bg-opacity-45"></div>

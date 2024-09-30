@@ -25,12 +25,10 @@ const HeroSection = () => {
 
   return (
     <section className="HeroSection">
-      {/* <div className=" absolute w-full h-full top-0 left-0 bg-black"></div> */}
-
       <div
         className=" p-5 absolute w-full h-full"
         style={{
-          backgroundImage: `url("src/assets/heroSection-bg.jpg")`,
+          backgroundImage: `url("/heroSection-bg.jpg")`,
           backgroundSize: "100% 100%",
         }}
       >

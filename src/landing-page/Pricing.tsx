@@ -55,7 +55,7 @@ const Pricing = () => {
           scrollTrigger: {
             trigger: headingRef.current,
             start: "top 80%",
-            end: "top 20%",
+            end: "top 30%",
             scrub: 2,
           },
         }
