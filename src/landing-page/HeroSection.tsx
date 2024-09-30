@@ -39,7 +39,7 @@ const HeroSection = () => {
             <li>Tv Shows</li>
           </ul>
 
-          <img src={logo} alt="Binge Logo" />
+          <img src={logo} alt="Binge Logo" className="headerLogo" />
 
           <ul className="headerList">
             <li>Choose your language</li>
@@ -48,14 +48,14 @@ const HeroSection = () => {
         </header>
 
         <div className=" text-center min-h-[100dvh] flex flex-col justify-center">
-          <h1 className=" text-center text-5xl font-semibold pb-2">
+          <h1 className=" text-center text-4xl md:text-5xl font-semibold pb-2">
             Welcome to Bin
             <span className=" text-[#9B51E0] inline-block" ref={headingRef}>
               ge!
             </span>
           </h1>
 
-          <p className="sectionSubHeading w-[435px] mx-auto">
+          <p className="sectionSubHeading w-10/12 md:w-[435px] mx-auto">
             Lorem ipsum dolor sit amet consectetur. Aenean augue e u bibendum
             morbi.
           </p>

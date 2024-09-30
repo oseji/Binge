@@ -9,7 +9,7 @@ import github from "../assets/github.png";
 const Footer = () => {
   return (
     <footer>
-      <div className=" flex flex-row items-start justify-center gap-20 pb-10">
+      <div className=" flex flex-col lg:flex-row items-start justify-center gap-20 p-5 md:p-0 md:pb-10">
         <div>
           <img src={footerLogo} alt="Binge Logo" className=" pb-5" />
           <p className="w-[320px]">
@@ -69,7 +69,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className=" bg-[#101828] py-10 px-20 flex flex-row justify-between items-center">
+      <div className=" bg-[#101828] py-10 px-20 flex-col md:flex-row justify-between items-center">
         <p className="text-[#98A2B3]">© 2023 Binge. All rights reserved.</p>
 
         <div className="footerIconsGrp">
