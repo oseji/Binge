@@ -45,7 +45,7 @@ const Questions = () => {
             trigger: headingRef.current,
             start: "top 80%",
             end: "top 30%",
-            scrub: 2,
+            scrub: 3,
           },
         }
       );

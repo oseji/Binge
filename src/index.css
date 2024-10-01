@@ -12,11 +12,11 @@
 }
 
 .sectionHeading {
-  @apply text-center text-4xl font-semibold pb-2;
+  @apply text-start lg:text-center text-4xl font-semibold pb-2;
 }
 
 .sectionSubHeading {
-  @apply text-center;
+  @apply text-start lg:text-center;
 }
 
 /* HeroSection */
@@ -25,7 +25,7 @@
 }
 
 header {
-  @apply flex flex-col lg:flex-row items-center justify-between py-2 px-10;
+  @apply flex flex-col lg:flex-row items-center justify-between lg:py-2 lg:px-10;
 }
 
 .headerList {
@@ -42,24 +42,28 @@ header {
 
 /* Favourites */
 .favoritesSection {
-  @apply px-5 md:px-10 py-10 min-h-screen;
+  @apply px-5 md:px-10 py-10 min-h-[30dvh] xl:min-h-screen;
 }
 
 .favoritesGrp {
-  @apply flex flex-col md:flex-row items-center gap-10 md:gap-4 justify-center mt-10;
+  @apply w-full overflow-x-scroll md:overflow-x-hidden flex flex-row items-center gap-10 md:gap-4 md:justify-center mt-10;
 }
 
 .favoritesBox {
-  @apply p-3 h-[480px] w-11/12 md:w-[420px] bg-contain bg-no-repeat relative;
+  @apply p-3 h-[480px] min-w-[80%] md:min-w-[420px] bg-contain bg-no-repeat relative;
 }
 
 /* Features */
 .featuresSection {
-  @apply px-5 md:px-10 py-10 min-h-screen;
+  @apply px-5 md:px-10 py-10 min-h-[40dvh] xl:min-h-screen;
 }
 
 .featuresGrp {
-  @apply flex flex-col md:flex-row items-center gap-4 justify-center mt-10;
+  @apply flex flex-col md:flex-row items-center gap-14 md:gap-4 justify-between lg:justify-center mt-10;
+}
+
+.featuresBox {
+  @apply w-full md:w-[30%];
 }
 
 .featureImg {
@@ -72,15 +76,15 @@ header {
 
 /* Pricing */
 .pricingSection {
-  @apply px-5 md:px-10 py-10 min-h-screen;
+  @apply px-5 md:px-10 py-10 min-h-[40dvh] xl:min-h-screen;
 }
 
 .pricingGrp {
-  @apply flex flex-col md:flex-row items-center  justify-center mt-10 gap-5;
+  @apply flex flex-col lg:flex-row items-center  justify-center mt-10 gap-5;
 }
 
 .pricingCard {
-  @apply h-[520px] w-11/12 md:w-[380px]  rounded-md outline;
+  @apply xl:h-[520px] w-full lg:w-[380px]  rounded-md outline;
 }
 
 .pricingName {

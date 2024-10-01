@@ -31,8 +31,8 @@ const Features = () => {
           scrollTrigger: {
             trigger: headingRef.current,
             start: "top 80%",
-            end: "top 20%",
-            scrub: 2,
+            end: "top 30%",
+            scrub: 3,
           },
         }
       );

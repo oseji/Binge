@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import menu from "../assets/menu.svg";
 
 import logo from "../assets/Binge.svg";
 
@@ -45,9 +46,11 @@ const HeroSection = () => {
             <li>Choose your language</li>
             <li>Sign up</li>
           </ul>
+
+          <img src={menu} alt="menu icon" />
         </header>
 
-        <div className=" text-center min-h-[100dvh] flex flex-col justify-center">
+        <div className=" text-center min-h-[80dvh] md:min-h-[100dvh] flex flex-col justify-center">
           <h1 className=" text-center text-4xl md:text-5xl font-semibold pb-2">
             Welcome to Bin
             <span className=" text-[#9B51E0] inline-block" ref={headingRef}>

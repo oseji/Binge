@@ -9,7 +9,7 @@ import github from "../assets/github.png";
 const Footer = () => {
   return (
     <footer>
-      <div className=" flex flex-col lg:flex-row items-start justify-center gap-20 p-5 md:p-0 md:pb-10">
+      <div className=" flex flex-col lg:flex-row items-start lg:justify-between gap-10 lg:gap-14 p-10">
         <div>
           <img src={footerLogo} alt="Binge Logo" className=" pb-5" />
           <p className="w-[320px]">
@@ -18,58 +18,60 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="footerCol">
-          <p className="footerColHeading">Product</p>
-          <p>Overview</p>
-          <p>Features</p>
-          <p>Solutions</p>
-          <p>Tutorials</p>
-          <p>Pricing</p>
-          <p>Releases</p>
-        </div>
+        <div className=" grid grid-cols-3 gap-5 md:gap-0 md:flex lg:flex-row md:justify-between w-full">
+          <div className="footerCol">
+            <p className="footerColHeading">Product</p>
+            <p>Overview</p>
+            <p>Features</p>
+            <p>Solutions</p>
+            <p>Tutorials</p>
+            <p>Pricing</p>
+            <p>Releases</p>
+          </div>
 
-        <div className="footerCol">
-          <p className="footerColHeading">Company</p>
-          <p>About</p>
-          <p>Careers</p>
-          <p>Press</p>
-          <p>news</p>
-          <p>media kit</p>
-          <p>contact</p>
-        </div>
+          <div className="footerCol">
+            <p className="footerColHeading">Company</p>
+            <p>About</p>
+            <p>Careers</p>
+            <p>Press</p>
+            <p>news</p>
+            <p>media kit</p>
+            <p>contact</p>
+          </div>
 
-        <div className="footerCol">
-          <p className="footerColHeading">Resources</p>
-          <p>blog</p>
-          <p>newscenter</p>
-          <p>events</p>
-          <p>help center</p>
-          <p>tutorials</p>
-          <p>support</p>
-        </div>
+          <div className="footerCol">
+            <p className="footerColHeading">Resources</p>
+            <p>blog</p>
+            <p>newscenter</p>
+            <p>events</p>
+            <p>help center</p>
+            <p>tutorials</p>
+            <p>support</p>
+          </div>
 
-        <div className="footerCol">
-          <p className="footerColHeading">social</p>
-          <p>twitter</p>
-          <p>linkedIn</p>
-          <p>facebook</p>
-          <p>github</p>
-          <p>angel list</p>
-          <p>dribble</p>
-        </div>
+          <div className="footerCol">
+            <p className="footerColHeading">social</p>
+            <p>twitter</p>
+            <p>linkedIn</p>
+            <p>facebook</p>
+            <p>github</p>
+            <p>angel list</p>
+            <p>dribble</p>
+          </div>
 
-        <div className="footerCol">
-          <p className="footerColHeading">legal</p>
-          <p>terms</p>
-          <p>privacy</p>
-          <p>cookies</p>
-          <p>licences</p>
-          <p>settings</p>
-          <p>contact</p>
+          <div className="footerCol">
+            <p className="footerColHeading">legal</p>
+            <p>terms</p>
+            <p>privacy</p>
+            <p>cookies</p>
+            <p>licences</p>
+            <p>settings</p>
+            <p>contact</p>
+          </div>
         </div>
       </div>
 
-      <div className=" bg-[#101828] py-10 px-20 flex-col md:flex-row justify-between items-center">
+      <div className=" bg-[#101828] py-10 px-20 flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
         <p className="text-[#98A2B3]">© 2023 Binge. All rights reserved.</p>
 
         <div className="footerIconsGrp">

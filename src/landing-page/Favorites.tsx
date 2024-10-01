@@ -47,13 +47,30 @@ const Favorites = () => {
           scrollTrigger: {
             trigger: headingRef.current,
             start: "top 80%",
-            end: "top 20%",
-            scrub: 2,
+            end: "top 30%",
+            scrub: 3,
           },
         }
       );
     }
   }, []);
+
+  const scrollableSectionRef = useRef(null);
+
+  useEffect(() => {
+    // ... (previous code)
+
+    gsap.to(scrollableSectionRef.current, {
+      scrollTrigger: {
+        trigger: scrollableSectionRef.current,
+        start: "top bottom", // Adjust start and end values as needed
+        end: "bottom top",
+        scrub: 1, // For smooth scrolling
+        markers: false, // Remove markers for production
+      },
+      x: "-=100%", // Adjust the scroll distance as needed
+    });
+  }, [scrollableSectionRef]);
 
   return (
     <section className="favoritesSection">
