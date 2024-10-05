@@ -28,6 +28,7 @@ const Favorites = () => {
 
   const headingRef = useRef(null);
 
+  // heading animation
   useEffect(() => {
     if (headingRef.current) {
       const text = new SplitType(headingRef.current, { types: "chars,words" });
@@ -54,23 +55,6 @@ const Favorites = () => {
       );
     }
   }, []);
-
-  const scrollableSectionRef = useRef(null);
-
-  useEffect(() => {
-    // ... (previous code)
-
-    gsap.to(scrollableSectionRef.current, {
-      scrollTrigger: {
-        trigger: scrollableSectionRef.current,
-        start: "top bottom", // Adjust start and end values as needed
-        end: "bottom top",
-        scrub: 1, // For smooth scrolling
-        markers: false, // Remove markers for production
-      },
-      x: "-=100%", // Adjust the scroll distance as needed
-    });
-  }, [scrollableSectionRef]);
 
   return (
     <section className="favoritesSection">

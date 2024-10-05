@@ -1,30 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import menu from "../assets/menu.svg";
-import closeMenu from "../assets/icons8-close.svg";
+// import menu from "../assets/menu.svg";
+// import closeMenu from "../assets/icons8-close.svg";
 
-import logo from "../assets/Binge.svg";
+// import logo from "../assets/Binge.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
   const headingRef = useRef(null);
-  const menuRef = useRef<HTMLImageElement>(null);
-  const [menuToggled, setMenuToggled] = useState(false);
+  // const headingRef = useRef(null);
+  // const menuRef = useRef<HTMLImageElement>(null);
+  // const [menuToggled, setMenuToggled] = useState(false);
 
-  // menu toggle
-  useEffect(() => {
-    if (menuRef.current) {
-      if (menuToggled) {
-        menuRef.current.classList.remove("menuHidden");
-      }
+  // // menu toggle
+  // useEffect(() => {
+  //   if (menuRef.current) {
+  //     if (menuToggled) {
+  //       menuRef.current.classList.remove("menuHidden");
+  //       menuRef.current.classList.add("menuShow");
+  //     }
 
-      if (!menuToggled) {
-        menuRef.current.classList.add("menuHidden");
-      }
-    }
-  }, [menuToggled]);
+  //     if (!menuToggled) {
+  //       menuRef.current.classList.add("menuHidden");
+  //       menuRef.current.classList.remove("menuShow");
+  //     }
+  //   }
+  // }, [menuToggled]);
 
   // hero section text animation
   useEffect(() => {
@@ -52,7 +55,7 @@ const HeroSection = () => {
         }}
       >
         {/* header for tablets and desktops */}
-        <header className="bigScreenHeader">
+        {/* <header className="bigScreenHeader">
           <ul className="headerList">
             <li>Movies</li>
             <li>Series</li>
@@ -65,10 +68,10 @@ const HeroSection = () => {
             <li>Choose your language</li>
             <li>Sign up</li>
           </ul>
-        </header>
+        </header> */}
 
         {/* header for phones */}
-        <header className="smallScreenHeader ">
+        {/* <header className="smallScreenHeader ">
           <div className=" flex flex-row justify-between items-start">
             <img src={logo} alt="Binge Logo" className=" h-8" />
 
@@ -81,7 +84,7 @@ const HeroSection = () => {
           </div>
 
           <div className="menuHidden " ref={menuRef}>
-            <ul className="flex flex-col items-start mt-5 gap-5 bg-black">
+            <ul className="flex flex-col items-start  gap-14 bg-black text-2xl uppercase ">
               <li>Movies</li>
               <li>Series</li>
               <li>Tv Shows</li>
@@ -89,7 +92,7 @@ const HeroSection = () => {
               <li>Sign up</li>
             </ul>
           </div>
-        </header>
+        </header> */}
 
         <div className=" text-center min-h-[80dvh] md:min-h-[100dvh] flex flex-col justify-center md:mt-5 pb-20 md:pb-0">
           <h1 className=" text-center text-6xl md:text-5xl font-semibold pb-2">
