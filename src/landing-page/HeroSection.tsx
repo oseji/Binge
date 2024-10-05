@@ -1,33 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-// import menu from "../assets/menu.svg";
-// import closeMenu from "../assets/icons8-close.svg";
-
-// import logo from "../assets/Binge.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
   const headingRef = useRef(null);
-  // const headingRef = useRef(null);
-  // const menuRef = useRef<HTMLImageElement>(null);
-  // const [menuToggled, setMenuToggled] = useState(false);
-
-  // // menu toggle
-  // useEffect(() => {
-  //   if (menuRef.current) {
-  //     if (menuToggled) {
-  //       menuRef.current.classList.remove("menuHidden");
-  //       menuRef.current.classList.add("menuShow");
-  //     }
-
-  //     if (!menuToggled) {
-  //       menuRef.current.classList.add("menuHidden");
-  //       menuRef.current.classList.remove("menuShow");
-  //     }
-  //   }
-  // }, [menuToggled]);
 
   // hero section text animation
   useEffect(() => {
