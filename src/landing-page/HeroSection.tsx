@@ -32,46 +32,6 @@ const HeroSection = () => {
           backgroundSize: "100% 100%",
         }}
       >
-        {/* header for tablets and desktops */}
-        {/* <header className="bigScreenHeader">
-          <ul className="headerList">
-            <li>Movies</li>
-            <li>Series</li>
-            <li>Tv Shows</li>
-          </ul>
-
-          <img src={logo} alt="Binge Logo" className="headerLogo" />
-
-          <ul className="headerList">
-            <li>Choose your language</li>
-            <li>Sign up</li>
-          </ul>
-        </header> */}
-
-        {/* header for phones */}
-        {/* <header className="smallScreenHeader ">
-          <div className=" flex flex-row justify-between items-start">
-            <img src={logo} alt="Binge Logo" className=" h-8" />
-
-            <img
-              src={menuToggled ? closeMenu : menu}
-              alt="menu image"
-              className=" h-8"
-              onClick={() => setMenuToggled((prev) => !prev)}
-            />
-          </div>
-
-          <div className="menuHidden " ref={menuRef}>
-            <ul className="flex flex-col items-start  gap-14 bg-black text-2xl uppercase ">
-              <li>Movies</li>
-              <li>Series</li>
-              <li>Tv Shows</li>
-              <li>Choose your language</li>
-              <li>Sign up</li>
-            </ul>
-          </div>
-        </header> */}
-
         <div className=" text-center min-h-[80dvh] md:min-h-[100dvh] flex flex-col justify-center md:mt-5 pb-20 md:pb-0">
           <h1 className=" text-center text-6xl md:text-5xl font-semibold pb-2">
             Welcome to Bin
