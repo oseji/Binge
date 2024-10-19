@@ -79,7 +79,7 @@ const RegistrationPage = () => {
             />
           </div>
 
-          <div className=" flex flex-row items-center justify-center gap-5 w-10/12 p-5">
+          <div className=" flex flex-row items-center justify-center gap-5 w-full md:w-10/12 p-5">
             <div className=" w-10/12 p-[0.5px] bg-[#98A2B3]"></div>
             <span className=" text-[#98A2B3] font-bold">OR</span>
             <div className=" w-10/12 p-[0.5px] bg-[#98A2B3]"></div>
@@ -87,12 +87,18 @@ const RegistrationPage = () => {
 
           {/* BUTTONS */}
           <div className=" flex flex-col gap-3 items-center w-full">
-            <button className=" py-3.5 w-10/12 flex flex-row justify-center items-center gap-3 border-2 border-[#98A2B3] text-[#98A2B3] rounded hover:scale-110 transition ease-in-out duration-200">
+            <button
+              className=" py-3.5 w-full md:w-10/12 flex flex-row justify-center items-center gap-3 border-2 border-[#98A2B3] text-[#98A2B3] rounded hover:scale-110 transition ease-in-out duration-200"
+              onClick={(e) => e.preventDefault()}
+            >
               <img src={googleIcon} alt="Google Icon" />
               <span> Sign in with Google</span>
             </button>
 
-            <button className=" py-3.5 w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-110 transition ease-in-out duration-200">
+            <button
+              className=" py-3.5 w-full md:w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-110 transition ease-in-out duration-200"
+              onClick={(e) => e.preventDefault()}
+            >
               SIGN UP
             </button>
           </div>

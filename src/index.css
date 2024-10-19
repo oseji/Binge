@@ -191,19 +191,18 @@ footer {
 }
 
 .registrationForm {
-  @apply absolute px-11 py-12 text-black bg-white w-11/12 md:w-2/3 rounded-md lg:w-1/2 max-h-[90dvh] overflow-y-auto;
+  @apply absolute px-5 md:px-11 py-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 max-h-[90dvh] overflow-y-auto;
 }
 
 .registrationForm::-webkit-scrollbar {
   @apply w-2;
 }
-
 .registrationForm::-webkit-scrollbar-thumb {
   @apply bg-gray-500 hover:bg-gray-700 rounded-md;
 }
 
 .inputGrp {
-  @apply flex flex-col gap-2 items-start w-10/12;
+  @apply flex flex-col gap-2 items-start w-11/12 md:w-10/12;
 }
 
 .inputGrp label {
