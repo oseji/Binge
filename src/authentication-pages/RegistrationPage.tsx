@@ -1,5 +1,7 @@
 import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
+import backArrow from "../assets/back.svg";
+import { Link } from "react-router-dom";
 
 const RegistrationPage = () => {
   return (
@@ -13,6 +15,9 @@ const RegistrationPage = () => {
       ></div>
 
       <form className="registrationForm">
+        <Link to={"/"}>
+          <img src={backArrow} alt="back arrow" className=" pt-8" />
+        </Link>
         <div className=" flex flex-col items-center mb-4">
           <img src={BingeLogo} alt="Binge Logo" className=" h-10" />
           <p className=" text-xl font-bold">Create an Account</p>
