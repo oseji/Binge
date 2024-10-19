@@ -47,7 +47,7 @@ const HeroSection = () => {
           </p>
 
           <div className=" flex flex-col items-center gap-3 mt-5">
-            <Link to={"/RegistrationPage"}>
+            <Link to={"/RegistrationPage"} className=" w-full">
               <button className="heroSectionBtns bg-[#9B51E0] rounded-md">
                 Wanna Join Binge? Sign Up
               </button>

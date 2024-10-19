@@ -43,6 +43,7 @@ const RegistrationPage = () => {
             <label htmlFor="phoneNumber">phone number</label>
             <input
               type="number"
+              inputMode="tel"
               name="phoneNumber"
               id="phoneNumber"
               placeholder="+234 7024341178"
@@ -53,6 +54,7 @@ const RegistrationPage = () => {
             <label htmlFor="emailAddress">email address</label>
             <input
               type="email"
+              inputMode="email"
               name="emailAddress"
               id="emailAddress"
               placeholder="SandyB@gmail.com"
@@ -88,7 +90,7 @@ const RegistrationPage = () => {
           {/* BUTTONS */}
           <div className=" flex flex-col gap-3 items-center w-full">
             <button
-              className=" py-3.5 w-full md:w-10/12 flex flex-row justify-center items-center gap-3 border-2 border-[#98A2B3] text-[#98A2B3] rounded hover:scale-110 transition ease-in-out duration-200"
+              className=" py-3.5 w-full md:w-10/12 flex flex-row justify-center items-center gap-3 border-2 border-[#98A2B3] text-[#98A2B3] rounded hover:scale-105 transition ease-in-out duration-200"
               onClick={(e) => e.preventDefault()}
             >
               <img src={googleIcon} alt="Google Icon" />
@@ -96,7 +98,7 @@ const RegistrationPage = () => {
             </button>
 
             <button
-              className=" py-3.5 w-full md:w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-110 transition ease-in-out duration-200"
+              className=" py-3.5 w-full md:w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
               onClick={(e) => e.preventDefault()}
             >
               SIGN UP

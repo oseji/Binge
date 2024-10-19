@@ -16,7 +16,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* LANDING PAGE */
-
 .sectionHeading {
   @apply text-start lg:text-center text-4xl font-semibold pb-2;
 }
@@ -191,7 +190,7 @@ footer {
 }
 
 .registrationForm {
-  @apply absolute px-5 md:px-11 py-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 max-h-[90dvh] overflow-y-auto;
+  @apply absolute px-5 md:px-11 py-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 h-[70dvh] md:h-[90dvh] overflow-y-auto;
 }
 
 .registrationForm::-webkit-scrollbar {
