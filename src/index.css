@@ -183,25 +183,29 @@ footer {
 
 /*  */
 /* AUTHENTICATION PAGES */
-
-/* registration page */
-#registrationPage {
-  @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
+.authenticationForm {
+  @apply absolute px-5 md:px-11 pb-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 overflow-y-auto;
 }
 
-.registrationForm {
-  @apply absolute px-5 md:px-11 pb-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 h-[70dvh] md:h-[90dvh] overflow-y-auto;
-}
-
-.registrationForm::-webkit-scrollbar {
+.authenticationForm::-webkit-scrollbar {
   @apply w-2;
 }
-.registrationForm::-webkit-scrollbar-thumb {
+.authenticationForm::-webkit-scrollbar-thumb {
   @apply bg-gray-500 hover:bg-gray-700 rounded-md;
 }
 
+.resetPasswordForm {
+  @apply absolute px-5 md:px-11 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 h-96 overflow-y-auto;
+}
+
+#registrationPage,
+#loginPage,
+#resetPassword {
+  @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
+}
+
 .inputGrp {
-  @apply flex flex-col gap-2 items-start w-11/12 md:w-10/12;
+  @apply flex flex-col gap-2 items-start w-full;
 }
 
 .inputGrp label {

@@ -2,6 +2,8 @@ import { useRef, useEffect, useState } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 
 import RegistrationPage from "./authentication-pages/RegistrationPage";
+import LoginPage from "./authentication-pages/LoginPage";
+import ResetPassword from "./authentication-pages/ResetPassword";
 
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
@@ -104,6 +106,14 @@ function App() {
 
         <Route path={"/RegistrationPage"}>
           <RegistrationPage />
+        </Route>
+
+        <Route path={"/LoginPage"}>
+          <LoginPage />
+        </Route>
+
+        <Route path={"/ResetPassword"}>
+          <ResetPassword />
         </Route>
       </Switch>
     </div>

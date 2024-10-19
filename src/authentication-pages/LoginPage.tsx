@@ -1,11 +1,11 @@
+import { Link } from "react-router-dom";
 import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
-import { Link } from "react-router-dom";
 
-const RegistrationPage = () => {
+const LoginPage = () => {
   return (
-    <section id="registrationPage">
+    <section id="loginPage">
       <div
         className=" absolute h-full w-full top-0 left-0 bg-cover z-0 inset-0"
         style={{
@@ -14,77 +14,53 @@ const RegistrationPage = () => {
         }}
       ></div>
 
-      <form className="authenticationForm h-[550px] md:h-[900px] lg:h-[65dvh] xl:h-[500px] ">
-        <Link to={"/"}>
+      <form className="authenticationForm h-[70dvh] md:h-[700px] xl:h-[500px] ">
+        <Link to={"/RegistrationPage"}>
           <img src={backArrow} alt="back arrow" className=" pt-8" />
         </Link>
         <div className=" flex flex-col items-center mb-4">
           <img src={BingeLogo} alt="Binge Logo" className=" h-10" />
-          <p className=" text-xl font-bold">Create an Account</p>
+          <p className=" text-xl font-bold">Welcome back to Binge</p>
         </div>
 
         <div className=" flex flex-col gap-3 items-center text-sm">
           <div className="inputGrp">
-            <label htmlFor="firstName">first name</label>
+            <label htmlFor="loginName">Name</label>
             <input
               type="text"
-              name="firstName"
-              id="firstName"
-              placeholder="Sandra"
+              name="loginName"
+              id="loginName"
+              placeholder="Imelda Leo"
             />
           </div>
 
           <div className="inputGrp">
-            <label htmlFor="lastName">last name</label>
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              placeholder="Bloyd"
-            />
-          </div>
-
-          <div className="inputGrp">
-            <label htmlFor="phoneNumber">phone number</label>
-            <input
-              type="number"
-              inputMode="tel"
-              name="phoneNumber"
-              id="phoneNumber"
-              placeholder="+234 7024341178"
-            />
-          </div>
-
-          <div className="inputGrp">
-            <label htmlFor="emailAddress">email address</label>
+            <label htmlFor="emailAddressLogin">email address</label>
             <input
               type="email"
               inputMode="email"
-              name="emailAddress"
-              id="emailAddress"
-              placeholder="SandyB@gmail.com"
+              name="emailAddressLogin"
+              id="emailAddressLogin"
+              placeholder="ImeldaLeo@gmail.com"
             />
           </div>
 
           <div className="inputGrp">
-            <label htmlFor="password">password</label>
+            <label htmlFor="passwordLogin">password</label>
             <input
               type="text"
-              name="password"
-              id="password"
-              placeholder="Enter password"
+              name="passwordLogin"
+              id="passwordLogin"
+              placeholder="**********"
             />
           </div>
 
-          <div className="inputGrp">
-            <label htmlFor="confirmPassword">confirm password</label>
-            <input
-              type="text"
-              name="confirmPassword"
-              id="confirmPassword"
-              placeholder="Confirm password"
-            />
-          </div>
+          <Link
+            to={"/ResetPassword"}
+            className=" text-[#9B51E0] underline mr-auto"
+          >
+            Forgot Password?
+          </Link>
 
           <div className=" flex flex-row items-center justify-center gap-5 w-full md:w-10/12 p-5">
             <div className=" w-10/12 p-[0.5px] bg-[#98A2B3]"></div>
@@ -106,16 +82,17 @@ const RegistrationPage = () => {
               className=" py-3.5 w-full md:w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
               onClick={(e) => e.preventDefault()}
             >
-              SIGN UP
+              LOGIN
             </button>
           </div>
 
           <p className=" text-[#98A2B3] mt-5">
-            Already have an account ?
-            <Link to={"/LoginPage"}>
+            Don't have an account ?
+            <Link to={"/RegistrationPage"}>
+              {" "}
               <span className=" text-[#9B51E0] underline cursor-pointer">
                 {" "}
-                Log in here
+                Sign up here
               </span>
             </Link>
           </p>
@@ -125,4 +102,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default LoginPage;
