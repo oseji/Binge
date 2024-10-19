@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
@@ -46,9 +47,11 @@ const HeroSection = () => {
           </p>
 
           <div className=" flex flex-col items-center gap-3 mt-5">
-            <button className="heroSectionBtns bg-[#9B51E0] rounded-md">
-              Wanna Join Binge? Sign Up
-            </button>
+            <Link to={"/RegistrationPage"}>
+              <button className="heroSectionBtns bg-[#9B51E0] rounded-md">
+                Wanna Join Binge? Sign Up
+              </button>
+            </Link>
 
             <button className="heroSectionBtns bg-transparent text-[#9B51E0] outline-[#9B51E0] outline ">
               Start 7-day Free Trial

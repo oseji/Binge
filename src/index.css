@@ -7,6 +7,10 @@
   src: url("/fonts/Inter_18pt-Regular.ttf");
 }
 
+input::-webkit-inner-spin-button {
+  @apply hidden;
+}
+
 .App {
   @apply bg-black text-white font-Inter max-w-[100vw];
 }
@@ -183,11 +187,19 @@ footer {
 
 /* registration page */
 #registrationPage {
-  @apply relative min-h-screen;
+  @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
 }
 
 .registrationForm {
-  @apply absolute p-2 text-black bg-white lg:left-1/4 xl:top-10 w-11/12 md:w-2/3 rounded-md lg:w-1/2;
+  @apply absolute px-11 py-12 text-black bg-white w-11/12 md:w-2/3 rounded-md lg:w-1/2 max-h-[90dvh] overflow-y-auto;
+}
+
+.registrationForm::-webkit-scrollbar {
+  @apply w-2;
+}
+
+.registrationForm::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 hover:bg-gray-700 rounded-md;
 }
 
 .inputGrp {
@@ -199,5 +211,5 @@ footer {
 }
 
 .inputGrp input {
-  @apply outline outline-2 outline-[#828282] p-2 rounded w-full;
+  @apply outline outline-2 outline-[#98A2B3] p-2 rounded w-full;
 }
