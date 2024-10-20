@@ -83,7 +83,7 @@ function App() {
                   <li>Tv Shows</li>
                   <li>Choose your language</li>
                   <Link to={"/RegistrationPage"}>
-                    <li>Sign up</li>
+                    <li onClick={() => setMenuToggled(false)}>Sign up</li>
                   </Link>
                 </ul>
               </div>
