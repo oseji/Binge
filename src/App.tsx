@@ -5,6 +5,8 @@ import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
 import ResetPassword from "./authentication-pages/ResetPassword";
 
+import SelectTrial from "./payment-pages/SelectTrial";
+
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
 import Features from "./landing-page/Features";
@@ -123,6 +125,9 @@ function App() {
           </div>
         </Route>
       </Switch>
+
+      {/* PAYMENT PAGES */}
+      <Route path={"/SelectTrial"} component={SelectTrial} />
     </div>
   );
 }

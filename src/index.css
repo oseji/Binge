@@ -11,6 +11,13 @@ input::-webkit-inner-spin-button {
   @apply hidden;
 }
 
+::-webkit-scrollbar {
+  @apply w-2;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 hover:bg-gray-700 rounded-md;
+}
+
 .App {
   @apply bg-black text-white font-Inter max-w-[100vw];
 }
@@ -187,13 +194,6 @@ footer {
   @apply absolute px-5 md:px-11 pb-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 overflow-y-auto;
 }
 
-.authenticationForm::-webkit-scrollbar {
-  @apply w-2;
-}
-.authenticationForm::-webkit-scrollbar-thumb {
-  @apply bg-gray-500 hover:bg-gray-700 rounded-md;
-}
-
 .resetPasswordForm {
   @apply absolute px-5 md:px-11 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 h-96 overflow-y-auto;
 }
@@ -212,4 +212,27 @@ footer {
 
 .inputGrp input {
   @apply outline outline-2 outline-[#98A2B3] p-2 rounded w-full;
+}
+
+/* 
+ */
+/* PAYMENT PAGES */
+#selectTrial {
+  @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
+}
+
+.paymentModal {
+  @apply absolute py-14 px-9 text-black bg-white w-11/12 md:w-3/4 rounded-md overflow-y-auto;
+}
+
+.paymentPricingGrp {
+  @apply flex flex-col lg:flex-row items-center  justify-center mt-10 gap-5;
+}
+
+.checkBoxGrpPayment {
+  @apply flex flex-row items-center gap-3;
+}
+
+.checkBoxGrpPayment > img {
+  @apply h-3;
 }
