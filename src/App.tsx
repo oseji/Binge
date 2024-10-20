@@ -41,6 +41,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* LANDING PAGE */}
       <Switch>
         <Route exact path={"/"}>
           <div className="landingPage">
@@ -104,16 +105,22 @@ function App() {
           </div>
         </Route>
 
-        <Route path={"/RegistrationPage"}>
-          <RegistrationPage />
-        </Route>
-
-        <Route path={"/LoginPage"}>
-          <LoginPage />
-        </Route>
-
-        <Route path={"/ResetPassword"}>
-          <ResetPassword />
+        {/* AUTHENTICATION PAGES */}
+        <Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>
+          <div id="authenticationPages">
+            <div
+              className=" absolute h-full w-full top-0 left-0 bg-cover z-0 inset-0"
+              style={{
+                backgroundImage: 'url("/heroSection-bg.jpg")',
+                backgroundSize: "cover",
+              }}
+            ></div>
+            <Switch>
+              <Route path={"/RegistrationPage"} component={RegistrationPage} />
+              <Route path={"/LoginPage"} component={LoginPage} />
+              <Route path={"/ResetPassword"} component={ResetPassword} />
+            </Switch>
+          </div>
         </Route>
       </Switch>
     </div>

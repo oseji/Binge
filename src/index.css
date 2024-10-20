@@ -198,9 +198,7 @@ footer {
   @apply absolute px-5 md:px-11 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 h-96 overflow-y-auto;
 }
 
-#registrationPage,
-#loginPage,
-#resetPassword {
+#authenticationPages {
   @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
 }
 
