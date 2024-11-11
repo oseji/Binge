@@ -53,8 +53,7 @@ const HeroSection = () => {
               </button>
             </Link>
 
-            <Link to={"/SelectTrial"}>
-              {" "}
+            <Link to={"/Plans"}>
               <button className="heroSectionBtns bg-transparent text-[#9B51E0] outline-[#9B51E0] outline ">
                 Start 7-day Free Trial
               </button>

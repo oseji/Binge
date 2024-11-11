@@ -218,7 +218,7 @@ footer {
  */
 /* PAYMENT PAGES */
 #selectTrial {
-  @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
+  @apply w-full relative min-h-screen p-5 flex flex-col justify-center items-center;
 }
 
 .paymentModal {
@@ -235,4 +235,8 @@ footer {
 
 .checkBoxGrpPayment > img {
   @apply h-3;
+}
+
+.paymentOptionGrp {
+  @apply w-full flex flex-row justify-between items-center outline outline-gray-700 rounded-md p-2 cursor-pointer;
 }

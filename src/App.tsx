@@ -6,6 +6,8 @@ import LoginPage from "./authentication-pages/LoginPage";
 import ResetPassword from "./authentication-pages/ResetPassword";
 
 import SelectTrial from "./payment-pages/SelectTrial";
+import Plans from "./payment-pages/Plans";
+import PaymentOption from "./payment-pages/PaymentOption";
 
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
@@ -124,10 +126,25 @@ function App() {
             </Switch>
           </div>
         </Route>
-      </Switch>
 
-      {/* PAYMENT PAGES */}
-      <Route path={"/SelectTrial"} component={SelectTrial} />
+        {/* PAYMENT PAGES */}
+        <Route path={["/SelectTrial", "/Plans", "/PaymentOption"]}>
+          <section id="selectTrial">
+            <div
+              className=" absolute h-full w-full top-0 left-0 bg-cover z-0 inset-0"
+              style={{
+                backgroundImage: 'url("/heroSection-bg.jpg")',
+                backgroundSize: "cover",
+              }}
+            ></div>
+            <Switch>
+              {/* <Route path={"/SelectTrial"} component={SelectTrial} /> */}
+              <Route path={"/Plans"} component={Plans} />
+              <Route path={"/PaymentOption"} component={PaymentOption} />
+            </Switch>
+          </section>
+        </Route>
+      </Switch>
     </div>
   );
 }
