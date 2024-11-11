@@ -49,15 +49,17 @@ const HeroSection = () => {
 
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader">
-        <ul className="headerList">
+        <ul className="headerList xl:w-1/3">
           <li>Movies</li>
           <li>Series</li>
           <li>Tv Shows</li>
         </ul>
 
-        <img src={logo} alt="Binge Logo" className="headerLogo" />
+        <div className=" xl:w-1/3">
+          <img src={logo} alt="Binge Logo" className="headerLogo mx-auto" />
+        </div>
 
-        <ul className="flex flex-col md:flex-row items-center gap-4 lg:gap-10">
+        <ul className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 xl:w-1/3">
           <div className=" flex flex-row items-center gap-3 bg-black text-white px-4 py-2 rounded-md outline outline-gray-300">
             <img src={searchIcon} alt="search icon" />
 
