@@ -16,6 +16,8 @@ import Pricing from "./landing-page/Pricing";
 import Questions from "./landing-page/Questions";
 import Footer from "./landing-page/Footer";
 
+import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
+
 import menu from "./assets/menu.svg";
 import closeMenu from "./assets/icons8-close.svg";
 
@@ -144,6 +146,9 @@ function App() {
             </Switch>
           </section>
         </Route>
+
+        {/* SIGNED IN LANDING PAGE */}
+        <Route path={"/SignedInLandingPage"} component={SignedInLandingPage} />
       </Switch>
     </div>
   );

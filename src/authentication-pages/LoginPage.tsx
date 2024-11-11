@@ -69,20 +69,20 @@ const LoginPage = () => {
             <span> Sign in with Google</span>
           </button>
 
-          <button
-            className=" py-3.5 w-full md:w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
-            onClick={(e) => e.preventDefault()}
-          >
-            LOGIN
-          </button>
+          <Link to={"/SignedInLandingPage"} className=" w-full mx-auto block">
+            <button
+              className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
+              // onClick={(e) => e.preventDefault()}
+            >
+              LOGIN
+            </button>
+          </Link>
         </div>
 
         <p className=" text-[#98A2B3] mt-5">
           Don't have an account ?
           <Link to={"/RegistrationPage"}>
-            {" "}
             <span className=" text-[#9B51E0] underline cursor-pointer">
-              {" "}
               Sign up here
             </span>
           </Link>
