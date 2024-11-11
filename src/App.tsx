@@ -5,9 +5,9 @@ import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
 import ResetPassword from "./authentication-pages/ResetPassword";
 
-import SelectTrial from "./payment-pages/SelectTrial";
 import Plans from "./payment-pages/Plans";
 import PaymentOption from "./payment-pages/PaymentOption";
+import PaymentDetails from "./payment-pages/PaymentDetails";
 
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
@@ -128,7 +128,7 @@ function App() {
         </Route>
 
         {/* PAYMENT PAGES */}
-        <Route path={["/SelectTrial", "/Plans", "/PaymentOption"]}>
+        <Route path={["/Plans", "/PaymentOption", "/PaymentDetails"]}>
           <section id="selectTrial">
             <div
               className=" absolute h-full w-full top-0 left-0 bg-cover z-0 inset-0"
@@ -138,9 +138,9 @@ function App() {
               }}
             ></div>
             <Switch>
-              {/* <Route path={"/SelectTrial"} component={SelectTrial} /> */}
               <Route path={"/Plans"} component={Plans} />
               <Route path={"/PaymentOption"} component={PaymentOption} />
+              <Route path={"/PaymentDetails"} component={PaymentDetails} />
             </Switch>
           </section>
         </Route>

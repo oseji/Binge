@@ -29,23 +29,31 @@ const PaymentOption = () => {
           <img src={lockIcon} alt="lock icon" className=" h-4" />
         </div>
 
-        <div className="paymentOptionGrp">
-          <div className=" flex flex-row items-center gap-2">
-            <span>Paystack</span>
-            <img src={paystackImg} alt="paystack icon" className=" h-5" />
+        <Link to={"/PaymentDetails"}>
+          <div className="paymentOptionGrp">
+            <div className=" flex flex-row items-center gap-2">
+              <span>Paystack</span>
+              <img src={paystackImg} alt="paystack icon" className=" h-5" />
+            </div>
+
+            <img src={downArrow} alt="down arror" />
           </div>
+        </Link>
 
-          <img src={downArrow} alt="down arror" />
-        </div>
+        <Link to={"/PaymentDetails"}>
+          <div className="paymentOptionGrp mt-2">
+            <div className=" flex flex-row items-center gap-2">
+              <span>Flutterwave</span>
+              <img
+                src={flutterwaveImg}
+                alt="flutterwave icon"
+                className=" h-5"
+              />
+            </div>
 
-        <div className="paymentOptionGrp mt-2">
-          <div className=" flex flex-row items-center gap-2">
-            <span>Flutterwave</span>
-            <img src={flutterwaveImg} alt="flutterwave icon" className=" h-5" />
+            <img src={downArrow} alt="down arror" />
           </div>
-
-          <img src={downArrow} alt="down arror" />
-        </div>
+        </Link>
       </div>
     </div>
   );

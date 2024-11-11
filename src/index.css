@@ -238,5 +238,13 @@ footer {
 }
 
 .paymentOptionGrp {
-  @apply w-full flex flex-row justify-between items-center outline outline-gray-700 rounded-md p-2 cursor-pointer;
+  @apply w-full flex flex-row justify-between items-center outline outline-gray-700 rounded-md p-5 cursor-pointer font-semibold;
+}
+
+.paymentOptionInputGrp {
+  @apply flex flex-col;
+}
+
+.paymentOptionInputGrp input {
+  @apply pl-2 w-full;
 }
