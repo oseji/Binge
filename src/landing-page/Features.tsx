@@ -20,10 +20,8 @@ const Features = () => {
 
       tl.fromTo(
         text.chars,
-        { scale: 0.2, opacity: 0, y: -20 },
+        { y: 50 },
         {
-          scale: 1,
-          opacity: 1,
           y: 0,
           stagger: 1,
           duration: 1,
@@ -31,7 +29,7 @@ const Features = () => {
           scrollTrigger: {
             trigger: headingRef.current,
             start: "top 80%",
-            end: "top 30%",
+            end: "top 35%",
             scrub: 3,
           },
         }
@@ -56,7 +54,7 @@ const Features = () => {
         <div className="featuresBox">
           <img src={feature1} alt="Feature" className="featureImg" />
 
-          <h2 className="featureHeading">Access your Favourites Movies</h2>
+          <h2 className="featureHeading">Access your Movies</h2>
 
           <p className="featureText">
             Lorem ipsum dolor sit amet consectetur. Aenean augue eu bibendum
@@ -78,7 +76,7 @@ const Features = () => {
         <div className="featuresBox">
           <img src={feature3} alt="Feature" className="featureImg" />
 
-          <h2 className="featureHeading">Convenient Payment Options</h2>
+          <h2 className="featureHeading">Convenient Payment</h2>
 
           <p className="featureText">
             Lorem ipsum dolor sit amet consectetur. Aenean augue eu bibendum

@@ -37,10 +37,8 @@ const Favorites = () => {
 
       tl.fromTo(
         text.chars,
-        { scale: 0.2, opacity: 0, y: -20 },
+        { y: 50 },
         {
-          scale: 1,
-          opacity: 1,
           y: 0,
           stagger: 1,
           duration: 1,
@@ -48,7 +46,7 @@ const Favorites = () => {
           scrollTrigger: {
             trigger: headingRef.current,
             start: "top 80%",
-            end: "top 30%",
+            end: "top 35%",
             scrub: 3,
           },
         }
@@ -76,11 +74,12 @@ const Favorites = () => {
             key={index}
             style={{
               backgroundImage: `url("/film${index + 1}.png")`,
+              backgroundSize: `100% auto`,
             }}
           >
             <div className=" absolute w-full h-full top-0 left-0 bg-black bg-opacity-45"></div>
 
-            <div className=" absolute">
+            <div className={` absolute`}>
               <h2 className=" font-semibold">{element.heading}</h2>
               <p>{element.subHeading}</p>
             </div>

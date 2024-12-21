@@ -54,7 +54,7 @@ const HeroSection = () => {
             </Link>
 
             <Link to={"/Plans"} className=" w-full">
-              <button className="heroSectionBtns bg-transparent text-[#9B51E0] outline-[#9B51E0] outline ">
+              <button className="heroSectionBtns bg-transparent text-[#9B51E0] outline-[#9B51E0] outline">
                 Start 7-day Free Trial
               </button>
             </Link>

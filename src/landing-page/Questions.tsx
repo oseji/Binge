@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Questions = () => {
   const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const arrowRefs = useRef<(HTMLImageElement | null)[]>([]);
   const headingRef = useRef(null);
 
   const toggleAnswer = (e: SyntheticEvent<HTMLImageElement>) => {
@@ -17,9 +18,19 @@ const Questions = () => {
     answerRefs.current.forEach((element, index) => {
       if (element) {
         if (clicked === index) {
-          element.classList.toggle("hidden");
+          element.classList.toggle("hideFaq");
         } else {
-          element.classList.add("hidden");
+          element.classList.add("hideFaq");
+        }
+      }
+    });
+
+    arrowRefs.current.forEach((element, index) => {
+      if (element) {
+        if (clicked === index) {
+          element.classList.toggle("rotate-180");
+        } else {
+          element.classList.remove("rotate-180");
         }
       }
     });
@@ -33,10 +44,8 @@ const Questions = () => {
 
       tl.fromTo(
         text.chars,
-        { scale: 0.2, opacity: 0, y: -20 },
+        { y: 50 },
         {
-          scale: 1,
-          opacity: 1,
           y: 0,
           stagger: 1,
           duration: 1,
@@ -44,7 +53,7 @@ const Questions = () => {
           scrollTrigger: {
             trigger: headingRef.current,
             start: "top 80%",
-            end: "top 30%",
+            end: "top 35%",
             scrub: 3,
           },
         }
@@ -68,11 +77,12 @@ const Questions = () => {
               alt="arrow"
               data-value={0}
               onClick={toggleAnswer}
+              ref={(el) => (arrowRefs.current[0] = el)}
             />
           </div>
 
           <p
-            className="answer hidden"
+            className="answer hideFaq"
             ref={(el) => (answerRefs.current[0] = el)}
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
@@ -90,11 +100,12 @@ const Questions = () => {
               alt="arrow"
               data-value={1}
               onClick={toggleAnswer}
+              ref={(el) => (arrowRefs.current[1] = el)}
             />
           </div>
 
           <p
-            className="answer hidden"
+            className="answer hideFaq"
             ref={(el) => (answerRefs.current[1] = el)}
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
@@ -112,11 +123,12 @@ const Questions = () => {
               alt="arrow"
               data-value={2}
               onClick={toggleAnswer}
+              ref={(el) => (arrowRefs.current[2] = el)}
             />
           </div>
 
           <p
-            className="answer hidden"
+            className="answer hideFaq"
             ref={(el) => (answerRefs.current[2] = el)}
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
@@ -134,11 +146,12 @@ const Questions = () => {
               alt="arrow"
               data-value={3}
               onClick={toggleAnswer}
+              ref={(el) => (arrowRefs.current[3] = el)}
             />
           </div>
 
           <p
-            className="answer hidden"
+            className="answer hideFaq"
             ref={(el) => (answerRefs.current[3] = el)}
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
@@ -156,11 +169,12 @@ const Questions = () => {
               alt="arrow"
               data-value={4}
               onClick={toggleAnswer}
+              ref={(el) => (arrowRefs.current[4] = el)}
             />
           </div>
 
           <p
-            className="answer hidden"
+            className="answer hideFaq"
             ref={(el) => (answerRefs.current[4] = el)}
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
