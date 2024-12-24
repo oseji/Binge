@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className=" bg-[#101828] py-10 px-20 flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
+      <div className=" bg-[#101828] py-10 px-5 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
         <p className="text-[#98A2B3]">© 2023 Binge. All rights reserved.</p>
 
         <div className="footerIconsGrp">

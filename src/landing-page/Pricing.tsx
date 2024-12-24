@@ -63,9 +63,12 @@ const Pricing = () => {
 
   return (
     <section className="pricingSection">
-      <h1 className="sectionHeading">
+      <h1 className="sectionHeading flex flex-row flex-wrap items-center lg:justify-center gap-2.5">
         Affordable{" "}
-        <span className=" text-[#9B51E0] inline-block" ref={headingRef}>
+        <span
+          className=" text-[#9B51E0] inline-block overflow-y-hidden"
+          ref={headingRef}
+        >
           Plans
         </span>{" "}
         For You
