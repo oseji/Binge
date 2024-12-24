@@ -8,13 +8,13 @@ import backArrow from "../assets/back.svg";
 
 const PaymentDetails = () => {
   return (
-    <div className=" h-[80dvh] absolute py-14 px-9 text-black bg-white w-11/12 md:w-3/4 xl:w-1/2 rounded-md overflow-y-auto">
+    <div className=" h-fit max-h-[90dvh] absolute py-14 px-9 text-black bg-white w-11/12 md:w-3/4 xl:w-1/2 rounded-md overflow-y-auto">
       <div className=" flex flex-row items-center gap-5">
         <Link to={"/PaymentOption"}>
           <img src={backArrow} alt="back arrow" />
         </Link>
 
-        <h1 className=" flex flex-row items-center capitalize font-bold text-3xl">
+        <h1 className=" flex flex-row items-center capitalize font-bold  text-xl md:text-3xl">
           Pay with Paystack
           <span>
             <img src={paystackImg} alt="Paystack logo" />
@@ -97,7 +97,7 @@ const PaymentDetails = () => {
           </div>
         </div>
 
-        <button className=" rounded-md w-full md:w-2/3 py-2 bg-[#9B51E0] text-white mt-12">
+        <button className=" rounded-md w-full py-2 bg-[#9B51E0] text-white mt-12">
           Save and continue
         </button>
 

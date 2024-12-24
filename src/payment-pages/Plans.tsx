@@ -30,7 +30,7 @@ const Plans = () => {
   ];
 
   return (
-    <div className="paymentModal h-[70dvh] md:h-[900px] lg:h-[65dvh] xl:h-[500px]">
+    <div className="paymentModal h-fit max-h-[90dvh]">
       <div className=" flex flex-row items-center w-full">
         <Link to={"/"}>
           <img src={backArrow} alt="back arrow" />

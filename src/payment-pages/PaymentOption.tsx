@@ -9,17 +9,17 @@ import downArrow from "../assets/down arrow.svg";
 const PaymentOption = () => {
   return (
     <div className="paymentModal">
-      <div className=" flex flex-row items-center w-full">
+      <div className=" flex flex-row items-center gap-5 md:gap-0 w-full">
         <Link to={"/Plans"}>
           <img src={backArrow} alt="back arrow" />
         </Link>
 
-        <h1 className=" text-center font-bold text-3xl w-full capitalize">
+        <h1 className=" text-start md:text-center font-bold text-xl md:text-3xl w-full capitalize">
           Choose how to pay
         </h1>
       </div>
 
-      <p className=" text-center text-gray-500">
+      <p className=" text-start md:text-center text-gray-500">
         Your payment is encrypted and you can change how you pay at any time
       </p>
 
