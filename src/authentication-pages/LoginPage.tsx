@@ -5,9 +5,9 @@ import backArrow from "../assets/back.svg";
 
 const LoginPage = () => {
   return (
-    <form className="authenticationForm h-[70dvh] md:h-[700px] xl:h-[500px] ">
-      <Link to={"/RegistrationPage"}>
-        <img src={backArrow} alt="back arrow" className=" pt-8" />
+    <form className="authenticationForm h-[70dvh] md:h-[85dvh] xl:h-[90dvh] ">
+      <Link to={"/RegistrationPage"} className=" w-fit mt-8 block">
+        <img src={backArrow} alt="back arrow" />
       </Link>
       <div className=" flex flex-col items-center mb-4">
         <img src={BingeLogo} alt="Binge Logo" className=" h-10" />
@@ -80,7 +80,7 @@ const LoginPage = () => {
         </div>
 
         <p className=" text-[#98A2B3] mt-5">
-          Don't have an account ?
+          Don't have an account ? {""}
           <Link to={"/RegistrationPage"}>
             <span className=" text-[#9B51E0] underline cursor-pointer">
               Sign up here

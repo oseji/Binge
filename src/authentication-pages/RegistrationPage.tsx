@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 
 const RegistrationPage = () => {
   return (
-    <form className="authenticationForm h-[550px] md:h-[900px] lg:h-[65dvh] xl:h-[500px] ">
-      <Link to={"/"}>
-        <img src={backArrow} alt="back arrow" className=" pt-8" />
+    <form className="authenticationForm h-[550px] md:h-[900px] lg:h-[85dvh] xl:h-[90dvh] ">
+      <Link to={"/"} className=" w-fit mt-8 block">
+        <img src={backArrow} alt="back arrow" />
       </Link>
+
       <div className=" flex flex-col items-center mb-4">
         <img src={BingeLogo} alt="Binge Logo" className=" h-10" />
         <p className=" text-xl font-bold">Create an Account</p>

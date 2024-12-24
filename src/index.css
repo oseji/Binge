@@ -198,16 +198,16 @@ footer {
 
 /*  */
 /* AUTHENTICATION PAGES */
+#authenticationPages {
+  @apply relative min-h-[100dvh] p-5 flex flex-col justify-center items-center;
+}
+
 .authenticationForm {
   @apply absolute px-5 md:px-11 pb-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 overflow-y-auto;
 }
 
 .resetPasswordForm {
   @apply absolute px-5 md:px-11 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 h-96 overflow-y-auto;
-}
-
-#authenticationPages {
-  @apply relative min-h-screen p-5 flex flex-col justify-center items-center;
 }
 
 .inputGrp {

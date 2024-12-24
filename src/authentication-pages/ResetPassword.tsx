@@ -5,8 +5,8 @@ import BingeLogo from "../assets/registration logo.svg";
 const ResetPassword = () => {
   return (
     <form className="resetPasswordForm">
-      <Link to={"/LoginPage"}>
-        <img src={backArrow} alt="back arrow" className=" pt-8" />
+      <Link to={"/LoginPage"} className=" block mt-8 w-fit">
+        <img src={backArrow} alt="back arrow" />
       </Link>
       <div className=" flex flex-col items-center mb-4">
         <img src={BingeLogo} alt="Binge Logo" className=" h-10" />
