@@ -19,7 +19,7 @@ const PaymentOption = () => {
         </h1>
       </div>
 
-      <p className=" text-start md:text-center text-gray-500">
+      <p className=" text-start md:text-center text-gray-500 py-5 md:py-0">
         Your payment is encrypted and you can change how you pay at any time
       </p>
 

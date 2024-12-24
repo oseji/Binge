@@ -36,7 +36,7 @@ const Plans = () => {
           <img src={backArrow} alt="back arrow" />
         </Link>
 
-        <h1 className=" text-center font-bold text-3xl w-full capitalize">
+        <h1 className=" text-center font-bold text-xl md:text-3xl w-full capitalize">
           Choose your plan
         </h1>
       </div>
