@@ -66,7 +66,7 @@ const Questions = () => {
       <h1 className="sectionHeading" ref={headingRef}>
         Questions?
       </h1>
-      <p className="sectionSubHeading">We've got Answers</p>
+      <p className="sectionSubHeading mb-3 md:mb-0">We've got Answers</p>
 
       <div>
         <div className="questionGrp">
