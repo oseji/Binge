@@ -9,7 +9,7 @@ import github from "../assets/github.png";
 const Footer = () => {
   return (
     <footer>
-      <div className=" flex flex-col lg:flex-row items-start lg:justify-between gap-10 lg:gap-14 p-10">
+      <div className=" flex flex-col lg:flex-row items-start lg:justify-between gap-10 lg:gap-14 px-5 md:px-10 py-10">
         <div>
           <img src={footerLogo} alt="Binge Logo" className=" pb-5" />
           <p className="w-[320px]">

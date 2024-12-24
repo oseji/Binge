@@ -12,7 +12,7 @@ const Questions = () => {
   const arrowRefs = useRef<(HTMLImageElement | null)[]>([]);
   const headingRef = useRef(null);
 
-  const toggleAnswer = (e: SyntheticEvent<HTMLImageElement>) => {
+  const toggleAnswer = (e: SyntheticEvent<HTMLDivElement>) => {
     const clicked = Number(e.currentTarget.getAttribute("data-value"));
 
     answerRefs.current.forEach((element, index) => {
@@ -70,13 +70,11 @@ const Questions = () => {
 
       <div>
         <div className="questionGrp">
-          <div className="questionBox">
+          <div className="questionBox" data-value={0} onClick={toggleAnswer}>
             <p>How does Binge Premium work?</p>
             <img
               src={downArrow}
               alt="arrow"
-              data-value={0}
-              onClick={toggleAnswer}
               ref={(el) => (arrowRefs.current[0] = el)}
             />
           </div>
@@ -93,13 +91,11 @@ const Questions = () => {
         </div>
 
         <div className="questionGrp">
-          <div className="questionBox">
+          <div className="questionBox" data-value={1} onClick={toggleAnswer}>
             <p>How does Binge Premium work?</p>
             <img
               src={downArrow}
               alt="arrow"
-              data-value={1}
-              onClick={toggleAnswer}
               ref={(el) => (arrowRefs.current[1] = el)}
             />
           </div>
@@ -116,13 +112,11 @@ const Questions = () => {
         </div>
 
         <div className="questionGrp">
-          <div className="questionBox">
+          <div className="questionBox" data-value={2} onClick={toggleAnswer}>
             <p>How does Binge Premium work?</p>
             <img
               src={downArrow}
               alt="arrow"
-              data-value={2}
-              onClick={toggleAnswer}
               ref={(el) => (arrowRefs.current[2] = el)}
             />
           </div>
@@ -139,13 +133,11 @@ const Questions = () => {
         </div>
 
         <div className="questionGrp">
-          <div className="questionBox">
+          <div className="questionBox" data-value={3} onClick={toggleAnswer}>
             <p>How does Binge Premium work?</p>
             <img
               src={downArrow}
               alt="arrow"
-              data-value={3}
-              onClick={toggleAnswer}
               ref={(el) => (arrowRefs.current[3] = el)}
             />
           </div>
@@ -162,13 +154,11 @@ const Questions = () => {
         </div>
 
         <div className="questionGrp">
-          <div className="questionBox">
+          <div className="questionBox" data-value={4} onClick={toggleAnswer}>
             <p>How does Binge Premium work?</p>
             <img
               src={downArrow}
               alt="arrow"
-              data-value={4}
-              onClick={toggleAnswer}
               ref={(el) => (arrowRefs.current[4] = el)}
             />
           </div>
