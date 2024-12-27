@@ -52,7 +52,7 @@ function App() {
         <Route exact path={"/"}>
           <div className="landingPage">
             {/* header for tablets and desktops */}
-            <header className="bigScreenHeader">
+            <header className="bigScreenHeader md:top-12 lg:top-10 xl:top-8">
               <ul className="headerList">
                 <li>Movies</li>
                 <li>Series</li>

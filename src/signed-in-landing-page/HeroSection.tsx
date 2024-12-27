@@ -39,16 +39,16 @@ const HeroSection = () => {
 
   return (
     <div
-      className=" min-h-screen bg-cover"
+      className=" min-h-screen min bg-cover"
       style={{
         backgroundImage: `url("/signed in hero bg.jpg")`,
         backgroundSize: "100% 100%",
       }}
     >
-      <div className=" absolute w-full h-full top-0 left-0 bg-black bg-opacity-45"></div>
+      <div className=" absolute w-full h-full min-h-screen top-0 left-0 bg-black bg-opacity-45"></div>
 
       {/* header for tablets and desktops */}
-      <header className="bigScreenHeader">
+      <header className="bigScreenHeader top-5">
         <ul className="headerList xl:w-1/3">
           <li>Movies</li>
           <li>Series</li>
@@ -130,8 +130,10 @@ const HeroSection = () => {
         </div>
       </header>
 
-      <div className=" absolute min-h-[80dvh] md:min-h-[100dvh] flex flex-col justify-center pt-5  pb-20 md:pb-0 px-5 xl:px-10">
-        <h1 className=" text-5xl font-bold mb-5">The Boy Who Cried Wolf</h1>
+      <div className=" absolute min-w-full min-h-[80dvh] md:min-h-[100dvh] flex flex-col justify-center pt-5  pb-20 md:pb-0 px-5 xl:px-10">
+        <h1 className=" text-3xl md:text-4xl lg:text-5xl font-bold mb-5">
+          The Boy Who Cried Wolf
+        </h1>
 
         <p className=" w-full md:w-3/4">
           Lorem ipsum dolor sit amet consectetur. Aenean augue e u bibendum

@@ -41,7 +41,7 @@ input::-webkit-inner-spin-button {
 }
 
 .bigScreenHeader {
-  @apply hidden w-full md:z-10 md:flex flex-col md:flex-row items-center justify-between md:px-5 lg:px-10  md:absolute md:top-12 lg:top-14 xl:top-8;
+  @apply hidden w-full md:z-10 md:flex flex-col md:flex-row items-center justify-between md:px-5 lg:px-10  md:absolute;
 }
 
 .bigScreenHeader li {
@@ -255,4 +255,22 @@ footer {
 
 .paymentOptionInputGrp input {
   @apply pl-2 w-full;
+}
+
+/* SIGNED IN LANDING PAGE */
+/* movie categories */
+.movieCategories {
+  @apply bg-black py-10 px-5 flex flex-col gap-10;
+}
+
+.categoryGroup {
+  @apply flex flex-row items-center gap-5 overflow-x-scroll;
+}
+
+.categoryGroupHeading {
+  @apply uppercase font-semibold;
+}
+
+.movieThumbnail {
+  @apply h-32 md:h-44;
 }
