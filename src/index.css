@@ -267,6 +267,10 @@ footer {
   @apply flex flex-row items-center gap-5 overflow-x-scroll;
 }
 
+.categoryGroup::-webkit-scrollbar {
+  @apply hidden;
+}
+
 .categoryGroupHeading {
   @apply uppercase font-semibold;
 }
