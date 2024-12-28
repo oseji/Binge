@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from "react";
-import { Route, Switch, Link } from "react-router-dom";
+import { useRef } from "react";
+import { Route, Switch } from "react-router-dom";
 
 import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
@@ -9,6 +9,7 @@ import Plans from "./payment-pages/Plans";
 import PaymentOption from "./payment-pages/PaymentOption";
 import PaymentDetails from "./payment-pages/PaymentDetails";
 
+import Header from "./landing-page/Header";
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
 import Features from "./landing-page/Features";
@@ -18,82 +19,16 @@ import Footer from "./landing-page/Footer";
 
 import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 
-import menu from "./assets/menu.svg";
-import closeMenu from "./assets/icons8-close.svg";
-
-import logo from "./assets/Binge.svg";
-
 function App() {
-  const menuRef = useRef<HTMLImageElement>(null);
-  const [menuToggled, setMenuToggled] = useState(false);
   const mainScreenRef = useRef<HTMLDivElement>(null);
-
-  // menu toggle
-  useEffect(() => {
-    if (menuRef.current) {
-      if (menuToggled) {
-        menuRef.current.classList.remove("menuHidden");
-        menuRef.current.classList.add("menuShow");
-        mainScreenRef.current?.classList.add("hideMainScreen");
-      }
-
-      if (!menuToggled) {
-        menuRef.current.classList.add("menuHidden");
-        menuRef.current.classList.remove("menuShow");
-        mainScreenRef.current?.classList.remove("hideMainScreen");
-      }
-    }
-  }, [menuToggled]);
 
   return (
     <div className="App">
-      {/* LANDING PAGE */}
       <Switch>
+        {/* LANDING PAGE */}
         <Route exact path={"/"}>
           <div className="landingPage">
-            {/* header for tablets and desktops */}
-            <header className="bigScreenHeader md:top-12 lg:top-10 xl:top-8">
-              <ul className="headerList">
-                <li>Movies</li>
-                <li>Series</li>
-                <li>Tv Shows</li>
-              </ul>
-
-              <img src={logo} alt="Binge Logo" className="headerLogo" />
-
-              <ul className="headerList">
-                <li>Choose your language</li>
-                <Link to={"/RegistrationPage"}>
-                  <li>Sign up</li>
-                </Link>
-              </ul>
-            </header>
-
-            {/* header for phones */}
-            <header className="smallScreenHeader ">
-              <div className=" flex flex-row justify-between items-start">
-                <img src={logo} alt="Binge Logo" className=" h-8" />
-
-                <img
-                  src={menuToggled ? closeMenu : menu}
-                  alt="menu image"
-                  className=" h-8"
-                  onClick={() => setMenuToggled((prev) => !prev)}
-                />
-              </div>
-
-              <div className="menuHidden " ref={menuRef}>
-                <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
-                  <li>Movies</li>
-                  <li>Series</li>
-                  <li>Tv Shows</li>
-                  <li>Choose your language</li>
-                  <Link to={"/RegistrationPage"}>
-                    <li onClick={() => setMenuToggled(false)}>Sign up</li>
-                  </Link>
-                </ul>
-              </div>
-            </header>
+            <Header mainScreenRef={mainScreenRef} />
 
             <div ref={mainScreenRef}>
               <HeroSection></HeroSection>

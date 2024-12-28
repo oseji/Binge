@@ -6,7 +6,7 @@ import backArrow from "../assets/back.svg";
 const LoginPage = () => {
   return (
     <form className="authenticationForm">
-      <Link to={"/RegistrationPage"}>
+      <Link to={"/"}>
         <img src={backArrow} alt="back arrow" className=" pt-8" />
       </Link>
       <div className=" flex flex-col items-center mb-4">
