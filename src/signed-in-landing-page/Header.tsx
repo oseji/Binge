@@ -113,12 +113,14 @@ const Header = (props: headerProps) => {
 
         <div className="menuHidden " ref={menuRef}>
           <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
-            <li>Movies</li>
-            <li>Series</li>
-            <li>Tv Shows</li>
-            <li>Choose your language</li>
+            <li>home</li>
+            <li>movies</li>
+            <li>series</li>
+            <li>downloads</li>
+            <li>my list</li>
+
             <Link to={"/RegistrationPage"}>
-              <li onClick={() => setMenuToggled(false)}>Sign up</li>
+              <li onClick={() => setMenuToggled(false)}>my profile</li>
             </Link>
           </ul>
         </div>
