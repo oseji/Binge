@@ -1,5 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+
+import { db, auth, googleProvider } from "./firebase-config/firebase";
 
 import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
@@ -20,6 +22,7 @@ import Footer from "./landing-page/Footer";
 import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const mainScreenRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -57,7 +60,12 @@ function App() {
               }}
             ></div>
             <Switch>
-              <Route path={"/RegistrationPage"} component={RegistrationPage} />
+              <Route path={"/RegistrationPage"}>
+                <RegistrationPage
+                  setIsLoggedIn={setIsLoggedIn}
+                  isLoggedIn={isLoggedIn}
+                />
+              </Route>
               <Route path={"/LoginPage"} component={LoginPage} />
               <Route path={"/ResetPassword"} component={ResetPassword} />
             </Switch>

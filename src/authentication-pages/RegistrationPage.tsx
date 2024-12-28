@@ -1,9 +1,43 @@
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
+import { auth } from "../firebase-config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
-import { Link } from "react-router-dom";
 
-const RegistrationPage = () => {
+type props = {
+  isLoggedIn: boolean;
+  setIsLoggedIn: (loading: boolean) => void;
+};
+
+const RegistrationPage = (props: props) => {
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const fullName = firstName + " " + lastName;
+  const [email, setEmail] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const [error, setError] = useState(null);
+
+  const createAccount = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      props.setIsLoggedIn(true);
+      setEmail("");
+      setPassword("");
+      console.log("signed up successfully");
+    } catch (error: any) {
+      props.setIsLoggedIn(false);
+      setError(error);
+    }
+  };
+
   return (
     <form className="authenticationForm">
       <Link to={"/"} className=" w-fit mt-8 block">
@@ -23,6 +57,8 @@ const RegistrationPage = () => {
             name="firstName"
             id="firstName"
             placeholder="Sandra"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
 
@@ -33,6 +69,8 @@ const RegistrationPage = () => {
             name="lastName"
             id="lastName"
             placeholder="Bloyd"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
 
@@ -44,6 +82,8 @@ const RegistrationPage = () => {
             name="phoneNumber"
             id="phoneNumber"
             placeholder="+234 7024341178"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
 
@@ -55,6 +95,8 @@ const RegistrationPage = () => {
             name="emailAddress"
             id="emailAddress"
             placeholder="SandyB@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -65,6 +107,8 @@ const RegistrationPage = () => {
             name="password"
             id="password"
             placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
@@ -75,6 +119,8 @@ const RegistrationPage = () => {
             name="confirmPassword"
             id="confirmPassword"
             placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
 
@@ -94,12 +140,21 @@ const RegistrationPage = () => {
             <span> Sign in with Google</span>
           </button>
 
-          <button
-            className=" py-3.5 w-full md:w-10/12 bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
-            onClick={(e) => e.preventDefault()}
+          <Link
+            to={props.isLoggedIn === true ? "/SignedInLandingPage" : ""}
+            className=" w-full"
           >
-            SIGN UP
-          </button>
+            <button
+              className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
+              onClick={(e) => {
+                e.preventDefault();
+
+                createAccount();
+              }}
+            >
+              SIGN UP
+            </button>
+          </Link>
         </div>
 
         <p className=" text-[#98A2B3] mt-5">
