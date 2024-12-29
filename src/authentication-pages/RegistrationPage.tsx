@@ -1,6 +1,10 @@
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import { logIn, logOut } from "../redux/loginState";
+
 import { auth } from "../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -9,8 +13,8 @@ import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
 
 type props = {
-  isLoggedIn: boolean;
-  setIsLoggedIn: (loggedIn: boolean) => void;
+  // isLoggedIn: boolean;
+  // setIsLoggedIn: (loggedIn: boolean) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
   error: string;
@@ -19,10 +23,11 @@ type props = {
 
 const RegistrationPage = (props: props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  const fullName = firstName + " " + lastName;
+  // const fullName = firstName + " " + lastName;
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -34,15 +39,19 @@ const RegistrationPage = (props: props) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      props.setIsLoggedIn(true);
+      // props.setIsLoggedIn(true);
+      dispatch(logIn());
       setEmail("");
       setPassword("");
       console.log("signed up successfully");
       history.push("/");
     } catch (err: any) {
-      console.log(err);
-      props.setIsLoggedIn(true);
       props.setError(err);
+      console.log(err);
+      if (err) {
+        // props.setIsLoggedIn(false);
+        dispatch(logOut());
+      }
     } finally {
       props.setIsLoading(false);
     }

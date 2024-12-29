@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 
 import { db, auth, googleProvider } from "./firebase-config/firebase";
 
@@ -22,15 +24,19 @@ import Footer from "./landing-page/Footer";
 import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const isloggedIn = useSelector(
+    (state: RootState) => state.loginSetter.isLoggedIn
+  );
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const mainScreenRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
+    console.log(isloggedIn);
+  }, [isloggedIn]);
 
   useEffect(() => {
     console.log(`LOADING : ${isLoading}`);
@@ -41,7 +47,7 @@ function App() {
       <Switch>
         {/* LANDING PAGE */}
         <Route exact path={"/"}>
-          {!isLoggedIn ? (
+          {!isloggedIn ? (
             <div className="landingPage">
               <Header mainScreenRef={mainScreenRef} />
 
@@ -77,8 +83,8 @@ function App() {
             <Switch>
               <Route path={"/RegistrationPage"}>
                 <RegistrationPage
-                  setIsLoggedIn={setIsLoggedIn}
-                  isLoggedIn={isLoggedIn}
+                  // setIsLoggedIn={setIsLoggedIn}
+                  // isLoggedIn={isLoggedIn}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
                   error={error}
