@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 import logo from "../assets/Binge.svg";
 import menu from "../assets/menu.svg";
@@ -10,6 +11,7 @@ import notificationIcon from "../assets/notificationIcon.svg";
 import avatar from "../assets/avatar.png";
 import editProfileIcon from "../assets/editProfile.svg";
 import logoutIcon from "../assets/logout.svg";
+import { auth } from "../firebase-config/firebase";
 
 type headerProps = {
   mainScreenRef: React.RefObject<HTMLDivElement>;
@@ -19,6 +21,17 @@ const Header = (props: headerProps) => {
   const menuRef = useRef<HTMLImageElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const [menuToggled, setMenuToggled] = useState(false);
+
+  // const logOut= async ()=>{
+  //   try{
+  //     await signOut(auth)
+
+  //     props
+  //   }
+  //   catch(error:any){
+
+  //   }
+  // }
 
   // menu toggle
   useEffect(() => {

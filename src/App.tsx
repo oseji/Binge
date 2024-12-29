@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { db, auth, googleProvider } from "./firebase-config/firebase";
@@ -23,30 +23,45 @@ import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
   const mainScreenRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log(`LOADING : ${isLoading}`);
+  }, [isLoading]);
 
   return (
     <div className="App">
       <Switch>
         {/* LANDING PAGE */}
         <Route exact path={"/"}>
-          <div className="landingPage">
-            <Header mainScreenRef={mainScreenRef} />
+          {!isLoggedIn ? (
+            <div className="landingPage">
+              <Header mainScreenRef={mainScreenRef} />
 
-            <div ref={mainScreenRef}>
-              <HeroSection></HeroSection>
+              <div ref={mainScreenRef}>
+                <HeroSection></HeroSection>
 
-              <Favorites></Favorites>
+                <Favorites></Favorites>
 
-              <Features></Features>
+                <Features></Features>
 
-              <Pricing></Pricing>
+                <Pricing></Pricing>
 
-              <Questions></Questions>
+                <Questions></Questions>
 
-              <Footer></Footer>
+                <Footer></Footer>
+              </div>
             </div>
-          </div>
+          ) : (
+            <SignedInLandingPage />
+          )}
         </Route>
 
         {/* AUTHENTICATION PAGES */}
@@ -64,6 +79,10 @@ function App() {
                 <RegistrationPage
                   setIsLoggedIn={setIsLoggedIn}
                   isLoggedIn={isLoggedIn}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                  error={error}
+                  setError={setError}
                 />
               </Route>
               <Route path={"/LoginPage"} component={LoginPage} />
@@ -91,7 +110,7 @@ function App() {
         </Route>
 
         {/* SIGNED IN LANDING PAGE */}
-        <Route path={"/SignedInLandingPage"} component={SignedInLandingPage} />
+        {/* <Route path={"/SignedInLandingPage"} component={SignedInLandingPage} /> */}
       </Switch>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 
 import { auth } from "../firebase-config/firebase";
@@ -10,10 +10,16 @@ import backArrow from "../assets/back.svg";
 
 type props = {
   isLoggedIn: boolean;
-  setIsLoggedIn: (loading: boolean) => void;
+  setIsLoggedIn: (loggedIn: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
+  error: string;
+  setError: (text: string) => void;
 };
 
 const RegistrationPage = (props: props) => {
+  const history = useHistory();
+
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const fullName = firstName + " " + lastName;
@@ -22,9 +28,9 @@ const RegistrationPage = (props: props) => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const [error, setError] = useState(null);
-
   const createAccount = async () => {
+    props.setIsLoading(true);
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
@@ -32,9 +38,13 @@ const RegistrationPage = (props: props) => {
       setEmail("");
       setPassword("");
       console.log("signed up successfully");
-    } catch (error: any) {
-      props.setIsLoggedIn(false);
-      setError(error);
+      history.push("/");
+    } catch (err: any) {
+      console.log(err);
+      props.setIsLoggedIn(true);
+      props.setError(err);
+    } finally {
+      props.setIsLoading(false);
     }
   };
 
@@ -140,21 +150,16 @@ const RegistrationPage = (props: props) => {
             <span> Sign in with Google</span>
           </button>
 
-          <Link
-            to={props.isLoggedIn === true ? "/SignedInLandingPage" : ""}
-            className=" w-full"
-          >
-            <button
-              className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
-              onClick={(e) => {
-                e.preventDefault();
+          <button
+            className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
+            onClick={(e) => {
+              e.preventDefault();
 
-                createAccount();
-              }}
-            >
-              SIGN UP
-            </button>
-          </Link>
+              createAccount();
+            }}
+          >
+            SIGN UP
+          </button>
         </div>
 
         <p className=" text-[#98A2B3] mt-5">
