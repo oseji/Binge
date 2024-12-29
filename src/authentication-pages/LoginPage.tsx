@@ -16,12 +16,12 @@ import { setFalse, setTrue } from "../redux/loginState";
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState("");
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const isloggedIn = useSelector(
-    (state: RootState) => state.loginSetter.isLoggedIn
+  const isLoading = useSelector(
+    (state: RootState) => state.loadingSetter.isLoading
   );
 
   const signIn = async () => {
@@ -39,7 +39,7 @@ const LoginPage = () => {
       setError(err);
       if (err) {
         dispatch(setFalse());
-        console.log("failed to sign in");
+        console.log(error);
       }
     } finally {
       dispatch(notLoading());
@@ -123,7 +123,7 @@ const LoginPage = () => {
               signIn();
             }}
           >
-            LOGIN
+            {isLoading ? "LOADING" : "LOGIN"}
           </button>
         </div>
 

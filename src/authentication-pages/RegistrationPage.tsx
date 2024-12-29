@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTrue, setFalse } from "../redux/loginState";
 import { loading, notLoading } from "../redux/loadingState";
+import { RootState } from "../redux/store";
 
 import { auth } from "../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -12,16 +13,11 @@ import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
 
-type props = {
-  error: string;
-  setError: (text: string) => void;
-};
-
-const RegistrationPage = (props: props) => {
+const RegistrationPage = () => {
   const history = useHistory();
-  // const isLoading = useSelector(
-  //   (state: RootState) => state.loadingSetter.isLoading
-  // );
+  const isLoading = useSelector(
+    (state: RootState) => state.loadingSetter.isLoading
+  );
 
   const dispatch = useDispatch();
 
@@ -31,6 +27,8 @@ const RegistrationPage = (props: props) => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const [error, setError] = useState("");
 
   const createAccount = async () => {
     dispatch(loading());
@@ -46,11 +44,12 @@ const RegistrationPage = (props: props) => {
 
       history.push("/");
     } catch (err: any) {
-      props.setError(err);
+      setError(err);
 
       console.log(err);
       if (err) {
         dispatch(setFalse());
+        console.log(error);
       }
     } finally {
       dispatch(notLoading());
@@ -167,7 +166,7 @@ const RegistrationPage = (props: props) => {
               createAccount();
             }}
           >
-            SIGN UP
+            {isLoading ? "LOADING" : " SIGN UP"}
           </button>
         </div>
 

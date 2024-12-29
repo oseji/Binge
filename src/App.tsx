@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 
-import { db, auth, googleProvider } from "./firebase-config/firebase";
+// import { db, auth, googleProvider } from "./firebase-config/firebase";
 
 import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
@@ -30,7 +30,6 @@ function App() {
   const isLoading = useSelector(
     (state: RootState) => state.loadingSetter.isLoading
   );
-  const [error, setError] = useState<string>("");
 
   const mainScreenRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +81,7 @@ function App() {
             ></div>
             <Switch>
               <Route path={"/RegistrationPage"}>
-                <RegistrationPage error={error} setError={setError} />
+                <RegistrationPage />
               </Route>
               <Route path={"/LoginPage"} component={LoginPage} />
               <Route path={"/ResetPassword"} component={ResetPassword} />
