@@ -1,9 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { logIn, logOut } from "../redux/loginState";
+import { useDispatch, useSelector } from "react-redux";
+import { setTrue, setFalse } from "../redux/loginState";
+import { loading, notLoading } from "../redux/loadingState";
 
 import { auth } from "../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -13,47 +13,47 @@ import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
 
 type props = {
-  // isLoggedIn: boolean;
-  // setIsLoggedIn: (loggedIn: boolean) => void;
-  isLoading: boolean;
-  setIsLoading: (loading: boolean) => void;
   error: string;
   setError: (text: string) => void;
 };
 
 const RegistrationPage = (props: props) => {
   const history = useHistory();
+  // const isLoading = useSelector(
+  //   (state: RootState) => state.loadingSetter.isLoading
+  // );
+
   const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  // const fullName = firstName + " " + lastName;
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const createAccount = async () => {
-    props.setIsLoading(true);
+    dispatch(loading());
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      // props.setIsLoggedIn(true);
-      dispatch(logIn());
+      dispatch(setTrue());
       setEmail("");
       setPassword("");
+
       console.log("signed up successfully");
+
       history.push("/");
     } catch (err: any) {
       props.setError(err);
+
       console.log(err);
       if (err) {
-        // props.setIsLoggedIn(false);
-        dispatch(logOut());
+        dispatch(setFalse());
       }
     } finally {
-      props.setIsLoading(false);
+      dispatch(notLoading());
     }
   };
 

@@ -1,9 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+
+import { auth } from "../firebase-config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+
 import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
+import { loading, notLoading } from "../redux/loadingState";
+import { setFalse, setTrue } from "../redux/loginState";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const isloggedIn = useSelector(
+    (state: RootState) => state.loginSetter.isLoggedIn
+  );
+
+  const signIn = async () => {
+    dispatch(loading());
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      dispatch(setTrue());
+
+      history.push("/");
+
+      console.log("signed in successfully");
+    } catch (err: any) {
+      setError(err);
+      if (err) {
+        dispatch(setFalse());
+        console.log("failed to sign in");
+      }
+    } finally {
+      dispatch(notLoading());
+    }
+  };
+
   return (
     <form className="authenticationForm">
       <Link to={"/"}>
@@ -33,6 +75,8 @@ const LoginPage = () => {
             name="emailAddressLogin"
             id="emailAddressLogin"
             placeholder="ImeldaLeo@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -43,6 +87,8 @@ const LoginPage = () => {
             name="passwordLogin"
             id="passwordLogin"
             placeholder="**********"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
@@ -69,14 +115,16 @@ const LoginPage = () => {
             <span> Sign in with Google</span>
           </button>
 
-          <Link to={"/SignedInLandingPage"} className=" w-full mx-auto block">
-            <button
-              className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
-              // onClick={(e) => e.preventDefault()}
-            >
-              LOGIN
-            </button>
-          </Link>
+          <button
+            className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
+            onClick={(e) => {
+              e.preventDefault();
+
+              signIn();
+            }}
+          >
+            LOGIN
+          </button>
         </div>
 
         <p className=" text-[#98A2B3] mt-5">

@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import { signOut } from "firebase/auth";
+import { auth } from "../firebase-config/firebase";
+
+import { setFalse, setTrue } from "../redux/loginState";
+import { loading, notLoading } from "../redux/loadingState";
+import { useDispatch } from "react-redux";
 
 import logo from "../assets/Binge.svg";
 import menu from "../assets/menu.svg";
@@ -11,7 +17,6 @@ import notificationIcon from "../assets/notificationIcon.svg";
 import avatar from "../assets/avatar.png";
 import editProfileIcon from "../assets/editProfile.svg";
 import logoutIcon from "../assets/logout.svg";
-import { auth } from "../firebase-config/firebase";
 
 type headerProps = {
   mainScreenRef: React.RefObject<HTMLDivElement>;
@@ -22,16 +27,25 @@ const Header = (props: headerProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [menuToggled, setMenuToggled] = useState(false);
 
-  // const logOut= async ()=>{
-  //   try{
-  //     await signOut(auth)
+  const dispatch = useDispatch();
 
-  //     props
-  //   }
-  //   catch(error:any){
+  const logOut = async () => {
+    dispatch(loading());
 
-  //   }
-  // }
+    try {
+      await signOut(auth);
+      console.log("logged out successfully");
+
+      dispatch(setFalse());
+    } catch (err: any) {
+      if (err) {
+        dispatch(setTrue());
+      }
+      console.log(err);
+    } finally {
+      dispatch(notLoading());
+    }
+  };
 
   // menu toggle
   useEffect(() => {
@@ -48,8 +62,6 @@ const Header = (props: headerProps) => {
         props.mainScreenRef.current?.classList.remove("hideMainScreen");
       }
     }
-
-    console.log("clicked");
   }, [menuToggled]);
 
   return (
@@ -100,12 +112,13 @@ const Header = (props: headerProps) => {
                 <span>Edit profile</span>
               </div>
 
-              <Link to={"/"}>
-                <div className=" flex flex-row gap-3 items-center">
-                  <img src={logoutIcon} alt="edit profile icon" />
-                  <span>Logout</span>
-                </div>
-              </Link>
+              <button
+                className=" flex flex-row gap-3 items-center"
+                onClick={logOut}
+              >
+                <img src={logoutIcon} alt="edit profile icon" />
+                <span>Logout</span>
+              </button>
             </div>
           </div>
         </ul>

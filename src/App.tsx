@@ -24,12 +24,12 @@ import Footer from "./landing-page/Footer";
 import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const isloggedIn = useSelector(
     (state: RootState) => state.loginSetter.isLoggedIn
   );
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const isLoading = useSelector(
+    (state: RootState) => state.loadingSetter.isLoading
+  );
   const [error, setError] = useState<string>("");
 
   const mainScreenRef = useRef<HTMLDivElement>(null);
@@ -82,14 +82,7 @@ function App() {
             ></div>
             <Switch>
               <Route path={"/RegistrationPage"}>
-                <RegistrationPage
-                  // setIsLoggedIn={setIsLoggedIn}
-                  // isLoggedIn={isLoggedIn}
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
-                  error={error}
-                  setError={setError}
-                />
+                <RegistrationPage error={error} setError={setError} />
               </Route>
               <Route path={"/LoginPage"} component={LoginPage} />
               <Route path={"/ResetPassword"} component={ResetPassword} />
@@ -114,9 +107,6 @@ function App() {
             </Switch>
           </section>
         </Route>
-
-        {/* SIGNED IN LANDING PAGE */}
-        {/* <Route path={"/SignedInLandingPage"} component={SignedInLandingPage} /> */}
       </Switch>
     </div>
   );
