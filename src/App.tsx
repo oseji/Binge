@@ -33,13 +33,13 @@ function App() {
 
   const mainScreenRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    console.log(isloggedIn);
-  }, [isloggedIn]);
+  // useEffect(() => {
+  //   console.log(isloggedIn);
+  // }, [isloggedIn]);
 
-  useEffect(() => {
-    console.log(`LOADING : ${isLoading}`);
-  }, [isLoading]);
+  // useEffect(() => {
+  //   console.log(`LOADING : ${isLoading}`);
+  // }, [isLoading]);
 
   return (
     <div className="App">
