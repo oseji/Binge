@@ -203,7 +203,7 @@ footer {
 }
 
 .authenticationForm {
-  @apply absolute h-fit max-h-[90dvh] px-5 md:px-11 pb-12 text-black bg-white w-11/12 md:w-2/3 rounded-md xl:w-1/2 overflow-y-auto;
+  @apply absolute h-fit max-h-[90dvh] px-5 md:px-11 pb-12 text-black bg-white w-11/12 md:w-2/3 rounded-md lg:w-1/2 overflow-y-auto;
 }
 
 .resetPasswordForm {

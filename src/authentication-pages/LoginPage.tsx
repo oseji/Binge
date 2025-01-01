@@ -7,6 +7,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
+import { CircularProgress } from "@mui/material";
+
 import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
@@ -123,7 +125,11 @@ const LoginPage = () => {
               signIn();
             }}
           >
-            {isLoading ? "LOADING" : "LOGIN"}
+            {isLoading ? (
+              <CircularProgress color="inherit" size={"1.2rem"} />
+            ) : (
+              " SIGN IN"
+            )}
           </button>
         </div>
 

@@ -6,7 +6,9 @@ import { auth } from "../firebase-config/firebase";
 
 import { setFalse, setTrue } from "../redux/loginState";
 import { loading, notLoading } from "../redux/loadingState";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { CircularProgress } from "@mui/material";
 
 import logo from "../assets/Binge.svg";
 import menu from "../assets/menu.svg";
@@ -17,6 +19,7 @@ import notificationIcon from "../assets/notificationIcon.svg";
 import avatar from "../assets/avatar.png";
 import editProfileIcon from "../assets/editProfile.svg";
 import logoutIcon from "../assets/logout.svg";
+import { RootState } from "../redux/store";
 
 type headerProps = {
   mainScreenRef: React.RefObject<HTMLDivElement>;
@@ -26,6 +29,10 @@ const Header = (props: headerProps) => {
   const menuRef = useRef<HTMLImageElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const [menuToggled, setMenuToggled] = useState(false);
+
+  const isLoading = useSelector(
+    (state: RootState) => state.loadingSetter.isLoading
+  );
 
   const dispatch = useDispatch();
 
@@ -116,8 +123,14 @@ const Header = (props: headerProps) => {
                 className=" flex flex-row gap-3 items-center"
                 onClick={logOut}
               >
-                <img src={logoutIcon} alt="edit profile icon" />
-                <span>Logout</span>
+                <div className="  flex flex-row gap-3 items-center">
+                  <img src={logoutIcon} alt="edit profile icon" />
+                  <span>Sign out</span>
+                </div>
+
+                {isLoading && (
+                  <CircularProgress color="inherit" size={"1.2rem"} />
+                )}
               </button>
             </div>
           </div>

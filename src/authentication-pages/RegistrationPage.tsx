@@ -9,6 +9,8 @@ import { RootState } from "../redux/store";
 import { auth } from "../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
+import { CircularProgress } from "@mui/material";
+
 import BingeLogo from "../assets/registration logo.svg";
 import googleIcon from "../assets/Google.svg";
 import backArrow from "../assets/back.svg";
@@ -166,7 +168,11 @@ const RegistrationPage = () => {
               createAccount();
             }}
           >
-            {isLoading ? "LOADING" : " SIGN UP"}
+            {isLoading ? (
+              <CircularProgress color="inherit" size={"1.2rem"} />
+            ) : (
+              " SIGN UP"
+            )}
           </button>
         </div>
 
