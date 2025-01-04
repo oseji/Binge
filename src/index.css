@@ -276,5 +276,5 @@ footer {
 }
 
 .movieThumbnail {
-  @apply h-32 md:h-56;
+  @apply h-48 md:h-56;
 }

@@ -157,10 +157,15 @@ const Header = (props: headerProps) => {
             <li>series</li>
             <li>downloads</li>
             <li>my list</li>
+            <li>my profile</li>
 
-            <Link to={"/RegistrationPage"}>
-              <li onClick={() => setMenuToggled(false)}>my profile</li>
-            </Link>
+            <button
+              className=" flex flex-row gap-3 items-center text-2xl uppercase"
+              onClick={logOut}
+            >
+              <span>Sign out</span>
+              <img src={logoutIcon} alt="edit profile icon" />
+            </button>
           </ul>
         </div>
       </header>
