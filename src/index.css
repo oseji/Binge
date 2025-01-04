@@ -272,9 +272,9 @@ footer {
 }
 
 .categoryGroupHeading {
-  @apply uppercase font-semibold;
+  @apply uppercase font-semibold text-xl mb-3;
 }
 
 .movieThumbnail {
-  @apply h-32 md:h-44;
+  @apply h-32 md:h-56;
 }
