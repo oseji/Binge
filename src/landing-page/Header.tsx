@@ -35,12 +35,18 @@ const Header = (props: headerProps) => {
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader md:top-12 lg:top-10 xl:top-8">
         <ul className="headerList">
-          <li>Movies</li>
-          <li>Series</li>
-          <li>Tv Shows</li>
+          <li>
+            <Link to={"/Movies"}>Movies</Link>
+          </li>
+
+          <li>
+            <Link to={"/Series"}>Series</Link>
+          </li>
         </ul>
 
-        <img src={logo} alt="Binge Logo" className="headerLogo" />
+        <Link to={"/"}>
+          <img src={logo} alt="Binge Logo" className="headerLogo" />
+        </Link>
 
         <ul className="headerList">
           <Link to={"/LoginPage"}>
@@ -56,7 +62,9 @@ const Header = (props: headerProps) => {
       {/* header for phones */}
       <header className="smallScreenHeader ">
         <div className=" flex flex-row justify-between items-start">
-          <img src={logo} alt="Binge Logo" className=" h-8" />
+          <Link to={"/"}>
+            <img src={logo} alt="Binge Logo" className=" h-8" />
+          </Link>
 
           <img
             src={menuToggled ? closeMenu : menu}
@@ -68,9 +76,14 @@ const Header = (props: headerProps) => {
 
         <div className="menuHidden " ref={menuRef}>
           <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
-            <li>Movies</li>
-            <li>Series</li>
-            <li>Tv Shows</li>
+            <li>
+              <Link to={"/Movies"}>Movies</Link>
+            </li>
+
+            <li>
+              <Link to={"/Series"}>Series</Link>
+            </li>
+
             <Link to={"/LoginPage"}>
               <li onClick={() => setMenuToggled(false)}>Login</li>
             </Link>

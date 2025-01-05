@@ -83,7 +83,11 @@ const MovieCategories = () => {
       <div>
         <h3 className="categoryGroupHeading">now playing</h3>
 
-        {categoryData.now_playing.loading && <CircularProgress />}
+        {categoryData.now_playing.loading && (
+          <div className=" w-full flex flex-row justify-center">
+            <CircularProgress color="inherit" />
+          </div>
+        )}
 
         {!categoryData.now_playing.loading && (
           <div className="categoryGroup">
@@ -92,6 +96,7 @@ const MovieCategories = () => {
                 src={tmdbBaseURL + element.poster_path}
                 alt={element.original_title}
                 key={index}
+                loading="lazy"
                 className="movieThumbnail"
               />
             ))}
@@ -101,7 +106,12 @@ const MovieCategories = () => {
 
       <div>
         <h3 className="categoryGroupHeading">popular</h3>
-        {categoryData.popular.loading && <CircularProgress />}
+
+        {categoryData.popular.loading && (
+          <div className=" w-full flex flex-row justify-center">
+            <CircularProgress color="inherit" />
+          </div>
+        )}
 
         {!categoryData.popular.loading && (
           <div className="categoryGroup">
@@ -110,6 +120,7 @@ const MovieCategories = () => {
                 src={tmdbBaseURL + element.poster_path}
                 alt={element.original_title}
                 key={index}
+                loading="lazy"
                 className="movieThumbnail"
               />
             ))}
@@ -119,7 +130,11 @@ const MovieCategories = () => {
 
       <div>
         <h3 className="categoryGroupHeading">top rated</h3>
-        {categoryData.top_rated.loading && <CircularProgress />}
+        {categoryData.top_rated.loading && (
+          <div className=" w-full flex flex-row justify-center">
+            <CircularProgress color="inherit" />
+          </div>
+        )}
 
         {!categoryData.top_rated.loading && (
           <div className="categoryGroup">
@@ -128,6 +143,7 @@ const MovieCategories = () => {
                 src={tmdbBaseURL + element.poster_path}
                 alt={element.original_title}
                 key={index}
+                loading="lazy"
                 className="movieThumbnail"
               />
             ))}
@@ -137,7 +153,11 @@ const MovieCategories = () => {
 
       <div>
         <h3 className="categoryGroupHeading">upcoming</h3>
-        {categoryData.upcoming.loading && <CircularProgress />}
+        {categoryData.upcoming.loading && (
+          <div className=" w-full flex flex-row justify-center">
+            <CircularProgress color="inherit" />
+          </div>
+        )}
 
         {!categoryData.upcoming.loading && (
           <div className="categoryGroup">
@@ -146,6 +166,7 @@ const MovieCategories = () => {
                 src={tmdbBaseURL + element.poster_path}
                 alt={element.original_title}
                 key={index}
+                loading="lazy"
                 className="movieThumbnail"
               />
             ))}

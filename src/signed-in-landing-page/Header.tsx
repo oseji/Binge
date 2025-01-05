@@ -78,7 +78,6 @@ const Header = (props: headerProps) => {
         <ul className="headerList xl:w-1/3">
           <li>Movies</li>
           <li>Series</li>
-          <li>Tv Shows</li>
         </ul>
 
         <div className=" xl:w-1/3">
@@ -155,7 +154,6 @@ const Header = (props: headerProps) => {
             <li>home</li>
             <li>movies</li>
             <li>series</li>
-            <li>downloads</li>
             <li>my list</li>
             <li>my profile</li>
 

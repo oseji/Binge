@@ -13,6 +13,9 @@ import Plans from "./payment-pages/Plans";
 import PaymentOption from "./payment-pages/PaymentOption";
 import PaymentDetails from "./payment-pages/PaymentDetails";
 
+import Movies from "./movies-series/Movies";
+import Series from "./movies-series/Series";
+
 import Header from "./landing-page/Header";
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
@@ -67,6 +70,13 @@ function App() {
           ) : (
             <SignedInLandingPage />
           )}
+        </Route>
+
+        <Route path={["/Movies", "/Series"]}>
+          <Switch>
+            <Route path={"/Movies"} component={Movies} />
+            <Route path={"/Series"} component={Series} />
+          </Switch>
         </Route>
 
         {/* AUTHENTICATION PAGES */}
