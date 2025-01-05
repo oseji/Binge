@@ -260,7 +260,11 @@ footer {
 /* SIGNED IN LANDING PAGE */
 /* movie categories */
 .movieCategories {
-  @apply bg-black py-10 px-5 flex flex-col gap-10;
+  @apply bg-black py-10 px-5 flex flex-col gap-10 min-h-[90dvh];
+}
+
+.category {
+  @apply min-h-48;
 }
 
 .categoryGroup {
@@ -273,6 +277,10 @@ footer {
 
 .categoryGroupHeading {
   @apply uppercase font-semibold text-xl mb-3;
+}
+
+.movieSpinnerContainer {
+  @apply w-full h-40 flex flex-row justify-center items-center;
 }
 
 .movieThumbnail {

@@ -36,7 +36,6 @@ const MovieCategories = () => {
       },
     };
 
-    // set loading to true
     setCategoryData((prev: any) => ({
       ...prev,
       [category]: { ...prev[category], loading: true },
@@ -45,13 +44,11 @@ const MovieCategories = () => {
     try {
       const response = await axios.request(options);
 
-      // set data
       setCategoryData((prev: any) => ({
         ...prev,
         [category]: { ...prev[category], data: response.data.results },
       }));
     } catch (err) {
-      // set error if any
       setCategoryData((prev: any) => ({
         ...prev,
         [category]: { ...prev[category], error: err },
@@ -61,7 +58,6 @@ const MovieCategories = () => {
         console.log(`error for ${category}`, err);
       }
     } finally {
-      // set loading to false
       setCategoryData((prev: any) => ({
         ...prev,
         [category]: { ...prev[category], loading: false },
@@ -80,11 +76,11 @@ const MovieCategories = () => {
 
   return (
     <div className="movieCategories">
-      <div>
+      <div className=" category">
         <h3 className="categoryGroupHeading">now playing</h3>
 
         {categoryData.now_playing.loading && (
-          <div className=" w-full flex flex-row justify-center">
+          <div className=" movieSpinnerContainer">
             <CircularProgress color="inherit" />
           </div>
         )}
@@ -104,11 +100,11 @@ const MovieCategories = () => {
         )}
       </div>
 
-      <div>
+      <div className=" category">
         <h3 className="categoryGroupHeading">popular</h3>
 
         {categoryData.popular.loading && (
-          <div className=" w-full flex flex-row justify-center">
+          <div className=" movieSpinnerContainer">
             <CircularProgress color="inherit" />
           </div>
         )}
@@ -128,10 +124,10 @@ const MovieCategories = () => {
         )}
       </div>
 
-      <div>
+      <div className=" category">
         <h3 className="categoryGroupHeading">top rated</h3>
         {categoryData.top_rated.loading && (
-          <div className=" w-full flex flex-row justify-center">
+          <div className=" movieSpinnerContainer">
             <CircularProgress color="inherit" />
           </div>
         )}
@@ -151,10 +147,10 @@ const MovieCategories = () => {
         )}
       </div>
 
-      <div>
+      <div className=" category">
         <h3 className="categoryGroupHeading">upcoming</h3>
         {categoryData.upcoming.loading && (
-          <div className=" w-full flex flex-row justify-center">
+          <div className=" movieSpinnerContainer">
             <CircularProgress color="inherit" />
           </div>
         )}

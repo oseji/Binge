@@ -42,6 +42,10 @@ const Header = (props: headerProps) => {
           <li>
             <Link to={"/Series"}>Series</Link>
           </li>
+
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
         </ul>
 
         <Link to={"/"}>
@@ -76,6 +80,10 @@ const Header = (props: headerProps) => {
 
         <div className="menuHidden " ref={menuRef}>
           <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
+            <li>
+              <Link to={"/"}>Home</Link>
+            </li>
+
             <li>
               <Link to={"/Movies"}>Movies</Link>
             </li>

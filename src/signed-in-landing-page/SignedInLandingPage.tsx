@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import Header from "./Header";
+import Header from "./SignedInHeader";
 import HeroSection from "./HeroSection";
 import MovieCategories from "./MovieCategories";
 import Footer from "../landing-page/Footer";

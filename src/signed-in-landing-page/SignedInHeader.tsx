@@ -76,12 +76,23 @@ const Header = (props: headerProps) => {
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader top-5">
         <ul className="headerList xl:w-1/3">
-          <li>Movies</li>
-          <li>Series</li>
+          <li>
+            <Link to={"/Movies"}>Movies</Link>
+          </li>
+
+          <li>
+            <Link to={"/Series"}>Series</Link>
+          </li>
+
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
         </ul>
 
         <div className=" xl:w-1/3">
-          <img src={logo} alt="Binge Logo" className="headerLogo mx-auto" />
+          <Link to={"/"}>
+            <img src={logo} alt="Binge Logo" className="headerLogo mx-auto" />
+          </Link>
         </div>
 
         <ul className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 xl:w-1/3">
@@ -139,7 +150,9 @@ const Header = (props: headerProps) => {
       {/* header for phones */}
       <header className="smallScreenHeader ">
         <div className=" flex flex-row justify-between items-start">
-          <img src={logo} alt="Binge Logo" className=" h-8" />
+          <Link to={"/"}>
+            <img src={logo} alt="Binge Logo" className=" h-8" />
+          </Link>
 
           <img
             src={menuToggled ? closeMenu : menu}
@@ -151,9 +164,17 @@ const Header = (props: headerProps) => {
 
         <div className="menuHidden " ref={menuRef}>
           <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
-            <li>home</li>
-            <li>movies</li>
-            <li>series</li>
+            <li>
+              <Link to={"/"}>Home</Link>
+            </li>
+
+            <li>
+              <Link to={"/Movies"}>Movies</Link>
+            </li>
+
+            <li>
+              <Link to={"/Series"}>Series</Link>
+            </li>
             <li>my list</li>
             <li>my profile</li>
 
