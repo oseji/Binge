@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import Header from "../landing-page/Header";
 import SignedInHeader from "../signed-in-landing-page/SignedInHeader";
-import MovieCategories from "../signed-in-landing-page/MovieCategories";
+import MovieCategories from "./MovieCategories";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
@@ -11,6 +11,12 @@ const Series = () => {
   const isLoggedIn = useSelector(
     (state: RootState) => state.loginSetter.isLoggedIn
   );
+
+  const information = {
+    url: "https://api.themoviedb.org/3/tv/",
+    categories: ["airing_today", "on_the_air", "popular", "top_rated"],
+    titles: ["airing today", "on the air", "popular", "top rated"],
+  };
 
   return (
     <div>
@@ -21,7 +27,7 @@ const Series = () => {
       )}
 
       <div ref={mainScreenRef} className=" pt-10 md:pt-20">
-        <MovieCategories />
+        <MovieCategories information={information} />
       </div>
     </div>
   );

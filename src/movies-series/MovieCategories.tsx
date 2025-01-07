@@ -4,10 +4,20 @@ import { CircularProgress } from "@mui/material";
 
 type movieType = {
   poster_path: string;
-  original_title: string;
+  title: string;
 };
 
-const MovieCategories = () => {
+type informationType = {
+  url: string;
+  categories: string[];
+  titles: string[];
+};
+
+type propTypes = {
+  information: informationType;
+};
+
+const MovieCategories = (props: propTypes) => {
   const [categoryData, setCategoryData] = useState<{
     now_playing: { data: movieType[]; loading: boolean; error: any };
     popular: { data: movieType[]; loading: boolean; error: any };
@@ -28,7 +38,7 @@ const MovieCategories = () => {
 
     const options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${category}`,
+      url: `${props.information.url}${category}`,
       params: { language: "en-US", page: "1" },
       headers: {
         accept: "application/json",
@@ -67,17 +77,17 @@ const MovieCategories = () => {
 
   useEffect(() => {
     Promise.all([
-      fetchData("now_playing"),
-      fetchData("popular"),
-      fetchData("top_rated"),
-      fetchData("upcoming"),
+      fetchData(props.information.categories[0]),
+      fetchData(props.information.categories[1]),
+      fetchData(props.information.categories[2]),
+      fetchData(props.information.categories[3]),
     ]);
   }, []);
 
   return (
     <div className="movieCategories">
       <div className=" category">
-        <h3 className="categoryGroupHeading">now playing</h3>
+        <h3 className="categoryGroupHeading">{props.information.titles[0]}</h3>
 
         {categoryData.now_playing.loading && (
           <div className=" movieSpinnerContainer">
@@ -90,7 +100,7 @@ const MovieCategories = () => {
             {categoryData.now_playing.data?.map((element, index) => (
               <img
                 src={tmdbBaseURL + element.poster_path}
-                alt={element.original_title}
+                alt={element.title}
                 key={index}
                 loading="lazy"
                 className="movieThumbnail"
@@ -101,7 +111,7 @@ const MovieCategories = () => {
       </div>
 
       <div className=" category">
-        <h3 className="categoryGroupHeading">popular</h3>
+        <h3 className="categoryGroupHeading">{props.information.titles[1]}</h3>
 
         {categoryData.popular.loading && (
           <div className=" movieSpinnerContainer">
@@ -114,7 +124,7 @@ const MovieCategories = () => {
             {categoryData.popular.data?.map((element, index) => (
               <img
                 src={tmdbBaseURL + element.poster_path}
-                alt={element.original_title}
+                alt={element.title}
                 key={index}
                 loading="lazy"
                 className="movieThumbnail"
@@ -125,7 +135,7 @@ const MovieCategories = () => {
       </div>
 
       <div className=" category">
-        <h3 className="categoryGroupHeading">top rated</h3>
+        <h3 className="categoryGroupHeading">{props.information.titles[2]}</h3>
         {categoryData.top_rated.loading && (
           <div className=" movieSpinnerContainer">
             <CircularProgress color="inherit" />
@@ -137,7 +147,7 @@ const MovieCategories = () => {
             {categoryData.top_rated.data?.map((element, index) => (
               <img
                 src={tmdbBaseURL + element.poster_path}
-                alt={element.original_title}
+                alt={element.title}
                 key={index}
                 loading="lazy"
                 className="movieThumbnail"
@@ -148,7 +158,7 @@ const MovieCategories = () => {
       </div>
 
       <div className=" category">
-        <h3 className="categoryGroupHeading">upcoming</h3>
+        <h3 className="categoryGroupHeading">{props.information.titles[3]}</h3>
         {categoryData.upcoming.loading && (
           <div className=" movieSpinnerContainer">
             <CircularProgress color="inherit" />
@@ -160,7 +170,7 @@ const MovieCategories = () => {
             {categoryData.upcoming.data?.map((element, index) => (
               <img
                 src={tmdbBaseURL + element.poster_path}
-                alt={element.original_title}
+                alt={element.title}
                 key={index}
                 loading="lazy"
                 className="movieThumbnail"

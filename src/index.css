@@ -284,5 +284,5 @@ footer {
 }
 
 .movieThumbnail {
-  @apply h-48 md:h-56;
+  @apply h-48 md:h-56 cursor-pointer;
 }

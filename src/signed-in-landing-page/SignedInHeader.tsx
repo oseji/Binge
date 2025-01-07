@@ -95,18 +95,12 @@ const Header = (props: headerProps) => {
           </Link>
         </div>
 
-        <ul className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 xl:w-1/3">
-          <div className=" flex flex-row items-center gap-3 bg-black text-white px-4 py-2 rounded-md outline outline-gray-300">
-            <img src={searchIcon} alt="search icon" />
-
-            <input
-              type="text"
-              name="heroSearch"
-              id="heroSearch"
-              placeholder="Title, people, genre"
-              className=" bg-transparent outline-none"
-            />
-          </div>
+        <ul className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 ">
+          <img
+            src={searchIcon}
+            alt=" search icon"
+            className=" cursor-pointer h-5"
+          />
 
           <img src={notificationIcon} alt="notification icon" />
 
