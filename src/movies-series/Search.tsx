@@ -10,9 +10,9 @@ const Search = () => {
     <div className=" min-h-screen">
       <Header mainScreenRef={mainScreenRef} />
 
-      <div className=" pt-32 ">
-        <div className=" w-fit mx-auto flex flex-col items-center gap-2">
-          <div className=" w-full flex flex-row items-center gap-2">
+      <div className=" pt-32 px-5 md:px-10">
+        <div className=" w-full md:w-fit mx-auto flex flex-col items-center gap-5 md:gap-2">
+          <div className=" w-full flex flex-col md:flex-row items-center gap-2">
             <input
               type="text"
               placeholder="Search by Title, Genre, People"
@@ -20,12 +20,12 @@ const Search = () => {
               onChange={(e) => {
                 setSearchedTerm(e.target.value);
               }}
-              className=" w-full p-4 rounded"
+              className=" w-full p-4 rounded outline-0 text-black"
             />
             <button className=" rounded px-6 py-4 bg-[#9B51E0]">Search</button>
           </div>
 
-          <div className=" flex flex-row items-center gap-2">
+          <div className="flex flex-wrap flex-row items-center gap-2">
             <p className=" rounded-md px-4 py-2 border border-purple-900">
               action
             </p>

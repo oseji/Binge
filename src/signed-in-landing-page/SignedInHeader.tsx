@@ -73,7 +73,9 @@ const Header = (props: headerProps) => {
     <div>
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader top-5">
-        <img src={logo} alt="Binge Logo" className="headerLogo" />
+        <Link to={"/"}>
+          <img src={logo} alt="Binge Logo" className="headerLogo" />
+        </Link>
 
         <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 ">
           <Link to={"/Search"}>
@@ -136,15 +138,30 @@ const Header = (props: headerProps) => {
 
         <div className="menuHidden " ref={menuRef}>
           <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
+            <li>
+              <Link to={"/"}>Home</Link>
+            </li>
             <li>my list</li>
             <li>my profile</li>
+
+            <Link
+              to={"/Search"}
+              className=" flex flex-row items-center gap-3 text-2xl uppercase"
+            >
+              <span>Search</span>
+              {/* <img
+                src={searchIcon}
+                alt=" search icon"
+                className=" cursor-pointer h-5"
+              /> */}
+            </Link>
 
             <button
               className=" flex flex-row gap-3 items-center text-2xl uppercase"
               onClick={logOut}
             >
               <span>Sign out</span>
-              <img src={logoutIcon} alt="edit profile icon" className=" h-6" />
+              <img src={logoutIcon} alt="edit profile icon" className=" h-5" />
             </button>
           </ul>
         </div>
