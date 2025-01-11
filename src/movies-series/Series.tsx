@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 import Header from "../landing-page/Header";
-import SignedInHeader from "../signed-in-landing-page/SignedInHeader";
 import MediaCategories from "./MediaCategories";
 
 const Series = () => {
@@ -20,11 +19,7 @@ const Series = () => {
 
   return (
     <div>
-      {isLoggedIn ? (
-        <SignedInHeader mainScreenRef={mainScreenRef} />
-      ) : (
-        <Header mainScreenRef={mainScreenRef} />
-      )}
+      {!isLoggedIn && <Header mainScreenRef={mainScreenRef} />}
 
       <div
         ref={mainScreenRef}

@@ -21,7 +21,7 @@ const SignedInLandingPage = () => {
           <span
             className={` border-b-2 ${
               currentType === "Movies"
-                ? " border-purple-600 "
+                ? " border-purple-600 scale-125"
                 : " border-transparent"
             }`}
             onClick={() => setCurrentType("Movies")}
@@ -31,7 +31,7 @@ const SignedInLandingPage = () => {
           <span
             className={` border-b-2 ${
               currentType === "Series"
-                ? " border-purple-600"
+                ? " border-purple-600 scale-125"
                 : " border-transparent"
             }`}
             onClick={() => setCurrentType("Series")}

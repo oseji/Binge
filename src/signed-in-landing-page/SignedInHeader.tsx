@@ -144,7 +144,7 @@ const Header = (props: headerProps) => {
               onClick={logOut}
             >
               <span>Sign out</span>
-              <img src={logoutIcon} alt="edit profile icon" />
+              <img src={logoutIcon} alt="edit profile icon" className=" h-6" />
             </button>
           </ul>
         </div>

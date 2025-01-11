@@ -94,13 +94,6 @@ const MediaCategories = (props: propTypes) => {
 
   return (
     <div className="movieCategories">
-      {/* {isLoggedIn && (
-        <div className=" flex flex-row gap-5 items-center justify-center">
-          <span>Movies</span>
-          <span>Series</span>
-        </div>
-      )} */}
-
       {props.information.categories.map((category, idx) => (
         <div key={category} className="category">
           <h3 className="categoryGroupHeading">

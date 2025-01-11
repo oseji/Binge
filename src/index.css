@@ -259,11 +259,11 @@ footer {
 
 /* SIGNED IN LANDING PAGE */
 .typeSwitcherGrp {
-  @apply flex flex-row gap-5 items-center justify-center pt-10;
+  @apply flex flex-row gap-10 items-center justify-center pt-10;
 }
 
 .typeSwitcherGrp span {
-  @apply cursor-pointer;
+  @apply cursor-pointer text-lg transition ease-in-out duration-200;
 }
 
 /* movie categories */
