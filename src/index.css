@@ -284,5 +284,7 @@ footer {
 }
 
 .movieThumbnail {
-  @apply h-48 md:h-56 cursor-pointer;
+  @apply h-48 md:h-72 cursor-pointer;
 }
+
+/* SEARCH */

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector, UseSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
+import { RootState } from "../redux/store";
 
 type movieType = {
   poster_path: string;
@@ -24,11 +26,15 @@ type propTypes = {
 };
 
 const MediaCategories = (props: propTypes) => {
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.loginSetter.isLoggedIn
+  );
+
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
   >(() => {
-    const initialState: Record<string, categoryDataType> = {};
-    // Only initialize the categories we received in props
+    const initialState: Record<string, categoryDataType> = {}; // Only initialize the categories we received in props
+
     props.information.categories.forEach((category) => {
       initialState[category] = { data: [], loading: false, error: null };
     });
@@ -77,9 +83,6 @@ const MediaCategories = (props: propTypes) => {
         ...prev,
         [category]: { ...prev[category], loading: false },
       }));
-
-      console.log("Category Data:", categoryData);
-      console.log("Categories from props:", props.information.categories);
     }
   };
 
@@ -91,8 +94,15 @@ const MediaCategories = (props: propTypes) => {
 
   return (
     <div className="movieCategories">
+      {isLoggedIn && (
+        <div className=" flex flex-row gap-5 items-center justify-center">
+          <p className=" cursor-pointer">Movies</p>
+          <p>Series</p>
+        </div>
+      )}
+
       {props.information.categories.map((category, idx) => (
-        <div key={idx} className="category">
+        <div key={category} className="category">
           <h3 className="categoryGroupHeading">
             {props.information.titles[idx]}
           </h3>
