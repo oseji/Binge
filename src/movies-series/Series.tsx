@@ -26,7 +26,10 @@ const Series = () => {
         <Header mainScreenRef={mainScreenRef} />
       )}
 
-      <div ref={mainScreenRef} className=" pt-10 md:pt-20">
+      <div
+        ref={mainScreenRef}
+        className={`${isLoggedIn ? "" : "pt-10 md:pt-20"}`}
+      >
         <MediaCategories information={information} />
       </div>
     </div>

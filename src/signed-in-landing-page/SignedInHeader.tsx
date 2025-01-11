@@ -73,7 +73,7 @@ const Header = (props: headerProps) => {
     <div>
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader top-5">
-        <img src={logo} alt="Binge Logo" className="headerLogo mx-auto" />
+        <img src={logo} alt="Binge Logo" className="headerLogo" />
 
         <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 ">
           <Link to={"/Search"}>

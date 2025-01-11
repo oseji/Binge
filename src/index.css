@@ -258,6 +258,14 @@ footer {
 }
 
 /* SIGNED IN LANDING PAGE */
+.typeSwitcherGrp {
+  @apply flex flex-row gap-5 items-center justify-center pt-10;
+}
+
+.typeSwitcherGrp span {
+  @apply cursor-pointer;
+}
+
 /* movie categories */
 .movieCategories {
   @apply bg-black py-10 px-5 flex flex-col gap-10 min-h-[90dvh];

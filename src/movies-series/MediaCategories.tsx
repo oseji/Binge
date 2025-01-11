@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector, UseSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { RootState } from "../redux/store";
+// import { RootState } from "../redux/store";
 
 type movieType = {
   poster_path: string;
@@ -26,9 +26,9 @@ type propTypes = {
 };
 
 const MediaCategories = (props: propTypes) => {
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.loginSetter.isLoggedIn
-  );
+  // const isLoggedIn = useSelector(
+  //   (state: RootState) => state.loginSetter.isLoggedIn
+  // );
 
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
@@ -94,12 +94,12 @@ const MediaCategories = (props: propTypes) => {
 
   return (
     <div className="movieCategories">
-      {isLoggedIn && (
+      {/* {isLoggedIn && (
         <div className=" flex flex-row gap-5 items-center justify-center">
-          <p className=" cursor-pointer">Movies</p>
-          <p>Series</p>
+          <span>Movies</span>
+          <span>Series</span>
         </div>
-      )}
+      )} */}
 
       {props.information.categories.map((category, idx) => (
         <div key={category} className="category">

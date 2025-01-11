@@ -1,18 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Header from "./SignedInHeader";
 import HeroSection from "./HeroSection";
-import MediaCategories from "../movies-series/MediaCategories";
+import Movies from "../movies-series/Movies";
+import Series from "../movies-series/Series";
 import Footer from "../landing-page/Footer";
 
 const SignedInLandingPage = () => {
   const mainScreenRef = useRef<HTMLDivElement>(null);
-
-  const information = {
-    url: "https://api.themoviedb.org/3/movie/",
-    categories: ["now_playing", "popular", "top_rated", "upcoming"],
-    titles: ["now playing", "popular", "top rated", "upcoming"],
-  };
+  const [currentType, setCurrentType] = useState<"Movies" | "Series">("Movies");
 
   return (
     <div>
@@ -20,7 +16,31 @@ const SignedInLandingPage = () => {
 
       <div ref={mainScreenRef}>
         <HeroSection />
-        <MediaCategories information={information} />
+
+        <div className="typeSwitcherGrp">
+          <span
+            className={` border-b-2 ${
+              currentType === "Movies"
+                ? " border-purple-600 "
+                : " border-transparent"
+            }`}
+            onClick={() => setCurrentType("Movies")}
+          >
+            Movies
+          </span>
+          <span
+            className={` border-b-2 ${
+              currentType === "Series"
+                ? " border-purple-600"
+                : " border-transparent"
+            }`}
+            onClick={() => setCurrentType("Series")}
+          >
+            Series
+          </span>
+        </div>
+
+        {currentType === "Movies" ? <Movies /> : <Series />}
 
         <Footer />
       </div>
