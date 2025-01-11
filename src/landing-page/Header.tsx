@@ -53,13 +53,13 @@ const Header = (props: headerProps) => {
         </Link>
 
         <ul className="headerList">
-          <Link to={"/LoginPage"}>
-            <li>Login</li>
-          </Link>
+          <li>
+            <Link to={"/LoginPage"}>Login</Link>
+          </li>
 
-          <Link to={"/RegistrationPage"}>
-            <li>Sign up</li>
-          </Link>
+          <li>
+            <Link to={"/RegistrationPage"}>Sign up</Link>
+          </li>
         </ul>
       </header>
 
@@ -92,13 +92,13 @@ const Header = (props: headerProps) => {
               <Link to={"/Series"}>Series</Link>
             </li>
 
-            <Link to={"/LoginPage"}>
-              <li onClick={() => setMenuToggled(false)}>Login</li>
-            </Link>
+            <li onClick={() => setMenuToggled(false)}>
+              <Link to={"/LoginPage"}>Login</Link>
+            </li>
 
-            <Link to={"/RegistrationPage"}>
-              <li onClick={() => setMenuToggled(false)}>Sign up</li>
-            </Link>
+            <li onClick={() => setMenuToggled(false)}>
+              <Link to={"/RegistrationPage"}>Sign up</Link>
+            </li>
           </ul>
         </div>
       </header>

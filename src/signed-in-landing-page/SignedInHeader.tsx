@@ -15,7 +15,6 @@ import menu from "../assets/menu.svg";
 import closeMenu from "../assets/icons8-close.svg";
 
 import searchIcon from "../assets/searchicon.svg";
-import notificationIcon from "../assets/notificationIcon.svg";
 import avatar from "../assets/avatar.png";
 import editProfileIcon from "../assets/editProfile.svg";
 import logoutIcon from "../assets/logout.svg";
@@ -75,7 +74,7 @@ const Header = (props: headerProps) => {
     <div>
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader top-5">
-        <ul className="headerList xl:w-1/3">
+        <ul className="headerList">
           <li>
             <Link to={"/Movies"}>Movies</Link>
           </li>
@@ -89,20 +88,18 @@ const Header = (props: headerProps) => {
           </li>
         </ul>
 
-        <div className=" xl:w-1/3">
-          <Link to={"/"}>
-            <img src={logo} alt="Binge Logo" className="headerLogo mx-auto" />
+        <Link to={"/"}>
+          <img src={logo} alt="Binge Logo" className="headerLogo mx-auto" />
+        </Link>
+
+        <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 ">
+          <Link to={"/Search"}>
+            <img
+              src={searchIcon}
+              alt=" search icon"
+              className=" cursor-pointer h-5"
+            />
           </Link>
-        </div>
-
-        <ul className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 ">
-          <img
-            src={searchIcon}
-            alt=" search icon"
-            className=" cursor-pointer h-5"
-          />
-
-          <img src={notificationIcon} alt="notification icon" />
 
           <div className=" flex flex-col items-start relative">
             <img
@@ -138,7 +135,7 @@ const Header = (props: headerProps) => {
               </button>
             </div>
           </div>
-        </ul>
+        </div>
       </header>
 
       {/* header for phones */}

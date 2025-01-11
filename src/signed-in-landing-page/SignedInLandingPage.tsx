@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import Header from "./SignedInHeader";
 import HeroSection from "./HeroSection";
-import MovieCategories from "../movies-series/MovieCategories";
+import MediaCategories from "../movies-series/MediaCategories";
 import Footer from "../landing-page/Footer";
 
 const SignedInLandingPage = () => {
@@ -20,7 +20,8 @@ const SignedInLandingPage = () => {
 
       <div ref={mainScreenRef}>
         <HeroSection />
-        <MovieCategories information={information} />
+        <MediaCategories information={information} />
+
         <Footer />
       </div>
     </div>

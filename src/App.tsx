@@ -15,6 +15,7 @@ import PaymentDetails from "./payment-pages/PaymentDetails";
 
 import Movies from "./movies-series/Movies";
 import Series from "./movies-series/Series";
+import Search from "./movies-series/Search";
 
 import Header from "./landing-page/Header";
 import HeroSection from "./landing-page/HeroSection";
@@ -71,6 +72,8 @@ function App() {
             <SignedInLandingPage />
           )}
         </Route>
+
+        <Route path={"/Search"} component={Search} />
 
         <Route path={["/Movies", "/Series"]}>
           <Switch>

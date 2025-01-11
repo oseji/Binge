@@ -1,10 +1,10 @@
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 import Header from "../landing-page/Header";
 import SignedInHeader from "../signed-in-landing-page/SignedInHeader";
-import MovieCategories from "./MovieCategories";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import MediaCategories from "./MediaCategories";
 
 const Movies = () => {
   const mainScreenRef = useRef<HTMLDivElement>(null);
@@ -27,7 +27,7 @@ const Movies = () => {
       )}
 
       <div ref={mainScreenRef} className=" pt-10 md:pt-20">
-        <MovieCategories information={information} />
+        <MediaCategories information={information} />
       </div>
     </div>
   );

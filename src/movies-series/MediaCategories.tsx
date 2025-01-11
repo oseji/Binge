@@ -17,7 +17,7 @@ type propTypes = {
   information: informationType;
 };
 
-const MovieCategories = (props: propTypes) => {
+const MediaCategories = (props: propTypes) => {
   const [categoryData, setCategoryData] = useState<{
     now_playing: { data: movieType[]; loading: boolean; error: any };
     popular: { data: movieType[]; loading: boolean; error: any };
@@ -72,16 +72,16 @@ const MovieCategories = (props: propTypes) => {
         ...prev,
         [category]: { ...prev[category], loading: false },
       }));
+
+      console.log("Category Data:", categoryData);
+      console.log("Categories from props:", props.information.categories);
     }
   };
 
   useEffect(() => {
-    Promise.all([
-      fetchData(props.information.categories[0]),
-      fetchData(props.information.categories[1]),
-      fetchData(props.information.categories[2]),
-      fetchData(props.information.categories[3]),
-    ]);
+    props.information.categories.forEach((element) => {
+      fetchData(element);
+    });
   }, []);
 
   return (
@@ -183,4 +183,4 @@ const MovieCategories = (props: propTypes) => {
   );
 };
 
-export default MovieCategories;
+export default MediaCategories;
