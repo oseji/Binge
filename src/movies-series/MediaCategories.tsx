@@ -7,6 +7,12 @@ type movieType = {
   title: string;
 };
 
+type categoryDataType = {
+  data: movieType[];
+  loading: boolean;
+  error: any;
+};
+
 type informationType = {
   url: string;
   categories: string[];
@@ -18,16 +24,15 @@ type propTypes = {
 };
 
 const MediaCategories = (props: propTypes) => {
-  const [categoryData, setCategoryData] = useState<{
-    now_playing: { data: movieType[]; loading: boolean; error: any };
-    popular: { data: movieType[]; loading: boolean; error: any };
-    top_rated: { data: movieType[]; loading: boolean; error: any };
-    upcoming: { data: movieType[]; loading: boolean; error: any };
-  }>({
-    now_playing: { data: [], loading: false, error: null },
-    popular: { data: [], loading: false, error: null },
-    top_rated: { data: [], loading: false, error: null },
-    upcoming: { data: [], loading: false, error: null },
+  const [categoryData, setCategoryData] = useState<
+    Record<string, categoryDataType>
+  >(() => {
+    const initialState: Record<string, categoryDataType> = {};
+    // Only initialize the categories we received in props
+    props.information.categories.forEach((category) => {
+      initialState[category] = { data: [], loading: false, error: null };
+    });
+    return initialState;
   });
 
   const tmdbBaseURL = "https://image.tmdb.org/t/p/w500/";
@@ -86,99 +91,33 @@ const MediaCategories = (props: propTypes) => {
 
   return (
     <div className="movieCategories">
-      <div className=" category">
-        <h3 className="categoryGroupHeading">{props.information.titles[0]}</h3>
+      {props.information.categories.map((category, idx) => (
+        <div key={idx} className="category">
+          <h3 className="categoryGroupHeading">
+            {props.information.titles[idx]}
+          </h3>
 
-        {categoryData.now_playing.loading && (
-          <div className=" movieSpinnerContainer">
-            <CircularProgress color="inherit" />
-          </div>
-        )}
+          {categoryData[category]?.loading && (
+            <div className="movieSpinnerContainer">
+              <CircularProgress color="inherit" />
+            </div>
+          )}
 
-        {!categoryData.now_playing.loading && (
-          <div className="categoryGroup">
-            {categoryData.now_playing.data?.map((element, index) => (
-              <img
-                src={tmdbBaseURL + element.poster_path}
-                alt={element.title}
-                key={index}
-                loading="lazy"
-                className="movieThumbnail"
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className=" category">
-        <h3 className="categoryGroupHeading">{props.information.titles[1]}</h3>
-
-        {categoryData.popular.loading && (
-          <div className=" movieSpinnerContainer">
-            <CircularProgress color="inherit" />
-          </div>
-        )}
-
-        {!categoryData.popular.loading && (
-          <div className="categoryGroup">
-            {categoryData.popular.data?.map((element, index) => (
-              <img
-                src={tmdbBaseURL + element.poster_path}
-                alt={element.title}
-                key={index}
-                loading="lazy"
-                className="movieThumbnail"
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className=" category">
-        <h3 className="categoryGroupHeading">{props.information.titles[2]}</h3>
-        {categoryData.top_rated.loading && (
-          <div className=" movieSpinnerContainer">
-            <CircularProgress color="inherit" />
-          </div>
-        )}
-
-        {!categoryData.top_rated.loading && (
-          <div className="categoryGroup">
-            {categoryData.top_rated.data?.map((element, index) => (
-              <img
-                src={tmdbBaseURL + element.poster_path}
-                alt={element.title}
-                key={index}
-                loading="lazy"
-                className="movieThumbnail"
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className=" category">
-        <h3 className="categoryGroupHeading">{props.information.titles[3]}</h3>
-        {categoryData.upcoming.loading && (
-          <div className=" movieSpinnerContainer">
-            <CircularProgress color="inherit" />
-          </div>
-        )}
-
-        {!categoryData.upcoming.loading && (
-          <div className="categoryGroup">
-            {categoryData.upcoming.data?.map((element, index) => (
-              <img
-                src={tmdbBaseURL + element.poster_path}
-                alt={element.title}
-                key={index}
-                loading="lazy"
-                className="movieThumbnail"
-              />
-            ))}
-          </div>
-        )}
-      </div>
+          {!categoryData[category]?.loading && (
+            <div className="categoryGroup">
+              {categoryData[category]?.data?.map((element, index) => (
+                <img
+                  src={tmdbBaseURL + element.poster_path}
+                  alt={element.title}
+                  key={index}
+                  loading="lazy"
+                  className="movieThumbnail"
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
