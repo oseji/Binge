@@ -44,14 +44,15 @@ const Details = () => {
   const history = useHistory();
 
   const fetchDetails = async () => {
+    const apiKey =
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMGEwY2RkZGUyM2I5NzJjM2U2MzMwMjIyMTQ0M2VjMSIsIm5iZiI6MTY5OTkwOTMyOS4yMzQsInN1YiI6IjY1NTI4ZWQxZDRmZTA0MDBhYzM0ZTBmOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xrsUAKPhkB21DPZwhnIP0RpRQpR8iRHTgzbCL_2jWaE";
     const options = {
       method: "GET",
       url: `https://api.themoviedb.org/3/${mediaType}/${movieId}`,
       params: { language: "en-US" },
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMGEwY2RkZGUyM2I5NzJjM2U2MzMwMjIyMTQ0M2VjMSIsIm5iZiI6MTY5OTkwOTMyOS4yMzQsInN1YiI6IjY1NTI4ZWQxZDRmZTA0MDBhYzM0ZTBmOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xrsUAKPhkB21DPZwhnIP0RpRQpR8iRHTgzbCL_2jWaE",
+        Authorization: apiKey,
       },
     };
 
@@ -106,12 +107,12 @@ const Details = () => {
           />
 
           <div>
-            <h1>{mediaDetails.title}</h1>
+            <h1 className=" text-3xl font-bold">{mediaDetails.title}</h1>
             <span>{mediaDetails.status}</span>
           </div>
 
-          <div>
-            <div>
+          <div className=" mt-5">
+            <div className=" flex flex-row items-center gap-3 text-sm">
               {mediaDetails.genres.map((element, index) => (
                 <span key={index}>{element.name}</span>
               ))}
@@ -121,10 +122,10 @@ const Details = () => {
           <div>
             <p>{mediaDetails.overview}</p>
 
-            <div>
+            <div className=" flex flex-row items-center gap-3 mt-5">
               <span>{mediaDetails.origin_country}</span>
               <span>{mediaDetails.original_language}</span>
-              <span>{mediaDetails.runtime}</span>
+              <span>{mediaDetails.runtime} minutes</span>
             </div>
           </div>
         </div>
