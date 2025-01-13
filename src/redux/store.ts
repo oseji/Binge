@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./loginState";
 import { loadingSlice } from "./loadingState";
 import { mediaIDSlice } from "./mediaID";
-import { mediaIDSlice } from "./mediaID";
 import { mediaTypeSlice } from "./mediaType";
 
 export const store = configureStore({
