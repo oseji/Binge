@@ -1,16 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-//import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setmediaID } from "../redux/mediaID";
 import { CircularProgress } from "@mui/material";
-// import { RootState } from "../redux/store";
+import { setmediaType } from "../redux/mediaType";
 
 type movieType = {
   poster_path: string;
   title: string;
   id: number;
-  genre_ids: [];
-  overview: string;
 };
 
 type categoryDataType = {
@@ -31,11 +30,8 @@ type propTypes = {
 };
 
 const MediaCategories = (props: propTypes) => {
-  // const isLoggedIn = useSelector(
-  //   (state: RootState) => state.loginSetter.isLoggedIn
-  // );
-
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
@@ -121,16 +117,12 @@ const MediaCategories = (props: propTypes) => {
                   src={tmdbBaseURL + element.poster_path}
                   alt={element.title}
                   data-id={element.id}
-                  data-genre={element.genre_ids}
                   loading="lazy"
                   className="movieThumbnail"
                   onClick={() => {
-                    console.log(
-                      element.title,
-                      element.id,
-                      element.genre_ids,
-                      element.overview
-                    );
+                    console.log(element.title, element.id);
+                    dispatch(setmediaID(element.id));
+                    dispatch(setmediaType(props.information.type));
 
                     history.push("/Details");
                   }}

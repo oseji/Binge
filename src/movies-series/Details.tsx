@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
+
+import backArrow from "../assets/previous.svg";
+import { RootState } from "../redux/store";
 
 type mediaDetails = {
   poster_path: string;
@@ -11,9 +16,17 @@ type mediaDetails = {
   original_language: string;
   overview: string;
   status: string;
+  runtime: number;
 };
 
 const Details = () => {
+  const movieId = useSelector(
+    (state: RootState) => state.mediaIDSetter.mediaID
+  );
+  const mediaType = useSelector(
+    (state: RootState) => state.mediaTypeSetter.mediaType
+  );
+
   const [mediaDetails, setMediaDetails] = useState<mediaDetails>({
     poster_path: "",
     title: "",
@@ -23,6 +36,7 @@ const Details = () => {
     original_language: "",
     overview: "",
     status: "",
+    runtime: 0,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -32,7 +46,7 @@ const Details = () => {
   const fetchDetails = async () => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/839033",
+      url: `https://api.themoviedb.org/3/${mediaType}/${movieId}`,
       params: { language: "en-US" },
       headers: {
         accept: "application/json",
@@ -40,6 +54,8 @@ const Details = () => {
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMGEwY2RkZGUyM2I5NzJjM2U2MzMwMjIyMTQ0M2VjMSIsIm5iZiI6MTY5OTkwOTMyOS4yMzQsInN1YiI6IjY1NTI4ZWQxZDRmZTA0MDBhYzM0ZTBmOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xrsUAKPhkB21DPZwhnIP0RpRQpR8iRHTgzbCL_2jWaE",
       },
     };
+
+    console.log(options.url);
 
     setIsLoading(true);
 
@@ -55,18 +71,21 @@ const Details = () => {
         original_language: response.data.original_language,
         overview: response.data.overview,
         status: response.data.status,
+        runtime: response.data.runtime,
       });
+
+      console.log(response.data);
     } catch (err) {
       setError(err);
       console.log(err);
     } finally {
       setIsLoading(false);
+      console.log(error);
     }
   };
 
   useEffect(() => {
     fetchDetails();
-    console.log(mediaDetails);
   }, []);
 
   useEffect(() => {
@@ -74,31 +93,42 @@ const Details = () => {
   }, [mediaDetails]);
 
   return (
-    <div className=" min-h-screen">
-      <p onClick={() => history.goBack()}>Back</p>
-
-      <h1>title</h1>
-
-      <div>
-        <span>genre</span>
-        <span>genre</span>
-        <span>genre</span>
-      </div>
-
-      <div>
-        <h2>ABOUT</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ad
-          voluptatum esse. Commodi est quos voluptatum veniam, adipisci impedit
-          quas mollitia quae facere! Totam vero, iste magni harum eaque debitis.
-        </p>
-
+    <div className=" min-h-screen px-5 md:px-10 py-5 md:py-10 flex flex-col justify-center relative">
+      {isLoading ? (
+        <CircularProgress color="inherit" size={"1.2rem"} />
+      ) : (
         <div>
-          <span>runtime</span>
-          <span>country of origin</span>
-          <span>language</span>
+          <img
+            src={backArrow}
+            alt="back arrow"
+            onClick={() => history.goBack()}
+            className=" absolute top-5 cursor-pointer"
+          />
+
+          <div>
+            <h1>{mediaDetails.title}</h1>
+            <span>{mediaDetails.status}</span>
+          </div>
+
+          <div>
+            <div>
+              {mediaDetails.genres.map((element, index) => (
+                <span key={index}>{element.name}</span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p>{mediaDetails.overview}</p>
+
+            <div>
+              <span>{mediaDetails.origin_country}</span>
+              <span>{mediaDetails.original_language}</span>
+              <span>{mediaDetails.runtime}</span>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
