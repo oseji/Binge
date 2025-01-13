@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 //import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 // import { RootState } from "../redux/store";
@@ -7,6 +8,9 @@ import { CircularProgress } from "@mui/material";
 type movieType = {
   poster_path: string;
   title: string;
+  id: number;
+  genre_ids: [];
+  overview: string;
 };
 
 type categoryDataType = {
@@ -16,6 +20,7 @@ type categoryDataType = {
 };
 
 type informationType = {
+  type: string;
   url: string;
   categories: string[];
   titles: string[];
@@ -29,6 +34,8 @@ const MediaCategories = (props: propTypes) => {
   // const isLoggedIn = useSelector(
   //   (state: RootState) => state.loginSetter.isLoggedIn
   // );
+
+  const history = useHistory();
 
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
@@ -110,11 +117,23 @@ const MediaCategories = (props: propTypes) => {
             <div className="categoryGroup">
               {categoryData[category]?.data?.map((element, index) => (
                 <img
+                  key={index}
                   src={tmdbBaseURL + element.poster_path}
                   alt={element.title}
-                  key={index}
+                  data-id={element.id}
+                  data-genre={element.genre_ids}
                   loading="lazy"
                   className="movieThumbnail"
+                  onClick={() => {
+                    console.log(
+                      element.title,
+                      element.id,
+                      element.genre_ids,
+                      element.overview
+                    );
+
+                    history.push("/Details");
+                  }}
                 />
               ))}
             </div>

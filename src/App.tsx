@@ -16,6 +16,7 @@ import PaymentDetails from "./payment-pages/PaymentDetails";
 import Movies from "./movies-series/Movies";
 import Series from "./movies-series/Series";
 import Search from "./movies-series/Search";
+import Details from "./movies-series/Details";
 
 import Header from "./landing-page/Header";
 import HeroSection from "./landing-page/HeroSection";
@@ -73,6 +74,7 @@ function App() {
           )}
         </Route>
 
+        {/* SEARCH PAGE */}
         <Route path={"/Search"} component={Search} />
 
         <Route path={["/Movies", "/Series"]}>
@@ -81,6 +83,9 @@ function App() {
             <Route path={"/Series"} component={Series} />
           </Switch>
         </Route>
+
+        {/* DETAILS PAGE */}
+        <Route path={"/Details"} component={Details} />
 
         {/* AUTHENTICATION PAGES */}
         <Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>

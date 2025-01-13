@@ -12,6 +12,7 @@ const Series = () => {
   );
 
   const information = {
+    type: "Series",
     url: "https://api.themoviedb.org/3/tv/",
     categories: ["airing_today", "on_the_air", "popular", "top_rated"],
     titles: ["airing today", "on the air", "popular", "top rated"],

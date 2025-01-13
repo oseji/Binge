@@ -12,6 +12,7 @@ const Movies = () => {
   );
 
   const information = {
+    type: "Movies",
     url: "https://api.themoviedb.org/3/movie/",
     categories: ["now_playing", "popular", "top_rated", "upcoming"],
     titles: ["now playing", "popular", "top rated", "upcoming"],
