@@ -7,16 +7,40 @@ import { CircularProgress } from "@mui/material";
 import backArrow from "../assets/previous.svg";
 import { RootState } from "../redux/store";
 
-type mediaDetails = {
+// type moediaDetails = {
+//   poster_path: string;
+//   title: string;
+//   id: number;
+//   genres: [];
+//   origin_country: string;
+//   original_language: string;
+//   overview: string;
+//   status: string;
+//   runtime: number;
+// };
+
+type movieDetails = {
   poster_path: string;
   title: string;
   id: number;
-  genres: [];
+  genres: { name: string }[];
   origin_country: string;
   original_language: string;
   overview: string;
   status: string;
   runtime: number;
+};
+
+type seriesDetails = {
+  poster_path: string;
+  name: string;
+  id: number;
+  number_of_seasons: number;
+  origin_country: string;
+  original_language: string;
+  overview: string;
+  status: string;
+  episode_run_time: number;
 };
 
 const Details = () => {
@@ -27,7 +51,7 @@ const Details = () => {
     (state: RootState) => state.mediaTypeSetter.mediaType
   );
 
-  const [mediaDetails, setMediaDetails] = useState<mediaDetails>({
+  const [movieDetails, setMovieDetails] = useState<movieDetails>({
     poster_path: "",
     title: "",
     id: 0,
@@ -37,6 +61,18 @@ const Details = () => {
     overview: "",
     status: "",
     runtime: 0,
+  });
+
+  const [seriesDetails, setSeriesDetails] = useState<seriesDetails>({
+    poster_path: "",
+    name: "",
+    id: 0,
+    number_of_seasons: 0,
+    origin_country: "",
+    original_language: "",
+    overview: "",
+    status: "",
+    episode_run_time: 0,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -63,17 +99,33 @@ const Details = () => {
     try {
       const response = await axios.request(options);
 
-      setMediaDetails({
-        poster_path: response.data.poster_path,
-        title: response.data.title,
-        id: response.data.id,
-        genres: response.data.genres,
-        origin_country: response.data.origin_country,
-        original_language: response.data.original_language,
-        overview: response.data.overview,
-        status: response.data.status,
-        runtime: response.data.runtime,
-      });
+      if (mediaType === "movie") {
+        setMovieDetails({
+          poster_path: response.data.poster_path,
+          title: response.data.title,
+          id: response.data.id,
+          genres: response.data.genres,
+          origin_country: response.data.origin_country,
+          original_language: response.data.original_language,
+          overview: response.data.overview,
+          status: response.data.status,
+          runtime: response.data.runtime,
+        });
+      }
+
+      if (mediaType === "tv") {
+        setSeriesDetails({
+          poster_path: response.data.poster_path,
+          name: response.data.name,
+          id: response.data.id,
+          number_of_seasons: response.data.number_of_seasons,
+          origin_country: response.data.origin_country,
+          original_language: response.data.original_language,
+          overview: response.data.overview,
+          status: response.data.status,
+          episode_run_time: response.data.episode_run_time,
+        });
+      }
 
       console.log(response.data);
     } catch (err) {
@@ -90,44 +142,85 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
-    console.log(mediaDetails);
-  }, [mediaDetails]);
+    console.log(movieDetails);
+  }, [movieDetails]);
 
   return (
     <div className=" min-h-screen px-5 md:px-10 py-5 md:py-10 flex flex-col justify-center relative">
       {isLoading ? (
-        <CircularProgress color="inherit" size={"1.2rem"} />
+        <CircularProgress
+          color="inherit"
+          size={"5rem"}
+          className=" w-fit mx-auto"
+        />
       ) : (
         <div>
-          <img
-            src={backArrow}
-            alt="back arrow"
-            onClick={() => history.goBack()}
-            className=" absolute top-5 cursor-pointer"
-          />
+          {mediaType === "movie" ? (
+            <div>
+              <img
+                src={backArrow}
+                alt="back arrow"
+                onClick={() => history.goBack()}
+                className=" absolute top-5 cursor-pointer"
+              />
 
-          <div>
-            <h1 className=" text-3xl font-bold">{mediaDetails.title}</h1>
-            <span>{mediaDetails.status}</span>
-          </div>
+              <div>
+                <h1 className=" text-3xl font-bold">{movieDetails.title}</h1>
+                <span className=" italic">{movieDetails.status}</span>
+              </div>
 
-          <div className=" mt-5">
-            <div className=" flex flex-row items-center gap-3 text-sm">
-              {mediaDetails.genres.map((element, index) => (
-                <span key={index}>{element.name}</span>
-              ))}
+              <div className=" mt-5">
+                <div className=" flex flex-row items-center gap-3 text-sm">
+                  {movieDetails.genres.map((element, index) => (
+                    <span key={index}>{element.name}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className=" my-5">{movieDetails.overview}</p>
+
+                <div className=" flex flex-row items-center gap-3 ">
+                  <span>{movieDetails.origin_country}</span>
+                  <span>{movieDetails.original_language}</span>
+                  <span>{movieDetails.runtime} minutes</span>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div>
+              <img
+                src={backArrow}
+                alt="back arrow"
+                onClick={() => history.goBack()}
+                className=" absolute top-5 cursor-pointer"
+              />
 
-          <div>
-            <p>{mediaDetails.overview}</p>
+              <div>
+                <h1 className=" text-3xl font-bold">{seriesDetails.name}</h1>
+                <span className=" italic">{seriesDetails.status}</span>
+              </div>
 
-            <div className=" flex flex-row items-center gap-3 mt-5">
-              <span>{mediaDetails.origin_country}</span>
-              <span>{mediaDetails.original_language}</span>
-              <span>{mediaDetails.runtime} minutes</span>
+              <div className=" mt-5 font-bold">
+                <span>{seriesDetails.number_of_seasons}</span>
+                <span>
+                  {seriesDetails.number_of_seasons === 1
+                    ? " season"
+                    : " seasons"}
+                </span>
+              </div>
+
+              <div>
+                <p className=" my-5">{seriesDetails.overview}</p>
+
+                <div className=" flex flex-row items-center gap-3  font-bold">
+                  <span>{seriesDetails.origin_country}</span>
+                  <span>{seriesDetails.original_language}</span>
+                  <span>{seriesDetails.episode_run_time} minutes</span>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>
