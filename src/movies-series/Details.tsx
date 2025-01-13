@@ -7,18 +7,6 @@ import { CircularProgress } from "@mui/material";
 import backArrow from "../assets/previous.svg";
 import { RootState } from "../redux/store";
 
-// type moediaDetails = {
-//   poster_path: string;
-//   title: string;
-//   id: number;
-//   genres: [];
-//   origin_country: string;
-//   original_language: string;
-//   overview: string;
-//   status: string;
-//   runtime: number;
-// };
-
 type movieDetails = {
   poster_path: string;
   title: string;
