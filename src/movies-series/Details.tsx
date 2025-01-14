@@ -134,7 +134,7 @@ const Details = () => {
   }, [movieDetails]);
 
   return (
-    <div className=" min-h-screen px-5 md:px-10 py-5 md:py-10 flex flex-col justify-center relative">
+    <div className=" min-h-[100dvh] px-5 md:px-10 py-5 md:py-10 flex flex-col justify-center relative">
       {isLoading ? (
         <CircularProgress
           color="inherit"
