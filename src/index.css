@@ -295,4 +295,19 @@ footer {
   @apply w-[500px] h-48 md:h-72 cursor-pointer;
 }
 
+/*  */
+/*  */
+/* DETAILS PAGE */
+.detailsPage {
+  @apply w-full flex flex-col xl:flex-row xl:items-center gap-5 md:gap-20;
+}
+
+.detailsPageImg {
+  @apply w-[500px] h-[600px] md:h-[650px] xl:h-[28.125rem] mx-auto;
+}
+
+.detailsBackArrow {
+  @apply absolute top-8 left-8 md:top-5 md:left-auto cursor-pointer;
+}
+
 /* SEARCH */

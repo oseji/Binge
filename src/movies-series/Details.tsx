@@ -39,6 +39,8 @@ const Details = () => {
     (state: RootState) => state.mediaTypeSetter.mediaType
   );
 
+  const tmdbBaseURL = "https://image.tmdb.org/t/p/w500/";
+
   const [movieDetails, setMovieDetails] = useState<movieDetails>({
     poster_path: "",
     title: "",
@@ -134,7 +136,7 @@ const Details = () => {
   }, [movieDetails]);
 
   return (
-    <div className=" min-h-[100dvh] px-5 md:px-10 py-5 md:py-10 flex flex-col justify-center relative">
+    <div className=" min-h-[100dvh] px-5 py-5 md:px-10  md:py-10 flex flex-col justify-center relative">
       {isLoading ? (
         <CircularProgress
           color="inherit"
@@ -149,29 +151,41 @@ const Details = () => {
                 src={backArrow}
                 alt="back arrow"
                 onClick={() => history.goBack()}
-                className=" absolute top-5 cursor-pointer"
+                className=" detailsBackArrow"
               />
 
-              <div>
-                <h1 className=" text-3xl font-bold">{movieDetails.title}</h1>
-                <span className=" italic">{movieDetails.status}</span>
-              </div>
+              <div className=" detailsPage">
+                <img
+                  src={tmdbBaseURL + movieDetails.poster_path}
+                  alt={movieDetails.title}
+                  className=" detailsPageImg"
+                />
 
-              <div className=" mt-5">
-                <div className=" flex flex-row items-center gap-3 text-sm">
-                  {movieDetails.genres.map((element, index) => (
-                    <span key={index}>{element.name}</span>
-                  ))}
-                </div>
-              </div>
+                <div>
+                  <div>
+                    <h1 className=" text-3xl font-bold">
+                      {movieDetails.title}
+                    </h1>
+                    <span className=" italic">{movieDetails.status}</span>
+                  </div>
 
-              <div>
-                <p className=" my-5">{movieDetails.overview}</p>
+                  <div className=" mt-5">
+                    <div className=" flex flex-row items-center gap-3 text-sm">
+                      {movieDetails.genres.map((element, index) => (
+                        <span key={index}>{element.name}</span>
+                      ))}
+                    </div>
+                  </div>
 
-                <div className=" flex flex-row items-center gap-3 ">
-                  <span>{movieDetails.origin_country}</span>
-                  <span>{movieDetails.original_language}</span>
-                  <span>{movieDetails.runtime} minutes</span>
+                  <div>
+                    <p className=" my-5">{movieDetails.overview}</p>
+
+                    <div className=" flex flex-row items-center gap-3 ">
+                      <span>{movieDetails.origin_country}</span>
+                      <span>{movieDetails.original_language}</span>
+                      <span>{movieDetails.runtime} minutes</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -181,30 +195,42 @@ const Details = () => {
                 src={backArrow}
                 alt="back arrow"
                 onClick={() => history.goBack()}
-                className=" absolute top-5 cursor-pointer"
+                className=" detailsBackArrow"
               />
 
-              <div>
-                <h1 className=" text-3xl font-bold">{seriesDetails.name}</h1>
-                <span className=" italic">{seriesDetails.status}</span>
-              </div>
+              <div className=" detailsPage">
+                <img
+                  src={tmdbBaseURL + seriesDetails.poster_path}
+                  alt={seriesDetails.name}
+                  className=" detailsPageImg"
+                />
 
-              <div className=" mt-5 font-bold">
-                <span>{seriesDetails.number_of_seasons}</span>
-                <span>
-                  {seriesDetails.number_of_seasons === 1
-                    ? " season"
-                    : " seasons"}
-                </span>
-              </div>
+                <div>
+                  <div>
+                    <h1 className=" text-3xl font-bold">
+                      {seriesDetails.name}
+                    </h1>
+                    <span className=" italic">{seriesDetails.status}</span>
+                  </div>
 
-              <div>
-                <p className=" my-5">{seriesDetails.overview}</p>
+                  <div className=" mt-5 font-bold">
+                    <span>{seriesDetails.number_of_seasons}</span>
+                    <span>
+                      {seriesDetails.number_of_seasons === 1
+                        ? " season"
+                        : " seasons"}
+                    </span>
+                  </div>
 
-                <div className=" flex flex-row items-center gap-3  font-bold">
-                  <span>{seriesDetails.origin_country}</span>
-                  <span>{seriesDetails.original_language}</span>
-                  <span>{seriesDetails.episode_run_time} minutes</span>
+                  <div>
+                    <p className=" my-5">{seriesDetails.overview}</p>
+
+                    <div className=" flex flex-row items-center gap-3  font-bold">
+                      <span>{seriesDetails.origin_country}</span>
+                      <span>{seriesDetails.original_language}</span>
+                      <span>{seriesDetails.episode_run_time} minutes</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
