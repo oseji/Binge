@@ -12,7 +12,7 @@ type movieDetails = {
   title: string;
   id: number;
   genres: { name: string }[];
-  origin_country: string;
+  origin_country: string[];
   original_language: string;
   overview: string;
   status: string;
@@ -24,11 +24,11 @@ type seriesDetails = {
   name: string;
   id: number;
   number_of_seasons: number;
-  origin_country: string;
+  origin_country: string[];
   original_language: string;
   overview: string;
   status: string;
-  episode_run_time: number;
+  episode_run_time: number[];
 };
 
 const Details = () => {
@@ -46,7 +46,7 @@ const Details = () => {
     title: "",
     id: 0,
     genres: [],
-    origin_country: "",
+    origin_country: [],
     original_language: "",
     overview: "",
     status: "",
@@ -58,12 +58,13 @@ const Details = () => {
     name: "",
     id: 0,
     number_of_seasons: 0,
-    origin_country: "",
+    origin_country: [],
     original_language: "",
     overview: "",
     status: "",
-    episode_run_time: 0,
+    episode_run_time: [],
   });
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
@@ -113,17 +114,42 @@ const Details = () => {
           original_language: response.data.original_language,
           overview: response.data.overview,
           status: response.data.status,
-          episode_run_time: response.data.episode_run_time,
+          episode_run_time: response.data?.episode_run_time,
         });
       }
 
       console.log(response.data);
     } catch (err) {
-      setError(err);
+      if (err) {
+        setError(err);
+      }
+
       console.log(err);
     } finally {
       setIsLoading(false);
       console.log(error);
+    }
+  };
+
+  const getCountryName = (countryCode: string) => {
+    if (countryCode) {
+      const name = new Intl.DisplayNames([countryCode], { type: "region" });
+
+      return name.of(countryCode);
+    } else {
+      return "Unknown country";
+    }
+  };
+
+  const getLanguageName = (languageCode: string) => {
+    if (languageCode) {
+      const language = new Intl.DisplayNames([languageCode], {
+        type: "language",
+      });
+
+      return language.of(languageCode);
+    } else {
+      return "Unknown langage";
     }
   };
 
@@ -181,8 +207,12 @@ const Details = () => {
                     <p className=" my-5">{movieDetails.overview}</p>
 
                     <div className=" flex flex-row items-center gap-3 ">
-                      <span>{movieDetails.origin_country}</span>
-                      <span>{movieDetails.original_language}</span>
+                      <span>
+                        {getCountryName(movieDetails.origin_country[0])}
+                      </span>
+                      <span>
+                        {getLanguageName(movieDetails.original_language)}
+                      </span>
                       <span>{movieDetails.runtime} minutes</span>
                     </div>
                   </div>
@@ -226,9 +256,19 @@ const Details = () => {
                     <p className=" my-5">{seriesDetails.overview}</p>
 
                     <div className=" flex flex-row items-center gap-3  font-bold">
-                      <span>{seriesDetails.origin_country}</span>
-                      <span>{seriesDetails.original_language}</span>
-                      <span>{seriesDetails.episode_run_time} minutes</span>
+                      <span>
+                        {getCountryName(seriesDetails.origin_country[0])}
+                      </span>
+
+                      <span>
+                        {getLanguageName(seriesDetails.original_language)}
+                      </span>
+
+                      <span>
+                        {seriesDetails.episode_run_time?.length > 0
+                          ? `${seriesDetails.episode_run_time[0]} minutes`
+                          : "No runtime available"}
+                      </span>
                     </div>
                   </div>
                 </div>
