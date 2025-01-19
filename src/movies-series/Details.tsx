@@ -240,7 +240,15 @@ const Details = () => {
                     <h1 className=" text-3xl font-bold">
                       {seriesDetails.name}
                     </h1>
-                    <span className=" italic">{seriesDetails.status}</span>
+                    <span
+                      className={` italic ${
+                        seriesDetails.status === "Ended"
+                          ? " text-red-600"
+                          : "text-green-600"
+                      }`}
+                    >
+                      {seriesDetails.status}
+                    </span>
                   </div>
 
                   <div className=" mt-5 font-bold">
