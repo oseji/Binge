@@ -1,15 +1,29 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { CircularProgress } from "@mui/material";
 
 import Header from "../signed-in-landing-page/SignedInHeader";
 import axios from "axios";
 
+type mediaContent = {
+  poster_path: string | null;
+  profile_path: string | null;
+  title: string;
+  name: string;
+  media_type: string;
+  id: number;
+};
+
 const Search = () => {
   const [searchedTerm, setSearchedTerm] = useState("");
   const mainScreenRef = useRef<HTMLDivElement>(null);
+  const tmdbBaseURL = "https://image.tmdb.org/t/p/w500/";
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<mediaContent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
+  // const [mediaType, setMediaType] = useState<"movie" | "tv" | "person" | null>(
+  //   null
+  // );
 
   const searchForItem = async () => {
     const options = {
@@ -32,9 +46,9 @@ const Search = () => {
 
     try {
       const response = await axios.request(options);
-      setData(response.data);
+      setData(response.data.results);
 
-      console.log(response.data);
+      // console.log(response.data.results);
     } catch (err) {
       setError(err);
       console.log(err);
@@ -44,13 +58,25 @@ const Search = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
-    <div className=" min-h-screen">
+    <div className=" min-h-[100dvh] flex flex-col">
       <Header mainScreenRef={mainScreenRef} />
 
       <div className=" pt-32 px-5 md:px-10">
         <div className=" w-full md:w-fit mx-auto flex flex-col items-center gap-5 md:gap-2">
-          <div className=" w-full flex flex-col md:flex-row items-center gap-2">
+          {/* search bar */}
+          <form
+            className=" w-full flex flex-col md:flex-row items-center gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              searchForItem();
+            }}
+          >
             <input
               type="text"
               placeholder="Search by Title, Genre, People"
@@ -60,14 +86,16 @@ const Search = () => {
               }}
               className=" w-full p-4 rounded outline-0 text-black"
             />
+
             <button
               className=" rounded px-6 py-4 bg-[#9B51E0]"
               onClick={() => searchForItem()}
             >
               Search
             </button>
-          </div>
+          </form>
 
+          {/* filters */}
           <div className="flex flex-wrap flex-row items-center gap-2">
             <p className=" rounded-md px-4 py-2 border border-purple-900">
               action
@@ -88,7 +116,50 @@ const Search = () => {
         </div>
       </div>
 
-      {/* <p className=" min-h-fit">search</p> */}
+      {/* results section */}
+      {isLoading ? (
+        <div className=" w-full flex flex-col items-center justify-center min-h-fit flex-1">
+          <CircularProgress />
+        </div>
+      ) : (
+        <div className=" p-10">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8">
+            {data.map((element, index) => (
+              <div key={index}>
+                {element.profile_path ? (
+                  <div>
+                    <img
+                      src={tmdbBaseURL + element.profile_path}
+                      alt={element.name || element.title}
+                      className=" movieThumbnail"
+                    />
+
+                    <p className=" text-center">
+                      {element.name || element.title}
+                    </p>
+                  </div>
+                ) : element.poster_path ? (
+                  <div>
+                    <img
+                      src={tmdbBaseURL + element.poster_path}
+                      alt={element.name || element.title}
+                      className=" movieThumbnail"
+                    />
+
+                    <p className=" text-center">
+                      {element.name || element.title}
+                    </p>
+                  </div>
+                ) : (
+                  <p className=" text-center">{`No image found for ${
+                    element.name || element.title
+                  } ${element.media_type}`}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
