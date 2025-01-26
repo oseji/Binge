@@ -1,4 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setmediaID } from "../redux/mediaID";
+import { setmediaType } from "../redux/mediaType";
 import { CircularProgress } from "@mui/material";
 
 import Header from "../signed-in-landing-page/SignedInHeader";
@@ -21,9 +25,9 @@ const Search = () => {
   const [data, setData] = useState<mediaContent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
-  // const [mediaType, setMediaType] = useState<"movie" | "tv" | "person" | null>(
-  //   null
-  // );
+
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const searchForItem = async () => {
     const options = {
@@ -132,6 +136,11 @@ const Search = () => {
                       src={tmdbBaseURL + element.profile_path}
                       alt={element.name || element.title}
                       className=" w-[500px] h-full rounded-lg cursor-pointer"
+                      onClick={() => {
+                        dispatch(setmediaID(element.id));
+                        dispatch(setmediaType(element.media_type));
+                        history.push("/Details");
+                      }}
                     />
 
                     <p className=" text-center">
@@ -144,6 +153,11 @@ const Search = () => {
                       src={tmdbBaseURL + element.poster_path}
                       alt={element.name || element.title}
                       className=" w-[500px] h-full rounded-lg cursor-pointer"
+                      onClick={() => {
+                        dispatch(setmediaID(element.id));
+                        dispatch(setmediaType(element.media_type));
+                        history.push("/Details");
+                      }}
                     />
 
                     <p className=" text-center">
