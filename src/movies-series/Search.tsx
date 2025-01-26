@@ -97,7 +97,7 @@ const Search = () => {
           </form>
 
           {/* filters */}
-          <div className="flex flex-wrap flex-row items-center gap-2">
+          {/* <div className="flex flex-wrap flex-row items-center gap-2">
             <p className=" rounded-md px-4 py-2 border border-purple-900">
               action
             </p>
@@ -113,7 +113,7 @@ const Search = () => {
             <p className=" rounded-md px-4 py-2 border border-purple-900">
               comedy
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -122,7 +122,7 @@ const Search = () => {
         <div className=" w-full flex flex-col items-center justify-center min-h-fit flex-1">
           <CircularProgress color="inherit" />
         </div>
-      ) : (
+      ) : searchResults.length !== 0 ? (
         <div className=" p-10">
           <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 lg:gap-8">
             {searchResults.map((element, index) => (
@@ -169,6 +169,10 @@ const Search = () => {
               </div>
             ))}
           </div>
+        </div>
+      ) : (
+        <div className=" w-full flex flex-col items-center justify-center min-h-fit flex-1">
+          No results found
         </div>
       )}
     </div>
