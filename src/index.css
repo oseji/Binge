@@ -292,7 +292,7 @@ footer {
 }
 
 .movieThumbnail {
-  @apply w-[500px] h-48 md:h-72 cursor-pointer;
+  @apply w-[500px] h-52 md:h-72 cursor-pointer rounded-lg;
 }
 
 /*  */

@@ -88,7 +88,7 @@ const Search = () => {
             />
 
             <button
-              className=" rounded px-6 py-4 bg-[#9B51E0]"
+              className=" w-full md:w-auto rounded px-6 py-4 bg-[#9B51E0]"
               onClick={() => searchForItem()}
             >
               Search
@@ -119,11 +119,11 @@ const Search = () => {
       {/* results section */}
       {isLoading ? (
         <div className=" w-full flex flex-col items-center justify-center min-h-fit flex-1">
-          <CircularProgress />
+          <CircularProgress color="inherit" />
         </div>
       ) : (
         <div className=" p-10">
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 lg:gap-8">
             {data.map((element, index) => (
               <div key={index}>
                 {element.profile_path ? (
@@ -131,7 +131,7 @@ const Search = () => {
                     <img
                       src={tmdbBaseURL + element.profile_path}
                       alt={element.name || element.title}
-                      className=" movieThumbnail"
+                      className=" w-[500px] h-full rounded-lg cursor-pointer"
                     />
 
                     <p className=" text-center">
@@ -143,7 +143,7 @@ const Search = () => {
                     <img
                       src={tmdbBaseURL + element.poster_path}
                       alt={element.name || element.title}
-                      className=" movieThumbnail"
+                      className=" w-[500px] h-full rounded-lg cursor-pointer"
                     />
 
                     <p className=" text-center">
@@ -151,7 +151,7 @@ const Search = () => {
                     </p>
                   </div>
                 ) : (
-                  <p className=" text-center">{`No image found for ${
+                  <p className=" flex flex-col justify-center h-full text-center">{`No image found for ${
                     element.name || element.title
                   } ${element.media_type}`}</p>
                 )}
