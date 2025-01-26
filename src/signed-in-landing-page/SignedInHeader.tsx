@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { CircularProgress } from "@mui/material";
 
+import { clearSearch } from "../redux/searchStateSlice";
+
 import logo from "../assets/Binge.svg";
 import menu from "../assets/menu.svg";
 import closeMenu from "../assets/icons8-close.svg";
@@ -73,7 +75,7 @@ const Header = (props: headerProps) => {
     <div>
       {/* header for tablets and desktops */}
       <header className="bigScreenHeader top-5">
-        <Link to={"/"}>
+        <Link to={"/"} onClick={() => dispatch(clearSearch())}>
           <img src={logo} alt="Binge Logo" className="headerLogo" />
         </Link>
 
