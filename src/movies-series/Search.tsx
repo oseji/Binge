@@ -1,28 +1,24 @@
 import { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import { setmediaID } from "../redux/mediaID";
 import { setmediaType } from "../redux/mediaType";
+import { setSearchResults } from "../redux/searchStateSlice";
+import { setSearchTerm } from "../redux/searchStateSlice";
 import { CircularProgress } from "@mui/material";
 
 import Header from "../signed-in-landing-page/SignedInHeader";
 import axios from "axios";
 
-type mediaContent = {
-  poster_path: string | null;
-  profile_path: string | null;
-  title: string;
-  name: string;
-  media_type: string;
-  id: number;
-};
-
 const Search = () => {
-  const [searchedTerm, setSearchedTerm] = useState("");
   const mainScreenRef = useRef<HTMLDivElement>(null);
   const tmdbBaseURL = "https://image.tmdb.org/t/p/w500/";
 
-  const [data, setData] = useState<mediaContent[]>([]);
+  const searchTerm = useSelector((state: RootState) => state.search.term);
+  const searchResults = useSelector((state: RootState) => state.search.results);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
@@ -34,7 +30,7 @@ const Search = () => {
       method: "GET",
       url: "https://api.themoviedb.org/3/search/multi",
       params: {
-        query: searchedTerm,
+        query: searchTerm,
         include_adult: "false",
         language: "en-US",
         page: "1",
@@ -50,21 +46,20 @@ const Search = () => {
 
     try {
       const response = await axios.request(options);
-      setData(response.data.results);
 
-      // console.log(response.data.results);
+      dispatch(setSearchResults(response.data.results));
     } catch (err) {
       setError(err);
       console.log(err);
     } finally {
-      console.log(error, data, isLoading);
+      console.log(error, isLoading);
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(searchResults);
+  }, [searchResults]);
 
   return (
     <div className=" min-h-[100dvh] flex flex-col">
@@ -84,9 +79,9 @@ const Search = () => {
             <input
               type="text"
               placeholder="Search by Title, Genre, People"
-              value={searchedTerm}
+              value={searchTerm}
               onChange={(e) => {
-                setSearchedTerm(e.target.value);
+                dispatch(setSearchTerm(e.target.value));
               }}
               className=" w-full p-4 rounded outline-0 text-black"
             />
@@ -128,7 +123,7 @@ const Search = () => {
       ) : (
         <div className=" p-10">
           <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 lg:gap-8">
-            {data.map((element, index) => (
+            {searchResults.map((element, index) => (
               <div key={index}>
                 {element.profile_path ? (
                   <div>
