@@ -31,6 +31,15 @@ type seriesDetails = {
   episode_run_time: number[];
 };
 
+type personDetails = {
+  name: string;
+  profile_path: string;
+  known_for_department: string;
+  place_of_birth: string;
+  biography: string;
+  birthday: string;
+};
+
 const Details = () => {
   const movieId = useSelector(
     (state: RootState) => state.mediaIDSetter.mediaID
@@ -63,6 +72,15 @@ const Details = () => {
     overview: "",
     status: "",
     episode_run_time: [],
+  });
+
+  const [personDetails, setPersonDetails] = useState<personDetails>({
+    name: "",
+    profile_path: "",
+    known_for_department: "",
+    place_of_birth: "",
+    biography: "",
+    birthday: "",
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -115,6 +133,17 @@ const Details = () => {
           overview: response.data.overview,
           status: response.data.status,
           episode_run_time: response.data?.episode_run_time,
+        });
+      }
+
+      if (mediaType === "person") {
+        setPersonDetails({
+          name: response.data.name,
+          profile_path: response.data.profile_path,
+          known_for_department: response.data.known_for_department,
+          biography: response.data.biography,
+          place_of_birth: response.data.place_of_birth,
+          birthday: response.data.birthday,
         });
       }
 
@@ -219,7 +248,7 @@ const Details = () => {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : mediaType === "tv" ? (
             <div>
               <img
                 src={backArrow}
@@ -279,6 +308,55 @@ const Details = () => {
                       </span>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <img
+                src={backArrow}
+                alt="back arrow"
+                onClick={() => history.goBack()}
+                className=" detailsBackArrow"
+              />
+
+              <div className=" detailsPage">
+                <img
+                  src={tmdbBaseURL + personDetails.profile_path}
+                  alt={personDetails.name}
+                  className=" detailsPageImg"
+                />
+
+                <div className=" xl:w-[70%]">
+                  <div>
+                    <h1 className=" text-3xl font-bold">
+                      {personDetails.name}
+                    </h1>
+
+                    <p>{personDetails.known_for_department}</p>
+                  </div>
+
+                  <div className=" my-5 flex flex-col md:flex-row md:items-center md:gap-3">
+                    <div>
+                      <span className=" font-bold capitalize">birthday:</span>
+                      <span>
+                        {" "}
+                        {personDetails.birthday || "No data available"}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className=" font-bold capitalize">
+                        place of birth:
+                      </span>
+                      <span>
+                        {" "}
+                        {personDetails.place_of_birth || "No data available"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p>{personDetails.biography || "No data available"}</p>
                 </div>
               </div>
             </div>

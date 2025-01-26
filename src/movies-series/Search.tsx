@@ -1,16 +1,18 @@
+import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+
 import { setmediaID } from "../redux/mediaID";
 import { setmediaType } from "../redux/mediaType";
 import { setSearchResults } from "../redux/searchStateSlice";
 import { setSearchTerm } from "../redux/searchStateSlice";
+
 import { CircularProgress } from "@mui/material";
 
 import Header from "../signed-in-landing-page/SignedInHeader";
-import axios from "axios";
 
 const Search = () => {
   const mainScreenRef = useRef<HTMLDivElement>(null);
