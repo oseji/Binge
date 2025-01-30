@@ -292,7 +292,7 @@ footer {
 }
 
 .movieThumbnail {
-  @apply w-[500px] h-52 md:h-72 cursor-pointer rounded-lg;
+  @apply w-fit h-52 md:h-72 cursor-pointer rounded-lg;
 }
 
 /*  */
@@ -303,7 +303,7 @@ footer {
 }
 
 .detailsPageImg {
-  @apply w-full md:w-[400px] xl:w-[300px] max-w-[500px] h-[600px] md:h-[650px] xl:h-[28.125rem] mx-auto rounded-lg;
+  @apply w-full md:w-[400px] xl:w-[300px] max-w-[500px] h-[600px] md:h-[650px] xl:h-[28.125rem] mx-auto md:mx-0 rounded-lg;
 }
 
 .detailsBackArrow {
