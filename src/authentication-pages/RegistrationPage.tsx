@@ -1,5 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setTrue, setFalse } from "../redux/loginState";
@@ -8,6 +8,7 @@ import { RootState } from "../redux/store";
 
 import { auth } from "../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { errorMessageCleanUp } from "./LoginPage";
 
 import { CircularProgress } from "@mui/material";
 
@@ -30,7 +31,8 @@ const RegistrationPage = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const createAccount = async () => {
     dispatch(loading());
@@ -51,12 +53,18 @@ const RegistrationPage = () => {
       console.log(err);
       if (err) {
         dispatch(setFalse());
-        console.log(error);
+        setError(err.message);
+        setErrorMessage(errorMessageCleanUp(err.message));
       }
     } finally {
       dispatch(notLoading());
     }
   };
+
+  useEffect(() => {
+    console.log(error);
+    console.log(errorMessage);
+  }, [error]);
 
   return (
     <form className="authenticationForm">
@@ -143,6 +151,10 @@ const RegistrationPage = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
+
+        <p className=" text-red-500 italic font-semibold mr-auto block capitalize">
+          {errorMessage}
+        </p>
 
         <div className=" flex flex-row items-center justify-center gap-5 w-full md:w-10/12 p-5">
           <div className=" w-10/12 p-[0.5px] bg-[#98A2B3]"></div>

@@ -1,5 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { auth } from "../firebase-config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -15,10 +15,21 @@ import backArrow from "../assets/back.svg";
 import { loading, notLoading } from "../redux/loadingState";
 import { setFalse, setTrue } from "../redux/loginState";
 
+export const errorMessageCleanUp = (text: string) => {
+  return text
+    .replace("Firebase: ", "")
+    .replace("Error ", "")
+    .replace("auth/", "")
+    .replace("(", "")
+    .replace(")", "")
+    .replace(/-/g, " ");
+};
+
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -38,20 +49,26 @@ const LoginPage = () => {
 
       console.log("signed in successfully");
     } catch (err: any) {
-      setError(err);
       if (err) {
         dispatch(setFalse());
-        console.log(error);
+        setError(err.message);
+        setErrorMessage(errorMessageCleanUp(err.message));
       }
     } finally {
       dispatch(notLoading());
     }
   };
 
+  useEffect(() => {
+    console.log(error);
+
+    console.log(errorMessage);
+  }, [error]);
+
   return (
     <form className="authenticationForm">
       <Link to={"/"}>
-        <img src={backArrow} alt="back arrow" className=" pt-8" />
+        <img src={backArrow} alt="back arrow" className=" mt-8" />
       </Link>
       <div className=" flex flex-col items-center mb-4">
         <img src={BingeLogo} alt="Binge Logo" className=" h-10" />
@@ -59,16 +76,6 @@ const LoginPage = () => {
       </div>
 
       <div className=" flex flex-col gap-3 items-center text-sm">
-        <div className="inputGrp">
-          <label htmlFor="loginName">Name</label>
-          <input
-            type="text"
-            name="loginName"
-            id="loginName"
-            placeholder="Imelda Leo"
-          />
-        </div>
-
         <div className="inputGrp">
           <label htmlFor="emailAddressLogin">email address</label>
           <input
@@ -93,6 +100,10 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        <p className=" text-red-500 italic font-semibold mr-auto block capitalize">
+          {errorMessage}
+        </p>
 
         <Link
           to={"/ResetPassword"}
