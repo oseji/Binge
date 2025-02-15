@@ -27,6 +27,7 @@ import Questions from "./landing-page/Questions";
 import Footer from "./landing-page/Footer";
 
 import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
+import MyList from "./signed-in-landing-page/MyList";
 
 function App() {
   const isloggedIn = useSelector(
@@ -77,6 +78,10 @@ function App() {
         {/* SEARCH PAGE */}
         <Route path={"/Search"} component={Search} />
 
+        {/* MY LIST */}
+        <Route path={"/MyList"} component={MyList} />
+
+        {/* MOVIES AND SERIES PAGES */}
         <Route path={["/Movies", "/Series"]}>
           <Switch>
             <Route path={"/Movies"} component={Movies} />

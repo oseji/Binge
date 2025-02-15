@@ -95,25 +95,6 @@ const Search = () => {
               Search
             </button>
           </form>
-
-          {/* filters */}
-          {/* <div className="flex flex-wrap flex-row items-center gap-2">
-            <p className=" rounded-md px-4 py-2 border border-purple-900">
-              action
-            </p>
-            <p className=" rounded-md px-4 py-2 border border-purple-900">
-              romance
-            </p>
-            <p className=" rounded-md px-4 py-2 border border-purple-900">
-              fantasy
-            </p>
-            <p className=" rounded-md px-4 py-2 border border-purple-900">
-              sci-fi
-            </p>
-            <p className=" rounded-md px-4 py-2 border border-purple-900">
-              comedy
-            </p>
-          </div> */}
         </div>
       </div>
 

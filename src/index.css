@@ -310,4 +310,7 @@ footer {
   @apply absolute top-8 left-8 md:top-5 md:left-auto cursor-pointer;
 }
 
-/* SEARCH */
+/* MY LIST */
+.myList {
+  @apply bg-black py-10 px-5 min-h-[100dvh];
+}

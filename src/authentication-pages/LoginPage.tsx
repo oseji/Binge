@@ -28,7 +28,7 @@ export const errorMessageCleanUp = (text: string) => {
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const history = useHistory();
 
@@ -84,6 +84,7 @@ const LoginPage = () => {
             name="emailAddressLogin"
             id="emailAddressLogin"
             placeholder="ImeldaLeo@gmail.com"
+            required={true}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -96,6 +97,7 @@ const LoginPage = () => {
             name="passwordLogin"
             id="passwordLogin"
             placeholder="**********"
+            required={true}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

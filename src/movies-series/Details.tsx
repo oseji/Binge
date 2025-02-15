@@ -218,16 +218,28 @@ const Details = () => {
 
                 <div>
                   <div>
-                    <h1 className=" text-3xl font-bold">
-                      {movieDetails.title}
-                    </h1>
+                    <div className=" flex flex-row justify-between items-center">
+                      <h1 className=" text-3xl font-bold">
+                        {movieDetails.title}
+                      </h1>
+
+                      <button className=" outline-0 transition ease-in-out duration-200 hover:scale-125">
+                        Like
+                      </button>
+                    </div>
+
                     <span className=" italic">{movieDetails.status}</span>
                   </div>
 
                   <div className=" mt-5">
                     <div className=" flex flex-row items-center gap-3 text-sm">
                       {movieDetails.genres.map((element, index) => (
-                        <span key={index}>{element.name}</span>
+                        <span
+                          key={index}
+                          className=" px-3 py-1.5 rounded-xl bg-purple-800"
+                        >
+                          {element.name}
+                        </span>
                       ))}
                     </div>
                   </div>

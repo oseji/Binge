@@ -20,6 +20,7 @@ import searchIcon from "../assets/searchicon.svg";
 import avatar from "../assets/avatar.png";
 import editProfileIcon from "../assets/editProfile.svg";
 import logoutIcon from "../assets/logout.svg";
+import heartIcon from "../assets/icons8-heart-100.png";
 import { RootState } from "../redux/store";
 
 type headerProps = {
@@ -102,10 +103,17 @@ const Header = (props: headerProps) => {
               ref={modalRef}
               className=" transition ease-in-out duration-200 scale-0 w-36 flex flex-col gap-5 p-4 rounded-md text-sm bg-black absolute top-14 right-2"
             >
-              <div className=" flex flex-row gap-3 items-center cursor-pointer">
+              <Link to={"/MyList"}>
+                <button className=" capitalize flex flex-row gap-3 items-center cursor-pointer">
+                  <img src={heartIcon} alt="heart icon" className=" h-4" />
+                  <span> my list</span>
+                </button>
+              </Link>
+
+              <button className=" flex flex-row gap-3 items-center cursor-pointer">
                 <img src={editProfileIcon} alt="edit profile icon" />
                 <span>Edit profile</span>
-              </div>
+              </button>
 
               <button
                 className=" flex flex-row gap-3 items-center"
