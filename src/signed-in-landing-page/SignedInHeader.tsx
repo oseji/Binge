@@ -81,7 +81,7 @@ const Header = (props: headerProps) => {
         </Link>
 
         <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-10 ">
-          <Link to={"/Search"}>
+          <Link to={"/Search"} id="searchBtn">
             <img
               src={searchIcon}
               alt=" search icon"

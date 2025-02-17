@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import YouTube from "react-youtube";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
@@ -182,6 +183,12 @@ const Details = () => {
     }
   };
 
+  const opts = {
+    height: "390",
+    width: "640",
+    playerVars: { autoplay: 1 },
+  };
+
   useEffect(() => {
     fetchDetails();
   }, []);
@@ -208,6 +215,8 @@ const Details = () => {
                 onClick={() => history.goBack()}
                 className=" detailsBackArrow"
               />
+
+              <YouTube videoId={""} opts={opts}></YouTube>
 
               <div className=" detailsPage">
                 <img
@@ -268,6 +277,8 @@ const Details = () => {
                 onClick={() => history.goBack()}
                 className=" detailsBackArrow"
               />
+
+              <YouTube videoId={""} opts={opts}></YouTube>
 
               <div className=" detailsPage">
                 <img

@@ -54,11 +54,15 @@ const Header = (props: headerProps) => {
 
         <ul className="headerList">
           <li>
-            <Link to={"/LoginPage"}>Login</Link>
+            <Link to={"/LoginPage"} id={"loginBtn"}>
+              Login
+            </Link>
           </li>
 
           <li>
-            <Link to={"/RegistrationPage"}>Sign up</Link>
+            <Link to={"/RegistrationPage"} id={"signUpBtn"}>
+              Sign up
+            </Link>
           </li>
         </ul>
       </header>

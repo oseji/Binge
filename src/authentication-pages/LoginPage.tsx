@@ -132,6 +132,7 @@ const LoginPage = () => {
 
           <button
             className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
+            id="signInButton"
             onClick={(e) => {
               e.preventDefault();
 

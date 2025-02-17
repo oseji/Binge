@@ -86,11 +86,13 @@ const Search = () => {
                 dispatch(setSearchTerm(e.target.value));
               }}
               className=" w-full p-4 rounded outline-0 text-black"
+              id="searchBar"
             />
 
             <button
               className=" w-full md:w-auto rounded px-6 py-4 bg-[#9B51E0]"
               onClick={() => searchForItem()}
+              id="searchForMediaBtn"
             >
               Search
             </button>
