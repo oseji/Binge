@@ -95,10 +95,6 @@ const MediaCategories = (props: propTypes) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   console.log(categoryData);
-  // });
-
   return (
     <div className="movieCategories">
       {props.information.categories.map((category, idx) => (

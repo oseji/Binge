@@ -102,8 +102,6 @@ const Details = () => {
       },
     };
 
-    console.log(options.url);
-
     setIsLoading(true);
 
     try {
@@ -147,17 +145,13 @@ const Details = () => {
           birthday: response.data.birthday,
         });
       }
-
-      // console.log(response.data);
     } catch (err) {
       if (err) {
         setError(err);
+        console.log(error);
       }
-
-      console.log(err);
     } finally {
       setIsLoading(false);
-      console.log(error);
     }
   };
 
@@ -184,26 +178,19 @@ const Details = () => {
   };
 
   const [trailerLoading, setTrailerLoading] = useState<boolean>(false);
-  const [movieTrailerID, setMovieTrailerID] = useState<string>("");
-  const [seriesTrailerID, setSeriesTrailerID] = useState<string>("");
+  const [trailerID, setTrailerID] = useState<string>("");
 
-  const fetchYoutubeTrailer = async () => {
+  const fetchYoutubeTrailer = async (title: string) => {
     setTrailerLoading(true);
 
     try {
-      const movieResponse = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${
-          movieDetails.title
-        }+trailer&type=video&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
-      );
-      const seriesResponse = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${
-          movieDetails.title
-        }+trailer&type=video&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${title}+trailer&type=video&key=${
+          import.meta.env.VITE_YOUTUBE_API_KEY
+        }`
       );
 
-      setMovieTrailerID(movieResponse.data.items[0].id.videoId);
-      setSeriesTrailerID(seriesResponse.data.items[0].id.videoId);
+      setTrailerID(response.data.items[0].id.videoId);
     } catch (err) {
       if (err) {
         console.log(err);
@@ -218,14 +205,11 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
-    if (movieDetails.title || seriesTrailerID) {
-      fetchYoutubeTrailer();
+    const title = movieDetails.title || seriesDetails.name;
+    if (title?.trim()) {
+      fetchYoutubeTrailer(title);
     }
   }, [movieDetails.title, seriesDetails.name]);
-
-  // useEffect(() => {
-  //   console.log(movieDetails);
-  // }, [movieDetails]);
 
   return (
     <div className=" min-h-[100dvh] px-5 py-5 md:px-10  md:py-10 flex flex-col justify-center relative">
@@ -246,14 +230,13 @@ const Details = () => {
                 className=" detailsBackArrow"
               />
 
-              <div className=" my-5 w-full flex flex-row justify-center">
+              <div className=" my-10 md:my-5 w-full flex flex-row justify-center">
                 {!trailerLoading ? (
                   <ReactPlayer
-                    url={`https://www.youtube.com/watch?v=${movieTrailerID}`}
+                    url={`https://www.youtube.com/watch?v=${trailerID}`}
                     playing={false}
                     controls
                     width="100%"
-                    height="500px"
                   />
                 ) : (
                   <CircularProgress
@@ -324,14 +307,13 @@ const Details = () => {
                 className=" detailsBackArrow"
               />
 
-              <div className=" my-5 w-full flex flex-row justify-center">
+              <div className=" my-10 md:my-5 w-full flex flex-row justify-center">
                 {!trailerLoading ? (
                   <ReactPlayer
-                    url={`https://www.youtube.com/watch?v=${seriesTrailerID}`}
+                    url={`https://www.youtube.com/watch?v=${trailerID}`}
                     playing={false}
                     controls
                     width="100%"
-                    height="500px"
                   />
                 ) : (
                   <CircularProgress

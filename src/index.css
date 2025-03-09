@@ -303,7 +303,7 @@ footer {
 }
 
 .detailsPageImg {
-  @apply w-full md:w-[400px] xl:w-[300px] max-w-[500px] h-[600px] md:h-[650px] xl:h-[28.125rem] mx-auto md:mx-0 rounded-lg;
+  @apply w-full md:w-[400px] xl:w-[300px] max-w-[500px] h-[600px] md:h-[650px] xl:h-[28.125rem] mx-auto xl:mx-0 rounded-lg;
 }
 
 .detailsBackArrow {
