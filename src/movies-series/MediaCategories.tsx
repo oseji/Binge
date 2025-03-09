@@ -95,9 +95,9 @@ const MediaCategories = (props: propTypes) => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(categoryData);
-  });
+  // useEffect(() => {
+  //   console.log(categoryData);
+  // });
 
   return (
     <div className="movieCategories">

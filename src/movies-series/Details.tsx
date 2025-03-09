@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import YouTube from "react-youtube";
+import ReactPlayer from "react-player";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
@@ -148,7 +148,7 @@ const Details = () => {
         });
       }
 
-      console.log(response.data);
+      // console.log(response.data);
     } catch (err) {
       if (err) {
         setError(err);
@@ -183,10 +183,34 @@ const Details = () => {
     }
   };
 
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: { autoplay: 1 },
+  const [trailerLoading, setTrailerLoading] = useState<boolean>(false);
+  const [movieTrailerID, setMovieTrailerID] = useState<string>("");
+  const [seriesTrailerID, setSeriesTrailerID] = useState<string>("");
+
+  const fetchYoutubeTrailer = async () => {
+    setTrailerLoading(true);
+
+    try {
+      const movieResponse = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${
+          movieDetails.title
+        }+trailer&type=video&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+      );
+      const seriesResponse = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${
+          movieDetails.title
+        }+trailer&type=video&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+      );
+
+      setMovieTrailerID(movieResponse.data.items[0].id.videoId);
+      setSeriesTrailerID(seriesResponse.data.items[0].id.videoId);
+    } catch (err) {
+      if (err) {
+        console.log(err);
+      }
+    } finally {
+      setTrailerLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -194,8 +218,14 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
-    console.log(movieDetails);
-  }, [movieDetails]);
+    if (movieDetails.title || seriesTrailerID) {
+      fetchYoutubeTrailer();
+    }
+  }, [movieDetails.title, seriesDetails.name]);
+
+  // useEffect(() => {
+  //   console.log(movieDetails);
+  // }, [movieDetails]);
 
   return (
     <div className=" min-h-[100dvh] px-5 py-5 md:px-10  md:py-10 flex flex-col justify-center relative">
@@ -216,7 +246,23 @@ const Details = () => {
                 className=" detailsBackArrow"
               />
 
-              <YouTube videoId={""} opts={opts}></YouTube>
+              <div className=" my-5 w-full flex flex-row justify-center">
+                {movieTrailerID !== "" ? (
+                  <ReactPlayer
+                    url={`https://www.youtube.com/watch?v=${movieTrailerID}`}
+                    playing={false}
+                    controls
+                    width="100%"
+                    height="500px"
+                  />
+                ) : (
+                  <CircularProgress
+                    color="inherit"
+                    size={"5rem"}
+                    className=" w-fit mx-auto"
+                  />
+                )}
+              </div>
 
               <div className=" detailsPage">
                 <img
@@ -278,7 +324,23 @@ const Details = () => {
                 className=" detailsBackArrow"
               />
 
-              <YouTube videoId={""} opts={opts}></YouTube>
+              <div className=" my-5 w-full flex flex-row justify-center">
+                {seriesTrailerID !== "" ? (
+                  <ReactPlayer
+                    url={`https://www.youtube.com/watch?v=${seriesTrailerID}`}
+                    playing={false}
+                    controls
+                    width="100%"
+                    height="500px"
+                  />
+                ) : (
+                  <CircularProgress
+                    color="inherit"
+                    size={"5rem"}
+                    className=" w-fit mx-auto"
+                  />
+                )}
+              </div>
 
               <div className=" detailsPage">
                 <img
