@@ -247,7 +247,7 @@ const Details = () => {
               />
 
               <div className=" my-5 w-full flex flex-row justify-center">
-                {movieTrailerID !== "" ? (
+                {!trailerLoading ? (
                   <ReactPlayer
                     url={`https://www.youtube.com/watch?v=${movieTrailerID}`}
                     playing={false}
@@ -325,7 +325,7 @@ const Details = () => {
               />
 
               <div className=" my-5 w-full flex flex-row justify-center">
-                {seriesTrailerID !== "" ? (
+                {!trailerLoading ? (
                   <ReactPlayer
                     url={`https://www.youtube.com/watch?v=${seriesTrailerID}`}
                     playing={false}
