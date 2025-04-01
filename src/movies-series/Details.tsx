@@ -96,7 +96,10 @@ const Details = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const [liked, setLiked] = useState<boolean>(false);
+  //const [likedMediaType, setLikedMediaType] = useState<string>("");
   const [ifLikedLoading, setIfLikedLoading] = useState<boolean>(false);
+  const [trailerLoading, setTrailerLoading] = useState<boolean>(false);
+  const [trailerID, setTrailerID] = useState<string>("");
 
   const history = useHistory();
 
@@ -188,9 +191,6 @@ const Details = () => {
     }
   };
 
-  const [trailerLoading, setTrailerLoading] = useState<boolean>(false);
-  const [trailerID, setTrailerID] = useState<string>("");
-
   const fetchYoutubeTrailer = async (title: string) => {
     setTrailerLoading(true);
 
@@ -253,6 +253,7 @@ const Details = () => {
         await addDoc(collection(db, `users/${user.email}/LikedContent`), {
           id: clickedElement,
           liked: true,
+          mediaType: mediaType,
         });
 
         console.log("Document successfully written!");
@@ -311,6 +312,7 @@ const Details = () => {
     }
 
     console.log(movieDetails.id);
+    console.log(seriesDetails.id);
   }, [movieDetails.title, seriesDetails.name]);
 
   return (
@@ -368,8 +370,6 @@ const Details = () => {
                         value={movieDetails.id}
                         onClick={(e) => {
                           e.preventDefault();
-
-                          //setLiked(!liked);
 
                           if (liked) {
                             removeFromLiked(e);
@@ -456,19 +456,46 @@ const Details = () => {
                 />
 
                 <div>
-                  <div>
-                    <h1 className=" text-3xl font-bold">
-                      {seriesDetails.name}
-                    </h1>
-                    <span
-                      className={` italic ${
-                        seriesDetails.status === "Ended"
-                          ? " text-red-600"
-                          : "text-green-600"
-                      }`}
+                  <div className="flex flex-row justify-between items-center">
+                    <div>
+                      <h1 className=" text-3xl font-bold">
+                        {seriesDetails.name}
+                      </h1>
+
+                      <span
+                        className={` italic ${
+                          seriesDetails.status === "Ended"
+                            ? " text-red-600"
+                            : "text-green-600"
+                        }`}
+                      >
+                        {seriesDetails.status}
+                      </span>
+                    </div>
+
+                    <button
+                      className=" outline-0 transition ease-in-out duration-200 hover:scale-125"
+                      value={seriesDetails.id}
+                      onClick={(e) => {
+                        e.preventDefault();
+
+                        if (liked) {
+                          removeFromLiked(e);
+                          setLiked(!liked);
+                        }
+
+                        if (!liked) {
+                          addToLiked(e);
+                          setLiked(!liked);
+                        }
+                      }}
                     >
-                      {seriesDetails.status}
-                    </span>
+                      {ifLikedLoading ? (
+                        <CircularProgress color="inherit" size={"1.5rem"} />
+                      ) : (
+                        <span>{liked ? "Unlike" : "Like"}</span>
+                      )}
+                    </button>
                   </div>
 
                   <div className=" mt-5 font-bold">
