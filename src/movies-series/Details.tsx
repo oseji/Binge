@@ -104,8 +104,7 @@ const Details = () => {
   const history = useHistory();
 
   const fetchDetails = async () => {
-    const apiKey =
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMGEwY2RkZGUyM2I5NzJjM2U2MzMwMjIyMTQ0M2VjMSIsIm5iZiI6MTY5OTkwOTMyOS4yMzQsInN1YiI6IjY1NTI4ZWQxZDRmZTA0MDBhYzM0ZTBmOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xrsUAKPhkB21DPZwhnIP0RpRQpR8iRHTgzbCL_2jWaE";
+    const apiKey = `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`;
     const options = {
       method: "GET",
       url: `https://api.themoviedb.org/3/${mediaType}/${movieId}`,

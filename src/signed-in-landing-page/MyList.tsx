@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
 import { Link } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 import backArrow from "../assets/previous.svg";
 const MyList = () => {
@@ -31,12 +32,30 @@ const MyList = () => {
         setLikedIds(likedIds);
       }
     } catch (err) {
-      console.log(err);
       setError(err);
     } finally {
       setIsLoading(false);
     }
   };
+
+  function fetchMedia({ id, mediaType }) {
+    const apiKey = `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`;
+    const url = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
+
+    return fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Error fetching ${mediaType} ${id}: ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .then((data) => ({
+        ...data,
+        mediaType, // Keep track of whether it's a movie or TV show
+      }));
+  }
 
   useEffect(() => {
     fetchLikedIds();
@@ -45,6 +64,12 @@ const MyList = () => {
   useEffect(() => {
     console.log("likedIds", likedIds);
   }, [likedIds]);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+  }, [error]);
 
   return (
     <div className=" myList">
@@ -57,7 +82,15 @@ const MyList = () => {
       </div>
 
       {/* list content */}
-      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10"></div>
+      <div>
+        {isLoading ? (
+          <div className=" min-h-[90dvh] flex justify-center items-center">
+            <CircularProgress color="inherit" />
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };
