@@ -1,12 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
+import { RootState } from "../redux/store";
+import { db, auth } from "../firebase-config/firebase";
+import {
+  addDoc,
+  deleteDoc,
+  getDocs,
+  collection,
+  where,
+  query,
+} from "firebase/firestore";
 
 import backArrow from "../assets/previous.svg";
-import { RootState } from "../redux/store";
 
 type movieDetails = {
   poster_path: string;
@@ -86,6 +95,8 @@ const Details = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
+  const [liked, setLiked] = useState<boolean>(false);
+  const [ifLikedLoading, setIfLikedLoading] = useState<boolean>(false);
 
   const history = useHistory();
 
@@ -200,8 +211,97 @@ const Details = () => {
     }
   };
 
+  const fetchIfLiked = async () => {
+    setIfLikedLoading(true);
+    const user = auth.currentUser;
+
+    try {
+      if (user) {
+      }
+      const likedContentRef = collection(
+        db,
+        `users/${user?.email}/LikedContent`
+      );
+
+      // Query for the media item by its ID
+      const q = query(likedContentRef, where("id", "==", movieId));
+      const querySnapshot = await getDocs(q);
+
+      // If a document is found, mark the media as liked
+      if (!querySnapshot.empty) {
+        setLiked(true);
+      } else {
+        setLiked(false);
+      }
+    } catch (err) {
+      if (err) {
+        console.log(err);
+        setError(err);
+      }
+    } finally {
+      setIfLikedLoading(false);
+    }
+  };
+
+  const addToLiked = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIfLikedLoading(true);
+    const user = auth.currentUser;
+    const clickedElement: number = Number(e.currentTarget.value);
+
+    try {
+      if (user) {
+        await addDoc(collection(db, `users/${user.email}/LikedContent`), {
+          id: clickedElement,
+          liked: true,
+        });
+
+        console.log("Document successfully written!");
+      }
+    } catch (err) {
+      if (err) {
+        console.log(err);
+        setError(err);
+      }
+
+      setError(err);
+    } finally {
+      setIfLikedLoading(false);
+    }
+  };
+
+  const removeFromLiked = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIfLikedLoading(true);
+    const user = auth.currentUser;
+    const clickedElement: number = Number(e.currentTarget.value);
+
+    try {
+      if (user) {
+        const likedContentRef = collection(
+          db,
+          `users/${user.email}/LikedContent`
+        );
+
+        const q = query(likedContentRef, where("id", "==", clickedElement));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+          await deleteDoc(doc.ref);
+        });
+
+        setLiked(false);
+        console.log("Document successfully deleted!");
+      }
+    } catch (err) {
+      console.log(err);
+      setError(err);
+    } finally {
+      setIfLikedLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchDetails();
+    fetchIfLiked();
   }, []);
 
   useEffect(() => {
@@ -209,6 +309,8 @@ const Details = () => {
     if (title?.trim()) {
       fetchYoutubeTrailer(title);
     }
+
+    console.log(movieDetails.id);
   }, [movieDetails.title, seriesDetails.name]);
 
   return (
@@ -261,8 +363,30 @@ const Details = () => {
                         {movieDetails.title}
                       </h1>
 
-                      <button className=" outline-0 transition ease-in-out duration-200 hover:scale-125">
-                        Like
+                      <button
+                        className=" outline-0 transition ease-in-out duration-200 hover:scale-125"
+                        value={movieDetails.id}
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          //setLiked(!liked);
+
+                          if (liked) {
+                            removeFromLiked(e);
+                            setLiked(!liked);
+                          }
+
+                          if (!liked) {
+                            addToLiked(e);
+                            setLiked(!liked);
+                          }
+                        }}
+                      >
+                        {ifLikedLoading ? (
+                          <CircularProgress color="inherit" size={"1.5rem"} />
+                        ) : (
+                          <span>{liked ? "Unlike" : "Like"}</span>
+                        )}
                       </button>
                     </div>
 
