@@ -1,16 +1,22 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
 import { Link } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
+type MediaItem = {
+  id: number;
+  mediaType: "movie" | "tv";
+};
+
 import backArrow from "../assets/previous.svg";
 const MyList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
-  const [likedIds, setLikedIds] = useState<string[]>([]);
+  const [likedMedia, setLikedMedia] = useState<MediaItem[]>([]);
 
-  const fetchLikedIds = async () => {
+  const fetchLikedMedia = async () => {
     setIsLoading(true);
     const user = auth.currentUser;
 
@@ -26,10 +32,13 @@ const MyList = () => {
         const querySnapshot = await getDocs(likedContentRef);
 
         // Extract the IDs from the documents
-        const likedIds = querySnapshot.docs.map((doc) => doc.data().id);
+        const likedContent = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return { id: data.id, mediaType: data.mediaType };
+        });
 
         // Update the state with the fetched liked IDs
-        setLikedIds(likedIds);
+        setLikedMedia(likedContent);
       }
     } catch (err) {
       setError(err);
@@ -38,32 +47,60 @@ const MyList = () => {
     }
   };
 
-  function fetchMedia({ id, mediaType }) {
-    const apiKey = `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`;
-    const url = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
+  const fetchMedia = async ({
+    id,
+    mediaType,
+  }: {
+    id: number;
+    mediaType: "movie" | "tv" | "person";
+  }) => {
+    const API_KEY = import.meta.env.VITE_TMDB_API_KEY; // Secure API Key storage
+    const BASE_URL = "https://api.themoviedb.org/3";
 
-    return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `Error fetching ${mediaType} ${id}: ${response.statusText}`
-          );
-        }
-        return response.json();
-      })
-      .then((data) => ({
-        ...data,
-        mediaType, // Keep track of whether it's a movie or TV show
-      }));
-  }
+    try {
+      const response = await axios.get(`${BASE_URL}/${mediaType}/${id}`, {
+        params: { language: "en-US" },
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+      });
+
+      setLikedMedia(response.data);
+      console.log("Fetched media:", response.data);
+
+      return { ...response.data, mediaType }; // Return data with mediaType for context
+    } catch (error) {
+      console.error(`Error fetching ${mediaType} with ID ${id}:`, error);
+      throw error; // Re-throw error for handling in calling function
+    }
+  };
+
+  const fetchAllMedia = () => {
+    const promises = likedMedia.map((item) => fetchMedia(item));
+    return Promise.all(promises);
+  };
 
   useEffect(() => {
-    fetchLikedIds();
+    fetchLikedMedia().then(() => fetchAllMedia());
   }, []);
 
   useEffect(() => {
-    console.log("likedIds", likedIds);
-  }, [likedIds]);
+    if (likedMedia.length > 0) {
+      fetchAllMedia()
+        .then((mediaArray) => {
+          console.log("Fetched media:", mediaArray);
+          setLikedMedia(mediaArray);
+        })
+        .catch((err) => {
+          setError(err);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("liked media", likedMedia);
+  }, [likedMedia]);
 
   useEffect(() => {
     if (error) {
@@ -88,7 +125,17 @@ const MyList = () => {
             <CircularProgress color="inherit" />
           </div>
         ) : (
-          <div></div>
+          <div>
+            {likedMedia.length > 0 ? (
+              <div>
+                {likedMedia.map((media) => (
+                  <div key={media.id}>{media.mediaType}</div>
+                ))}
+              </div>
+            ) : (
+              <div>no liked media found</div>
+            )}
+          </div>
         )}
       </div>
     </div>
