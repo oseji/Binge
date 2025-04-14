@@ -10,11 +10,22 @@ type MediaItem = {
   mediaType: "movie" | "tv";
 };
 
+type detailedMediaItem = {
+  id: number;
+  mediaType: "movie" | "tv";
+  name: string;
+  title: string;
+  overview: string;
+  poster_path: string;
+};
+
 import backArrow from "../assets/previous.svg";
 const MyList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const [likedMedia, setLikedMedia] = useState<MediaItem[]>([]);
+  const [detailedMedia, setDetailedMedia] = useState<detailedMediaItem[]>([]);
+  const tmdbBasePosterURL = "https://image.tmdb.org/t/p/w500/";
 
   const fetchLikedMedia = async () => {
     setIsLoading(true);
@@ -66,8 +77,7 @@ const MyList = () => {
         },
       });
 
-      setLikedMedia(response.data);
-      console.log("Fetched media:", response.data);
+      setDetailedMedia(response.data);
 
       return { ...response.data, mediaType }; // Return data with mediaType for context
     } catch (error) {
@@ -77,12 +87,14 @@ const MyList = () => {
   };
 
   const fetchAllMedia = () => {
-    const promises = likedMedia.map((item) => fetchMedia(item));
+    const promises = likedMedia.map((item) =>
+      fetchMedia({ id: item.id, mediaType: item.mediaType })
+    );
     return Promise.all(promises);
   };
 
   useEffect(() => {
-    fetchLikedMedia().then(() => fetchAllMedia());
+    fetchLikedMedia();
   }, []);
 
   useEffect(() => {
@@ -90,17 +102,17 @@ const MyList = () => {
       fetchAllMedia()
         .then((mediaArray) => {
           console.log("Fetched media:", mediaArray);
-          setLikedMedia(mediaArray);
+          setDetailedMedia(mediaArray);
         })
         .catch((err) => {
           setError(err);
         });
     }
-  }, []);
+  }, [likedMedia]);
 
   useEffect(() => {
-    console.log("liked media", likedMedia);
-  }, [likedMedia]);
+    console.log("detailed media", detailedMedia);
+  }, [detailedMedia]);
 
   useEffect(() => {
     if (error) {
@@ -126,10 +138,26 @@ const MyList = () => {
           </div>
         ) : (
           <div>
-            {likedMedia.length > 0 ? (
-              <div>
-                {likedMedia.map((media) => (
-                  <div key={media.id}>{media.mediaType}</div>
+            {detailedMedia.length > 0 ? (
+              <div className=" flex flex-col gap-5 mt-5">
+                {detailedMedia.map((media, index) => (
+                  <div key={index} className=" flex flex-row gap-5">
+                    <img
+                      src={tmdbBasePosterURL + media.poster_path}
+                      alt={
+                        media.mediaType === "movie" ? media.title : media.name
+                      }
+                      className=" h-36 rounded-lg"
+                    />
+
+                    <div className=" flex flex-col gap-2">
+                      <h1 className=" text-lg font-bold">
+                        {media.mediaType === "movie" ? media.title : media.name}
+                      </h1>
+
+                      <p className=" text-sm">{media.overview}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (
