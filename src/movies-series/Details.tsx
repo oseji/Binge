@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactPlayer from "react-player";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import { RootState } from "../redux/store";
@@ -96,7 +96,6 @@ const Details = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const [liked, setLiked] = useState<boolean>(false);
-  //const [likedMediaType, setLikedMediaType] = useState<string>("");
   const [ifLikedLoading, setIfLikedLoading] = useState<boolean>(false);
   const [trailerLoading, setTrailerLoading] = useState<boolean>(false);
   const [trailerID, setTrailerID] = useState<string>("");
@@ -302,6 +301,7 @@ const Details = () => {
   useEffect(() => {
     fetchDetails();
     fetchIfLiked();
+    console.log(auth.currentUser);
   }, []);
 
   useEffect(() => {
@@ -364,27 +364,42 @@ const Details = () => {
                         {movieDetails.title}
                       </h1>
 
-                      <button
-                        className=" outline-0 transition ease-in-out duration-200 hover:scale-125"
-                        value={movieDetails.id}
-                        onClick={(e) => {
-                          e.preventDefault();
+                      <button>
+                        {auth.currentUser ? (
+                          <span>
+                            {ifLikedLoading ? (
+                              <CircularProgress
+                                color="inherit"
+                                size={"1.5rem"}
+                              />
+                            ) : (
+                              <button
+                                className=" outline-0 transition ease-in-out duration-200 hover:scale-125"
+                                value={movieDetails.id}
+                                onClick={(e) => {
+                                  e.preventDefault();
 
-                          if (liked) {
-                            removeFromLiked(e);
-                            setLiked(!liked);
-                          }
+                                  if (liked) {
+                                    removeFromLiked(e);
+                                    setLiked(!liked);
+                                  }
 
-                          if (!liked) {
-                            addToLiked(e);
-                            setLiked(!liked);
-                          }
-                        }}
-                      >
-                        {ifLikedLoading ? (
-                          <CircularProgress color="inherit" size={"1.5rem"} />
+                                  if (!liked) {
+                                    addToLiked(e);
+                                    setLiked(!liked);
+                                  }
+                                }}
+                              >
+                                {liked ? "Unlike" : "Like"}
+                              </button>
+                            )}
+                          </span>
                         ) : (
-                          <span>{liked ? "Unlike" : "Like"}</span>
+                          <Link to={"/LoginPage"}>
+                            <button title="You need to log in to add media to your liked list">
+                              Login to like
+                            </button>
+                          </Link>
                         )}
                       </button>
                     </div>

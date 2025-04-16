@@ -2,7 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setmediaID } from "../redux/mediaID";
+import { setmediaType } from "../redux/mediaType";
 import { CircularProgress } from "@mui/material";
 
 type MediaItem = {
@@ -21,6 +24,8 @@ type detailedMediaItem = {
 
 import backArrow from "../assets/previous.svg";
 const MyList = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const [likedMedia, setLikedMedia] = useState<MediaItem[]>([]);
@@ -122,7 +127,7 @@ const MyList = () => {
 
   return (
     <div className=" myList">
-      <div className=" flex flex-row justify-between items-center">
+      <div className=" flex flex-row justify-between items-center mb-5">
         <Link to={"/"}>
           <img src={backArrow} alt="back arrow" />
         </Link>
@@ -141,7 +146,16 @@ const MyList = () => {
             {detailedMedia.length > 0 ? (
               <div className=" flex flex-col gap-5 mt-5">
                 {detailedMedia.map((media, index) => (
-                  <div key={index} className=" flex flex-row gap-5">
+                  <div
+                    key={index}
+                    className=" flex flex-row gap-5 cursor-pointer"
+                    onClick={() => {
+                      dispatch(setmediaID(media.id));
+                      dispatch(setmediaType(media.mediaType));
+
+                      history.push("/Details");
+                    }}
+                  >
                     <img
                       src={tmdbBasePosterURL + media.poster_path}
                       alt={

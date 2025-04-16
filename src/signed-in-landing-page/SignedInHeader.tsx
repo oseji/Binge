@@ -151,7 +151,9 @@ const Header = (props: headerProps) => {
             <li>
               <Link to={"/"}>Home</Link>
             </li>
-            <li>my list</li>
+            <li>
+              <Link to={"/MyList"}>My List</Link>
+            </li>
             <li>my profile</li>
 
             <Link
