@@ -203,6 +203,11 @@ const Details = () => {
 			setTrailerID(response.data.items[0].id.videoId);
 		} catch (err) {
 			if (err) {
+				toast.error(
+					`Failed to load ${
+						mediaType === "movie" ? movieDetails.title : seriesDetails.name
+					} trailer`
+				);
 				console.error(err);
 			}
 		} finally {
