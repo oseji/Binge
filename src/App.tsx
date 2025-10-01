@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import { ToastContainer } from "react-toastify";
 
 // import { db, auth, googleProvider } from "./firebase-config/firebase";
 
@@ -30,108 +31,121 @@ import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 import MyList from "./signed-in-landing-page/MyList";
 
 function App() {
-  const isloggedIn = useSelector(
-    (state: RootState) => state.loginSetter.isLoggedIn
-  );
-  const isLoading = useSelector(
-    (state: RootState) => state.loadingSetter.isLoading
-  );
+	const isloggedIn = useSelector(
+		(state: RootState) => state.loginSetter.isLoggedIn
+	);
+	const isLoading = useSelector(
+		(state: RootState) => state.loadingSetter.isLoading
+	);
 
-  const mainScreenRef = useRef<HTMLDivElement>(null);
+	const mainScreenRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    console.log(isloggedIn);
-  }, [isloggedIn]);
+	useEffect(() => {
+		console.log(isloggedIn);
+	}, [isloggedIn]);
 
-  useEffect(() => {
-    console.log(`LOADING : ${isLoading}`);
-  }, [isLoading]);
+	useEffect(() => {
+		console.log(`LOADING : ${isLoading}`);
+	}, [isLoading]);
 
-  return (
-    <div className="App">
-      <Switch>
-        {/* LANDING PAGE */}
-        <Route exact path={"/"}>
-          {!isloggedIn ? (
-            <div className="landingPage">
-              <Header mainScreenRef={mainScreenRef} />
+	return (
+		<div className="App">
+			<Switch>
+				{/* LANDING PAGE */}
+				<Route exact path={"/"}>
+					{!isloggedIn ? (
+						<div className="landingPage">
+							<Header mainScreenRef={mainScreenRef} />
 
-              <div ref={mainScreenRef}>
-                <HeroSection></HeroSection>
+							<div ref={mainScreenRef}>
+								<HeroSection></HeroSection>
 
-                <Favorites></Favorites>
+								<Favorites></Favorites>
 
-                <Features></Features>
+								<Features></Features>
 
-                <Pricing></Pricing>
+								<Pricing></Pricing>
 
-                <Questions></Questions>
+								<Questions></Questions>
 
-                <Footer></Footer>
-              </div>
-            </div>
-          ) : (
-            <SignedInLandingPage />
-          )}
-        </Route>
+								<Footer></Footer>
+							</div>
+						</div>
+					) : (
+						<SignedInLandingPage />
+					)}
+				</Route>
 
-        {/* SEARCH PAGE */}
-        <Route path={"/Search"} component={Search} />
+				{/* SEARCH PAGE */}
+				<Route path={"/Search"} component={Search} />
 
-        {/* MY LIST */}
-        <Route path={"/MyList"} component={MyList} />
+				{/* MY LIST */}
+				<Route path={"/MyList"} component={MyList} />
 
-        {/* MOVIES AND SERIES PAGES */}
-        <Route path={["/Movies", "/Series"]}>
-          <Switch>
-            <Route path={"/Movies"} component={Movies} />
-            <Route path={"/Series"} component={Series} />
-          </Switch>
-        </Route>
+				{/* MOVIES AND SERIES PAGES */}
+				<Route path={["/Movies", "/Series"]}>
+					<Switch>
+						<Route path={"/Movies"} component={Movies} />
+						<Route path={"/Series"} component={Series} />
+					</Switch>
+				</Route>
 
-        {/* DETAILS PAGE */}
-        <Route path={"/Details"} component={Details} />
+				{/* DETAILS PAGE */}
+				<Route path={"/Details"} component={Details} />
 
-        {/* AUTHENTICATION PAGES */}
-        <Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>
-          <div id="authenticationPages">
-            <div
-              className=" absolute h-full w-full top-0 left-0 bg-cover z-0 inset-0"
-              style={{
-                backgroundImage: 'url("/heroSection-bg.jpg")',
-                backgroundSize: "cover",
-              }}
-            ></div>
-            <Switch>
-              <Route path={"/RegistrationPage"}>
-                <RegistrationPage />
-              </Route>
-              <Route path={"/LoginPage"} component={LoginPage} />
-              <Route path={"/ResetPassword"} component={ResetPassword} />
-            </Switch>
-          </div>
-        </Route>
+				{/* AUTHENTICATION PAGES */}
+				<Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>
+					<div id="authenticationPages">
+						<div
+							className="absolute inset-0 top-0 left-0 z-0 w-full h-full bg-cover "
+							style={{
+								backgroundImage: 'url("/heroSection-bg.jpg")',
+								backgroundSize: "cover",
+							}}
+						></div>
+						<Switch>
+							<Route path={"/RegistrationPage"}>
+								<RegistrationPage />
+							</Route>
+							<Route path={"/LoginPage"} component={LoginPage} />
+							<Route path={"/ResetPassword"} component={ResetPassword} />
+						</Switch>
+					</div>
+				</Route>
 
-        {/* PAYMENT PAGES */}
-        <Route path={["/Plans", "/PaymentOption", "/PaymentDetails"]}>
-          <section id="selectTrial">
-            <div
-              className=" absolute h-full w-full top-0 left-0 bg-cover z-0 inset-0"
-              style={{
-                backgroundImage: 'url("/heroSection-bg.jpg")',
-                backgroundSize: "cover",
-              }}
-            ></div>
-            <Switch>
-              <Route path={"/Plans"} component={Plans} />
-              <Route path={"/PaymentOption"} component={PaymentOption} />
-              <Route path={"/PaymentDetails"} component={PaymentDetails} />
-            </Switch>
-          </section>
-        </Route>
-      </Switch>
-    </div>
-  );
+				{/* PAYMENT PAGES */}
+				<Route path={["/Plans", "/PaymentOption", "/PaymentDetails"]}>
+					<section id="selectTrial">
+						<div
+							className="absolute inset-0 top-0 left-0 z-0 w-full h-full bg-cover "
+							style={{
+								backgroundImage: 'url("/heroSection-bg.jpg")',
+								backgroundSize: "cover",
+							}}
+						></div>
+						<Switch>
+							<Route path={"/Plans"} component={Plans} />
+							<Route path={"/PaymentOption"} component={PaymentOption} />
+							<Route path={"/PaymentDetails"} component={PaymentDetails} />
+						</Switch>
+					</section>
+				</Route>
+			</Switch>
+
+			<ToastContainer
+				position="top-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				newestOnTop={true}
+				theme="dark"
+			/>
+		</div>
+	);
 }
 
 export default App;
