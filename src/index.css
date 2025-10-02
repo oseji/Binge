@@ -106,7 +106,7 @@ input::-webkit-inner-spin-button {
 }
 
 .featureImg {
-	@apply w-[428px] h-[302px];
+	@apply w-[428px] h-[302px] rounded-md;
 }
 
 .featureHeading {
