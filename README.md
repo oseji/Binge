@@ -14,7 +14,7 @@ Binge lets users browse, search, and manage a watchlist of movies and TV series.
 - **Search** — real-time search across movies and series
 - **Detail view** — trailer playback and full media info
 - **My List** — save and manage favourite titles
-- **Subscription plans** — Professional, Premium, and Organisational tiers with Paystack/Flutterwave payment integration
+- **Subscription plan UI** — multi-step plan selection and payment method screens (Paystack/Flutterwave branding present; payment processing not integrated)
 
 ## Tech stack
 
