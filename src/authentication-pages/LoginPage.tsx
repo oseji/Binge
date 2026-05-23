@@ -1,8 +1,8 @@
 import { Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { auth } from "../firebase-config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, googleProvider } from "../firebase-config/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -25,10 +25,24 @@ export const errorMessageCleanUp = (text: string) => {
 		.replace(/-/g, " ");
 };
 
+const EyeOpen = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+		<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+		<circle cx="12" cy="12" r="3"/>
+	</svg>
+);
+
+const EyeClosed = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+		<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+		<line x1="1" y1="1" x2="23" y2="23"/>
+	</svg>
+);
+
 const LoginPage = () => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
-	const [error, setError] = useState<string>("");
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = useState<string>("");
 	const history = useHistory();
 
@@ -38,32 +52,36 @@ const LoginPage = () => {
 	);
 
 	const signIn = async () => {
+		setErrorMessage("");
 		dispatch(loading());
 
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
-
 			dispatch(setTrue());
-
 			history.push("/");
-
-			console.log("signed in successfully");
 		} catch (err: any) {
-			if (err) {
-				dispatch(setFalse());
-				setError(err.message);
-				setErrorMessage(errorMessageCleanUp(err.message));
-			}
+			dispatch(setFalse());
+			setErrorMessage(errorMessageCleanUp(err.message));
 		} finally {
 			dispatch(notLoading());
 		}
 	};
 
-	useEffect(() => {
-		console.log(error);
+	const signInWithGoogle = async () => {
+		setErrorMessage("");
+		dispatch(loading());
 
-		console.log(errorMessage);
-	}, [error]);
+		try {
+			await signInWithPopup(auth, googleProvider);
+			dispatch(setTrue());
+			history.push("/");
+		} catch (err: any) {
+			dispatch(setFalse());
+			setErrorMessage(errorMessageCleanUp(err.message));
+		} finally {
+			dispatch(notLoading());
+		}
+	};
 
 	return (
 		<form
@@ -74,14 +92,15 @@ const LoginPage = () => {
 			}}
 		>
 			<Link to={"/"}>
-				<img src={backArrow} alt="back arrow" className="mt-8 " />
+				<img src={backArrow} alt="back arrow" className="mt-8" />
 			</Link>
-			<div className="flex flex-col items-center mb-4 ">
-				<img src={BingeLogo} alt="Binge Logo" className="h-10 " />
-				<p className="text-xl font-bold ">Welcome back to Binge</p>
+			<div className="flex flex-col items-center mb-7">
+				<img src={BingeLogo} alt="Binge Logo" className="h-10" />
+				<p className="text-xl font-bold mt-2 text-white">Welcome back to Binge</p>
+				<p className="text-xs text-white/40 mt-1">Sign in to your account</p>
 			</div>
 
-			<div className="flex flex-col items-center gap-3 text-sm ">
+			<div className="flex flex-col items-center gap-3 text-sm">
 				<div className="inputGrp">
 					<label htmlFor="emailAddressLogin">email address</label>
 					<input
@@ -90,74 +109,84 @@ const LoginPage = () => {
 						name="emailAddressLogin"
 						id="emailAddressLogin"
 						placeholder="ImeldaLeo@gmail.com"
-						required={true}
+						required
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						className="focus:outline-purple-500"
 					/>
 				</div>
 
 				<div className="inputGrp">
 					<label htmlFor="passwordLogin">password</label>
-					<input
-						type="text"
-						name="passwordLogin"
-						id="passwordLogin"
-						placeholder="**********"
-						required={true}
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
+					<div className="relative w-full">
+						<input
+							type={showPassword ? "text" : "password"}
+							name="passwordLogin"
+							id="passwordLogin"
+							placeholder="Enter your password"
+							required
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							className="focus:outline-purple-500 pr-10 w-full"
+						/>
+						<button
+							type="button"
+							aria-label={showPassword ? "Hide password" : "Show password"}
+							onClick={() => setShowPassword((p) => !p)}
+							className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+						>
+							{showPassword ? <EyeClosed /> : <EyeOpen />}
+						</button>
+					</div>
 				</div>
 
-				<p className="block mr-auto italic font-semibold text-red-500 capitalize ">
-					{errorMessage}
-				</p>
+				{errorMessage && (
+					<div className="w-full px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/20">
+						<p className="text-red-400 font-medium capitalize text-sm">{errorMessage}</p>
+					</div>
+				)}
 
-				<Link
-					to={"/ResetPassword"}
-					className=" text-[#9B51E0] underline mr-auto"
-				>
-					Forgot Password?
+				<Link to={"/ResetPassword"} className="text-[#9B51E0] hover:text-purple-400 transition-colors text-sm mr-auto">
+					Forgot password?
 				</Link>
 
-				<div className="flex flex-row items-center justify-center w-full gap-5 p-5 md:w-10/12">
-					<div className=" w-10/12 p-[0.5px] bg-[#98A2B3]"></div>
-					<span className=" text-[#98A2B3] font-bold">OR</span>
-					<div className=" w-10/12 p-[0.5px] bg-[#98A2B3]"></div>
+				<div className="flex flex-row items-center justify-center w-full gap-4 py-2 md:w-10/12">
+					<div className="flex-1 h-px bg-white/8"></div>
+					<span className="text-white/25 text-xs font-semibold uppercase tracking-wider">or</span>
+					<div className="flex-1 h-px bg-white/8"></div>
 				</div>
 
-				{/* BUTTONS */}
-				<div className="flex flex-col items-center w-full gap-3 ">
+				<div className="flex flex-col items-center w-full gap-3">
 					<button
-						className=" py-3.5 w-full md:w-10/12 flex flex-row justify-center items-center gap-3 border-2 border-[#98A2B3] text-[#98A2B3] rounded hover:scale-105 transition ease-in-out duration-200"
-						onClick={(e) => e.preventDefault()}
+						type="button"
+						className="py-3 w-full md:w-10/12 flex justify-center items-center gap-3 border border-white/10 text-white/50 rounded-xl hover:border-white/20 hover:text-white/80 transition-all duration-200 text-sm bg-white/3 hover:bg-white/5"
+						onClick={signInWithGoogle}
+						disabled={isLoading}
 					>
-						<img src={googleIcon} alt="Google Icon" />
-						<span> Sign in with Google</span>
+						<img src={googleIcon} alt="Google Icon" className="h-4" />
+						<span>Continue with Google</span>
 					</button>
 
 					<button
-						className=" py-3.5 w-full md:w-10/12 mx-auto block bg-[#9B51E0] text-white font-semibold rounded hover:scale-105 transition ease-in-out duration-200"
+						type="submit"
+						className="py-3 w-full md:w-10/12 mx-auto block text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 text-sm"
+						style={{ background: "linear-gradient(135deg, #9B51E0 0%, #7B3FC0 100%)" }}
 						id="signInButton"
-						onClick={(e) => {
-							e.preventDefault();
-
-							signIn();
-						}}
+						disabled={isLoading}
 					>
 						{isLoading ? (
-							<CircularProgress color="inherit" size={"1.2rem"} />
+							<CircularProgress color="inherit" size={"1.1rem"} />
 						) : (
-							" SIGN IN"
+							"Sign In"
 						)}
 					</button>
 				</div>
 
-				<p className=" text-[#98A2B3] mt-5">
-					Don't have an account ?
+				<p className="text-white/35 text-sm mt-4 mb-2">
+					Don't have an account?{" "}
 					<Link to={"/RegistrationPage"}>
-						<span className=" text-[#9B51E0] underline cursor-pointer">
-							Sign up here
+						<span className="text-[#9B51E0] hover:text-purple-400 transition-colors cursor-pointer">
+							Sign up free
 						</span>
 					</Link>
 				</p>

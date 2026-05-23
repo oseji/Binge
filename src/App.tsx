@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
@@ -34,19 +34,8 @@ function App() {
 	const isloggedIn = useSelector(
 		(state: RootState) => state.loginSetter.isLoggedIn
 	);
-	const isLoading = useSelector(
-		(state: RootState) => state.loadingSetter.isLoading
-	);
 
 	const mainScreenRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		console.log(isloggedIn);
-	}, [isloggedIn]);
-
-	useEffect(() => {
-		console.log(`LOADING : ${isLoading}`);
-	}, [isLoading]);
 
 	return (
 		<div className="App">

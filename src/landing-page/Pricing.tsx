@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import SplitType from "split-type";
 
 import proCheckbox from "../assets/pro-checkbox.png";
 import premiumCheckbox from "../assets/premium-checkbox.png";
@@ -10,213 +9,153 @@ import orgCheckbox from "../assets/org-checkbox.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type pricingType = {
-	heading: string;
-	price: number;
-	color: string;
-}[];
+const plans = [
+  {
+    heading: "Professional",
+    price: 3000,
+    color: "#F2994A",
+    checkboxImg: proCheckbox,
+    badge: null,
+    features: [
+      "HD Streaming",
+      "2 Screens at once",
+      "Unlimited Movies",
+      "Download on 2 devices",
+      "Email support",
+    ],
+  },
+  {
+    heading: "Premium",
+    price: 10000,
+    color: "#9B51E0",
+    checkboxImg: premiumCheckbox,
+    badge: "Most Popular",
+    features: [
+      "4K + HDR Streaming",
+      "4 Screens at once",
+      "Unlimited Movies & Series",
+      "Download on 4 devices",
+      "Priority support",
+    ],
+  },
+  {
+    heading: "Organizational",
+    price: 5000,
+    color: "#B42318",
+    checkboxImg: orgCheckbox,
+    badge: "Best Value",
+    features: [
+      "4K + HDR Streaming",
+      "10 Screens at once",
+      "Unlimited Everything",
+      "Download on 10 devices",
+      "Dedicated account manager",
+    ],
+  },
+];
 
 const Pricing = () => {
-	const pricingObject: pricingType = [
-		{
-			heading: "Professional",
-			price: 3000,
-			color: "#F2994A",
-		},
-		{
-			heading: "Premium",
-			price: 10000,
-			color: "#9B51E0",
-		},
-		{
-			heading: "Organizational",
-			price: 5000,
-			color: "#B42318",
-		},
-	];
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subRef = useRef<HTMLParagraphElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-	const headingRef = useRef(null);
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
+    });
 
-	useEffect(() => {
-		if (headingRef.current) {
-			const text = new SplitType(headingRef.current, { types: "chars,words" });
+    tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
+      .fromTo(subRef.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.5")
+      .fromTo(
+        cardsRef.current,
+        { y: 80, opacity: 0, scale: 0.92 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.16, ease: "power3.out" },
+        "-=0.3"
+      );
+  }, []);
 
-			const tl = gsap.timeline();
+  return (
+    <section className="pricingSection">
+      <h1 className="sectionHeading flex flex-row flex-wrap items-center lg:justify-center gap-2" ref={headingRef}>
+        Affordable{" "}
+        <span className="text-gradient inline-block">Plans</span>{" "}
+        For You
+      </h1>
+      <p className="sectionSubHeading" ref={subRef}>
+        Start free. Upgrade whenever you're ready.
+      </p>
 
-			tl.fromTo(
-				text.chars,
-				{ y: 50 },
-				{
-					y: 0,
-					stagger: 1,
-					duration: 1,
+      <div className="pricingGrp">
+        {plans.map((plan, index) => (
+          <div
+            className="pricingCard"
+            key={index}
+            ref={(el) => (cardsRef.current[index] = el)}
+            style={{ borderColor: `${plan.color}30` }}
+          >
+            {plan.badge ? (
+              <div
+                className="text-center font-bold text-sm py-2.5 tracking-wide"
+                style={{ backgroundColor: plan.color, color: "white" }}
+              >
+                {plan.badge}
+              </div>
+            ) : (
+              <div className="py-2.5" />
+            )}
 
-					scrollTrigger: {
-						trigger: headingRef.current,
-						start: "top 80%",
-						end: "top 35%",
-						scrub: 3,
-					},
-				}
-			);
-		}
-	}, []);
+            <div className="flex flex-col justify-between gap-4 p-7 flex-1">
+              <div className="flex flex-col gap-5">
+                <div>
+                  <h2 className="pricingName" style={{ color: plan.color }}>
+                    {plan.heading}
+                  </h2>
+                  <p className="text-xs text-[#606070] mt-0.5 uppercase tracking-wider">
+                    Billed monthly
+                  </p>
+                </div>
 
-	return (
-		<section className="pricingSection">
-			<h1 className="sectionHeading flex flex-row flex-wrap items-center lg:justify-center gap-2.5">
-				Affordable{" "}
-				<span
-					className=" text-[#9B51E0] inline-block overflow-y-hidden"
-					ref={headingRef}
-				>
-					Plans
-				</span>{" "}
-				For You
-			</h1>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-white text-lg">₦</span>
+                  <span className="text-4xl font-bold text-white leading-none">
+                    {plan.price.toLocaleString()}
+                  </span>
+                  <span className="text-[#606070] text-sm">/month</span>
+                </div>
 
-			<p className="sectionSubHeading">
-				Lorem ipsum dolor sit amet consectetur. Aenean augue e u bibendum morbi.
-			</p>
+                <Link to={"/PaymentOption"} className="block">
+                  <button
+                    className="pricingBtn text-white"
+                    style={
+                      index === 0
+                        ? { border: `1.5px solid ${plan.color}`, color: plan.color, background: "transparent" }
+                        : { background: plan.color }
+                    }
+                  >
+                    Start free trial
+                  </button>
+                </Link>
 
-			<div className="pricingGrp">
-				{pricingObject.map((element, index) => (
-					<div
-						className={`pricingCard ${
-							index === 0
-								? "outline-[#F2994A] text-[#F2994A]"
-								: index === 1
-								? "outline-[#9B51E0] text-[#9B51E0]"
-								: "outline-[#B42318] text-[#B42318]"
-						}`}
-						key={index}
-					>
-						{index === 0 ? (
-							<div className="p-2 mb-6 "></div>
-						) : index === 1 ? (
-							<div className=" text-center font-semibold p-2 bg-[#9B51E0] text-black">
-								Most Popular
-							</div>
-						) : index === 2 ? (
-							<div className=" text-center font-semibold p-2 bg-[#B42318] text-white">
-								Best Deals
-							</div>
-						) : null}
+                <div className="h-px bg-white/5" />
 
-						<div className="flex flex-col justify-between gap-3 p-8 ">
-							<div className="flex flex-col items-start gap-5 ">
-								<h1 className="pricingName" key={index}>
-									{element.heading}
-								</h1>
-
-								<h3 className="text-white ">
-									₦{" "}
-									<span className="text-4xl font-bold ">
-										{element.price.toLocaleString()}
-									</span>
-									/month
-								</h3>
-
-								<p className="text-sm text-white ">
-									Lorem ipsum dolor sit amet consectetur. Iaculis quam rhoncus
-									scelerisque .
-								</p>
-							</div>
-
-							<Link to={"/PaymentOption"} className="w-full ">
-								{" "}
-								<button
-									className={`pricingBtn ${
-										index === 0
-											? " outline outline-[#F2994A] text-[#F2994A]"
-											: index === 1
-											? "bg-[#9B51E0] text-white"
-											: "bg-[#B42318] text-white"
-									}`}
-								>
-									Free 7-days Trial
-								</button>
-							</Link>
-
-							<div>
-								<h3 className="mb-3 ">Core Features</h3>
-
-								<div className="checkBoxGrp">
-									<img
-										src={
-											index === 0
-												? proCheckbox
-												: index === 1
-												? premiumCheckbox
-												: orgCheckbox
-										}
-										alt="checkbox"
-									/>
-									<p>Rich Member Profile</p>
-								</div>
-
-								<div className="checkBoxGrp">
-									<img
-										src={
-											index === 0
-												? proCheckbox
-												: index === 1
-												? premiumCheckbox
-												: orgCheckbox
-										}
-										alt="checkbox"
-									/>
-									<p>Rich Member Profile</p>
-								</div>
-
-								<div className="checkBoxGrp">
-									<img
-										src={
-											index === 0
-												? proCheckbox
-												: index === 1
-												? premiumCheckbox
-												: orgCheckbox
-										}
-										alt="checkbox"
-									/>
-									<p>Rich Member Profile</p>
-								</div>
-
-								<div className="checkBoxGrp">
-									<img
-										src={
-											index === 0
-												? proCheckbox
-												: index === 1
-												? premiumCheckbox
-												: orgCheckbox
-										}
-										alt="checkbox"
-									/>
-									<p>Rich Member Profile</p>
-								</div>
-
-								<div className="checkBoxGrp">
-									<img
-										src={
-											index === 0
-												? proCheckbox
-												: index === 1
-												? premiumCheckbox
-												: orgCheckbox
-										}
-										alt="checkbox"
-									/>
-									<p>Rich Member Profile</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				))}
-			</div>
-		</section>
-	);
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-[#606070] font-semibold mb-3">
+                    What's included
+                  </p>
+                  {plan.features.map((feature, fIdx) => (
+                    <div className="checkBoxGrp" key={fIdx}>
+                      <img src={plan.checkboxImg} alt="check" />
+                      <p>{feature}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default Pricing;

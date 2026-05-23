@@ -9,13 +9,14 @@ import { setmediaType } from "../redux/mediaType";
 type movieType = {
   poster_path: string;
   title: string;
+  name: string;
   id: number;
 };
 
 type categoryDataType = {
   data: movieType[];
   loading: boolean;
-  error: any;
+  error: string | null;
 };
 
 type informationType = {
@@ -36,8 +37,7 @@ const MediaCategories = (props: propTypes) => {
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
   >(() => {
-    const initialState: Record<string, categoryDataType> = {}; // Only initialize the categories we received in props
-
+    const initialState: Record<string, categoryDataType> = {};
     props.information.categories.forEach((category) => {
       initialState[category] = { data: [], loading: false, error: null };
     });
@@ -59,29 +59,25 @@ const MediaCategories = (props: propTypes) => {
       },
     };
 
-    setCategoryData((prev: any) => ({
+    setCategoryData((prev) => ({
       ...prev,
-      [category]: { ...prev[category], loading: true },
+      [category]: { ...prev[category], loading: true, error: null },
     }));
 
     try {
       const response = await axios.request(options);
 
-      setCategoryData((prev: any) => ({
+      setCategoryData((prev) => ({
         ...prev,
         [category]: { ...prev[category], data: response.data.results },
       }));
     } catch (err) {
-      setCategoryData((prev: any) => ({
+      setCategoryData((prev) => ({
         ...prev,
-        [category]: { ...prev[category], error: err },
+        [category]: { ...prev[category], error: "Failed to load" },
       }));
-
-      if (err !== null) {
-        console.log(`error for ${category}`, err);
-      }
     } finally {
-      setCategoryData((prev: any) => ({
+      setCategoryData((prev) => ({
         ...prev,
         [category]: { ...prev[category], loading: false },
       }));
@@ -108,24 +104,52 @@ const MediaCategories = (props: propTypes) => {
             </div>
           )}
 
-          {!categoryData[category]?.loading && (
+          {categoryData[category]?.error && (
+            <div className="flex items-center gap-3 h-40 text-gray-500 text-sm">
+              <span>{categoryData[category].error}</span>
+              <button
+                onClick={() => fetchData(category)}
+                className="text-purple-400 hover:text-purple-300 underline text-xs"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
+          {!categoryData[category]?.loading && !categoryData[category]?.error && (
             <div className="categoryGroup">
-              {categoryData[category]?.data?.map((element, index) => (
-                <img
-                  key={index}
-                  src={tmdbBaseURL + element.poster_path}
-                  alt={element.title}
-                  data-id={element.id}
-                  loading="lazy"
-                  className="movieThumbnail"
+              {categoryData[category]?.data?.map((element) => (
+                <div
+                  key={element.id}
+                  className="movieCard"
                   onClick={() => {
-                    console.log(element.title, element.id);
                     dispatch(setmediaID(element.id));
                     dispatch(setmediaType(props.information.type));
-
                     history.push("/Details");
                   }}
-                />
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${element.title || element.name}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      dispatch(setmediaID(element.id));
+                      dispatch(setmediaType(props.information.type));
+                      history.push("/Details");
+                    }
+                  }}
+                >
+                  <img
+                    src={tmdbBaseURL + element.poster_path}
+                    alt={element.title || element.name}
+                    loading="lazy"
+                    className="movieThumbnail"
+                  />
+                  <div className="movieCardOverlay">
+                    <p className="font-semibold text-sm leading-tight">
+                      {element.title || element.name}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           )}

@@ -1,86 +1,61 @@
 import footerLogo from "../assets/footer-logo.svg";
-import ball from "../assets/ball.png";
-import finger from "../assets/finger.png";
-import fb from "../assets/fb.png";
 import twitter from "../assets/twitter.svg";
 import linkedin from "../assets/linkedin.png";
+import fb from "../assets/fb.png";
 import github from "../assets/github.png";
+
+const footerLinks = [
+  {
+    heading: "Product",
+    links: ["Overview", "Features", "Solutions", "Pricing", "Releases"],
+  },
+  {
+    heading: "Company",
+    links: ["About", "Careers", "Press", "News", "Contact"],
+  },
+  {
+    heading: "Resources",
+    links: ["Blog", "Help Center", "Events", "Tutorials", "Support"],
+  },
+  {
+    heading: "Legal",
+    links: ["Terms", "Privacy", "Cookies", "Licences", "Settings"],
+  },
+];
 
 const Footer = () => {
   return (
     <footer>
-      <div className=" flex flex-col lg:flex-row items-start lg:justify-between gap-10 lg:gap-14 px-5 md:px-10 py-10">
-        <div>
-          <img src={footerLogo} alt="Binge Logo" className=" pb-5" />
-          <p className="w-[320px]">
-            Design amazing digital experiences that create more happy in the
-            world.
+      <div className="flex flex-col lg:flex-row items-start lg:justify-between gap-10 lg:gap-20 px-5 md:px-10 py-14">
+        {/* Brand */}
+        <div className="flex-shrink-0">
+          <img src={footerLogo} alt="Binge Logo" className="h-8 mb-4 opacity-80" />
+          <p className="text-[#505068] text-sm leading-relaxed max-w-[240px]">
+            Stream anything, anytime. Beautiful cinema, delivered to your screen.
           </p>
         </div>
 
-        <div className=" grid grid-cols-3 gap-5 md:gap-0 md:flex lg:flex-row md:justify-between w-full">
-          <div className="footerCol">
-            <p className="footerColHeading">Product</p>
-            <p>Overview</p>
-            <p>Features</p>
-            <p>Solutions</p>
-            <p>Tutorials</p>
-            <p>Pricing</p>
-            <p>Releases</p>
-          </div>
-
-          <div className="footerCol">
-            <p className="footerColHeading">Company</p>
-            <p>About</p>
-            <p>Careers</p>
-            <p>Press</p>
-            <p>news</p>
-            <p>media kit</p>
-            <p>contact</p>
-          </div>
-
-          <div className="footerCol">
-            <p className="footerColHeading">Resources</p>
-            <p>blog</p>
-            <p>newscenter</p>
-            <p>events</p>
-            <p>help center</p>
-            <p>tutorials</p>
-            <p>support</p>
-          </div>
-
-          <div className="footerCol">
-            <p className="footerColHeading">social</p>
-            <p>twitter</p>
-            <p>linkedIn</p>
-            <p>facebook</p>
-            <p>github</p>
-            <p>angel list</p>
-            <p>dribble</p>
-          </div>
-
-          <div className="footerCol">
-            <p className="footerColHeading">legal</p>
-            <p>terms</p>
-            <p>privacy</p>
-            <p>cookies</p>
-            <p>licences</p>
-            <p>settings</p>
-            <p>contact</p>
-          </div>
+        {/* Links grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 w-full lg:w-auto">
+          {footerLinks.map((col) => (
+            <div className="footerCol" key={col.heading}>
+              <p className="footerColHeading">{col.heading}</p>
+              {col.links.map((link) => (
+                <p key={link}>{link}</p>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className=" bg-[#101828] py-10 px-5 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
-        <p className="text-[#98A2B3]">© 2023 Binge. All rights reserved.</p>
-
+      {/* Bottom bar */}
+      <div className="border-t border-white/5 py-6 px-5 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p className="text-[#404058] text-sm">© 2024 Binge, Inc. All rights reserved.</p>
         <div className="footerIconsGrp">
           <img src={twitter} alt="Twitter" className="footerIcon" />
-          <img src={linkedin} alt="linkedin" className="footerIcon" />
-          <img src={fb} alt="facebook" className="footerIcon" />
-          <img src={github} alt="github" className="footerIcon" />
-          <img src={finger} alt="fingers" className="footerIcon" />
-          <img src={ball} alt="ball" className="footerIcon" />
+          <img src={linkedin} alt="LinkedIn" className="footerIcon" />
+          <img src={fb} alt="Facebook" className="footerIcon" />
+          <img src={github} alt="GitHub" className="footerIcon" />
         </div>
       </div>
     </footer>

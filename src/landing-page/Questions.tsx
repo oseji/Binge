@@ -1,16 +1,40 @@
 import { SyntheticEvent, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import SplitType from "split-type";
 
 import downArrow from "../assets/down-arrow.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const faqs = [
+  {
+    q: "How does Binge work?",
+    a: "Binge is a media discovery platform that lets you search, explore, and track thousands of movies and TV series. Find what to watch next, browse trailers, ratings, and cast info — all in one place.",
+  },
+  {
+    q: "Can I try Binge for free?",
+    a: "Yes! We offer a 7-day free trial on all plans. You won't be charged until your trial ends, and you can cancel at any time before then — no questions asked.",
+  },
+  {
+    q: "How many screens can I watch on at once?",
+    a: "It depends on your plan. Professional allows 2 simultaneous streams, Premium allows 4, and Organizational allows up to 10. Each plan also allows downloads on the same number of devices for offline viewing.",
+  },
+  {
+    q: "Can I download content to watch offline?",
+    a: "Yes. All plans include downloads so you can save your favorite movies and episodes and watch them without an internet connection. Downloaded content is available for 30 days.",
+  },
+  {
+    q: "How do I cancel my subscription?",
+    a: "You can cancel your Binge subscription anytime from your account settings — no phone calls, no hassle. If you cancel, you'll still have access until the end of your current billing period.",
+  },
+];
+
 const Questions = () => {
   const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const arrowRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const headingRef = useRef(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subRef = useRef<HTMLParagraphElement>(null);
+  const faqItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleAnswer = (e: SyntheticEvent<HTMLDivElement>) => {
     const clicked = Number(e.currentTarget.getAttribute("data-value"));
@@ -37,142 +61,47 @@ const Questions = () => {
   };
 
   useEffect(() => {
-    if (headingRef.current) {
-      const text = new SplitType(headingRef.current, { types: "chars,words" });
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
+    });
 
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        text.chars,
-        { y: 50 },
-        {
-          y: 0,
-          stagger: 1,
-          duration: 1,
-
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 80%",
-            end: "top 35%",
-            scrub: 3,
-          },
-        }
+    tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
+      .fromTo(subRef.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.5")
+      .fromTo(
+        faqItemsRef.current,
+        { x: -40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.55, stagger: 0.1, ease: "power3.out" },
+        "-=0.3"
       );
-    }
   }, []);
 
   return (
     <div className="questionsSection">
       <h1 className="sectionHeading" ref={headingRef}>
-        Questions?
+        Common{" "}
+        <span className="text-gradient">Questions</span>
       </h1>
-      <p className="sectionSubHeading mb-3 md:mb-0">We've got Answers</p>
+      <p className="sectionSubHeading mb-8" ref={subRef}>Everything you need to know about Binge.</p>
 
       <div>
-        <div className="questionGrp">
-          <div className="questionBox" data-value={0} onClick={toggleAnswer}>
-            <p>How does Binge Premium work?</p>
-            <img
-              src={downArrow}
-              alt="arrow"
-              ref={(el) => (arrowRefs.current[0] = el)}
-            />
+        {faqs.map((faq, index) => (
+          <div className="questionGrp" key={index} ref={(el) => (faqItemsRef.current[index] = el)}>
+            <div className="questionBox" data-value={index} onClick={toggleAnswer}>
+              <p>{faq.q}</p>
+              <img
+                src={downArrow}
+                alt="toggle"
+                ref={(el) => (arrowRefs.current[index] = el)}
+              />
+            </div>
+            <p
+              className="answer hideFaq"
+              ref={(el) => (answerRefs.current[index] = el)}
+            >
+              {faq.a}
+            </p>
           </div>
-
-          <p
-            className="answer hideFaq"
-            ref={(el) => (answerRefs.current[0] = el)}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
-            laudantium consectetur obcaecati, praesentium nemo nesciunt
-            provident eveniet optio suscipit, nulla alias. Ipsum, id laboriosam.
-            Laboriosam eius autem dolores hic laudantium.
-          </p>
-        </div>
-
-        <div className="questionGrp">
-          <div className="questionBox" data-value={1} onClick={toggleAnswer}>
-            <p>How does Binge Premium work?</p>
-            <img
-              src={downArrow}
-              alt="arrow"
-              ref={(el) => (arrowRefs.current[1] = el)}
-            />
-          </div>
-
-          <p
-            className="answer hideFaq"
-            ref={(el) => (answerRefs.current[1] = el)}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
-            laudantium consectetur obcaecati, praesentium nemo nesciunt
-            provident eveniet optio suscipit, nulla alias. Ipsum, id laboriosam.
-            Laboriosam eius autem dolores hic laudantium.
-          </p>
-        </div>
-
-        <div className="questionGrp">
-          <div className="questionBox" data-value={2} onClick={toggleAnswer}>
-            <p>How does Binge Premium work?</p>
-            <img
-              src={downArrow}
-              alt="arrow"
-              ref={(el) => (arrowRefs.current[2] = el)}
-            />
-          </div>
-
-          <p
-            className="answer hideFaq"
-            ref={(el) => (answerRefs.current[2] = el)}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
-            laudantium consectetur obcaecati, praesentium nemo nesciunt
-            provident eveniet optio suscipit, nulla alias. Ipsum, id laboriosam.
-            Laboriosam eius autem dolores hic laudantium.
-          </p>
-        </div>
-
-        <div className="questionGrp">
-          <div className="questionBox" data-value={3} onClick={toggleAnswer}>
-            <p>How does Binge Premium work?</p>
-            <img
-              src={downArrow}
-              alt="arrow"
-              ref={(el) => (arrowRefs.current[3] = el)}
-            />
-          </div>
-
-          <p
-            className="answer hideFaq"
-            ref={(el) => (answerRefs.current[3] = el)}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
-            laudantium consectetur obcaecati, praesentium nemo nesciunt
-            provident eveniet optio suscipit, nulla alias. Ipsum, id laboriosam.
-            Laboriosam eius autem dolores hic laudantium.
-          </p>
-        </div>
-
-        <div className="questionGrp">
-          <div className="questionBox" data-value={4} onClick={toggleAnswer}>
-            <p>How does Binge Premium work?</p>
-            <img
-              src={downArrow}
-              alt="arrow"
-              ref={(el) => (arrowRefs.current[4] = el)}
-            />
-          </div>
-
-          <p
-            className="answer hideFaq"
-            ref={(el) => (answerRefs.current[4] = el)}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
-            laudantium consectetur obcaecati, praesentium nemo nesciunt
-            provident eveniet optio suscipit, nulla alias. Ipsum, id laboriosam.
-            Laboriosam eius autem dolores hic laudantium.
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   );

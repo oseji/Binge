@@ -17,27 +17,33 @@ const SignedInLandingPage = () => {
       <div ref={mainScreenRef}>
         <HeroSection />
 
+        {/* Pill switcher */}
         <div className="typeSwitcherGrp">
-          <span
-            className={` border-b-2 ${
-              currentType === "Movies"
-                ? " border-purple-600 scale-125"
-                : " border-transparent"
-            }`}
-            onClick={() => setCurrentType("Movies")}
+          <div
+            className="flex items-center rounded-full p-1 border border-white/8"
+            style={{ background: "rgba(255,255,255,0.04)" }}
           >
-            Movies
-          </span>
-          <span
-            className={` border-b-2 ${
-              currentType === "Series"
-                ? " border-purple-600 scale-125"
-                : " border-transparent"
-            }`}
-            onClick={() => setCurrentType("Series")}
-          >
-            Series
-          </span>
+            <button
+              className={`px-7 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                currentType === "Movies"
+                  ? "bg-[#9B51E0] text-white shadow-lg shadow-purple-900/40"
+                  : "text-white/50 hover:text-white/80"
+              }`}
+              onClick={() => setCurrentType("Movies")}
+            >
+              Movies
+            </button>
+            <button
+              className={`px-7 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                currentType === "Series"
+                  ? "bg-[#9B51E0] text-white shadow-lg shadow-purple-900/40"
+                  : "text-white/50 hover:text-white/80"
+              }`}
+              onClick={() => setCurrentType("Series")}
+            >
+              Series
+            </button>
+          </div>
         </div>
 
         {currentType === "Movies" ? <Movies /> : <Series />}

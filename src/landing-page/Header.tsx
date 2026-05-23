@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import menu from "../assets/menu.svg";
-import closeMenu from "../assets/icons8-close.svg";
+import menuImg from "../assets/menu.svg";
+import closeImg from "../assets/icons8-close.svg";
 import logo from "../assets/Binge.svg";
 
 type headerProps = {
@@ -10,19 +10,16 @@ type headerProps = {
 };
 
 const Header = (props: headerProps) => {
-  const menuRef = useRef<HTMLImageElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [menuToggled, setMenuToggled] = useState(false);
 
-  // menu toggle
   useEffect(() => {
     if (menuRef.current) {
       if (menuToggled) {
         menuRef.current.classList.remove("menuHidden");
         menuRef.current.classList.add("menuShow");
         props.mainScreenRef.current?.classList.add("hideMainScreen");
-      }
-
-      if (!menuToggled) {
+      } else {
         menuRef.current.classList.add("menuHidden");
         menuRef.current.classList.remove("menuShow");
         props.mainScreenRef.current?.classList.remove("hideMainScreen");
@@ -32,76 +29,61 @@ const Header = (props: headerProps) => {
 
   return (
     <div>
-      {/* header for tablets and desktops */}
-      <header className="bigScreenHeader md:top-12 lg:top-10 xl:top-8">
+      {/* Desktop / tablet */}
+      <header className="bigScreenHeader">
         <ul className="headerList">
-          <li>
-            <Link to={"/Movies"}>Movies</Link>
-          </li>
-
-          <li>
-            <Link to={"/Series"}>Series</Link>
-          </li>
-
-          <li>
-            <Link to={"/"}>Home</Link>
-          </li>
+          <li><Link to={"/Movies"}>Movies</Link></li>
+          <li><Link to={"/Series"}>Series</Link></li>
+          <li><Link to={"/"}>Home</Link></li>
         </ul>
 
         <Link to={"/"}>
           <img src={logo} alt="Binge Logo" className="headerLogo" />
         </Link>
 
-        <ul className="headerList">
-          <li>
-            <Link to={"/LoginPage"} id={"loginBtn"}>
-              Login
-            </Link>
-          </li>
-
-          <li>
-            <Link to={"/RegistrationPage"} id={"signUpBtn"}>
+        <div className="flex items-center gap-2">
+          <Link to={"/LoginPage"}>
+            <button className="px-5 py-2 text-sm font-semibold text-white/70 hover:text-white transition-colors duration-200 rounded-xl hover:bg-white/5">
+              Log in
+            </button>
+          </Link>
+          <Link to={"/RegistrationPage"}>
+            <button className="px-5 py-2 text-sm font-semibold bg-[#9B51E0] text-white rounded-xl hover:bg-purple-600 transition-all duration-200 shadow-lg shadow-purple-900/30">
               Sign up
-            </Link>
-          </li>
-        </ul>
+            </button>
+          </Link>
+        </div>
       </header>
 
-      {/* header for phones */}
-      <header className="smallScreenHeader ">
-        <div className=" flex flex-row justify-between items-start">
+      {/* Mobile */}
+      <header className="smallScreenHeader">
+        <div className="flex flex-row justify-between items-center">
           <Link to={"/"}>
-            <img src={logo} alt="Binge Logo" className=" h-8" />
+            <img src={logo} alt="Binge Logo" className="h-8" />
           </Link>
-
-          <img
-            src={menuToggled ? closeMenu : menu}
-            alt="menu image"
-            className=" h-8"
+          <button
+            aria-label={menuToggled ? "Close menu" : "Open menu"}
             onClick={() => setMenuToggled((prev) => !prev)}
-          />
+            className="p-1 focus:outline-none"
+          >
+            <img src={menuToggled ? closeImg : menuImg} alt="" className="h-7" />
+          </button>
         </div>
 
-        <div className="menuHidden " ref={menuRef}>
-          <ul className="flex flex-col items-start  gap-16 bg-black text-2xl uppercase ">
+        <div className="menuHidden" ref={menuRef}>
+          <ul className="flex flex-col gap-8 text-2xl uppercase pt-8 pl-2">
+            <li><Link to={"/"} onClick={() => setMenuToggled(false)}>Home</Link></li>
+            <li><Link to={"/Movies"} onClick={() => setMenuToggled(false)}>Movies</Link></li>
+            <li><Link to={"/Series"} onClick={() => setMenuToggled(false)}>Series</Link></li>
             <li>
-              <Link to={"/"}>Home</Link>
+              <Link to={"/LoginPage"} onClick={() => setMenuToggled(false)} className="text-[#9B51E0]">
+                Log in
+              </Link>
             </li>
-
             <li>
-              <Link to={"/Movies"}>Movies</Link>
-            </li>
-
-            <li>
-              <Link to={"/Series"}>Series</Link>
-            </li>
-
-            <li onClick={() => setMenuToggled(false)}>
-              <Link to={"/LoginPage"}>Login</Link>
-            </li>
-
-            <li onClick={() => setMenuToggled(false)}>
-              <Link to={"/RegistrationPage"}>Sign up</Link>
+              <Link to={"/RegistrationPage"} onClick={() => setMenuToggled(false)}>
+                Sign up
+              </Link>
             </li>
           </ul>
         </div>
