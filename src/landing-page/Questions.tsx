@@ -16,12 +16,12 @@ const faqs = [
     a: "Yes! We offer a 7-day free trial on all plans. You won't be charged until your trial ends, and you can cancel at any time before then — no questions asked.",
   },
   {
-    q: "How many screens can I watch on at once?",
-    a: "It depends on your plan. Professional allows 2 simultaneous streams, Premium allows 4, and Organizational allows up to 10. Each plan also allows downloads on the same number of devices for offline viewing.",
+    q: "Can I save movies and shows I want to watch?",
+    a: "Absolutely. You can add any title to your personal list with a single tap. Your list is saved to your account so you can access it from any device — never lose track of something you wanted to watch.",
   },
   {
-    q: "Can I download content to watch offline?",
-    a: "Yes. All plans include downloads so you can save your favorite movies and episodes and watch them without an internet connection. Downloaded content is available for 30 days.",
+    q: "What information does Binge show for each title?",
+    a: "Each title page includes the synopsis, cast and crew, genre tags, ratings, release info, and an official trailer so you can get a real feel for a movie or show before committing to it.",
   },
   {
     q: "How do I cancel my subscription?",

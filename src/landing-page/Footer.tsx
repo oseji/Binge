@@ -31,7 +31,7 @@ const Footer = () => {
         <div className="flex-shrink-0">
           <img src={footerLogo} alt="Binge Logo" className="h-8 mb-4 opacity-80" />
           <p className="text-[#505068] text-sm leading-relaxed max-w-[240px]">
-            Stream anything, anytime. Beautiful cinema, delivered to your screen.
+            Discover what to watch next. Explore thousands of titles, trailers, and reviews — all in one place.
           </p>
         </div>
 

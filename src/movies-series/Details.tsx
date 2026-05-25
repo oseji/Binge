@@ -297,25 +297,28 @@ const Details = () => {
   };
 
   const TrailerSection = () => (
-    <div className="w-full rounded-2xl overflow-hidden aspect-video bg-[#0D0D18] border border-white/5 my-8">
-      {trailerLoading ? (
-        <div className="flex items-center justify-center h-full min-h-[200px]">
-          <CircularProgress color="inherit" size="3rem" />
-        </div>
-      ) : trailerID ? (
-        <ReactPlayer
-          url={`https://www.youtube.com/watch?v=${trailerID}`}
-          playing={false}
-          controls
-          width="100%"
-          height="100%"
-        />
-      ) : (
-        <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-white/20">
-          <span className="text-4xl">▶</span>
-          <span className="text-sm">Trailer unavailable</span>
-        </div>
-      )}
+    <div className="w-full max-w-3xl mx-auto mt-16 mb-10">
+      <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-3">Official Trailer</p>
+      <div className="rounded-2xl overflow-hidden aspect-video bg-[#0D0D18] border border-white/8 shadow-2xl shadow-black/60">
+        {trailerLoading ? (
+          <div className="flex items-center justify-center h-full min-h-[200px]">
+            <CircularProgress color="inherit" size="2.5rem" />
+          </div>
+        ) : trailerID ? (
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${trailerID}`}
+            playing={false}
+            controls
+            width="100%"
+            height="100%"
+          />
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-white/20">
+            <span className="text-4xl">▶</span>
+            <span className="text-sm">Trailer unavailable</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 
@@ -367,49 +370,58 @@ const Details = () => {
         {mediaType === "movie" && (
           <>
             <TrailerSection />
-            <div className="detailsPage">
-              <img
-                src={tmdbPosterURL + movieDetails.poster_path}
-                alt={movieDetails.title}
-                className="detailsPageImg"
-              />
-              <div className="flex flex-col gap-4 flex-1">
-                <div className="flex items-start justify-between gap-4 flex-wrap">
-                  <div>
-                    <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-                      {movieDetails.title}
-                    </h1>
-                    <span className="text-sm text-white/40 italic">{movieDetails.status}</span>
+            <div className="max-w-5xl mx-auto w-full">
+              <div className="detailsPage">
+                <img
+                  src={tmdbPosterURL + movieDetails.poster_path}
+                  alt={movieDetails.title}
+                  className="detailsPageImg"
+                />
+                <div className="flex flex-col gap-5 flex-1">
+                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                    <div>
+                      <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                        {movieDetails.title}
+                      </h1>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-white/30 mt-1 block">{movieDetails.status}</span>
+                    </div>
+                    <LikeButton id={movieDetails.id} />
                   </div>
-                  <LikeButton id={movieDetails.id} />
-                </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {movieDetails.genres.map((g, i) => (
-                    <span key={i} className="px-3 py-1 text-xs font-semibold rounded-full bg-purple-900/40 text-purple-300 border border-purple-700/30">
-                      {g.name}
-                    </span>
-                  ))}
-                </div>
+                  <div className="flex flex-wrap gap-2">
+                    {movieDetails.genres.map((g, i) => (
+                      <span key={i} className="px-3 py-1 text-xs font-semibold rounded-full bg-purple-900/40 text-purple-300 border border-purple-700/30">
+                        {g.name}
+                      </span>
+                    ))}
+                  </div>
 
-                <p className="text-white/65 leading-relaxed text-sm md:text-base">
-                  {movieDetails.overview}
-                </p>
+                  <div className="h-px bg-white/6" />
 
-                <div className="flex flex-wrap items-center gap-3 text-sm text-white/35">
-                  {getCountryName(movieDetails.origin_country[0]) && (
-                    <span>{getCountryName(movieDetails.origin_country[0])}</span>
-                  )}
-                  <span className="w-px h-3 bg-white/15" />
-                  {getLanguageName(movieDetails.original_language) && (
-                    <span>{getLanguageName(movieDetails.original_language)}</span>
-                  )}
-                  {movieDetails.runtime > 0 && (
-                    <>
-                      <span className="w-px h-3 bg-white/15" />
-                      <span>{movieDetails.runtime} min</span>
-                    </>
-                  )}
+                  <p className="text-white/60 leading-relaxed text-sm md:text-base">
+                    {movieDetails.overview}
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/35 font-medium">
+                    {getCountryName(movieDetails.origin_country[0]) && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {getCountryName(movieDetails.origin_country[0])}
+                      </span>
+                    )}
+                    {getLanguageName(movieDetails.original_language) && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {getLanguageName(movieDetails.original_language)}
+                      </span>
+                    )}
+                    {movieDetails.runtime > 0 && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {movieDetails.runtime} min
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -419,48 +431,59 @@ const Details = () => {
         {mediaType === "tv" && (
           <>
             <TrailerSection />
-            <div className="detailsPage">
-              <img
-                src={tmdbPosterURL + seriesDetails.poster_path}
-                alt={seriesDetails.name}
-                className="detailsPageImg"
-              />
-              <div className="flex flex-col gap-4 flex-1">
-                <div className="flex items-start justify-between gap-4 flex-wrap">
-                  <div>
-                    <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-                      {seriesDetails.name}
-                    </h1>
-                    <span className={`text-sm italic ${seriesDetails.status === "Ended" ? "text-red-400/70" : "text-green-400/70"}`}>
-                      {seriesDetails.status}
+            <div className="max-w-5xl mx-auto w-full">
+              <div className="detailsPage">
+                <img
+                  src={tmdbPosterURL + seriesDetails.poster_path}
+                  alt={seriesDetails.name}
+                  className="detailsPageImg"
+                />
+                <div className="flex flex-col gap-5 flex-1">
+                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                    <div>
+                      <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                        {seriesDetails.name}
+                      </h1>
+                      <span className={`text-xs font-semibold uppercase tracking-wider mt-1 block ${seriesDetails.status === "Ended" ? "text-red-400/60" : "text-green-400/60"}`}>
+                        {seriesDetails.status}
+                      </span>
+                    </div>
+                    <LikeButton id={seriesDetails.id} />
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/8 text-white/60 border border-white/10">
+                      {seriesDetails.number_of_seasons}{" "}
+                      {seriesDetails.number_of_seasons === 1 ? "Season" : "Seasons"}
                     </span>
                   </div>
-                  <LikeButton id={seriesDetails.id} />
-                </div>
 
-                <p className="text-white/50 font-medium text-sm">
-                  {seriesDetails.number_of_seasons}{" "}
-                  {seriesDetails.number_of_seasons === 1 ? "season" : "seasons"}
-                </p>
+                  <div className="h-px bg-white/6" />
 
-                <p className="text-white/65 leading-relaxed text-sm md:text-base">
-                  {seriesDetails.overview}
-                </p>
+                  <p className="text-white/60 leading-relaxed text-sm md:text-base">
+                    {seriesDetails.overview}
+                  </p>
 
-                <div className="flex flex-wrap items-center gap-3 text-sm text-white/35">
-                  {getCountryName(seriesDetails.origin_country[0]) && (
-                    <span>{getCountryName(seriesDetails.origin_country[0])}</span>
-                  )}
-                  <span className="w-px h-3 bg-white/15" />
-                  {getLanguageName(seriesDetails.original_language) && (
-                    <span>{getLanguageName(seriesDetails.original_language)}</span>
-                  )}
-                  {seriesDetails.episode_run_time?.length > 0 && (
-                    <>
-                      <span className="w-px h-3 bg-white/15" />
-                      <span>{seriesDetails.episode_run_time[0]} min/ep</span>
-                    </>
-                  )}
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/35 font-medium">
+                    {getCountryName(seriesDetails.origin_country[0]) && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {getCountryName(seriesDetails.origin_country[0])}
+                      </span>
+                    )}
+                    {getLanguageName(seriesDetails.original_language) && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {getLanguageName(seriesDetails.original_language)}
+                      </span>
+                    )}
+                    {seriesDetails.episode_run_time?.length > 0 && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        {seriesDetails.episode_run_time[0]} min/ep
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -468,41 +491,58 @@ const Details = () => {
         )}
 
         {mediaType === "person" && (
-          <div className="pt-16">
+          <div className="pt-20 max-w-5xl mx-auto w-full">
             <div className="detailsPage">
-              <img
-                src={tmdbPosterURL + personDetails.profile_path}
-                alt={personDetails.name}
-                className="detailsPageImg"
-              />
-              <div className="xl:w-[70%] flex flex-col gap-4">
+              <div className="flex-shrink-0 mx-auto" style={{ maxWidth: 240 }}>
+                <img
+                  src={tmdbPosterURL + personDetails.profile_path}
+                  alt={personDetails.name}
+                  className="detailsPageImg"
+                  style={{ maxWidth: "100%" }}
+                />
+              </div>
+              <div className="flex flex-col gap-5 flex-1">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                  <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
                     {personDetails.name}
                   </h1>
-                  <p className="text-[#9B51E0] text-sm font-medium mt-0.5">
+                  <span className="inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-900/40 text-purple-300 border border-purple-700/30">
                     {personDetails.known_for_department}
-                  </p>
+                  </span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 text-sm text-white/40">
+                <div className="h-px bg-white/6" />
+
+                <div className="flex flex-wrap gap-4 text-xs text-white/40">
                   {personDetails.birthday && (
-                    <div>
-                      <span className="font-semibold text-white/60">Born </span>
-                      {personDetails.birthday}
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-white/25 font-semibold uppercase tracking-wider text-[10px]">Born</span>
+                      <span className="text-white/60 font-medium">{personDetails.birthday}</span>
                     </div>
                   )}
                   {personDetails.place_of_birth && (
-                    <div>
-                      <span className="font-semibold text-white/60">In </span>
-                      {personDetails.place_of_birth}
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-white/25 font-semibold uppercase tracking-wider text-[10px]">Place of Birth</span>
+                      <span className="text-white/60 font-medium">{personDetails.place_of_birth}</span>
                     </div>
                   )}
                 </div>
 
-                <p className="text-white/60 leading-relaxed text-sm md:text-base">
-                  {personDetails.biography || "No biography available."}
-                </p>
+                {personDetails.biography && (
+                  <>
+                    <div className="h-px bg-white/6" />
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/25 mb-3">Biography</p>
+                      <p className="text-white/60 leading-relaxed text-sm md:text-base">
+                        {personDetails.biography}
+                      </p>
+                    </div>
+                  </>
+                )}
+
+                {!personDetails.biography && (
+                  <p className="text-white/25 text-sm italic">No biography available.</p>
+                )}
               </div>
             </div>
           </div>

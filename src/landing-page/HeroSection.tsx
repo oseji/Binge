@@ -54,7 +54,10 @@ const HeroSection = () => {
           style={{ fontSize: "clamp(3.5rem, 12vw, 8rem)", textShadow: "0 2px 40px rgba(0,0,0,0.95)" }}
         >
           <span className="block" style={{ color: "#F0E6FF" }}>Welcome to</span>
-          <span className="block text-gradient">Binge</span>
+          <span
+            className="block text-gradient"
+            style={{ filter: "drop-shadow(0 0 40px rgba(155, 81, 224, 0.7)) drop-shadow(0 0 80px rgba(192, 132, 252, 0.4))" }}
+          >Binge</span>
         </h1>
 
         {/* Sub */}
