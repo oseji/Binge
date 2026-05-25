@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import playIcon from "../assets/circle-play.svg";
-import infoOutline from "../assets/info_outline.svg";
 import { useDispatch } from "react-redux";
 import { setmediaID } from "../redux/mediaID";
 import { setmediaType } from "../redux/mediaType";
