@@ -101,7 +101,7 @@ const MediaCategories = (props: propTypes) => {
           )}
 
           {categoryData[category]?.error && (
-            <div className="flex items-center gap-3 h-40 text-gray-500 text-sm">
+            <div className="flex items-center gap-3 h-40 text-fg-muted text-sm">
               <span>{categoryData[category].error}</span>
               <button
                 onClick={() => fetchData(category)}

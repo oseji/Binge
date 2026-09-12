@@ -29,7 +29,7 @@ const HeroSection = () => {
         }}
       >
         {/* Layered overlays for cinematic look */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#09090F]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-canvas" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
       </div>
 
@@ -41,7 +41,7 @@ const HeroSection = () => {
           ref={badgeRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm mb-8"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#9B51E0] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
           <span className="text-xs font-semibold text-purple-300 tracking-wide uppercase">
             Discover your next obsession
           </span>
@@ -63,7 +63,7 @@ const HeroSection = () => {
         {/* Sub */}
         <p
           ref={subRef}
-          className="text-white/60 max-w-md mx-auto text-lg leading-relaxed mb-10"
+          className="text-fg-muted max-w-md mx-auto text-lg leading-relaxed mb-10"
         >
           Discover thousands of movies and series. Find what to watch next, explore trailers, and never run out of ideas.
         </p>
@@ -83,7 +83,7 @@ const HeroSection = () => {
         </div>
 
         {/* Trust strip */}
-        <div className="flex items-center gap-6 mt-12 text-white/30 text-xs font-medium uppercase tracking-wider">
+        <div className="flex items-center gap-6 mt-12 text-fg-subtle text-xs font-medium uppercase tracking-wider">
           <span>Free to use</span>
           <span className="w-px h-3 bg-white/20" />
           <span>1M+ titles</span>

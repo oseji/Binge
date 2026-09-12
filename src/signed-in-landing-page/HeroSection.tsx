@@ -67,7 +67,7 @@ const HeroSection = () => {
         history.push(`/Details/movie/${featured.id}`);
     };
 
-    if (!featured) return <div className="min-h-[60vh] bg-[#09090F]" />;
+    if (!featured) return <div className="min-h-[60vh] bg-canvas" />;
 
     const backdropURL = `https://image.tmdb.org/t/p/original${featured.backdrop_path}`;
     const year = featured.release_date?.split("-")[0];
@@ -82,15 +82,15 @@ const HeroSection = () => {
             style={{ backgroundImage: `url("${backdropURL}")` }}
         >
             {/* Cinematic layered overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#09090F] via-[#09090F]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#09090F]/80 via-[#09090F]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-canvas/80 via-canvas/20 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
             {/* Content */}
             <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-5 md:px-10 lg:px-14 pt-[72px]">
                 {/* Genre + year pills */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#9B51E0]/80 text-white backdrop-blur-sm">
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
                         Trending
                     </span>
                     {genres.map((g) => (
@@ -117,7 +117,7 @@ const HeroSection = () => {
                 </h1>
 
                 {/* Description */}
-                <p className="max-w-lg text-sm leading-relaxed text-white/60 md:text-base mb-7 line-clamp-3">
+                <p className="max-w-lg text-sm leading-relaxed text-fg-muted md:text-base mb-7 line-clamp-3">
                     {featured.overview}
                 </p>
 

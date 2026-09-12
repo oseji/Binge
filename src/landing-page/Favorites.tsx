@@ -61,8 +61,8 @@ const Favorites = () => {
               </span>
               <h2 className="text-2xl font-bold text-white leading-tight">{item.heading}</h2>
               <div className="flex items-center gap-1.5 mt-3">
-                <div className="w-6 h-0.5 bg-[#9B51E0] rounded-full" />
-                <span className="text-xs text-white/50">Browse collection</span>
+                <div className="w-6 h-0.5 bg-accent rounded-full" />
+                <span className="text-xs text-fg-muted">Browse collection</span>
               </div>
             </div>
           </div>

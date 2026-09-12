@@ -267,7 +267,7 @@ const Details = () => {
     if (!auth.currentUser) {
       return (
         <Link to={"/LoginPage"}>
-          <button className="text-xs text-white/40 border border-white/15 px-3 py-1.5 rounded-full hover:border-purple-500/50 hover:text-purple-400 transition-all duration-200">
+          <button className="text-xs text-fg-muted border border-line-strong px-3 py-1.5 rounded-full hover:border-purple-500/50 hover:text-purple-400 transition-all duration-200">
             Login to like
           </button>
         </Link>
@@ -278,7 +278,7 @@ const Details = () => {
         className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 text-sm font-medium ${
           liked
             ? "border-red-500/60 text-red-400 bg-red-500/10 hover:bg-red-500/20"
-            : "border-white/15 text-white/60 hover:border-red-400/50 hover:text-red-400 hover:bg-red-500/5"
+            : "border-line-strong text-fg-muted hover:border-red-400/50 hover:text-red-400 hover:bg-red-500/5"
         }`}
         onClick={() => toggleLike(id)}
         aria-label={liked ? "Remove from liked" : "Add to liked"}
@@ -297,8 +297,8 @@ const Details = () => {
 
   const TrailerSection = () => (
     <div className="w-full max-w-3xl mx-auto mt-16 mb-10">
-      <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-3">Official Trailer</p>
-      <div className="rounded-2xl overflow-hidden aspect-video bg-[#0D0D18] border border-white/8 shadow-2xl shadow-black/60">
+      <p className="text-xs font-bold uppercase tracking-widest text-fg-subtle mb-3">Official Trailer</p>
+      <div className="rounded-2xl overflow-hidden aspect-video bg-surface border border-line shadow-2xl shadow-black/60">
         {trailerLoading ? (
           <div className="flex items-center justify-center h-full min-h-[200px]">
             <CircularProgress color="inherit" size="2.5rem" />
@@ -312,7 +312,7 @@ const Details = () => {
             height="100%"
           />
         ) : (
-          <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-white/20">
+          <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-fg-subtle">
             <span className="text-4xl">▶</span>
             <span className="text-sm">Trailer unavailable</span>
           </div>
@@ -323,7 +323,7 @@ const Details = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#09090F]">
+      <div className="min-h-screen flex items-center justify-center bg-canvas">
         <CircularProgress color="inherit" size="4rem" />
       </div>
     );
@@ -331,11 +331,11 @@ const Details = () => {
 
   if (fetchError) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#09090F] gap-4">
-        <p className="text-white/40 text-lg">{fetchError}</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-canvas gap-4">
+        <p className="text-fg-muted text-lg">{fetchError}</p>
         <button
           onClick={() => { fetchDetails(); fetchIfLiked(); }}
-          className="px-6 py-2.5 bg-[#9B51E0] rounded-xl hover:bg-purple-700 transition-colors font-medium"
+          className="px-6 py-2.5 bg-accent rounded-xl hover:bg-accent-deep transition-colors font-medium"
         >
           Try Again
         </button>
@@ -344,7 +344,7 @@ const Details = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#09090F]">
+    <div className="relative min-h-screen bg-canvas">
       {/* Cinematic backdrop */}
       {backdrop && (
         <div className="absolute inset-0 overflow-hidden">
@@ -354,8 +354,8 @@ const Details = () => {
             className="w-full h-full object-cover object-top"
             style={{ filter: "blur(1px)" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#09090F]/80 to-[#09090F]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#09090F]/70 via-transparent to-[#09090F]/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-canvas/80 to-canvas" />
+          <div className="absolute inset-0 bg-gradient-to-r from-canvas/70 via-transparent to-canvas/50" />
         </div>
       )}
 
@@ -363,7 +363,7 @@ const Details = () => {
       <div className="relative z-10 px-5 md:px-10 py-6 md:py-10 min-h-screen">
         {/* Back button */}
         <button onClick={() => history.goBack()} aria-label="Go back" className="detailsBackArrow">
-          <img src={backArrow} alt="back" className="h-4 opacity-80" />
+          <img src={backArrow} alt="" className="h-4 opacity-80" />
         </button>
 
         {mediaType === "movie" && (
@@ -382,7 +382,7 @@ const Details = () => {
                       <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
                         {movieDetails.title}
                       </h1>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-white/30 mt-1 block">{movieDetails.status}</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-fg-subtle mt-1 block">{movieDetails.status}</span>
                     </div>
                     <LikeButton id={movieDetails.id} />
                   </div>
@@ -395,13 +395,13 @@ const Details = () => {
                     ))}
                   </div>
 
-                  <div className="h-px bg-white/6" />
+                  <div className="h-px bg-line" />
 
-                  <p className="text-white/60 leading-relaxed text-sm md:text-base">
+                  <p className="text-fg-muted leading-relaxed text-sm md:text-base">
                     {movieDetails.overview}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/35 font-medium">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-fg-subtle font-medium">
                     {getCountryName(movieDetails.origin_country[0]) && (
                       <span className="flex items-center gap-1.5">
                         <span className="w-1 h-1 rounded-full bg-white/20" />
@@ -443,7 +443,7 @@ const Details = () => {
                       <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
                         {seriesDetails.name}
                       </h1>
-                      <span className={`text-xs font-semibold uppercase tracking-wider mt-1 block ${seriesDetails.status === "Ended" ? "text-red-400/60" : "text-green-400/60"}`}>
+                      <span className={`text-xs font-semibold uppercase tracking-wider mt-1 block ${seriesDetails.status === "Ended" ? "text-red-400" : "text-green-400"}`}>
                         {seriesDetails.status}
                       </span>
                     </div>
@@ -451,19 +451,19 @@ const Details = () => {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/8 text-white/60 border border-white/10">
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/10 text-fg-muted border border-white/10">
                       {seriesDetails.number_of_seasons}{" "}
                       {seriesDetails.number_of_seasons === 1 ? "Season" : "Seasons"}
                     </span>
                   </div>
 
-                  <div className="h-px bg-white/6" />
+                  <div className="h-px bg-line" />
 
-                  <p className="text-white/60 leading-relaxed text-sm md:text-base">
+                  <p className="text-fg-muted leading-relaxed text-sm md:text-base">
                     {seriesDetails.overview}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/35 font-medium">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-fg-subtle font-medium">
                     {getCountryName(seriesDetails.origin_country[0]) && (
                       <span className="flex items-center gap-1.5">
                         <span className="w-1 h-1 rounded-full bg-white/20" />
@@ -510,29 +510,29 @@ const Details = () => {
                   </span>
                 </div>
 
-                <div className="h-px bg-white/6" />
+                <div className="h-px bg-line" />
 
-                <div className="flex flex-wrap gap-4 text-xs text-white/40">
+                <div className="flex flex-wrap gap-4 text-xs text-fg-muted">
                   {personDetails.birthday && (
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-white/25 font-semibold uppercase tracking-wider text-[10px]">Born</span>
-                      <span className="text-white/60 font-medium">{personDetails.birthday}</span>
+                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[10px]">Born</span>
+                      <span className="text-fg-muted font-medium">{personDetails.birthday}</span>
                     </div>
                   )}
                   {personDetails.place_of_birth && (
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-white/25 font-semibold uppercase tracking-wider text-[10px]">Place of Birth</span>
-                      <span className="text-white/60 font-medium">{personDetails.place_of_birth}</span>
+                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[10px]">Place of Birth</span>
+                      <span className="text-fg-muted font-medium">{personDetails.place_of_birth}</span>
                     </div>
                   )}
                 </div>
 
                 {personDetails.biography && (
                   <>
-                    <div className="h-px bg-white/6" />
+                    <div className="h-px bg-line" />
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/25 mb-3">Biography</p>
-                      <p className="text-white/60 leading-relaxed text-sm md:text-base">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-fg-subtle mb-3">Biography</p>
+                      <p className="text-fg-muted leading-relaxed text-sm md:text-base">
                         {personDetails.biography}
                       </p>
                     </div>
@@ -540,7 +540,7 @@ const Details = () => {
                 )}
 
                 {!personDetails.biography && (
-                  <p className="text-white/25 text-sm italic">No biography available.</p>
+                  <p className="text-fg-subtle text-sm italic">No biography available.</p>
                 )}
               </div>
             </div>

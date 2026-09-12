@@ -38,8 +38,8 @@ input::-webkit-inner-spin-button {
 
 /* ─── Base ─── */
 .App {
-  background-color: #09090F;
-  color: white;
+  background-color: theme("colors.canvas");
+  color: theme("colors.fg.DEFAULT");
   font-family: Inter, sans-serif;
   max-width: 100vw;
   min-height: 100vh;
@@ -69,7 +69,7 @@ input::-webkit-inner-spin-button {
 }
 
 .sectionSubHeading {
-  color: #A0A0B8;
+  color: theme("colors.fg.muted");
   font-size: 1.0625rem;
   line-height: 1.6;
   text-align: left;
@@ -133,7 +133,7 @@ input::-webkit-inner-spin-button {
 }
 
 .smallScreenHeader li:hover {
-  color: #9B51E0;
+  color: theme("colors.accent.text");
   transform: translateX(6px);
 }
 
@@ -226,7 +226,7 @@ input::-webkit-inner-spin-button {
   border-radius: 1.25rem;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid theme("colors.line.DEFAULT");
   transition: border-color 0.3s ease, transform 0.3s ease;
   background-size: cover;
   background-position: center;
@@ -259,8 +259,8 @@ input::-webkit-inner-spin-button {
 
 .featuresBox {
   width: 100%;
-  background: #0D0D18;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: theme("colors.surface.DEFAULT");
+  border: 1px solid theme("colors.line.DEFAULT");
   border-radius: 1.125rem;
   padding: 1.375rem;
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -316,7 +316,7 @@ input::-webkit-inner-spin-button {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #0D0D18;
+  background: theme("colors.surface.DEFAULT");
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -346,7 +346,7 @@ input::-webkit-inner-spin-button {
 }
 
 .checkBoxGrp > img { height: 1.125rem; flex-shrink: 0; }
-.checkBoxGrp > p { font-size: 0.875rem; color: #A0A0B8; }
+.checkBoxGrp > p { font-size: 0.875rem; color: theme("colors.fg.muted"); }
 
 /* ─── FAQ ─── */
 .questionsSection {
@@ -367,7 +367,7 @@ input::-webkit-inner-spin-button {
   justify-content: space-between;
   width: 100%;
   padding: 1.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid theme("colors.line.DEFAULT");
   cursor: pointer;
   text-align: left;
   color: inherit;
@@ -375,7 +375,7 @@ input::-webkit-inner-spin-button {
   gap: 1rem;
 }
 
-.questionBox:hover { color: #9B51E0; }
+.questionBox:hover { color: theme("colors.accent.text"); }
 
 .questionBox > img {
   transition: transform 0.3s ease;
@@ -390,7 +390,7 @@ input::-webkit-inner-spin-button {
 .answer {
   overflow: hidden;
   font-size: 0.9375rem;
-  color: #909098;
+  color: theme("colors.fg.muted");
   line-height: 1.75;
   transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
   max-height: 300px;
@@ -407,22 +407,22 @@ input::-webkit-inner-spin-button {
 }
 
 /* ─── Footer ─── */
-footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
+footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
 
 .footerCol { display: flex; flex-direction: column; align-items: flex-start; gap: 0.625rem; }
 
 .footerCol > p {
   font-size: 0.875rem;
   text-transform: capitalize;
-  color: #505068;
+  color: theme("colors.fg.subtle");
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
-.footerCol > p:hover { color: #9B51E0; }
+.footerCol > p:hover { color: theme("colors.accent.text"); }
 
 .footerColHeading {
-  color: #9B51E0 !important;
+  color: theme("colors.accent.text") !important;
   font-size: 0.6875rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.12em !important;
@@ -464,7 +464,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   background: rgba(8, 8, 16, 0.92);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid theme("colors.line.DEFAULT");
   border-radius: 1.5rem;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(155, 81, 224, 0.06);
   overflow-y: auto;
@@ -484,7 +484,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   background: rgba(8, 8, 16, 0.92);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid theme("colors.line.DEFAULT");
   border-radius: 1.5rem;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
   overflow-y: auto;
@@ -502,12 +502,12 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #6868A0;
+  color: theme("colors.fg.subtle");
 }
 
 .inputGrp input {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid theme("colors.line.strong");
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
   width: 100%;
@@ -516,7 +516,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   transition: all 0.15s ease;
 }
 
-.inputGrp input::placeholder { color: #383858; }
+.inputGrp input::placeholder { color: theme("colors.fg.subtle"); }
 
 .inputGrp input:focus {
   outline: none;
@@ -537,7 +537,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
 /* ─── Movie categories ─── */
 .movieCategories {
-  background: #09090F;
+  background: theme("colors.canvas");
   padding: 2rem 1.25rem 3.5rem;
   display: flex;
   flex-direction: column;
@@ -567,7 +567,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #707088;
+  color: theme("colors.fg.subtle");
 }
 
 .movieSpinnerContainer {
@@ -653,7 +653,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   top: 1.5rem;
   left: 1.5rem;
   background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid theme("colors.line.DEFAULT");
   border-radius: 50%;
   width: 42px;
   height: 42px;
@@ -672,7 +672,7 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
 /* ─── My List ─── */
 .myList {
-  background: #09090F;
+  background: theme("colors.canvas");
   padding: 5.5rem 1.25rem 3rem;
   min-height: 100dvh;
 }

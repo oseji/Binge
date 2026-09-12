@@ -96,14 +96,14 @@ const RegistrationPage = () => {
         createAccount();
       }}
     >
-      <Link to={"/"} className="w-fit mt-8 block">
-        <img src={backArrow} alt="back arrow" />
+      <Link to={"/"} aria-label="Back to home" className="w-fit mt-8 block">
+        <img src={backArrow} alt="" />
       </Link>
 
       <div className="flex flex-col items-center mb-7">
         <img src={BingeLogo} alt="Binge Logo" className="h-10" />
         <p className="text-xl font-bold mt-2 text-white">Create an Account</p>
-        <p className="text-xs text-white/40 mt-1">Join Binge today — it's free</p>
+        <p className="text-xs text-fg-muted mt-1">Join Binge today — it's free</p>
       </div>
 
       <div className="flex flex-col gap-3 items-center text-sm">
@@ -139,7 +139,7 @@ const RegistrationPage = () => {
               type="button"
               aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={() => setShowPassword((p) => !p)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-fg-subtle hover:text-fg"
             >
               {showPassword ? <EyeClosed /> : <EyeOpen />}
             </button>
@@ -167,13 +167,13 @@ const RegistrationPage = () => {
               type="button"
               aria-label={showConfirm ? "Hide password" : "Show password"}
               onClick={() => setShowConfirm((p) => !p)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-fg-subtle hover:text-fg"
             >
               {showConfirm ? <EyeClosed /> : <EyeOpen />}
             </button>
           </div>
           {confirmPassword && confirmPassword !== password && (
-            <p className="text-red-500 text-xs">Passwords do not match</p>
+            <p className="text-red-400 text-xs">Passwords do not match</p>
           )}
         </div>
 
@@ -184,19 +184,19 @@ const RegistrationPage = () => {
         )}
 
         <div className="flex flex-row items-center justify-center gap-4 py-2 w-full md:w-10/12">
-          <div className="flex-1 h-px bg-white/8"></div>
-          <span className="text-white/25 text-xs font-semibold uppercase tracking-wider">or</span>
-          <div className="flex-1 h-px bg-white/8"></div>
+          <div className="flex-1 h-px bg-line"></div>
+          <span className="text-fg-subtle text-xs font-semibold uppercase tracking-wider">or</span>
+          <div className="flex-1 h-px bg-line"></div>
         </div>
 
         <div className="flex flex-col gap-3 items-center w-full">
           <button
             type="button"
-            className="py-3 w-full md:w-10/12 flex justify-center items-center gap-3 border border-white/10 text-white/50 rounded-xl hover:border-white/20 hover:text-white/80 transition-all duration-200 text-sm bg-white/3 hover:bg-white/5"
+            className="py-3 w-full md:w-10/12 flex justify-center items-center gap-3 border border-line text-fg-muted rounded-xl hover:border-line-strong hover:text-fg transition-all duration-200 text-sm bg-white/5 hover:bg-white/5"
             onClick={signUpWithGoogle}
             disabled={isLoading}
           >
-            <img src={googleIcon} alt="Google Icon" className="h-4" />
+            <img src={googleIcon} alt="" className="h-4" />
             <span>Continue with Google</span>
           </button>
 
@@ -215,10 +215,10 @@ const RegistrationPage = () => {
           </button>
         </div>
 
-        <p className="text-white/35 text-sm mt-4 mb-2">
+        <p className="text-fg-muted text-sm mt-4 mb-2">
           Already have an account?{" "}
           <Link to={"/LoginPage"}>
-            <span className="text-[#9B51E0] hover:text-purple-400 transition-colors cursor-pointer">
+            <span className="text-accent-text hover:text-purple-300 transition-colors cursor-pointer">
               Sign in
             </span>
           </Link>

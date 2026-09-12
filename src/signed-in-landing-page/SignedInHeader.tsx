@@ -93,7 +93,7 @@ const Header = (props: headerProps) => {
   return (
     <div>
       {/* ── Fixed desktop header ── */}
-      <header className="hidden md:flex fixed top-0 left-0 right-0 z-50 w-full h-[68px] flex-row items-center justify-between px-6 lg:px-10 backdrop-blur-xl border-b border-white/5"
+      <header className="hidden md:flex fixed top-0 left-0 right-0 z-50 w-full h-[68px] flex-row items-center justify-between px-6 lg:px-10 backdrop-blur-xl border-b border-line"
         style={{ background: "rgba(9,9,15,0.88)" }}
       >
         <Link to={"/"} onClick={() => dispatch(clearSearch())}>
@@ -104,7 +104,7 @@ const Header = (props: headerProps) => {
           <Link to={"/Search"} aria-label="Search" onClick={() => dispatch(clearSearch())}>
             <img
               src={searchIcon}
-              alt="search"
+              alt=""
               className="h-5 opacity-60 hover:opacity-100 transition-opacity duration-200"
             />
           </Link>
@@ -118,7 +118,7 @@ const Header = (props: headerProps) => {
               aria-haspopup="menu"
               aria-expanded={dropdownOpen}
               aria-controls="account-menu"
-              className="block rounded-full ring-2 ring-transparent hover:ring-[#9B51E0]/60 transition-all duration-200"
+              className="block rounded-full ring-2 ring-transparent hover:ring-accent/60 transition-all duration-200"
               onClick={() => setDropdownOpen((p) => !p)}
             >
               <img src={avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
@@ -129,7 +129,7 @@ const Header = (props: headerProps) => {
               id="account-menu"
               role="menu"
               aria-label="Account"
-              className={`absolute top-12 right-0 w-44 flex flex-col gap-1 p-2 rounded-2xl border border-white/8 shadow-2xl shadow-black/60 z-50 transition-all duration-200 origin-top-right ${
+              className={`absolute top-12 right-0 w-44 flex flex-col gap-1 p-2 rounded-2xl border border-line shadow-2xl shadow-black/60 z-50 transition-all duration-200 origin-top-right ${
                 dropdownOpen
                   ? "visible opacity-100 scale-100 pointer-events-auto"
                   : "invisible opacity-0 scale-95 pointer-events-none"
@@ -151,7 +151,7 @@ const Header = (props: headerProps) => {
               <button
                 type="button"
                 role="menuitem"
-                className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/5 transition-colors"
+                className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-red-400 hover:text-red-400 hover:bg-red-500/5 transition-colors"
                 onClick={logOut}
               >
                 <img src={logoutIcon} alt="" className="h-4 opacity-80" />
@@ -165,7 +165,7 @@ const Header = (props: headerProps) => {
 
       {/* ── Mobile header ── */}
       <header
-        className="md:hidden sticky top-0 z-50 border-b border-white/5"
+        className="md:hidden sticky top-0 z-50 border-b border-line"
         style={{ background: "rgba(9,9,15,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="flex justify-between items-center p-4">

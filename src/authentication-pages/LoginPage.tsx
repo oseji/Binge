@@ -123,22 +123,22 @@ const LoginPage = () => {
                 signIn();
             }}
         >
-            <Link to={"/"}>
-                <img src={backArrow} alt="back arrow" className="mt-8" />
+            <Link to={"/"} aria-label="Back to home" className="block mt-8 w-fit">
+                <img src={backArrow} alt="" />
             </Link>
             <div className="flex flex-col items-center mb-7">
                 <img src={BingeLogo} alt="Binge Logo" className="h-10" />
                 <p className="mt-2 text-xl font-bold text-white">
                     Welcome back to Binge
                 </p>
-                <p className="mt-1 text-xs text-white/40">
+                <p className="mt-1 text-xs text-fg-muted">
                     Sign in to your account
                 </p>
             </div>
 
             <div className="flex flex-col items-center gap-3 text-sm">
                 <div className="flex flex-col items-center w-full gap-2 px-4 py-3 mb-1 border rounded-xl border-purple-500/25 bg-purple-500/10 sm:flex-row sm:justify-between">
-                    <p className="text-xs text-center text-white/60 sm:text-left">
+                    <p className="text-xs text-center text-fg-muted sm:text-left">
                         Just browsing? Skip the sign-up.
                     </p>
                     <button
@@ -190,7 +190,7 @@ const LoginPage = () => {
                                 showPassword ? "Hide password" : "Show password"
                             }
                             onClick={() => setShowPassword((p) => !p)}
-                            className="absolute text-gray-500 -translate-y-1/2 right-3 top-1/2 hover:text-gray-700 focus:outline-none"
+                            className="absolute text-fg-subtle -translate-y-1/2 right-3 top-1/2 hover:text-fg"
                         >
                             {showPassword ? <EyeClosed /> : <EyeOpen />}
                         </button>
@@ -207,29 +207,29 @@ const LoginPage = () => {
 
                 <Link
                     to={"/ResetPassword"}
-                    className="text-[#9B51E0] hover:text-purple-400 transition-colors text-sm mr-auto"
+                    className="text-accent-text hover:text-purple-300 transition-colors text-sm mr-auto"
                 >
                     Forgot password?
                 </Link>
 
                 <div className="flex flex-row items-center justify-center w-full gap-4 py-2 md:w-10/12">
-                    <div className="flex-1 h-px bg-white/8"></div>
-                    <span className="text-xs font-semibold tracking-wider uppercase text-white/25">
+                    <div className="flex-1 h-px bg-line"></div>
+                    <span className="text-xs font-semibold tracking-wider uppercase text-fg-subtle">
                         or
                     </span>
-                    <div className="flex-1 h-px bg-white/8"></div>
+                    <div className="flex-1 h-px bg-line"></div>
                 </div>
 
                 <div className="flex flex-col items-center w-full gap-3">
                     <button
                         type="button"
-                        className="flex items-center justify-center w-full gap-3 py-3 text-sm transition-all duration-200 border md:w-10/12 border-white/10 text-white/50 rounded-xl hover:border-white/20 hover:text-white/80 bg-white/3 hover:bg-white/5"
+                        className="flex items-center justify-center w-full gap-3 py-3 text-sm transition-all duration-200 border md:w-10/12 border-line text-fg-muted rounded-xl hover:border-line-strong hover:text-fg bg-white/5 hover:bg-white/5"
                         // onClick={signInWithGoogle}
                         disabled={isLoading}
                     >
                         <img
                             src={googleIcon}
-                            alt="Google Icon"
+                            alt=""
                             className="h-4"
                         />
                         <span>Continue with Google</span>
@@ -253,10 +253,10 @@ const LoginPage = () => {
                     </button>
                 </div>
 
-                <p className="mt-4 mb-2 text-sm text-white/35">
+                <p className="mt-4 mb-2 text-sm text-fg-muted">
                     Don't have an account?{" "}
                     <Link to={"/RegistrationPage"}>
-                        <span className="text-[#9B51E0] hover:text-purple-400 transition-colors cursor-pointer">
+                        <span className="text-accent-text hover:text-purple-300 transition-colors cursor-pointer">
                             Sign up free
                         </span>
                     </Link>

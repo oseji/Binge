@@ -110,7 +110,7 @@ const Pricing = () => {
                   <h2 className="pricingName" style={{ color: plan.color }}>
                     {plan.heading}
                   </h2>
-                  <p className="text-xs text-[#606070] mt-0.5 uppercase tracking-wider">
+                  <p className="text-xs text-fg-subtle mt-0.5 uppercase tracking-wider">
                     Billed monthly
                   </p>
                 </div>
@@ -120,7 +120,7 @@ const Pricing = () => {
                   <span className="text-4xl font-bold text-white leading-none">
                     {plan.price.toLocaleString()}
                   </span>
-                  <span className="text-[#606070] text-sm">/month</span>
+                  <span className="text-fg-subtle text-sm">/month</span>
                 </div>
 
                 <Link to={"/RegistrationPage"} className="block">
@@ -136,15 +136,15 @@ const Pricing = () => {
                   </button>
                 </Link>
 
-                <div className="h-px bg-white/5" />
+                <div className="h-px bg-line" />
 
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-[#606070] font-semibold mb-3">
+                  <p className="text-xs uppercase tracking-widest text-fg-subtle font-semibold mb-3">
                     What's included
                   </p>
                   {plan.features.map((feature, fIdx) => (
                     <div className="checkBoxGrp" key={fIdx}>
-                      <img src={plan.checkboxImg} alt="check" />
+                      <img src={plan.checkboxImg} alt="" />
                       <p>{feature}</p>
                     </div>
                   ))}

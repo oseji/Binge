@@ -33,13 +33,13 @@ const ResetPassword = () => {
 
   return (
     <form className="resetPasswordForm" onSubmit={handleReset}>
-      <Link to={"/LoginPage"} className="block mt-8 w-fit">
-        <img src={backArrow} alt="back arrow" />
+      <Link to={"/LoginPage"} aria-label="Back to login" className="block mt-8 w-fit">
+        <img src={backArrow} alt="" />
       </Link>
       <div className="flex flex-col items-center mb-7">
         <img src={BingeLogo} alt="Binge Logo" className="h-10" />
         <p className="text-xl font-bold mt-2 text-white">Reset your password</p>
-        <p className="text-white/40 text-center text-sm mt-1 leading-relaxed">
+        <p className="text-fg-muted text-center text-sm mt-1 leading-relaxed">
           Enter your email and we'll send you reset instructions.
         </p>
       </div>
@@ -52,12 +52,12 @@ const ResetPassword = () => {
             </svg>
           </div>
           <p className="text-center font-semibold text-white">Email sent!</p>
-          <p className="text-center text-sm text-white/40 leading-relaxed">
+          <p className="text-center text-sm text-fg-muted leading-relaxed">
             Check{" "}
-            <span className="font-medium text-white/70">{email}</span>
+            <span className="font-medium text-fg">{email}</span>
             {" "}for reset instructions.
           </p>
-          <Link to={"/LoginPage"} className="text-[#9B51E0] hover:text-purple-400 transition-colors text-sm mt-1">
+          <Link to={"/LoginPage"} className="text-accent-text hover:text-purple-300 transition-colors text-sm mt-1">
             Back to login
           </Link>
         </div>

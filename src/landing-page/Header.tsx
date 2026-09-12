@@ -48,7 +48,7 @@ const Header = (props: headerProps) => {
             </button>
           </Link>
           <Link to={"/RegistrationPage"}>
-            <button className="px-5 py-2 text-sm font-semibold bg-[#9B51E0] text-white rounded-xl hover:bg-purple-600 transition-all duration-200 shadow-lg shadow-purple-900/30">
+            <button className="px-5 py-2 text-sm font-semibold bg-accent text-white rounded-xl hover:bg-accent-deep transition-all duration-200 shadow-lg shadow-purple-900/30">
               Sign up
             </button>
           </Link>
@@ -79,7 +79,7 @@ const Header = (props: headerProps) => {
             <li><Link to={"/Movies"} onClick={() => setMenuToggled(false)}>Movies</Link></li>
             <li><Link to={"/Series"} onClick={() => setMenuToggled(false)}>Series</Link></li>
             <li>
-              <Link to={"/LoginPage"} onClick={() => setMenuToggled(false)} className="text-[#9B51E0]">
+              <Link to={"/LoginPage"} onClick={() => setMenuToggled(false)} className="text-accent-text">
                 Log in
               </Link>
             </li>

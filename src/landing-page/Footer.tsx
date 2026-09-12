@@ -30,7 +30,7 @@ const Footer = () => {
         {/* Brand */}
         <div className="flex-shrink-0">
           <img src={footerLogo} alt="Binge Logo" className="h-8 mb-4 opacity-80" />
-          <p className="text-[#505068] text-sm leading-relaxed max-w-[240px]">
+          <p className="text-fg-subtle text-sm leading-relaxed max-w-[240px]">
             Discover what to watch next. Explore thousands of titles, trailers, and reviews — all in one place.
           </p>
         </div>
@@ -49,8 +49,8 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/5 py-6 px-5 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-[#404058] text-sm">© 2024 Binge, Inc. All rights reserved.</p>
+      <div className="border-t border-line py-6 px-5 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p className="text-fg-subtle text-sm">© 2024 Binge, Inc. All rights reserved.</p>
         <div className="footerIconsGrp">
           <img src={twitter} alt="Twitter" className="footerIcon" />
           <img src={linkedin} alt="LinkedIn" className="footerIcon" />

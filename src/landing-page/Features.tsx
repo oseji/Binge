@@ -64,12 +64,12 @@ const Features = () => {
           <div className="featuresBox" key={i} ref={(el) => (cardsRef.current[i] = el)}>
             <div className="relative">
               <img src={f.img} alt={f.heading} className="featureImg" />
-              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#9B51E0]/80 text-white backdrop-blur-sm">
+              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
                 {f.badge}
               </span>
             </div>
             <h2 className="featureHeading">{f.heading}</h2>
-            <p className="text-sm text-[#909098] leading-relaxed">{f.body}</p>
+            <p className="text-sm text-fg-muted leading-relaxed">{f.body}</p>
           </div>
         ))}
       </div>

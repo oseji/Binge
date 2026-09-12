@@ -22,7 +22,7 @@ type detailedMediaItem = {
 };
 
 const HeartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600">
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-fg-subtle">
     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
   </svg>
 );
@@ -109,7 +109,7 @@ const MyList = () => {
     <div className="myList">
       <div className="flex flex-row items-center gap-4 mb-8">
         <Link to={"/"} aria-label="Go back home">
-          <img src={backArrow} alt="back arrow" className="opacity-70 hover:opacity-100 transition-opacity" />
+          <img src={backArrow} alt="" className="opacity-70 hover:opacity-100 transition-opacity" />
         </Link>
         <h1 className="text-3xl font-bold capitalize">My List</h1>
       </div>
@@ -120,10 +120,10 @@ const MyList = () => {
         </div>
       ) : fetchError ? (
         <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-          <p className="text-gray-400">{fetchError}</p>
+          <p className="text-fg-muted">{fetchError}</p>
           <button
             onClick={fetchLikedMedia}
-            className="px-6 py-2 bg-[#9B51E0] rounded-lg hover:bg-purple-700 transition-colors"
+            className="px-6 py-2 bg-accent rounded-lg hover:bg-accent-deep transition-colors"
           >
             Try Again
           </button>
@@ -133,7 +133,7 @@ const MyList = () => {
           {detailedMedia.map((media) => (
             <div
               key={media.id}
-              className="flex flex-row gap-4 cursor-pointer bg-gray-900 rounded-xl p-3 hover:bg-gray-800 transition-colors duration-200 group"
+              className="flex flex-row gap-4 cursor-pointer bg-surface rounded-xl p-3 hover:bg-surface-2 transition-colors duration-200 group"
               onClick={() => navigateToDetails(media)}
               role="button"
               tabIndex={0}
@@ -154,7 +154,7 @@ const MyList = () => {
                 <span className="text-xs text-purple-400 capitalize font-medium">
                   {media.mediaType === "tv" ? "Series" : media.mediaType}
                 </span>
-                <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-fg-muted leading-relaxed line-clamp-3">
                   {media.overview || "No description available."}
                 </p>
               </div>
@@ -165,14 +165,14 @@ const MyList = () => {
         <div className="min-h-[60vh] flex flex-col items-center justify-center gap-5">
           <HeartIcon />
           <div className="text-center">
-            <p className="text-xl font-semibold text-gray-300">Your list is empty</p>
-            <p className="text-gray-500 text-sm mt-2">
+            <p className="text-xl font-semibold text-fg">Your list is empty</p>
+            <p className="text-fg-subtle text-sm mt-2">
               Like movies and series to save them here.
             </p>
           </div>
           <Link
             to={"/"}
-            className="px-6 py-2.5 bg-[#9B51E0] rounded-lg hover:bg-purple-700 transition-colors font-medium"
+            className="px-6 py-2.5 bg-accent rounded-lg hover:bg-accent-deep transition-colors font-medium"
           >
             Browse Content
           </Link>
