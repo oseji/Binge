@@ -32,7 +32,7 @@ function App() {
 		(state: RootState) => state.loginSetter.isLoggedIn
 	);
 
-	const mainScreenRef = useRef<HTMLDivElement>(null);
+	const mainScreenRef = useRef<HTMLElement>(null);
 	const dispatch = useDispatch();
 	const [authReady, setAuthReady] = useState(false);
 
@@ -50,6 +50,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<a href="#main" className="skipLink">Skip to content</a>
 			<Switch>
 				{/* LANDING PAGE */}
 				<Route exact path={"/"}>
@@ -57,7 +58,7 @@ function App() {
 						<div className="landingPage">
 							<Header mainScreenRef={mainScreenRef} />
 
-							<div ref={mainScreenRef}>
+							<main id="main" ref={mainScreenRef}>
 								<HeroSection></HeroSection>
 
 								<Favorites></Favorites>
@@ -69,7 +70,7 @@ function App() {
 								<Questions></Questions>
 
 								<Footer></Footer>
-							</div>
+							</main>
 						</div>
 					) : (
 						<SignedInLandingPage />
@@ -95,7 +96,7 @@ function App() {
 
 				{/* AUTHENTICATION PAGES */}
 				<Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>
-					<div id="authenticationPages">
+					<main id="main" className="authenticationPages">
 						<div
 							className="absolute inset-0 top-0 left-0 z-0 w-full h-full bg-cover "
 							style={{
@@ -110,7 +111,7 @@ function App() {
 							<Route path={"/LoginPage"} component={LoginPage} />
 							<Route path={"/ResetPassword"} component={ResetPassword} />
 						</Switch>
-					</div>
+					</main>
 				</Route>
 			</Switch>
 

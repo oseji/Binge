@@ -123,14 +123,14 @@ const LoginPage = () => {
                 signIn();
             }}
         >
-            <Link to={"/"} aria-label="Back to home" className="block mt-8 w-fit">
+            <Link to={"/"} aria-label="Back to home" className="inline-flex items-center justify-center w-11 h-11 mt-4 -ml-3 rounded-full hover:bg-white/5">
                 <img src={backArrow} alt="" />
             </Link>
             <div className="flex flex-col items-center mb-7">
                 <img src={BingeLogo} alt="Binge Logo" className="h-10" />
-                <p className="mt-2 text-xl font-bold text-white">
+                <h1 className="mt-2 text-xl font-bold text-white">
                     Welcome back to Binge
-                </p>
+                </h1>
                 <p className="mt-1 text-xs text-fg-muted">
                     Sign in to your account
                 </p>
@@ -167,7 +167,7 @@ const LoginPage = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="focus:outline-purple-500"
+                        className=""
                     />
                 </div>
 
@@ -182,7 +182,7 @@ const LoginPage = () => {
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full pr-10 focus:outline-purple-500"
+                            className="w-full pr-12"
                         />
                         <button
                             type="button"
@@ -190,7 +190,7 @@ const LoginPage = () => {
                                 showPassword ? "Hide password" : "Show password"
                             }
                             onClick={() => setShowPassword((p) => !p)}
-                            className="absolute text-fg-subtle -translate-y-1/2 right-3 top-1/2 hover:text-fg"
+                            className="absolute right-0.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-11 h-11 rounded-full text-fg-subtle hover:text-fg"
                         >
                             {showPassword ? <EyeClosed /> : <EyeOpen />}
                         </button>
@@ -198,7 +198,7 @@ const LoginPage = () => {
                 </div>
 
                 {errorMessage && (
-                    <div className="w-full px-3 py-2 border rounded-xl bg-red-500/10 border-red-500/20">
+                    <div role="alert" className="w-full px-3 py-2 border rounded-xl bg-red-500/10 border-red-500/20">
                         <p className="text-sm font-medium text-red-400 capitalize">
                             {errorMessage}
                         </p>
@@ -246,7 +246,7 @@ const LoginPage = () => {
                         disabled={isLoading}
                     >
                         {isLoading ? (
-                            <CircularProgress color="inherit" size={"1.1rem"} />
+                            <CircularProgress aria-label="Loading" color="inherit" size={"1.1rem"} />
                         ) : (
                             "Sign In"
                         )}

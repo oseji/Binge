@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
 import backArrow from "../assets/previous.svg";
@@ -28,7 +28,6 @@ const HeartIcon = () => (
 );
 
 const MyList = () => {
-  const history = useHistory();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<string>("");
   const [likedMedia, setLikedMedia] = useState<MediaItem[]>([]);
@@ -85,10 +84,6 @@ const MyList = () => {
     return Promise.all(promises);
   };
 
-  const navigateToDetails = (media: detailedMediaItem) => {
-    history.push(`/Details/${media.mediaType}/${media.id}`);
-  };
-
   useEffect(() => {
     fetchLikedMedia();
   }, []);
@@ -106,17 +101,21 @@ const MyList = () => {
   }, [likedMedia]);
 
   return (
-    <div className="myList">
+    <main id="main" className="myList">
       <div className="flex flex-row items-center gap-4 mb-8">
-        <Link to={"/"} aria-label="Go back home">
-          <img src={backArrow} alt="" className="opacity-70 hover:opacity-100 transition-opacity" />
+        <Link
+          to={"/"}
+          aria-label="Go back home"
+          className="inline-flex items-center justify-center w-11 h-11 -ml-2 rounded-full opacity-70 hover:opacity-100 hover:bg-white/5 transition-opacity"
+        >
+          <img src={backArrow} alt="" />
         </Link>
         <h1 className="text-3xl font-bold capitalize">My List</h1>
       </div>
 
       {isLoading ? (
         <div className="min-h-[60vh] flex justify-center items-center">
-          <CircularProgress color="inherit" />
+          <CircularProgress aria-label="Loading" color="inherit" />
         </div>
       ) : fetchError ? (
         <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
@@ -131,14 +130,11 @@ const MyList = () => {
       ) : detailedMedia.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {detailedMedia.map((media) => (
-            <div
+            <Link
               key={media.id}
-              className="flex flex-row gap-4 cursor-pointer bg-surface rounded-xl p-3 hover:bg-surface-2 transition-colors duration-200 group"
-              onClick={() => navigateToDetails(media)}
-              role="button"
-              tabIndex={0}
+              to={`/Details/${media.mediaType}/${media.id}`}
+              className="flex flex-row gap-4 bg-surface rounded-xl p-3 hover:bg-surface-2 transition-colors duration-200 group"
               aria-label={`View ${media.mediaType === "movie" ? media.title : media.name}`}
-              onKeyDown={(e) => e.key === "Enter" && navigateToDetails(media)}
             >
               <img
                 src={tmdbBasePosterURL + media.poster_path}
@@ -158,7 +154,7 @@ const MyList = () => {
                   {media.overview || "No description available."}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ) : (
@@ -178,7 +174,7 @@ const MyList = () => {
           </Link>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

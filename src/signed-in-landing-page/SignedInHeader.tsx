@@ -21,7 +21,7 @@ import logoutIcon from "../assets/logout.svg";
 import heartIcon from "../assets/icons8-heart-100.png";
 
 type headerProps = {
-  mainScreenRef: React.RefObject<HTMLDivElement>;
+  mainScreenRef: React.RefObject<HTMLElement>;
 };
 
 const Header = (props: headerProps) => {
@@ -100,13 +100,14 @@ const Header = (props: headerProps) => {
           <img src={logo} alt="Binge Logo" className="headerLogo" />
         </Link>
 
-        <div className="flex items-center gap-5">
-          <Link to={"/Search"} aria-label="Search" onClick={() => dispatch(clearSearch())}>
-            <img
-              src={searchIcon}
-              alt=""
-              className="h-5 opacity-60 hover:opacity-100 transition-opacity duration-200"
-            />
+        <nav aria-label="Primary" className="flex items-center gap-2">
+          <Link
+            to={"/Search"}
+            aria-label="Search"
+            onClick={() => dispatch(clearSearch())}
+            className="inline-flex items-center justify-center w-11 h-11 rounded-full hover:bg-white/5 opacity-60 hover:opacity-100 transition-opacity duration-200"
+          >
+            <img src={searchIcon} alt="" className="h-5" />
           </Link>
 
           {/* Avatar + dropdown */}
@@ -118,7 +119,7 @@ const Header = (props: headerProps) => {
               aria-haspopup="menu"
               aria-expanded={dropdownOpen}
               aria-controls="account-menu"
-              className="block rounded-full ring-2 ring-transparent hover:ring-accent/60 transition-all duration-200"
+              className="flex items-center justify-center w-11 h-11 rounded-full ring-2 ring-transparent hover:ring-accent/60 transition-all duration-200"
               onClick={() => setDropdownOpen((p) => !p)}
             >
               <img src={avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
@@ -156,11 +157,11 @@ const Header = (props: headerProps) => {
               >
                 <img src={logoutIcon} alt="" className="h-4 opacity-80" />
                 <span>Sign out</span>
-                {isLoading && <CircularProgress color="inherit" size="0.875rem" className="ml-auto" />}
+                {isLoading && <CircularProgress aria-label="Loading" color="inherit" size="0.875rem" className="ml-auto" />}
               </button>
             </div>
           </div>
-        </div>
+        </nav>
       </header>
 
       {/* ── Mobile header ── */}
@@ -169,20 +170,22 @@ const Header = (props: headerProps) => {
         style={{ background: "rgba(9,9,15,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="flex justify-between items-center p-4">
-          <img src={logo} alt="Binge Logo" className="h-8" />
+          <Link to={"/"}>
+            <img src={logo} alt="Binge Logo" className="h-8" />
+          </Link>
           <button
             type="button"
             aria-label={menuToggled ? "Close menu" : "Open menu"}
             aria-expanded={menuToggled}
             aria-controls="signed-in-mobile-menu"
             onClick={() => setMenuToggled((p) => !p)}
-            className="p-1"
+            className="flex items-center justify-center w-11 h-11 -mr-2 rounded-full"
           >
             <img src={menuToggled ? closeImg : menuImg} alt="" className="h-7" />
           </button>
         </div>
 
-        <div id="signed-in-mobile-menu" className="menuHidden" ref={menuRef}>
+        <nav id="signed-in-mobile-menu" aria-label="Primary" className="menuHidden" ref={menuRef}>
           <ul className="flex flex-col gap-10 text-xl uppercase pl-5 pt-6 pb-10">
             <li><Link to={"/"} onClick={closeMenu}>Home</Link></li>
             <li><Link to={"/MyList"} onClick={closeMenu}>My List</Link></li>
@@ -197,7 +200,7 @@ const Header = (props: headerProps) => {
               </button>
             </li>
           </ul>
-        </div>
+        </nav>
       </header>
     </div>
   );

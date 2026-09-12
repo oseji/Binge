@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
@@ -28,7 +28,6 @@ const Search = () => {
   const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<string>("");
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const searchForItem = async () => {
@@ -64,14 +63,12 @@ const Search = () => {
     }
   };
 
-  const navigateToDetails = (id: number, mediaType: string) => {
-    history.push(`/Details/${mediaType}/${id}`);
-  };
-
   return (
     <div className="min-h-[100dvh] flex flex-col bg-canvas">
       <Header mainScreenRef={mainScreenRef} />
 
+      <main id="main" className="flex-1 flex flex-col">
+      <h1 className="sr-only">Search</h1>
       <div className="pt-32 px-5 md:px-10">
         <form
           className="w-full max-w-2xl mx-auto flex flex-col md:flex-row items-center gap-2"
@@ -104,7 +101,7 @@ const Search = () => {
       <div className="flex-1 flex flex-col">
         {isLoading ? (
           <div className="flex-1 flex items-center justify-center py-20">
-            <CircularProgress color="inherit" />
+            <CircularProgress aria-label="Loading" color="inherit" />
           </div>
         ) : fetchError ? (
           <div className="flex-1 flex flex-col items-center justify-center py-20 gap-4">
@@ -118,7 +115,7 @@ const Search = () => {
           </div>
         ) : searchResults.length > 0 ? (
           <div className="p-5 md:p-10">
-            <p className="text-fg-muted text-sm mb-6">
+            <p className="text-fg-muted text-sm mb-6" aria-live="polite">
               {searchResults.length} result{searchResults.length !== 1 ? "s" : ""} for{" "}
               <span className="text-white font-medium">"{searchTerm}"</span>
             </p>
@@ -127,14 +124,11 @@ const Search = () => {
                 const imagePath = element.profile_path || element.poster_path;
                 const title = element.name || element.title;
                 return (
-                  <div
+                  <Link
                     key={element.id}
-                    className="movieCard group cursor-pointer"
-                    onClick={() => navigateToDetails(element.id, element.media_type)}
-                    role="button"
-                    tabIndex={0}
+                    to={`/Details/${element.media_type}/${element.id}`}
+                    className="movieCard group"
                     aria-label={`View details for ${title}`}
-                    onKeyDown={(e) => e.key === "Enter" && navigateToDetails(element.id, element.media_type)}
                   >
                     {imagePath ? (
                       <>
@@ -160,7 +154,7 @@ const Search = () => {
                       </div>
                     )}
                     <p className="text-center text-sm mt-2 text-fg-muted truncate">{title}</p>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -180,6 +174,7 @@ const Search = () => {
           </div>
         )}
       </div>
+      </main>
     </div>
   );
 };

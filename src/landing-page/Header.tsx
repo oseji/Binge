@@ -6,7 +6,7 @@ import closeImg from "../assets/icons8-close.svg";
 import logo from "../assets/Binge.svg";
 
 type headerProps = {
-  mainScreenRef: React.RefObject<HTMLDivElement>;
+  mainScreenRef: React.RefObject<HTMLElement>;
 };
 
 const Header = (props: headerProps) => {
@@ -31,26 +31,30 @@ const Header = (props: headerProps) => {
     <div>
       {/* Desktop / tablet */}
       <header className="bigScreenHeader">
-        <ul className="headerList">
-          <li><Link to={"/Movies"}>Movies</Link></li>
-          <li><Link to={"/Series"}>Series</Link></li>
-          <li><Link to={"/"}>Home</Link></li>
-        </ul>
+        <nav aria-label="Primary">
+          <ul className="headerList">
+            <li><Link to={"/"}>Home</Link></li>
+            <li><Link to={"/Movies"}>Movies</Link></li>
+            <li><Link to={"/Series"}>Series</Link></li>
+          </ul>
+        </nav>
 
         <Link to={"/"}>
           <img src={logo} alt="Binge Logo" className="headerLogo" />
         </Link>
 
         <div className="flex items-center gap-2">
-          <Link to={"/LoginPage"}>
-            <button className="px-5 py-2 text-sm font-semibold text-white/70 hover:text-white transition-colors duration-200 rounded-xl hover:bg-white/5">
-              Log in
-            </button>
+          <Link
+            to={"/LoginPage"}
+            className="inline-flex items-center min-h-11 px-5 text-sm font-semibold text-white/70 hover:text-white transition-colors duration-200 rounded-xl hover:bg-white/5"
+          >
+            Log in
           </Link>
-          <Link to={"/RegistrationPage"}>
-            <button className="px-5 py-2 text-sm font-semibold bg-accent text-white rounded-xl hover:bg-accent-deep transition-all duration-200 shadow-lg shadow-purple-900/30">
-              Sign up
-            </button>
+          <Link
+            to={"/RegistrationPage"}
+            className="inline-flex items-center min-h-11 px-5 text-sm font-semibold bg-accent text-white rounded-xl hover:bg-accent-deep transition-all duration-200 shadow-lg shadow-purple-900/30"
+          >
+            Sign up
           </Link>
         </div>
       </header>
@@ -67,13 +71,13 @@ const Header = (props: headerProps) => {
             aria-expanded={menuToggled}
             aria-controls="landing-mobile-menu"
             onClick={() => setMenuToggled((prev) => !prev)}
-            className="p-1"
+            className="flex items-center justify-center w-11 h-11 -mr-2 rounded-full"
           >
             <img src={menuToggled ? closeImg : menuImg} alt="" className="h-7" />
           </button>
         </div>
 
-        <div id="landing-mobile-menu" className="menuHidden" ref={menuRef}>
+        <nav id="landing-mobile-menu" aria-label="Primary" className="menuHidden" ref={menuRef}>
           <ul className="flex flex-col gap-8 text-2xl uppercase pt-8 pl-2">
             <li><Link to={"/"} onClick={() => setMenuToggled(false)}>Home</Link></li>
             <li><Link to={"/Movies"} onClick={() => setMenuToggled(false)}>Movies</Link></li>
@@ -89,7 +93,7 @@ const Header = (props: headerProps) => {
               </Link>
             </li>
           </ul>
-        </div>
+        </nav>
       </header>
     </div>
   );

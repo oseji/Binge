@@ -51,11 +51,11 @@ const Questions = () => {
   }, []);
 
   return (
-    <div className="questionsSection">
-      <h1 className="sectionHeading" ref={headingRef}>
+    <section id="faq" className="questionsSection">
+      <h2 className="sectionHeading" ref={headingRef}>
         Common{" "}
         <span className="text-gradient">Questions</span>
-      </h1>
+      </h2>
       <p className="sectionSubHeading mb-8" ref={subRef}>Everything you need to know about Binge.</p>
 
       <div>
@@ -94,7 +94,7 @@ const Questions = () => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -50,11 +50,11 @@ const Features = () => {
   }, []);
 
   return (
-    <section className="featuresSection">
-      <h1 className="sectionHeading" ref={headingRef}>
+    <section id="features" className="featuresSection">
+      <h2 className="sectionHeading" ref={headingRef}>
         Our Prominent{" "}
         <span className="text-gradient inline-block">Features</span>
-      </h1>
+      </h2>
       <p className="sectionSubHeading" ref={subRef}>
         Everything you need to discover your next watch.
       </p>
@@ -68,7 +68,7 @@ const Features = () => {
                 {f.badge}
               </span>
             </div>
-            <h2 className="featureHeading">{f.heading}</h2>
+            <h3 className="featureHeading">{f.heading}</h3>
             <p className="text-sm text-fg-muted leading-relaxed">{f.body}</p>
           </div>
         ))}

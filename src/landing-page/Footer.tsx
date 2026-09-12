@@ -1,25 +1,32 @@
+import { Link } from "react-router-dom";
 import footerLogo from "../assets/footer-logo.svg";
-import twitter from "../assets/twitter.svg";
-import linkedin from "../assets/linkedin.png";
-import fb from "../assets/fb.png";
 import github from "../assets/github.png";
 
 const footerLinks = [
   {
-    heading: "Product",
-    links: ["Overview", "Features", "Solutions", "Pricing", "Releases"],
+    heading: "Browse",
+    links: [
+      { label: "Home", to: "/" },
+      { label: "Movies", to: "/Movies" },
+      { label: "Series", to: "/Series" },
+      { label: "Search", to: "/Search" },
+    ],
   },
   {
-    heading: "Company",
-    links: ["About", "Careers", "Press", "News", "Contact"],
+    heading: "Account",
+    links: [
+      { label: "Log in", to: "/LoginPage" },
+      { label: "Sign up", to: "/RegistrationPage" },
+      { label: "My List", to: "/MyList" },
+    ],
   },
   {
-    heading: "Resources",
-    links: ["Blog", "Help Center", "Events", "Tutorials", "Support"],
-  },
-  {
-    heading: "Legal",
-    links: ["Terms", "Privacy", "Cookies", "Licences", "Settings"],
+    heading: "About",
+    links: [
+      { label: "Features", to: "/#features" },
+      { label: "Pricing", to: "/#pricing" },
+      { label: "FAQ", to: "/#faq" },
+    ],
   },
 ];
 
@@ -36,26 +43,36 @@ const Footer = () => {
         </div>
 
         {/* Links grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 w-full lg:w-auto">
+        <nav aria-label="Footer" className="grid grid-cols-2 sm:grid-cols-3 gap-8 w-full lg:w-auto">
           {footerLinks.map((col) => (
             <div className="footerCol" key={col.heading}>
-              <p className="footerColHeading">{col.heading}</p>
-              {col.links.map((link) => (
-                <p key={link}>{link}</p>
-              ))}
+              <h3 className="footerColHeading">{col.heading}</h3>
+              {col.links.map((link) =>
+                // In-page anchors need a real <a> so the browser jumps to the section
+                link.to.startsWith("/#") ? (
+                  <a key={link.label} href={link.to}>{link.label}</a>
+                ) : (
+                  <Link key={link.label} to={link.to}>{link.label}</Link>
+                )
+              )}
             </div>
           ))}
-        </div>
+        </nav>
       </div>
 
       {/* Bottom bar */}
       <div className="border-t border-line py-6 px-5 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-fg-subtle text-sm">© 2024 Binge, Inc. All rights reserved.</p>
+        <p className="text-fg-subtle text-sm">© {new Date().getFullYear()} Binge. All rights reserved.</p>
         <div className="footerIconsGrp">
-          <img src={twitter} alt="Twitter" className="footerIcon" />
-          <img src={linkedin} alt="LinkedIn" className="footerIcon" />
-          <img src={fb} alt="Facebook" className="footerIcon" />
-          <img src={github} alt="GitHub" className="footerIcon" />
+          <a
+            href="https://github.com/oseji/Binge"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Binge on GitHub"
+            className="footerIcon"
+          >
+            <img src={github} alt="" />
+          </a>
         </div>
       </div>
     </footer>

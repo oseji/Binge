@@ -75,12 +75,12 @@ const Pricing = () => {
   }, []);
 
   return (
-    <section className="pricingSection">
-      <h1 className="sectionHeading flex flex-row flex-wrap items-center lg:justify-center gap-2" ref={headingRef}>
+    <section id="pricing" className="pricingSection">
+      <h2 className="sectionHeading flex flex-row flex-wrap items-center lg:justify-center gap-2" ref={headingRef}>
         Affordable{" "}
         <span className="text-gradient inline-block">Plans</span>{" "}
         For You
-      </h1>
+      </h2>
       <p className="sectionSubHeading" ref={subRef}>
         Start free. Upgrade whenever you're ready.
       </p>
@@ -107,9 +107,9 @@ const Pricing = () => {
             <div className="flex flex-col justify-between gap-4 p-7 flex-1">
               <div className="flex flex-col gap-5">
                 <div>
-                  <h2 className="pricingName" style={{ color: plan.color }}>
+                  <h3 className="pricingName" style={{ color: plan.color }}>
                     {plan.heading}
-                  </h2>
+                  </h3>
                   <p className="text-xs text-fg-subtle mt-0.5 uppercase tracking-wider">
                     Billed monthly
                   </p>
@@ -123,17 +123,16 @@ const Pricing = () => {
                   <span className="text-fg-subtle text-sm">/month</span>
                 </div>
 
-                <Link to={"/RegistrationPage"} className="block">
-                  <button
-                    className="pricingBtn text-white"
-                    style={
-                      index === 0
-                        ? { border: `1.5px solid ${plan.color}`, color: plan.color, background: "transparent" }
-                        : { background: plan.color }
-                    }
-                  >
-                    Start free trial
-                  </button>
+                <Link
+                  to={"/RegistrationPage"}
+                  className="pricingBtn text-white"
+                  style={
+                    index === 0
+                      ? { border: `1.5px solid ${plan.color}`, color: plan.color, background: "transparent" }
+                      : { background: plan.color }
+                  }
+                >
+                  Start free trial
                 </Link>
 
                 <div className="h-px bg-line" />

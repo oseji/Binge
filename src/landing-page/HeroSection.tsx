@@ -70,15 +70,14 @@ const HeroSection = () => {
 
         {/* CTAs */}
         <div ref={btnsRef} className="flex flex-col items-center gap-3 w-full">
-          <Link to={"/RegistrationPage"} className="w-full flex justify-center">
-            <button
-              className="heroSectionBtns text-white"
-              style={{
-                background: "linear-gradient(135deg, #9B51E0 0%, #7B3FC0 100%)",
-              }}
-            >
-              Get started — it's free
-            </button>
+          <Link
+            to={"/RegistrationPage"}
+            className="heroSectionBtns text-white"
+            style={{
+              background: "linear-gradient(135deg, #9B51E0 0%, #7B3FC0 100%)",
+            }}
+          >
+            Get started — it's free
           </Link>
         </div>
 

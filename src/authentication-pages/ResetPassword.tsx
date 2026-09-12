@@ -33,12 +33,12 @@ const ResetPassword = () => {
 
   return (
     <form className="resetPasswordForm" onSubmit={handleReset}>
-      <Link to={"/LoginPage"} aria-label="Back to login" className="block mt-8 w-fit">
+      <Link to={"/LoginPage"} aria-label="Back to login" className="inline-flex items-center justify-center w-11 h-11 mt-4 -ml-3 rounded-full hover:bg-white/5">
         <img src={backArrow} alt="" />
       </Link>
       <div className="flex flex-col items-center mb-7">
         <img src={BingeLogo} alt="Binge Logo" className="h-10" />
-        <p className="text-xl font-bold mt-2 text-white">Reset your password</p>
+        <h1 className="text-xl font-bold mt-2 text-white">Reset your password</h1>
         <p className="text-fg-muted text-center text-sm mt-1 leading-relaxed">
           Enter your email and we'll send you reset instructions.
         </p>
@@ -74,12 +74,12 @@ const ResetPassword = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="focus:outline-purple-500"
+              className=""
             />
           </div>
 
           {errorMessage && (
-            <div className="w-full px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/20">
+            <div role="alert" className="w-full px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/20">
               <p className="text-red-400 font-medium capitalize text-sm">{errorMessage}</p>
             </div>
           )}
@@ -91,7 +91,7 @@ const ResetPassword = () => {
             disabled={isLoading}
           >
             {isLoading ? (
-              <CircularProgress color="inherit" size={"1.2rem"} />
+              <CircularProgress aria-label="Loading" color="inherit" size={"1.2rem"} />
             ) : (
               "Send reset instructions"
             )}

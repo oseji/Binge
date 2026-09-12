@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
 type movieType = {
@@ -28,8 +28,6 @@ type propTypes = {
 };
 
 const MediaCategories = (props: propTypes) => {
-  const history = useHistory();
-
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
   >(() => {
@@ -90,13 +88,13 @@ const MediaCategories = (props: propTypes) => {
     <div className="movieCategories">
       {props.information.categories.map((category, idx) => (
         <div key={category} className="category">
-          <h3 className="categoryGroupHeading">
+          <h2 className="categoryGroupHeading">
             {props.information.titles[idx]}
-          </h3>
+          </h2>
 
           {categoryData[category]?.loading && (
             <div className="movieSpinnerContainer">
-              <CircularProgress color="inherit" />
+              <CircularProgress aria-label="Loading" color="inherit" />
             </div>
           )}
 
@@ -115,18 +113,11 @@ const MediaCategories = (props: propTypes) => {
           {!categoryData[category]?.loading && !categoryData[category]?.error && (
             <div className="categoryGroup">
               {categoryData[category]?.data?.map((element) => (
-                <div
+                <Link
                   key={element.id}
+                  to={`/Details/${props.information.type}/${element.id}`}
                   className="movieCard"
-                  onClick={() => history.push(`/Details/${props.information.type}/${element.id}`)}
-                  role="button"
-                  tabIndex={0}
                   aria-label={`View ${element.title || element.name}`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      history.push(`/Details/${props.information.type}/${element.id}`);
-                    }
-                  }}
                 >
                   <img
                     src={tmdbBaseURL + element.poster_path}
@@ -139,7 +130,7 @@ const MediaCategories = (props: propTypes) => {
                       {element.title || element.name}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}

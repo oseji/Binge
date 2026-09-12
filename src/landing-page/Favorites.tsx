@@ -32,10 +32,10 @@ const Favorites = () => {
 
   return (
     <section className="favoritesSection">
-      <h1 className="sectionHeading" ref={headingRef}>
+      <h2 className="sectionHeading" ref={headingRef}>
         Watch your{" "}
         <span className="text-gradient inline-block">Favourites</span>
-      </h1>
+      </h2>
       <p className="sectionSubHeading" ref={subRef}>
         Handpicked categories to match every mood.
       </p>
@@ -59,7 +59,7 @@ const Favorites = () => {
               <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10 mb-3">
                 {item.subHeading}
               </span>
-              <h2 className="text-2xl font-bold text-white leading-tight">{item.heading}</h2>
+              <h3 className="text-2xl font-bold text-white leading-tight">{item.heading}</h3>
               <div className="flex items-center gap-1.5 mt-3">
                 <div className="w-6 h-0.5 bg-accent rounded-full" />
                 <span className="text-xs text-fg-muted">Browse collection</span>

@@ -7,14 +7,14 @@ import Series from "../movies-series/Series";
 import Footer from "../landing-page/Footer";
 
 const SignedInLandingPage = () => {
-  const mainScreenRef = useRef<HTMLDivElement>(null);
+  const mainScreenRef = useRef<HTMLElement>(null);
   const [currentType, setCurrentType] = useState<"Movies" | "Series">("Movies");
 
   return (
     <div>
       <Header mainScreenRef={mainScreenRef} />
 
-      <div ref={mainScreenRef}>
+      <main id="main" ref={mainScreenRef}>
         <HeroSection />
 
         {/* Pill switcher */}
@@ -29,6 +29,7 @@ const SignedInLandingPage = () => {
                   ? "bg-accent text-white shadow-lg shadow-purple-900/40"
                   : "text-fg-muted hover:text-white/80"
               }`}
+              aria-pressed={currentType === "Movies"}
               onClick={() => setCurrentType("Movies")}
             >
               Movies
@@ -39,6 +40,7 @@ const SignedInLandingPage = () => {
                   ? "bg-accent text-white shadow-lg shadow-purple-900/40"
                   : "text-fg-muted hover:text-white/80"
               }`}
+              aria-pressed={currentType === "Series"}
               onClick={() => setCurrentType("Series")}
             >
               Series
@@ -49,7 +51,7 @@ const SignedInLandingPage = () => {
         {currentType === "Movies" ? <Movies /> : <Series />}
 
         <Footer />
-      </div>
+      </main>
     </div>
   );
 };

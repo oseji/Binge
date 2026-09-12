@@ -44,6 +44,7 @@ const RegistrationPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const confirmMismatch = confirmPassword !== "" && confirmPassword !== password;
 
   const createAccount = async () => {
     setErrorMessage("");
@@ -96,13 +97,13 @@ const RegistrationPage = () => {
         createAccount();
       }}
     >
-      <Link to={"/"} aria-label="Back to home" className="w-fit mt-8 block">
+      <Link to={"/"} aria-label="Back to home" className="inline-flex items-center justify-center w-11 h-11 mt-4 -ml-3 rounded-full hover:bg-white/5">
         <img src={backArrow} alt="" />
       </Link>
 
       <div className="flex flex-col items-center mb-7">
         <img src={BingeLogo} alt="Binge Logo" className="h-10" />
-        <p className="text-xl font-bold mt-2 text-white">Create an Account</p>
+        <h1 className="text-xl font-bold mt-2 text-white">Create an Account</h1>
         <p className="text-xs text-fg-muted mt-1">Join Binge today — it's free</p>
       </div>
 
@@ -118,7 +119,7 @@ const RegistrationPage = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="focus:outline-purple-500"
+            className=""
           />
         </div>
 
@@ -133,13 +134,13 @@ const RegistrationPage = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="focus:outline-purple-500 pr-10 w-full"
+              className="pr-12 w-full"
             />
             <button
               type="button"
               aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={() => setShowPassword((p) => !p)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-fg-subtle hover:text-fg"
+              className="absolute right-0.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-11 h-11 rounded-full text-fg-subtle hover:text-fg"
             >
               {showPassword ? <EyeClosed /> : <EyeOpen />}
             </button>
@@ -157,28 +158,26 @@ const RegistrationPage = () => {
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`focus:outline-purple-500 pr-10 w-full ${
-                confirmPassword && confirmPassword !== password
-                  ? "outline-red-400"
-                  : ""
-              }`}
+              aria-invalid={confirmMismatch}
+              aria-describedby={confirmMismatch ? "confirmPasswordError" : undefined}
+              className={`pr-12 w-full ${confirmMismatch ? "!border-red-400" : ""}`}
             />
             <button
               type="button"
               aria-label={showConfirm ? "Hide password" : "Show password"}
               onClick={() => setShowConfirm((p) => !p)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-fg-subtle hover:text-fg"
+              className="absolute right-0.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-11 h-11 rounded-full text-fg-subtle hover:text-fg"
             >
               {showConfirm ? <EyeClosed /> : <EyeOpen />}
             </button>
           </div>
-          {confirmPassword && confirmPassword !== password && (
-            <p className="text-red-400 text-xs">Passwords do not match</p>
+          {confirmMismatch && (
+            <p id="confirmPasswordError" className="text-red-400 text-xs">Passwords do not match</p>
           )}
         </div>
 
         {errorMessage && (
-          <div className="w-full px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/20">
+          <div role="alert" className="w-full px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/20">
             <p className="text-red-400 font-medium capitalize text-sm">{errorMessage}</p>
           </div>
         )}
@@ -208,7 +207,7 @@ const RegistrationPage = () => {
             disabled={isLoading}
           >
             {isLoading ? (
-              <CircularProgress color="inherit" size={"1.1rem"} />
+              <CircularProgress aria-label="Loading" color="inherit" size={"1.1rem"} />
             ) : (
               "Create Account"
             )}

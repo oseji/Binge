@@ -266,10 +266,11 @@ const Details = () => {
   const LikeButton = ({ id }: { id: number }) => {
     if (!auth.currentUser) {
       return (
-        <Link to={"/LoginPage"}>
-          <button className="text-xs text-fg-muted border border-line-strong px-3 py-1.5 rounded-full hover:border-purple-500/50 hover:text-purple-400 transition-all duration-200">
-            Login to like
-          </button>
+        <Link
+          to={"/LoginPage"}
+          className="inline-flex items-center text-xs text-fg-muted border border-line-strong px-3 py-1.5 rounded-full hover:border-purple-500/50 hover:text-purple-400 transition-all duration-200"
+        >
+          Login to like
         </Link>
       );
     }
@@ -281,10 +282,10 @@ const Details = () => {
             : "border-line-strong text-fg-muted hover:border-red-400/50 hover:text-red-400 hover:bg-red-500/5"
         }`}
         onClick={() => toggleLike(id)}
-        aria-label={liked ? "Remove from liked" : "Add to liked"}
+        aria-pressed={liked}
       >
         {ifLikedLoading ? (
-          <CircularProgress color="inherit" size="1rem" />
+          <CircularProgress aria-label="Loading" color="inherit" size="1rem" />
         ) : (
           <>
             <HeartIcon filled={liked} />
@@ -301,7 +302,7 @@ const Details = () => {
       <div className="rounded-2xl overflow-hidden aspect-video bg-surface border border-line shadow-2xl shadow-black/60">
         {trailerLoading ? (
           <div className="flex items-center justify-center h-full min-h-[200px]">
-            <CircularProgress color="inherit" size="2.5rem" />
+            <CircularProgress aria-label="Loading" color="inherit" size="2.5rem" />
           </div>
         ) : trailerID ? (
           <ReactPlayer
@@ -324,7 +325,7 @@ const Details = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-canvas">
-        <CircularProgress color="inherit" size="4rem" />
+        <CircularProgress aria-label="Loading" color="inherit" size="4rem" />
       </div>
     );
   }
@@ -344,7 +345,7 @@ const Details = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-canvas">
+    <main id="main" className="relative min-h-screen bg-canvas">
       {/* Cinematic backdrop */}
       {backdrop && (
         <div className="absolute inset-0 overflow-hidden">
@@ -547,7 +548,7 @@ const Details = () => {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 };
 
