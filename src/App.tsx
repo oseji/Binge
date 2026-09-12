@@ -10,10 +10,6 @@ import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
 import ResetPassword from "./authentication-pages/ResetPassword";
 
-import Plans from "./payment-pages/Plans";
-import PaymentOption from "./payment-pages/PaymentOption";
-import PaymentDetails from "./payment-pages/PaymentDetails";
-
 import Movies from "./movies-series/Movies";
 import Series from "./movies-series/Series";
 import Search from "./movies-series/Search";
@@ -100,24 +96,6 @@ function App() {
 							<Route path={"/ResetPassword"} component={ResetPassword} />
 						</Switch>
 					</div>
-				</Route>
-
-				{/* PAYMENT PAGES */}
-				<Route path={["/Plans", "/PaymentOption", "/PaymentDetails"]}>
-					<section id="selectTrial">
-						<div
-							className="absolute inset-0 top-0 left-0 z-0 w-full h-full bg-cover "
-							style={{
-								backgroundImage: 'url("/heroSection-bg.jpg")',
-								backgroundSize: "cover",
-							}}
-						></div>
-						<Switch>
-							<Route path={"/Plans"} component={Plans} />
-							<Route path={"/PaymentOption"} component={PaymentOption} />
-							<Route path={"/PaymentDetails"} component={PaymentDetails} />
-						</Switch>
-					</section>
 				</Route>
 			</Switch>
 

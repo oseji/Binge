@@ -498,61 +498,6 @@ footer { border-top: 1px solid rgba(255, 255, 255, 0.05); }
   background: rgba(155, 81, 224, 0.04);
 }
 
-/* ─── Payment pages ─── */
-#selectTrial {
-  width: 100%;
-  position: relative;
-  min-height: 100dvh;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.paymentModal {
-  position: absolute;
-  padding: 3.5rem 2.25rem;
-  background: rgba(8, 8, 16, 0.95);
-  backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 1.5rem;
-  width: 91.666%;
-  overflow-y: auto;
-  color: white;
-}
-
-@media (min-width: 768px) { .paymentModal { width: 80%; } }
-
-.paymentPricingGrp {
-  @apply flex flex-col items-center justify-center gap-5 mt-10 lg:flex-row;
-}
-
-.checkBoxGrpPayment { @apply flex flex-row items-center gap-3; }
-.checkBoxGrpPayment > img { @apply h-3; }
-
-.paymentOptionGrp {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 1.125rem 1.25rem;
-  font-weight: 600;
-  border-radius: 0.875rem;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.paymentOptionGrp:hover {
-  border-color: #9B51E0;
-  background: rgba(155, 81, 224, 0.05);
-}
-
-.paymentOptionInputGrp { display: flex; flex-direction: column; }
-.paymentOptionInputGrp input { width: 100%; padding-left: 0.5rem; background: transparent; color: white; }
-
 /* ─── Signed-in landing ─── */
 .typeSwitcherGrp {
   display: flex;

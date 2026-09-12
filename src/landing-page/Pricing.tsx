@@ -123,7 +123,7 @@ const Pricing = () => {
                   <span className="text-[#606070] text-sm">/month</span>
                 </div>
 
-                <Link to={"/PaymentOption"} className="block">
+                <Link to={"/RegistrationPage"} className="block">
                   <button
                     className="pricingBtn text-white"
                     style={

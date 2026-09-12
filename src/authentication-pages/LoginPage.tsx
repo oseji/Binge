@@ -61,9 +61,13 @@ const EyeClosed = () => (
     </svg>
 );
 
+// Shared demo account so visitors can explore the app without registering.
+const DEMO_EMAIL = "fake@gmail.com";
+const DEMO_PASSWORD = "fakepassword";
+
 const LoginPage = () => {
-    const [email, setEmail] = useState<string>("fake@gmail.com");
-    const [password, setPassword] = useState<string>("fakepassword");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const history = useHistory();
@@ -73,12 +77,18 @@ const LoginPage = () => {
         (state: RootState) => state.loadingSetter.isLoading,
     );
 
-    const signIn = async () => {
+    const signIn = async (
+        credentials: { email: string; password: string } = { email, password },
+    ) => {
         setErrorMessage("");
         dispatch(loading());
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            await signInWithEmailAndPassword(
+                auth,
+                credentials.email,
+                credentials.password,
+            );
             dispatch(setTrue());
             history.push("/");
         } catch (err: any) {
@@ -127,6 +137,25 @@ const LoginPage = () => {
             </div>
 
             <div className="flex flex-col items-center gap-3 text-sm">
+                <div className="flex flex-col items-center w-full gap-2 px-4 py-3 mb-1 border rounded-xl border-purple-500/25 bg-purple-500/10 sm:flex-row sm:justify-between">
+                    <p className="text-xs text-center text-white/60 sm:text-left">
+                        Just browsing? Skip the sign-up.
+                    </p>
+                    <button
+                        type="button"
+                        onClick={() =>
+                            signIn({
+                                email: DEMO_EMAIL,
+                                password: DEMO_PASSWORD,
+                            })
+                        }
+                        disabled={isLoading}
+                        className="px-3 py-1.5 text-xs font-semibold text-white whitespace-nowrap transition-colors border rounded-lg border-purple-400/40 hover:bg-purple-500/20 disabled:opacity-50"
+                    >
+                        Sign in as guest
+                    </button>
+                </div>
+
                 <div className="inputGrp">
                     <label htmlFor="emailAddressLogin">email address</label>
                     <input

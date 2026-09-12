@@ -80,11 +80,6 @@ const HeroSection = () => {
               Get started — it's free
             </button>
           </Link>
-          <Link to={"/Plans"} className="w-full flex justify-center">
-            <button className="heroSectionBtns border border-white/20 text-white/80 hover:text-white hover:border-white/40 bg-white/5 backdrop-blur-sm">
-              Start 7-day free trial
-            </button>
-          </Link>
         </div>
 
         {/* Trust strip */}
