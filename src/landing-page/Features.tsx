@@ -9,19 +9,19 @@ const features = [
   {
     img: feature1,
     heading: "Unlimited Movies",
-    body: "Browse thousands of movies across every genre. New titles added weekly — from blockbusters to indie gems.",
+    body: "Browse thousands of movies across every genre. New titles added weekly, from blockbusters to indie gems.",
     badge: "Movies",
   },
   {
     img: feature2,
     heading: "Save It for Later",
-    body: "Tap the heart on any title and it's in your list — synced to your account, so it's there on every device.",
+    body: "Tap the heart on any title and it's in your list, synced to your account, so it's there on every device.",
     badge: "Watchlist",
   },
   {
     img: feature3,
     heading: "Flexible Plans",
-    body: "Pick a plan that fits your life. Switch, pause, or cancel at any time — no hidden fees, no long contracts.",
+    body: "Pick a plan that fits your life. Switch, pause, or cancel at any time. No hidden fees, no long contracts.",
     badge: "Pricing",
   },
 ];

@@ -8,12 +8,12 @@ Binge lets users browse, search, and manage a watchlist of movies and TV series.
 
 ## Features
 
-- **Landing page** — hero section, feature highlights, pricing plans, and FAQ, all animated with GSAP scroll triggers
-- **Authentication** — sign up, log in, and password reset via Firebase Auth (email/password and Google), plus a one-click guest login for trying the app without an account
-- **Movies & Series** — dedicated browsing pages with category filtering
-- **Search** — real-time search across movies and series
-- **Detail view** — trailer playback and full media info
-- **My List** — save and manage favourite titles
+- **Landing page**: hero section, feature highlights, pricing plans, and FAQ, all animated with GSAP scroll triggers
+- **Authentication**: sign up, log in, and password reset via Firebase Auth (email/password and Google), plus a one-click guest login for trying the app without an account
+- **Movies & Series**: dedicated browsing pages with category filtering
+- **Search**: real-time search across movies and series
+- **Detail view**: trailer playback and full media info
+- **My List**: save and manage favourite titles
 
 ## Tech stack
 

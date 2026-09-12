@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Inter variable font (400–700) — self-hosted so bold/semibold are real cuts, not synthesized */
+/* Inter variable font (400-700), self-hosted so bold/semibold are real cuts, not synthesized */
 @font-face {
   font-family: Inter;
   font-style: normal;
@@ -21,13 +21,13 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* Keyboard focus — one ring everywhere; pointer clicks don't trigger it */
+/* Keyboard focus: one ring everywhere; pointer clicks don't trigger it */
 :focus-visible {
   outline: 2px solid #9B51E0;
   outline-offset: 2px;
 }
 
-/* Skip link — offscreen until focused */
+/* Skip link: offscreen until focused */
 .skipLink {
   position: absolute;
   top: 1rem;

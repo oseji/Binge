@@ -6,15 +6,15 @@ import downArrow from "../assets/down-arrow.svg";
 const faqs = [
   {
     q: "How does Binge work?",
-    a: "Binge is a media discovery platform that lets you search, explore, and track thousands of movies and TV series. Find what to watch next, browse trailers, ratings, and cast info — all in one place.",
+    a: "Binge is a media discovery platform that lets you search, explore, and track thousands of movies and TV series. Find what to watch next, browse trailers, ratings, and cast info, all in one place.",
   },
   {
     q: "Can I try Binge for free?",
-    a: "Yes! We offer a 7-day free trial on all plans. You won't be charged until your trial ends, and you can cancel at any time before then — no questions asked.",
+    a: "Yes! We offer a 7-day free trial on all plans. You won't be charged until your trial ends, and you can cancel at any time before then, no questions asked.",
   },
   {
     q: "Can I save movies and shows I want to watch?",
-    a: "Absolutely. You can add any title to your personal list with a single tap. Your list is saved to your account so you can access it from any device — never lose track of something you wanted to watch.",
+    a: "Absolutely. You can add any title to your personal list with a single tap. Your list is saved to your account so you can access it from any device, so you never lose track of something you wanted to watch.",
   },
   {
     q: "What information does Binge show for each title?",
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "How do I cancel my subscription?",
-    a: "You can cancel your Binge subscription anytime from your account settings — no phone calls, no hassle. If you cancel, you'll still have access until the end of your current billing period.",
+    a: "You can cancel your Binge subscription anytime from your account settings. No phone calls, no hassle. If you cancel, you'll still have access until the end of your current billing period.",
   },
 ];
 

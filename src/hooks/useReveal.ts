@@ -8,7 +8,7 @@ type RevealOptions = {
   heading: RefObject<HTMLElement>;
   sub?: RefObject<HTMLElement>;
   items: RefObject<(HTMLElement | null)[]>;
-  /** Starting state for the staggered items — lets each section enter differently */
+  /** Starting state for the staggered items, so each section can enter differently */
   from?: gsap.TweenVars;
   stagger?: number;
   duration?: number;

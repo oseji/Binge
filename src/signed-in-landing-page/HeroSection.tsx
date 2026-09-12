@@ -56,7 +56,7 @@ const HeroSection = () => {
                 const pick = movies.find((m) => m.backdrop_path) ?? movies[0];
                 setFeatured(pick);
             } catch {
-                // silently fail — hero stays hidden
+                // silently fail; hero stays hidden
             }
         };
         fetchTrending();
