@@ -20,9 +20,9 @@ const features = [
   },
   {
     img: feature3,
-    heading: "Flexible Plans",
-    body: "Pick a plan that fits your life. Switch, pause, or cancel at any time. No hidden fees, no long contracts.",
-    badge: "Pricing",
+    heading: "Trailers Included",
+    body: "Every title page has the official trailer, synopsis, genres and runtime, so you can decide before you commit an evening.",
+    badge: "Details",
   },
 ];
 

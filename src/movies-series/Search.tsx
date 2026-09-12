@@ -79,7 +79,7 @@ const Search = () => {
         >
           <input
             type="text"
-            placeholder="Search by Title, Genre, People"
+            placeholder="Search movies, series and people"
             value={searchTerm}
             onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             className="w-full p-4 rounded-xl bg-white/5 border border-line-strong text-fg placeholder:text-fg-subtle outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-colors"

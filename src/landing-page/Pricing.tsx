@@ -65,12 +65,11 @@ const Pricing = () => {
   return (
     <section id="pricing" className="pricingSection">
       <h2 className="sectionHeading flex flex-row flex-wrap items-center lg:justify-center gap-2" ref={headingRef}>
-        Affordable{" "}
-        <span className="text-gradient inline-block">Plans</span>{" "}
-        For You
+        Pricing, as a{" "}
+        <span className="text-gradient inline-block">concept</span>
       </h2>
       <p className="sectionSubHeading" ref={subRef}>
-        Start free. Upgrade whenever you're ready.
+        A design exploration, not a live product. Everything on Binge is free.
       </p>
 
       <div className="pricingGrp">
@@ -120,7 +119,7 @@ const Pricing = () => {
                       : { background: plan.color }
                   }
                 >
-                  Start free trial
+                  Create a free account
                 </Link>
 
                 <div className="h-px bg-line" />

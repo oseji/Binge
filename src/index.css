@@ -157,6 +157,8 @@ input::-webkit-inner-spin-button {
 }
 
 .favoritesBox {
+  display: block;
+  color: inherit;
   flex-shrink: 0;
   height: 420px;
   min-width: 82%;

@@ -6,11 +6,11 @@ import downArrow from "../assets/down-arrow.svg";
 const faqs = [
   {
     q: "How does Binge work?",
-    a: "Binge is a media discovery platform that lets you search, explore, and track thousands of movies and TV series. Find what to watch next, browse trailers, ratings, and cast info, all in one place.",
+    a: "Binge is a media discovery platform that lets you search, explore, and track thousands of movies and TV series. Find what to watch next, browse trailers and details, and keep a watchlist, all in one place.",
   },
   {
-    q: "Can I try Binge for free?",
-    a: "Yes! We offer a 7-day free trial on all plans. You won't be charged until your trial ends, and you can cancel at any time before then, no questions asked.",
+    q: "Is Binge free?",
+    a: "Yes, all of it. Browsing, search and trailers work without an account, and a free account adds your watchlist. The pricing section is a design concept only; there is nothing to pay.",
   },
   {
     q: "Can I save movies and shows I want to watch?",
@@ -18,11 +18,11 @@ const faqs = [
   },
   {
     q: "What information does Binge show for each title?",
-    a: "Each title page includes the synopsis, cast and crew, genre tags, ratings, release info, and an official trailer so you can get a real feel for a movie or show before committing to it.",
+    a: "Each title page includes the synopsis, genres, runtime or season count, country and language, plus the official trailer. People pages show a biography and where they were born.",
   },
   {
-    q: "How do I cancel my subscription?",
-    a: "You can cancel your Binge subscription anytime from your account settings. No phone calls, no hassle. If you cancel, you'll still have access until the end of your current billing period.",
+    q: "Where does the data come from?",
+    a: "Titles, artwork and details come from The Movie Database (TMDB) and trailers are played from YouTube. Binge uses the TMDB API but is not endorsed or certified by TMDB.",
   },
 ];
 

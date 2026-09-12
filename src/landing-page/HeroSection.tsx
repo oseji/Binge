@@ -102,7 +102,7 @@ const HeroSection = () => {
           </h1>
 
           <p ref={subRef} className="text-fg-muted text-base md:text-lg leading-relaxed max-w-lg mb-9">
-            Trailers, ratings and a watchlist for every movie and series. Search it, save it, watch it.
+            Trailers, details and a watchlist for every movie and series. Search it, save it, decide in seconds.
           </p>
 
           <div ref={ctaRef} className="flex flex-wrap items-center gap-x-6 gap-y-4">
