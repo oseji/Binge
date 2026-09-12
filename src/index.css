@@ -195,24 +195,9 @@ input::-webkit-inner-spin-button {
 
 .headerLogo { height: 2rem; cursor: pointer; }
 
-/* Hero buttons */
-.heroSectionBtns {
-  display: block;
-  width: 100%;
-  max-width: 340px;
-  padding: 1rem 2rem;
-  border-radius: 0.875rem;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  text-align: center;
-  transition: all 0.25s ease;
-  cursor: pointer;
-}
-
-.heroSectionBtns:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(155, 81, 224, 0.3);
-}
+.heroStrip { scroll-snap-type: x proximity; scrollbar-width: none; }
+.heroStrip::-webkit-scrollbar { display: none; }
+.heroStrip > a { scroll-snap-align: start; }
 
 /* ─── Favourites ─── */
 .favoritesSection {
