@@ -60,6 +60,68 @@ const HeartIcon = ({ filled }: { filled: boolean }) => (
   </svg>
 );
 
+type LikeButtonProps = { liked: boolean; loading: boolean; onToggle: () => void };
+
+const LikeButton = ({ liked, loading, onToggle }: LikeButtonProps) => {
+  if (!auth.currentUser) {
+    return (
+      <Link
+        to={"/LoginPage"}
+        className="inline-flex items-center text-xs text-fg-muted border border-line-strong px-3 py-1.5 rounded-full hover:border-purple-500/50 hover:text-purple-400 transition-all duration-200"
+      >
+        Login to like
+      </Link>
+    );
+  }
+  return (
+    <button
+      type="button"
+      className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 text-sm font-medium ${
+        liked
+          ? "border-red-500/60 text-red-400 bg-red-500/10 hover:bg-red-500/20"
+          : "border-line-strong text-fg-muted hover:border-red-400/50 hover:text-red-400 hover:bg-red-500/5"
+      }`}
+      onClick={onToggle}
+      aria-pressed={liked}
+    >
+      {loading ? (
+        <CircularProgress aria-label="Loading" color="inherit" size="1rem" />
+      ) : (
+        <>
+          <HeartIcon filled={liked} />
+          <span>{liked ? "Liked" : "Like"}</span>
+        </>
+      )}
+    </button>
+  );
+};
+
+const TrailerSection = ({ loading, videoId }: { loading: boolean; videoId: string }) => (
+  <div className="w-full max-w-5xl mx-auto mt-14 mb-10">
+    <p className="text-xs font-bold uppercase tracking-widest text-fg-subtle mb-3">Official Trailer</p>
+    <div className="rounded-2xl overflow-hidden aspect-video bg-surface border border-line shadow-2xl shadow-black/60">
+      {loading ? (
+        <div className="flex items-center justify-center h-full min-h-[200px]">
+          <CircularProgress aria-label="Loading" color="inherit" size="2.5rem" />
+        </div>
+      ) : videoId ? (
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=${videoId}`}
+          playing={false}
+          controls
+          width="100%"
+          height="100%"
+        />
+      ) : (
+        <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-fg-subtle">
+          <span className="text-4xl">▶</span>
+          <span className="text-sm">Trailer unavailable</span>
+        </div>
+      )}
+    </div>
+  </div>
+);
+
 const Details = () => {
   // Media identity comes from the URL so the page survives refresh and can be shared
   const { type: mediaType, id } = useParams<{ type: string; id: string }>();
@@ -263,65 +325,6 @@ const Details = () => {
       ? seriesDetails.backdrop_path
       : null;
 
-  const LikeButton = ({ id }: { id: number }) => {
-    if (!auth.currentUser) {
-      return (
-        <Link
-          to={"/LoginPage"}
-          className="inline-flex items-center text-xs text-fg-muted border border-line-strong px-3 py-1.5 rounded-full hover:border-purple-500/50 hover:text-purple-400 transition-all duration-200"
-        >
-          Login to like
-        </Link>
-      );
-    }
-    return (
-      <button
-        className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 text-sm font-medium ${
-          liked
-            ? "border-red-500/60 text-red-400 bg-red-500/10 hover:bg-red-500/20"
-            : "border-line-strong text-fg-muted hover:border-red-400/50 hover:text-red-400 hover:bg-red-500/5"
-        }`}
-        onClick={() => toggleLike(id)}
-        aria-pressed={liked}
-      >
-        {ifLikedLoading ? (
-          <CircularProgress aria-label="Loading" color="inherit" size="1rem" />
-        ) : (
-          <>
-            <HeartIcon filled={liked} />
-            <span>{liked ? "Liked" : "Like"}</span>
-          </>
-        )}
-      </button>
-    );
-  };
-
-  const TrailerSection = () => (
-    <div className="w-full max-w-3xl mx-auto mt-16 mb-10">
-      <p className="text-xs font-bold uppercase tracking-widest text-fg-subtle mb-3">Official Trailer</p>
-      <div className="rounded-2xl overflow-hidden aspect-video bg-surface border border-line shadow-2xl shadow-black/60">
-        {trailerLoading ? (
-          <div className="flex items-center justify-center h-full min-h-[200px]">
-            <CircularProgress aria-label="Loading" color="inherit" size="2.5rem" />
-          </div>
-        ) : trailerID ? (
-          <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${trailerID}`}
-            playing={false}
-            controls
-            width="100%"
-            height="100%"
-          />
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-fg-subtle">
-            <span className="text-4xl">▶</span>
-            <span className="text-sm">Trailer unavailable</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-canvas">
@@ -369,8 +372,7 @@ const Details = () => {
 
         {mediaType === "movie" && (
           <>
-            <TrailerSection />
-            <div className="max-w-5xl mx-auto w-full">
+            <div className="max-w-5xl mx-auto w-full pt-16">
               <div className="detailsPage">
                 <img
                   src={tmdbPosterURL + movieDetails.poster_path}
@@ -385,7 +387,7 @@ const Details = () => {
                       </h1>
                       <span className="text-xs font-semibold uppercase tracking-wider text-fg-subtle mt-1 block">{movieDetails.status}</span>
                     </div>
-                    <LikeButton id={movieDetails.id} />
+                    <LikeButton liked={liked} loading={ifLikedLoading} onToggle={() => toggleLike(movieDetails.id)} />
                   </div>
 
                   <div className="flex flex-wrap gap-2">
@@ -425,13 +427,13 @@ const Details = () => {
                 </div>
               </div>
             </div>
+            <TrailerSection loading={trailerLoading} videoId={trailerID} />
           </>
         )}
 
         {mediaType === "tv" && (
           <>
-            <TrailerSection />
-            <div className="max-w-5xl mx-auto w-full">
+            <div className="max-w-5xl mx-auto w-full pt-16">
               <div className="detailsPage">
                 <img
                   src={tmdbPosterURL + seriesDetails.poster_path}
@@ -448,7 +450,7 @@ const Details = () => {
                         {seriesDetails.status}
                       </span>
                     </div>
-                    <LikeButton id={seriesDetails.id} />
+                    <LikeButton liked={liked} loading={ifLikedLoading} onToggle={() => toggleLike(seriesDetails.id)} />
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -487,6 +489,7 @@ const Details = () => {
                 </div>
               </div>
             </div>
+            <TrailerSection loading={trailerLoading} videoId={trailerID} />
           </>
         )}
 
@@ -516,13 +519,13 @@ const Details = () => {
                 <div className="flex flex-wrap gap-4 text-xs text-fg-muted">
                   {personDetails.birthday && (
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[10px]">Born</span>
+                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[11px]">Born</span>
                       <span className="text-fg-muted font-medium">{personDetails.birthday}</span>
                     </div>
                   )}
                   {personDetails.place_of_birth && (
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[10px]">Place of Birth</span>
+                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[11px]">Place of Birth</span>
                       <span className="text-fg-muted font-medium">{personDetails.place_of_birth}</span>
                     </div>
                   )}
@@ -532,7 +535,7 @@ const Details = () => {
                   <>
                     <div className="h-px bg-line" />
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-fg-subtle mb-3">Biography</p>
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-fg-subtle mb-3">Biography</p>
                       <p className="text-fg-muted leading-relaxed text-sm md:text-base">
                         {personDetails.biography}
                       </p>

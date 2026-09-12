@@ -1,10 +1,7 @@
-import { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { useRef, useState } from "react";
+import { useReveal } from "../hooks/useReveal";
 
 import downArrow from "../assets/down-arrow.svg";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
   {
@@ -35,20 +32,7 @@ const Questions = () => {
   const subRef = useRef<HTMLParagraphElement>(null);
   const faqItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
-    });
-
-    tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
-      .fromTo(subRef.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.5")
-      .fromTo(
-        faqItemsRef.current,
-        { x: -40, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.55, stagger: 0.1, ease: "power3.out" },
-        "-=0.3"
-      );
-  }, []);
+  useReveal({ heading: headingRef, sub: subRef, items: faqItemsRef, from: { x: -40, opacity: 0 } });
 
   return (
     <section id="faq" className="questionsSection">

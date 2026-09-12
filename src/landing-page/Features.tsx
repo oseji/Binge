@@ -1,12 +1,9 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+import { useReveal } from "../hooks/useReveal";
 
 import feature1 from "../assets/feature1.png";
 import feature2 from "../assets/feature2.png";
 import feature3 from "../assets/feature3.png";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
@@ -34,20 +31,7 @@ const Features = () => {
   const subRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
-    });
-
-    tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
-      .fromTo(subRef.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.5")
-      .fromTo(
-        cardsRef.current,
-        { y: 70, opacity: 0, scale: 0.93 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.75, stagger: 0.14, ease: "power3.out" },
-        "-=0.3"
-      );
-  }, []);
+  useReveal({ heading: headingRef, sub: subRef, items: cardsRef, from: { y: 70, opacity: 0, scale: 0.93 } });
 
   return (
     <section id="features" className="featuresSection">
@@ -64,7 +48,7 @@ const Features = () => {
           <div className="featuresBox" key={i} ref={(el) => (cardsRef.current[i] = el)}>
             <div className="relative">
               <img src={f.img} alt={f.heading} className="featureImg" />
-              <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
+              <span className="absolute top-3 left-3 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
                 {f.badge}
               </span>
             </div>

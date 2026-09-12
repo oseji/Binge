@@ -1,8 +1,5 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
+import { useReveal } from "../hooks/useReveal";
 
 const favMedia = [
   { heading: "New & Classics", subHeading: "Series", img: "/film1.png" },
@@ -15,20 +12,7 @@ const Favorites = () => {
   const subRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
-    });
-
-    tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
-      .fromTo(subRef.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.5")
-      .fromTo(
-        cardsRef.current,
-        { y: 70, opacity: 0, scale: 0.93 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.75, stagger: 0.14, ease: "power3.out" },
-        "-=0.3"
-      );
-  }, []);
+  useReveal({ heading: headingRef, sub: subRef, items: cardsRef, from: { x: 60, opacity: 0 } });
 
   return (
     <section className="favoritesSection">
@@ -56,7 +40,7 @@ const Favorites = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
             <div className="absolute bottom-0 left-0 p-6 w-full">
-              <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10 mb-3">
+              <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10 mb-3">
                 {item.subHeading}
               </span>
               <h3 className="text-2xl font-bold text-white leading-tight">{item.heading}</h3>

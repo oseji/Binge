@@ -90,19 +90,19 @@ const HeroSection = () => {
             <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-5 md:px-10 lg:px-14 pt-[72px]">
                 {/* Genre + year pills */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
+                    <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
                         Trending
                     </span>
                     {genres.map((g) => (
                         <span
                             key={g}
-                            className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10"
+                            className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10"
                         >
                             {g}
                         </span>
                     ))}
                     {year && (
-                        <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10">
+                        <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10">
                             {year}
                         </span>
                     )}

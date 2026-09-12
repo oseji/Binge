@@ -365,7 +365,7 @@ input::-webkit-inner-spin-button {
   margin-bottom: 0.625rem;
 }
 
-.checkBoxGrp > img { height: 1.125rem; flex-shrink: 0; }
+.checkBoxGrp > svg { flex-shrink: 0; }
 .checkBoxGrp > p { font-size: 0.875rem; color: theme("colors.fg.muted"); }
 
 /* ─── FAQ ─── */

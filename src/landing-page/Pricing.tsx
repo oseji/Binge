@@ -1,21 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useReveal } from "../hooks/useReveal";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
 
-import proCheckbox from "../assets/pro-checkbox.png";
-import premiumCheckbox from "../assets/premium-checkbox.png";
-import orgCheckbox from "../assets/org-checkbox.png";
+const CheckIcon = ({ color }: { color: string }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="11" fill={color} opacity="0.15" />
+    <path d="M7 12.5l3 3 7-7" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
-gsap.registerPlugin(ScrollTrigger);
-
+// Ordered by price so the eye reads cheapest → priciest left to right
 const plans = [
   {
     heading: "Professional",
     price: 3000,
     color: "#F2994A",
-    checkboxImg: proCheckbox,
     badge: null,
+    badgeText: "white",
     features: [
       "HD Trailers & Previews",
       "2 User Profiles",
@@ -26,10 +27,10 @@ const plans = [
   },
   {
     heading: "Premium",
-    price: 10000,
+    price: 5000,
     color: "#9B51E0",
-    checkboxImg: premiumCheckbox,
     badge: "Most Popular",
+    badgeText: "white",
     features: [
       "4K + HDR Trailers & Previews",
       "4 User Profiles",
@@ -40,10 +41,10 @@ const plans = [
   },
   {
     heading: "Organizational",
-    price: 5000,
-    color: "#B42318",
-    checkboxImg: orgCheckbox,
-    badge: "Best Value",
+    price: 10000,
+    color: "#2DD4BF",
+    badge: "For teams",
+    badgeText: "#09090F",
     features: [
       "4K + HDR Trailers & Previews",
       "10 User Profiles",
@@ -59,20 +60,7 @@ const Pricing = () => {
   const subRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
-    });
-
-    tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
-      .fromTo(subRef.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.5")
-      .fromTo(
-        cardsRef.current,
-        { y: 80, opacity: 0, scale: 0.92 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.16, ease: "power3.out" },
-        "-=0.3"
-      );
-  }, []);
+  useReveal({ heading: headingRef, sub: subRef, items: cardsRef, from: { y: 80, opacity: 0, scale: 0.92 } });
 
   return (
     <section id="pricing" className="pricingSection">
@@ -96,7 +84,7 @@ const Pricing = () => {
             {plan.badge ? (
               <div
                 className="text-center font-bold text-sm py-2.5 tracking-wide"
-                style={{ backgroundColor: plan.color, color: "white" }}
+                style={{ backgroundColor: plan.color, color: plan.badgeText }}
               >
                 {plan.badge}
               </div>
@@ -143,7 +131,7 @@ const Pricing = () => {
                   </p>
                   {plan.features.map((feature, fIdx) => (
                     <div className="checkBoxGrp" key={fIdx}>
-                      <img src={plan.checkboxImg} alt="" />
+                      <CheckIcon color={plan.color} />
                       <p>{feature}</p>
                     </div>
                   ))}

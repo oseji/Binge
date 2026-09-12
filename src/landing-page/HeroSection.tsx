@@ -9,12 +9,19 @@ const HeroSection = () => {
   const btnsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    const mm = gsap.matchMedia();
 
-    tl.fromTo(badgeRef.current, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
-      .fromTo(headingRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.3")
-      .fromTo(subRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.4")
-      .fromTo(btnsRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.4");
+    // Skip the entrance entirely under reduced motion — content is never hidden
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.fromTo(badgeRef.current, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
+        .fromTo(headingRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.3")
+        .fromTo(subRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.4")
+        .fromTo(btnsRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.4");
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -34,14 +41,14 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-[100svh] flex flex-col items-center justify-center text-center px-5 md:px-10 pb-16 pt-24 md:pt-0">
+      <div className="relative z-10 min-h-[100svh] flex flex-col items-center justify-center text-center px-5 md:px-10 pb-16 pt-24 md:pt-28">
 
         {/* Badge */}
         <div
           ref={badgeRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm mb-8"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent motion-safe:animate-pulse" />
           <span className="text-xs font-semibold text-purple-300 tracking-wide uppercase">
             Discover your next obsession
           </span>
