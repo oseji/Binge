@@ -14,9 +14,9 @@ const features = [
   },
   {
     img: feature2,
-    heading: "Watch Party",
-    body: "Invite friends and watch together in real time, no matter where they are. React, chat, and share the experience.",
-    badge: "Social",
+    heading: "Save It for Later",
+    body: "Tap the heart on any title and it's in your list — synced to your account, so it's there on every device.",
+    badge: "Watchlist",
   },
   {
     img: feature3,
