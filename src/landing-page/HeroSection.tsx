@@ -96,13 +96,12 @@ const HeroSection = () => {
 
           <h1
             ref={headingRef}
-            className="font-bold leading-[0.95] tracking-[-0.03em] text-white mb-6"
-            style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
+            className="text-display font-bold tracking-[-0.03em] text-white mb-6"
           >
             Know what to watch <span className="text-gradient">tonight.</span>
           </h1>
 
-          <p ref={subRef} className="text-fg-muted text-lg md:text-xl leading-relaxed max-w-lg mb-9">
+          <p ref={subRef} className="text-fg-muted text-base md:text-lg leading-relaxed max-w-lg mb-9">
             Trailers, ratings and a watchlist for every movie and series. Search it, save it, watch it.
           </p>
 
@@ -130,7 +129,7 @@ const HeroSection = () => {
               <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-fg-subtle">
                 Trending this week
               </h2>
-              <span className="text-[11px] text-fg-subtle">Data from TMDB</span>
+              <span className="text-xs text-fg-subtle">Data from TMDB</span>
             </div>
             <div ref={stripRef} className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 md:mx-0 md:px-0 heroStrip">
               {trending.map((item) => {
@@ -139,14 +138,14 @@ const HeroSection = () => {
                   <Link
                     key={`${item.media_type}-${item.id}`}
                     to={`/Details/${item.media_type}/${item.id}`}
-                    className="movieCard flex-shrink-0"
+                    className="movieCard flex-shrink-0 rounded-lg"
                     aria-label={`View ${title}`}
                   >
                     <img
                       src={`${POSTER}${item.poster_path}`}
                       alt={title}
                       loading="lazy"
-                      className="h-40 md:h-52 w-auto rounded-[0.625rem] object-cover"
+                      className="h-40 md:h-52 w-auto rounded-lg object-cover"
                     />
                     <div className="movieCardOverlay">
                       <p className="font-semibold text-sm leading-tight">{title}</p>

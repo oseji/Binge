@@ -90,19 +90,19 @@ const HeroSection = () => {
             <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-5 md:px-10 lg:px-14 pt-[72px]">
                 {/* Genre + year pills */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
+                    <span className="text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
                         Trending
                     </span>
                     {genres.map((g) => (
                         <span
                             key={g}
-                            className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10"
+                            className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10"
                         >
                             {g}
                         </span>
                     ))}
                     {year && (
-                        <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10">
+                        <span className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10">
                             {year}
                         </span>
                     )}
@@ -110,8 +110,7 @@ const HeroSection = () => {
 
                 {/* Title */}
                 <h1
-                    className="mb-4 font-bold leading-none tracking-tight text-white"
-                    style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}
+                    className="mb-4 text-display-sm font-bold tracking-tight text-white"
                 >
                     {featured.title}
                 </h1>

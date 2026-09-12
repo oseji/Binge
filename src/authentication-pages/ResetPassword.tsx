@@ -38,7 +38,7 @@ const ResetPassword = () => {
       </Link>
       <div className="flex flex-col items-center mb-7">
         <img src={BingeLogo} alt="Binge Logo" className="h-10" />
-        <h1 className="text-xl font-bold mt-2 text-white">Reset your password</h1>
+        <h1 className="text-lg font-bold mt-2 text-white">Reset your password</h1>
         <p className="text-fg-muted text-center text-sm mt-1 leading-relaxed">
           Enter your email and we'll send you reset instructions.
         </p>

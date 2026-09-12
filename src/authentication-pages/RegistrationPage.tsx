@@ -103,7 +103,7 @@ const RegistrationPage = () => {
 
       <div className="flex flex-col items-center mb-7">
         <img src={BingeLogo} alt="Binge Logo" className="h-10" />
-        <h1 className="text-xl font-bold mt-2 text-white">Create an Account</h1>
+        <h1 className="text-lg font-bold mt-2 text-white">Create an Account</h1>
         <p className="text-xs text-fg-muted mt-1">Join Binge today — it's free</p>
       </div>
 

@@ -110,7 +110,7 @@ const MyList = () => {
         >
           <img src={backArrow} alt="" />
         </Link>
-        <h1 className="text-3xl font-bold capitalize">My List</h1>
+        <h1 className="text-xl font-bold capitalize">My List</h1>
       </div>
 
       {isLoading ? (
@@ -161,7 +161,7 @@ const MyList = () => {
         <div className="min-h-[60vh] flex flex-col items-center justify-center gap-5">
           <HeartIcon />
           <div className="text-center">
-            <p className="text-xl font-semibold text-fg">Your list is empty</p>
+            <p className="text-lg font-semibold text-fg">Your list is empty</p>
             <p className="text-fg-subtle text-sm mt-2">
               Like movies and series to save them here.
             </p>

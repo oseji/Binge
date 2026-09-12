@@ -114,7 +114,7 @@ const TrailerSection = ({ loading, videoId }: { loading: boolean; videoId: strin
         />
       ) : (
         <div className="flex flex-col items-center justify-center h-full min-h-[200px] gap-2 text-fg-subtle">
-          <span className="text-4xl">▶</span>
+          <span className="text-2xl">▶</span>
           <span className="text-sm">Trailer unavailable</span>
         </div>
       )}
@@ -382,7 +382,7 @@ const Details = () => {
                 <div className="flex flex-col gap-5 flex-1">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div>
-                      <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                      <h1 className="text-xl md:text-2xl font-bold tracking-tight leading-tight">
                         {movieDetails.title}
                       </h1>
                       <span className="text-xs font-semibold uppercase tracking-wider text-fg-subtle mt-1 block">{movieDetails.status}</span>
@@ -443,7 +443,7 @@ const Details = () => {
                 <div className="flex flex-col gap-5 flex-1">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div>
-                      <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                      <h1 className="text-xl md:text-2xl font-bold tracking-tight leading-tight">
                         {seriesDetails.name}
                       </h1>
                       <span className={`text-xs font-semibold uppercase tracking-wider mt-1 block ${seriesDetails.status === "Ended" ? "text-red-400" : "text-green-400"}`}>
@@ -506,7 +506,7 @@ const Details = () => {
               </div>
               <div className="flex flex-col gap-5 flex-1">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+                  <h1 className="text-xl md:text-2xl font-bold tracking-tight leading-tight">
                     {personDetails.name}
                   </h1>
                   <span className="inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-900/40 text-purple-300 border border-purple-700/30">
@@ -519,13 +519,13 @@ const Details = () => {
                 <div className="flex flex-wrap gap-4 text-xs text-fg-muted">
                   {personDetails.birthday && (
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[11px]">Born</span>
+                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-xs">Born</span>
                       <span className="text-fg-muted font-medium">{personDetails.birthday}</span>
                     </div>
                   )}
                   {personDetails.place_of_birth && (
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-[11px]">Place of Birth</span>
+                      <span className="text-fg-subtle font-semibold uppercase tracking-wider text-xs">Place of Birth</span>
                       <span className="text-fg-muted font-medium">{personDetails.place_of_birth}</span>
                     </div>
                   )}
@@ -535,7 +535,7 @@ const Details = () => {
                   <>
                     <div className="h-px bg-line" />
                     <div>
-                      <p className="text-[11px] font-bold uppercase tracking-widest text-fg-subtle mb-3">Biography</p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-fg-subtle mb-3">Biography</p>
                       <p className="text-fg-muted leading-relaxed text-sm md:text-base">
                         {personDetails.biography}
                       </p>

@@ -27,7 +27,7 @@ const Series = ({ embedded = false }: Props) => {
       <Header mainScreenRef={mainScreenRef} />
 
       <main id="main" ref={mainScreenRef} className="pt-4 md:pt-[68px]">
-        <h1 className="px-5 md:px-10 pt-8 text-3xl font-bold">Series</h1>
+        <h1 className="px-5 md:px-10 pt-8 text-xl font-bold">Series</h1>
         <MediaCategories information={information} />
       </main>
     </div>

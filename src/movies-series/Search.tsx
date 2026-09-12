@@ -149,7 +149,7 @@ const Search = () => {
                       </>
                     ) : (
                       <div className="w-full h-64 rounded-lg bg-surface-2 flex flex-col items-center justify-center gap-2 p-3">
-                        <span className="text-fg-subtle text-3xl">🎬</span>
+                        <span className="text-fg-subtle text-xl">🎬</span>
                         <p className="text-fg-muted text-xs text-center leading-tight">{title}</p>
                       </div>
                     )}
@@ -162,7 +162,7 @@ const Search = () => {
         ) : hasSearched ? (
           <div className="flex-1 flex flex-col items-center justify-center py-20 gap-4">
             <SearchIcon />
-            <p className="text-xl font-semibold text-fg">No results found</p>
+            <p className="text-lg font-semibold text-fg">No results found</p>
             <p className="text-fg-subtle text-sm text-center max-w-xs">
               We couldn't find anything for "{searchTerm}". Try a different title, genre, or person.
             </p>

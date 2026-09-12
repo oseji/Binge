@@ -93,7 +93,7 @@ const Header = ({ mainScreenRef }: HeaderProps) => {
   }, [menuToggled, mainScreenRef]);
 
   const navLinkClass =
-    "inline-block px-3 py-3 text-[0.9375rem] font-medium text-white/70 hover:text-white transition-colors duration-200";
+    "inline-block px-3 py-3 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200";
 
   return (
     <div>
@@ -219,7 +219,7 @@ const Header = ({ mainScreenRef }: HeaderProps) => {
         </div>
 
         <nav id="mobile-menu" aria-label="Primary" className="menuHidden" ref={menuRef}>
-          <ul className="flex flex-col gap-8 text-xl uppercase pl-5 pt-6 pb-10">
+          <ul className="flex flex-col gap-8 text-lg uppercase pl-5 pt-6 pb-10">
             {NAV.map((item) => (
               <li key={item.to}>
                 <Link to={item.to} onClick={closeMenu}>{item.label}</Link>
@@ -232,7 +232,7 @@ const Header = ({ mainScreenRef }: HeaderProps) => {
                 <li>
                   <button
                     type="button"
-                    className="flex items-center gap-3 text-red-400 uppercase text-xl"
+                    className="flex items-center gap-3 text-red-400 uppercase text-lg"
                     onClick={() => { logOut(); closeMenu(); }}
                   >
                     Sign out

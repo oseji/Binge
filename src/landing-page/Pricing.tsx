@@ -105,7 +105,7 @@ const Pricing = () => {
 
                 <div className="flex items-baseline gap-1">
                   <span className="text-white text-lg">₦</span>
-                  <span className="text-4xl font-bold text-white leading-none">
+                  <span className="text-2xl font-bold text-white leading-none">
                     {plan.price.toLocaleString()}
                   </span>
                   <span className="text-fg-subtle text-sm">/month</span>

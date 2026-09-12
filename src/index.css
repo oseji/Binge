@@ -76,7 +76,7 @@ input::-webkit-inner-spin-button {
   text-align: left;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem); /* xl → 2xl */
   margin-bottom: 0.75rem;
   color: #ffffff;
 }
@@ -87,7 +87,7 @@ input::-webkit-inner-spin-button {
 
 .sectionSubHeading {
   color: theme("colors.fg.muted");
-  font-size: 1.0625rem;
+  font-size: 1rem;
   line-height: 1.6;
   text-align: left;
 }
@@ -198,7 +198,7 @@ input::-webkit-inner-spin-button {
   width: 100%;
   background: theme("colors.surface.DEFAULT");
   border: 1px solid theme("colors.line.DEFAULT");
-  border-radius: 1.125rem;
+  border-radius: 1.25rem;
   padding: 1.375rem;
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -213,7 +213,7 @@ input::-webkit-inner-spin-button {
 
 .featureImg {
   width: 100%;
-  border-radius: 0.625rem;
+  border-radius: 0.5rem;
   object-fit: cover;
   aspect-ratio: 16/10;
   display: block;
@@ -221,7 +221,7 @@ input::-webkit-inner-spin-button {
 }
 
 .featureHeading {
-  font-size: 1.1875rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 0.4375rem;
   color: white;
@@ -247,7 +247,7 @@ input::-webkit-inner-spin-button {
 }
 
 .pricingCard {
-  border-radius: 1.125rem;
+  border-radius: 1.25rem;
   overflow: hidden;
   border: 1px solid;
   flex: 1;
@@ -259,7 +259,7 @@ input::-webkit-inner-spin-button {
 
 .pricingCard:hover { transform: translateY(-6px); }
 
-.pricingName { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; }
+.pricingName { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; }
 
 .pricingBtn {
   display: block;
@@ -269,7 +269,7 @@ input::-webkit-inner-spin-button {
   margin: 1rem 0;
   border-radius: 0.75rem;
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -324,11 +324,11 @@ input::-webkit-inner-spin-button {
   filter: invert(1);
 }
 
-.questionBox > span { font-weight: 600; font-size: 0.9375rem; letter-spacing: -0.01em; }
+.questionBox > span { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
 
 .answer {
   overflow: hidden;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: theme("colors.fg.muted");
   line-height: 1.75;
   transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
@@ -362,7 +362,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
 
 .footerColHeading {
   color: theme("colors.accent.text") !important;
-  font-size: 0.6875rem !important;
+  font-size: 0.75rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
@@ -408,7 +408,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   border: 1px solid theme("colors.line.DEFAULT");
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(155, 81, 224, 0.06);
   overflow-y: auto;
   color: white;
@@ -428,7 +428,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   border: 1px solid theme("colors.line.DEFAULT");
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
   overflow-y: auto;
   color: white;
@@ -441,7 +441,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
 .inputGrp { display: flex; flex-direction: column; align-items: flex-start; width: 100%; gap: 0.4375rem; }
 
 .inputGrp label {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -455,7 +455,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
   border-radius: 0.75rem;
   width: 100%;
   color: white;
-  font-size: 0.9375rem;
+  font-size: 1rem; /* ≥16px also stops iOS zooming the page on focus */
   transition: all 0.15s ease;
 }
 
@@ -524,7 +524,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
 /* ─── Movie card ─── */
 .movieCard {
   position: relative;
-  border-radius: 0.625rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   overflow: hidden;
   flex-shrink: 0;
@@ -559,7 +559,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
 .movieCard:focus-visible .movieCardOverlay { opacity: 1; }
 
 .movieThumbnail {
-  border-radius: 0.625rem;
+  border-radius: 0.5rem;
   width: auto;
   height: 13rem;
   display: block;
@@ -583,7 +583,7 @@ footer { border-top: 1px solid theme("colors.line.DEFAULT"); }
 .detailsPageImg {
   width: 100%;
   max-width: 240px;
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
   flex-shrink: 0;
   margin: 0 auto;

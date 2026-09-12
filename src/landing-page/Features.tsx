@@ -48,7 +48,7 @@ const Features = () => {
           <div className="featuresBox" key={i} ref={(el) => (cardsRef.current[i] = el)}>
             <div className="relative">
               <img src={f.img} alt={f.heading} className="featureImg" />
-              <span className="absolute top-3 left-3 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
+              <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/80 text-white backdrop-blur-sm">
                 {f.badge}
               </span>
             </div>

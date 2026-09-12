@@ -40,10 +40,10 @@ const Favorites = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
             <div className="absolute bottom-0 left-0 p-6 w-full">
-              <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10 mb-3">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 text-white/70 backdrop-blur-sm border border-white/10 mb-3">
                 {item.subHeading}
               </span>
-              <h3 className="text-2xl font-bold text-white leading-tight">{item.heading}</h3>
+              <h3 className="text-xl font-bold text-white leading-tight">{item.heading}</h3>
               <div className="flex items-center gap-1.5 mt-3">
                 <div className="w-6 h-0.5 bg-accent rounded-full" />
                 <span className="text-xs text-fg-muted">Browse collection</span>

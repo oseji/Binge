@@ -128,7 +128,7 @@ const LoginPage = () => {
             </Link>
             <div className="flex flex-col items-center mb-7">
                 <img src={BingeLogo} alt="Binge Logo" className="h-10" />
-                <h1 className="mt-2 text-xl font-bold text-white">
+                <h1 className="mt-2 text-lg font-bold text-white">
                     Welcome back to Binge
                 </h1>
                 <p className="mt-1 text-xs text-fg-muted">
