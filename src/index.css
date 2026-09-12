@@ -102,58 +102,6 @@ input::-webkit-inner-spin-button {
   min-height: 100svh;
 }
 
-/* ─── Landing page header (absolute over hero) ─── */
-.bigScreenHeader {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 2.5rem;
-}
-
-@media (min-width: 768px) {
-  .bigScreenHeader { display: flex; }
-}
-
-.bigScreenHeader li {
-  color: rgba(255, 255, 255, 0.75);
-  transition: color 200ms ease;
-  cursor: pointer;
-}
-
-.bigScreenHeader li:hover { color: white; }
-
-/* ─── Mobile header ─── */
-.smallScreenHeader {
-  display: block;
-  padding: 1rem;
-  background: rgba(9, 9, 15, 0.97);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-
-@media (min-width: 768px) { .smallScreenHeader { display: none; } }
-
-.smallScreenHeader li {
-  transition: color 200ms ease, transform 200ms ease;
-}
-
-.smallScreenHeader li:hover {
-  color: theme("colors.accent.text");
-  transform: translateX(6px);
-}
-
 .menuHidden {
   height: 0;
   overflow: hidden;
@@ -178,20 +126,6 @@ input::-webkit-inner-spin-button {
 @media (min-width: 768px) {
   .hideMainScreen { height: auto; overflow: visible; }
 }
-
-.headerList {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-@media (min-width: 768px) {
-  .headerList { flex-direction: row; gap: 2rem; }
-}
-
-.headerList > li { font-size: 0.9375rem; font-weight: 500; }
-.headerList a { display: inline-block; padding: 0.75rem 0.25rem; }
 
 .headerLogo { height: 2rem; cursor: pointer; }
 

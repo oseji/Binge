@@ -16,7 +16,7 @@ import Series from "./movies-series/Series";
 import Search from "./movies-series/Search";
 import Details from "./movies-series/Details";
 
-import Header from "./landing-page/Header";
+import Header from "./components/Header";
 import HeroSection from "./landing-page/HeroSection";
 import Favorites from "./landing-page/Favorites";
 import Features from "./landing-page/Features";

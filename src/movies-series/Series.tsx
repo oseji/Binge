@@ -1,15 +1,15 @@
 import { useRef } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 
-import Header from "../landing-page/Header";
+import Header from "../components/Header";
 import MediaCategories from "./MediaCategories";
 
-const Series = () => {
+type Props = {
+  /** Rendered inside another page (no header, no page title, no landmark) */
+  embedded?: boolean;
+};
+
+const Series = ({ embedded = false }: Props) => {
   const mainScreenRef = useRef<HTMLElement>(null);
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.loginSetter.isLoggedIn
-  );
 
   const information = {
     type: "tv",
@@ -18,18 +18,16 @@ const Series = () => {
     titles: ["airing today", "on the air", "popular", "top rated"],
   };
 
+  if (embedded) {
+    return <MediaCategories information={information} />;
+  }
+
   return (
     <div>
-      {!isLoggedIn && <Header mainScreenRef={mainScreenRef} />}
+      <Header mainScreenRef={mainScreenRef} />
 
-      <main
-        id="main"
-        ref={mainScreenRef}
-        className={`${isLoggedIn ? "" : "pt-10 md:pt-20"}`}
-      >
-        {!isLoggedIn && (
-          <h1 className="px-5 md:px-10 pt-8 text-3xl font-bold">Series</h1>
-        )}
+      <main id="main" ref={mainScreenRef} className="pt-4 md:pt-[68px]">
+        <h1 className="px-5 md:px-10 pt-8 text-3xl font-bold">Series</h1>
         <MediaCategories information={information} />
       </main>
     </div>

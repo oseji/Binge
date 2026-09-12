@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import Header from "./SignedInHeader";
+import Header from "../components/Header";
 import HeroSection from "./HeroSection";
 import Movies from "../movies-series/Movies";
 import Series from "../movies-series/Series";
@@ -48,7 +48,7 @@ const SignedInLandingPage = () => {
           </div>
         </div>
 
-        {currentType === "Movies" ? <Movies /> : <Series />}
+        {currentType === "Movies" ? <Movies embedded /> : <Series embedded />}
 
         <Footer />
       </main>
