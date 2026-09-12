@@ -1,16 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./loginState";
 import { loadingSlice } from "./loadingState";
-import { mediaIDSlice } from "./mediaID";
-import { mediaTypeSlice } from "./mediaType";
 import searchSlice from "./searchStateSlice";
 
 export const store = configureStore({
   reducer: {
     loginSetter: authSlice.reducer,
     loadingSetter: loadingSlice.reducer,
-    mediaIDSetter: mediaIDSlice.reducer,
-    mediaTypeSetter: mediaTypeSlice.reducer,
     search: searchSlice,
   },
 });

@@ -62,15 +62,18 @@ const Header = (props: headerProps) => {
             <img src={logo} alt="Binge Logo" className="h-8" />
           </Link>
           <button
+            type="button"
             aria-label={menuToggled ? "Close menu" : "Open menu"}
+            aria-expanded={menuToggled}
+            aria-controls="landing-mobile-menu"
             onClick={() => setMenuToggled((prev) => !prev)}
-            className="p-1 focus:outline-none"
+            className="p-1"
           >
             <img src={menuToggled ? closeImg : menuImg} alt="" className="h-7" />
           </button>
         </div>
 
-        <div className="menuHidden" ref={menuRef}>
+        <div id="landing-mobile-menu" className="menuHidden" ref={menuRef}>
           <ul className="flex flex-col gap-8 text-2xl uppercase pt-8 pl-2">
             <li><Link to={"/"} onClick={() => setMenuToggled(false)}>Home</Link></li>
             <li><Link to={"/Movies"} onClick={() => setMenuToggled(false)}>Movies</Link></li>

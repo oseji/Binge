@@ -4,8 +4,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
-import { setmediaID } from "../redux/mediaID";
-import { setmediaType } from "../redux/mediaType";
 import { setSearchResults, setSearchTerm } from "../redux/searchStateSlice";
 
 import { CircularProgress } from "@mui/material";
@@ -67,9 +65,7 @@ const Search = () => {
   };
 
   const navigateToDetails = (id: number, mediaType: string) => {
-    dispatch(setmediaID(id));
-    dispatch(setmediaType(mediaType));
-    history.push("/Details");
+    history.push(`/Details/${mediaType}/${id}`);
   };
 
   return (

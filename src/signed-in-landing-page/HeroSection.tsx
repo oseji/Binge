@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import playIcon from "../assets/circle-play.svg";
-import { useDispatch } from "react-redux";
-import { setmediaID } from "../redux/mediaID";
-import { setmediaType } from "../redux/mediaType";
 import { useHistory } from "react-router-dom";
 
 type TrendingMovie = {
@@ -40,7 +37,6 @@ const GENRE_MAP: Record<number, string> = {
 
 const HeroSection = () => {
     const [featured, setFeatured] = useState<TrendingMovie | null>(null);
-    const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
@@ -68,9 +64,7 @@ const HeroSection = () => {
 
     const goToDetails = () => {
         if (!featured) return;
-        dispatch(setmediaID(featured.id));
-        dispatch(setmediaType("movie"));
-        history.push("/Details");
+        history.push(`/Details/movie/${featured.id}`);
     };
 
     if (!featured) return <div className="min-h-[60vh] bg-[#09090F]" />;

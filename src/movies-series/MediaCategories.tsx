@@ -1,10 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setmediaID } from "../redux/mediaID";
 import { CircularProgress } from "@mui/material";
-import { setmediaType } from "../redux/mediaType";
 
 type movieType = {
   poster_path: string;
@@ -32,7 +29,6 @@ type propTypes = {
 
 const MediaCategories = (props: propTypes) => {
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const [categoryData, setCategoryData] = useState<
     Record<string, categoryDataType>
@@ -122,19 +118,13 @@ const MediaCategories = (props: propTypes) => {
                 <div
                   key={element.id}
                   className="movieCard"
-                  onClick={() => {
-                    dispatch(setmediaID(element.id));
-                    dispatch(setmediaType(props.information.type));
-                    history.push("/Details");
-                  }}
+                  onClick={() => history.push(`/Details/${props.information.type}/${element.id}`)}
                   role="button"
                   tabIndex={0}
                   aria-label={`View ${element.title || element.name}`}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      dispatch(setmediaID(element.id));
-                      dispatch(setmediaType(props.information.type));
-                      history.push("/Details");
+                      history.push(`/Details/${props.information.type}/${element.id}`);
                     }
                   }}
                 >

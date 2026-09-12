@@ -27,7 +27,7 @@ type headerProps = {
 const Header = (props: headerProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const avatarRef = useRef<HTMLImageElement>(null);
+  const avatarRef = useRef<HTMLButtonElement>(null);
   const [menuToggled, setMenuToggled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -46,9 +46,10 @@ const Header = (props: headerProps) => {
     }
   };
 
-  // Close dropdown on outside click
+  // Close dropdown on outside click or Escape (Escape also returns focus to the trigger)
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
+    if (!dropdownOpen) return;
+    const onMouseDown = (e: MouseEvent) => {
       if (
         modalRef.current &&
         !modalRef.current.contains(e.target as Node) &&
@@ -58,9 +59,19 @@ const Header = (props: headerProps) => {
         setDropdownOpen(false);
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDropdownOpen(false);
+        avatarRef.current?.focus();
+      }
+    };
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [dropdownOpen]);
 
   // Mobile menu toggle
   useEffect(() => {
@@ -100,33 +111,46 @@ const Header = (props: headerProps) => {
 
           {/* Avatar + dropdown */}
           <div className="relative">
-            <img
+            <button
               ref={avatarRef}
-              src={avatar}
-              alt="profile"
-              className="h-9 w-9 rounded-full cursor-pointer object-cover ring-2 ring-transparent hover:ring-[#9B51E0]/60 transition-all duration-200"
+              type="button"
+              aria-label="Account menu"
+              aria-haspopup="menu"
+              aria-expanded={dropdownOpen}
+              aria-controls="account-menu"
+              className="block rounded-full ring-2 ring-transparent hover:ring-[#9B51E0]/60 transition-all duration-200"
               onClick={() => setDropdownOpen((p) => !p)}
-            />
+            >
+              <img src={avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
+            </button>
 
             <div
               ref={modalRef}
+              id="account-menu"
+              role="menu"
+              aria-label="Account"
               className={`absolute top-12 right-0 w-44 flex flex-col gap-1 p-2 rounded-2xl border border-white/8 shadow-2xl shadow-black/60 z-50 transition-all duration-200 origin-top-right ${
                 dropdownOpen
-                  ? "opacity-100 scale-100 pointer-events-auto"
-                  : "opacity-0 scale-95 pointer-events-none"
+                  ? "visible opacity-100 scale-100 pointer-events-auto"
+                  : "invisible opacity-0 scale-95 pointer-events-none"
               }`}
               style={{ background: "rgba(16,16,26,0.97)", backdropFilter: "blur(20px)" }}
             >
-              <Link to={"/MyList"} onClick={() => setDropdownOpen(false)}>
-                <button className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors">
-                  <img src={heartIcon} alt="" className="h-4 opacity-80" />
-                  My List
-                </button>
+              <Link
+                to={"/MyList"}
+                role="menuitem"
+                onClick={() => setDropdownOpen(false)}
+                className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+              >
+                <img src={heartIcon} alt="" className="h-4 opacity-80" />
+                My List
               </Link>
 
               <div className="h-px bg-white/5 mx-2" />
 
               <button
+                type="button"
+                role="menuitem"
                 className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/5 transition-colors"
                 onClick={logOut}
               >
@@ -147,15 +171,18 @@ const Header = (props: headerProps) => {
         <div className="flex justify-between items-center p-4">
           <img src={logo} alt="Binge Logo" className="h-8" />
           <button
+            type="button"
             aria-label={menuToggled ? "Close menu" : "Open menu"}
+            aria-expanded={menuToggled}
+            aria-controls="signed-in-mobile-menu"
             onClick={() => setMenuToggled((p) => !p)}
-            className="focus:outline-none p-1"
+            className="p-1"
           >
             <img src={menuToggled ? closeImg : menuImg} alt="" className="h-7" />
           </button>
         </div>
 
-        <div className="menuHidden" ref={menuRef}>
+        <div id="signed-in-mobile-menu" className="menuHidden" ref={menuRef}>
           <ul className="flex flex-col gap-10 text-xl uppercase pl-5 pt-6 pb-10">
             <li><Link to={"/"} onClick={closeMenu}>Home</Link></li>
             <li><Link to={"/MyList"} onClick={closeMenu}>My List</Link></li>

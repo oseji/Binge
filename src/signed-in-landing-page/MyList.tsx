@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setmediaID } from "../redux/mediaID";
-import { setmediaType } from "../redux/mediaType";
 import { CircularProgress } from "@mui/material";
 
 import backArrow from "../assets/previous.svg";
@@ -32,7 +29,6 @@ const HeartIcon = () => (
 
 const MyList = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<string>("");
   const [likedMedia, setLikedMedia] = useState<MediaItem[]>([]);
@@ -90,9 +86,7 @@ const MyList = () => {
   };
 
   const navigateToDetails = (media: detailedMediaItem) => {
-    dispatch(setmediaID(media.id));
-    dispatch(setmediaType(media.mediaType));
-    history.push("/Details");
+    history.push(`/Details/${media.mediaType}/${media.id}`);
   };
 
   useEffect(() => {

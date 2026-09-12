@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReactPlayer from "react-player";
-import { Link, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { RootState } from "../redux/store";
 import { db, auth } from "../firebase-config/firebase";
 import {
   addDoc,
@@ -63,8 +61,9 @@ const HeartIcon = ({ filled }: { filled: boolean }) => (
 );
 
 const Details = () => {
-  const movieId = useSelector((state: RootState) => state.mediaIDSetter.mediaID);
-  const mediaType = useSelector((state: RootState) => state.mediaTypeSetter.mediaType);
+  // Media identity comes from the URL so the page survives refresh and can be shared
+  const { type: mediaType, id } = useParams<{ type: string; id: string }>();
+  const movieId = Number(id);
 
   const tmdbPosterURL = "https://image.tmdb.org/t/p/w500/";
   const tmdbBackdropURL = "https://image.tmdb.org/t/p/original/";
@@ -250,7 +249,7 @@ const Details = () => {
   useEffect(() => {
     fetchDetails();
     fetchIfLiked();
-  }, []);
+  }, [mediaType, movieId]);
 
   useEffect(() => {
     const title = movieDetails.title || seriesDetails.name;

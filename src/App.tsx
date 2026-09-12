@@ -76,7 +76,7 @@ function App() {
 				</Route>
 
 				{/* DETAILS PAGE */}
-				<Route path={"/Details"} component={Details} />
+				<Route path={"/Details/:type/:id"} component={Details} />
 
 				{/* AUTHENTICATION PAGES */}
 				<Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>

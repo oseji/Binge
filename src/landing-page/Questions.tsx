@@ -1,4 +1,4 @@
-import { SyntheticEvent, useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
@@ -30,35 +30,10 @@ const faqs = [
 ];
 
 const Questions = () => {
-  const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const arrowRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const faqItemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  const toggleAnswer = (e: SyntheticEvent<HTMLDivElement>) => {
-    const clicked = Number(e.currentTarget.getAttribute("data-value"));
-
-    answerRefs.current.forEach((element, index) => {
-      if (element) {
-        if (clicked === index) {
-          element.classList.toggle("hideFaq");
-        } else {
-          element.classList.add("hideFaq");
-        }
-      }
-    });
-
-    arrowRefs.current.forEach((element, index) => {
-      if (element) {
-        if (clicked === index) {
-          element.classList.toggle("rotate-180");
-        } else {
-          element.classList.remove("rotate-180");
-        }
-      }
-    });
-  };
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -84,24 +59,40 @@ const Questions = () => {
       <p className="sectionSubHeading mb-8" ref={subRef}>Everything you need to know about Binge.</p>
 
       <div>
-        {faqs.map((faq, index) => (
-          <div className="questionGrp" key={index} ref={(el) => (faqItemsRef.current[index] = el)}>
-            <div className="questionBox" data-value={index} onClick={toggleAnswer}>
-              <p>{faq.q}</p>
-              <img
-                src={downArrow}
-                alt="toggle"
-                ref={(el) => (arrowRefs.current[index] = el)}
-              />
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          const questionId = `faq-question-${index}`;
+          const answerId = `faq-answer-${index}`;
+          return (
+            <div className="questionGrp" key={index} ref={(el) => (faqItemsRef.current[index] = el)}>
+              <h3>
+                <button
+                  type="button"
+                  id={questionId}
+                  className="questionBox"
+                  aria-expanded={isOpen}
+                  aria-controls={answerId}
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                >
+                  <span>{faq.q}</span>
+                  <img
+                    src={downArrow}
+                    alt=""
+                    className={isOpen ? "rotate-180" : ""}
+                  />
+                </button>
+              </h3>
+              <div
+                id={answerId}
+                role="region"
+                aria-labelledby={questionId}
+                className={`answer ${isOpen ? "" : "hideFaq"}`}
+              >
+                {faq.a}
+              </div>
             </div>
-            <p
-              className="answer hideFaq"
-              ref={(el) => (answerRefs.current[index] = el)}
-            >
-              {faq.a}
-            </p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
