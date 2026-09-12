@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
 import { RootState } from "./redux/store";
+import { setFalse, setTrue } from "./redux/loginState";
+import { auth } from "./firebase-config/firebase";
 import { ToastContainer } from "react-toastify";
-
-// import { db, auth, googleProvider } from "./firebase-config/firebase";
 
 import RegistrationPage from "./authentication-pages/RegistrationPage";
 import LoginPage from "./authentication-pages/LoginPage";
@@ -32,6 +33,20 @@ function App() {
 	);
 
 	const mainScreenRef = useRef<HTMLDivElement>(null);
+	const dispatch = useDispatch();
+	const [authReady, setAuthReady] = useState(false);
+
+	// Firebase persists the session across reloads; mirror it into Redux so a
+	// refresh doesn't drop the user back to the marketing page.
+	useEffect(() => {
+		return onAuthStateChanged(auth, (user) => {
+			dispatch(user ? setTrue() : setFalse());
+			setAuthReady(true);
+		});
+	}, [dispatch]);
+
+	// Hold rendering until the session is known to avoid flashing the wrong page
+	if (!authReady) return <div className="App" />;
 
 	return (
 		<div className="App">
