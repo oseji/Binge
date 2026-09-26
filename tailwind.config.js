@@ -2,44 +2,39 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    // Seven type steps (12 / 14 / 16 / 20 / 28 / 40 / display) and three radii (8 / 12 / 20)
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],
-      sm: ["0.875rem", { lineHeight: "1.25rem" }],
-      base: ["1rem", { lineHeight: "1.5rem" }],
-      lg: ["1.25rem", { lineHeight: "1.75rem" }],
-      xl: ["1.75rem", { lineHeight: "2.125rem" }],
-      "2xl": ["2.5rem", { lineHeight: "2.75rem" }],
-      "display-sm": ["clamp(2rem, 6vw, 4.5rem)", { lineHeight: "1" }],
-      display: ["clamp(2.75rem, 7vw, 5.5rem)", { lineHeight: "0.95" }],
+      sm: ["0.875rem", { lineHeight: "1.35rem" }],
+      base: ["1rem", { lineHeight: "1.6rem" }],
+      lg: ["1.1875rem", { lineHeight: "1.75rem" }],
+      xl: ["1.5rem", { lineHeight: "1.9rem" }],
     },
+    // Printed-programme corners: posters and controls are near-square, stills are square
     borderRadius: {
       none: "0",
-      DEFAULT: "0.5rem",
-      lg: "0.5rem",
-      xl: "0.75rem",
-      "2xl": "1.25rem",
+      sm: "2px",
+      DEFAULT: "4px",
       full: "9999px",
     },
     extend: {
       colors: {
-        // Surfaces
-        canvas: "#09090F",
-        surface: { DEFAULT: "#0D0D18", 2: "#14141F" },
-        // Text: every step clears WCAG AA (4.5:1) on canvas and surface-2
-        fg: { DEFAULT: "#FFFFFF", muted: "#A0A0B8", subtle: "#8A8AA4" },
-        // Brand: `accent` for fills (white text on it = 4.5:1),
-        // `accent-text` for purple text on dark (6.7:1)
-        accent: { DEFAULT: "#9B51E0", text: "#B57CF0", deep: "#7B3FC0" },
-        // Hairlines: `line` is decorative, `line-strong` is for input/button
-        // boundaries (3:1 non-text contrast)
-        line: { DEFAULT: "rgba(255,255,255,0.10)", strong: "rgba(255,255,255,0.35)" },
+        // Every text step clears WCAG AA (4.5:1) on ink-0 through ink-2
+        ink: { 0: "#0B0A09", 1: "#141210", 2: "#1C1916", 3: "#27231F" },
+        paper: { DEFAULT: "#F2ECE3", muted: "#B9B0A3", subtle: "#948B7F" },
+        // Negative orange: the base colour of colour negative film
+        signal: { DEFAULT: "#FF6B2C", ink: "#431A08" },
+        rule: { DEFAULT: "rgba(242,236,227,0.12)", strong: "rgba(242,236,227,0.38)" },
       },
       fontFamily: {
-        Inter: ["Inter", "sans-serif"],
+        sans: ["Archivo", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+      transitionTimingFunction: {
+        out: "cubic-bezier(0.16, 1, 0.3, 1)",
+        "in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
       },
       screens: {
         xl: "1200px",
+        "2xl": "1560px",
       },
     },
   },

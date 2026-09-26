@@ -1,28 +1,30 @@
 # Binge
 
-A Netflix-inspired streaming platform frontend built with React and TypeScript.
+A film and series discovery app built with React and TypeScript, on live data from TMDB. It plays trailers, never films, and it's honest about that.
+
+Live: https://binge-beta.vercel.app
 
 ## What it does
 
-Binge lets users browse, search, and manage a watchlist of movies and TV series. Unauthenticated visitors see a marketing landing page; authenticated users get a personalised home feed, browsing pages, and a saved list.
+- **Home**: a title sequence over this week's most-watched film. Point at any trending poster and the screen recuts to that film's still.
+- **Browse**: Movies and Series pages organised as strands (In cinemas, Coming soon, Top rated, On air this week...), each with a full "See all" grid, plus browsing by genre with sorting.
+- **Search**: results update as you type, with filters for films, series and people. The query lives in the URL, so searches can be shared. Press `/` on any page to jump to it.
+- **Title pages**: cast and crew, the official trailer, where it's streaming, renting or on sale in your country (switchable), seasons for series, and "More like this". Every name and genre links onward.
+- **People pages**: biography, best-known work and a full filmography filterable by department.
+- **My List**: save any title with a free account (or the guest login). The list follows you across devices.
+- **Pricing, as a concept**: a design exploration. Nothing is for sale; everything on Binge is free.
 
-## Features
+## Motion
 
-- **Landing page**: hero with this week's trending titles, feature highlights, a concept pricing section (no billing), and FAQ, all animated with GSAP scroll triggers
-- **Authentication**: sign up, log in, and password reset via Firebase Auth (email/password and Google), plus a one-click guest login for trying the app without an account
-- **Movies & Series**: dedicated browsing pages with category filtering
-- **Search**: search across movies, series and people
-- **Detail view**: trailer playback and full media info
-- **My List**: save and manage favourite titles
+Route changes run as View Transitions: the poster you click travels into the title page and back, and stills dissolve from page to page. Rows deal in as they arrive, the home hero opens like a projector shutter, and the footer wordmark rises with the scroll. Everything has a `prefers-reduced-motion` path that keeps state changes but drops the movement.
 
 ## Tech stack
 
-- React 18 + TypeScript (Vite)
-- Redux Toolkit for global auth and UI state
-- React Router v5
-- Tailwind CSS + MUI
-- Firebase (Auth + Firestore)
-- GSAP for animations
+- React 18 + TypeScript (Vite), React Router v5
+- Tailwind CSS with a small token set (`tailwind.config.js`, `src/index.css`)
+- GSAP for the hero sequence, the Web Animations API and CSS for everything else
+- Firebase Auth + Firestore for accounts and My List
+- TMDB API for all catalogue data; JustWatch (via TMDB) for streaming availability
 
 ## Getting started
 
@@ -31,4 +33,8 @@ npm install
 npm run dev
 ```
 
-Set up a `.env` file with your Firebase, TMDB, and YouTube API credentials before running.
+Create a `.env` with `VITE_TMDB_API_KEY` (a TMDB v4 read access token) and, optionally, `VITE_YOUTUBE_API_KEY` for the trailer fallback used when TMDB has no video for a title.
+
+## Credits
+
+This product uses the TMDB API but is not endorsed or certified by TMDB. Streaming availability is provided by JustWatch.

@@ -1,134 +1,52 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { RootState } from "./redux/store";
-import { setFalse, setTrue } from "./redux/loginState";
-import { auth } from "./firebase-config/firebase";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import RegistrationPage from "./authentication-pages/RegistrationPage";
-import LoginPage from "./authentication-pages/LoginPage";
-import ResetPassword from "./authentication-pages/ResetPassword";
-
-import Movies from "./movies-series/Movies";
-import Series from "./movies-series/Series";
-import Search from "./movies-series/Search";
+import { useWatchlist } from "./hooks/useWatchlist";
+import Landing from "./landing-page/Landing";
 import Details from "./movies-series/Details";
-
-import Header from "./components/Header";
-import HeroSection from "./landing-page/HeroSection";
-import Favorites from "./landing-page/Favorites";
-import Features from "./landing-page/Features";
-import Pricing from "./landing-page/Pricing";
-import Questions from "./landing-page/Questions";
-import Footer from "./landing-page/Footer";
-
-import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
+import Movies from "./movies-series/Movies";
+import Search from "./movies-series/Search";
+import Series from "./movies-series/Series";
+import NotFound from "./NotFound";
 import MyList from "./signed-in-landing-page/MyList";
+import SignedInLandingPage from "./signed-in-landing-page/SignedInLandingPage";
 
-function App() {
-	const isloggedIn = useSelector(
-		(state: RootState) => state.loginSetter.isLoggedIn
-	);
+// Auth screens are rarely visited and never part of a poster transition, so they load on demand
+const LoginPage = lazy(() => import("./authentication-pages/LoginPage"));
+const RegistrationPage = lazy(() => import("./authentication-pages/RegistrationPage"));
+const ResetPassword = lazy(() => import("./authentication-pages/ResetPassword"));
 
-	const mainScreenRef = useRef<HTMLElement>(null);
-	const dispatch = useDispatch();
-	const [authReady, setAuthReady] = useState(false);
+export default function App() {
+  const { user, authReady } = useWatchlist();
 
-	// Firebase persists the session across reloads; mirror it into Redux so a
-	// refresh doesn't drop the user back to the marketing page.
-	useEffect(() => {
-		return onAuthStateChanged(auth, (user) => {
-			dispatch(user ? setTrue() : setFalse());
-			setAuthReady(true);
-		});
-	}, [dispatch]);
+  // Hold the first paint until Firebase knows who this is, so the wrong home never flashes
+  if (!authReady) return <div className="min-h-[100svh] bg-ink-0" />;
 
-	// Hold rendering until the session is known to avoid flashing the wrong page
-	if (!authReady) return <div className="App" />;
+  return (
+    <>
+      <a href="#main" className="skipLink">
+        Skip to content
+      </a>
+      <Suspense fallback={<div className="min-h-[100svh] bg-ink-0" />}>
+        <Switch>
+          <Route exact path="/">
+            {user ? <SignedInLandingPage /> : <Landing />}
+          </Route>
+          <Route path="/Movies" component={Movies} />
+          <Route path="/Series" component={Series} />
+          <Route path="/Search" component={Search} />
+          <Route path="/MyList" component={MyList} />
+          <Route path="/Details/:type/:id" component={Details} />
+          <Route path="/LoginPage" component={LoginPage} />
+          <Route path="/RegistrationPage" component={RegistrationPage} />
+          <Route path="/ResetPassword" component={ResetPassword} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
 
-	return (
-		<div className="App">
-			<a href="#main" className="skipLink">Skip to content</a>
-			<Switch>
-				{/* LANDING PAGE */}
-				<Route exact path={"/"}>
-					{!isloggedIn ? (
-						<div className="landingPage">
-							<Header mainScreenRef={mainScreenRef} />
-
-							<main id="main" ref={mainScreenRef}>
-								<HeroSection></HeroSection>
-
-								<Favorites></Favorites>
-
-								<Features></Features>
-
-								<Pricing></Pricing>
-
-								<Questions></Questions>
-
-								<Footer></Footer>
-							</main>
-						</div>
-					) : (
-						<SignedInLandingPage />
-					)}
-				</Route>
-
-				{/* SEARCH PAGE */}
-				<Route path={"/Search"} component={Search} />
-
-				{/* MY LIST */}
-				<Route path={"/MyList"} component={MyList} />
-
-				{/* MOVIES AND SERIES PAGES */}
-				<Route path={["/Movies", "/Series"]}>
-					<Switch>
-						<Route path={"/Movies"} component={Movies} />
-						<Route path={"/Series"} component={Series} />
-					</Switch>
-				</Route>
-
-				{/* DETAILS PAGE */}
-				<Route path={"/Details/:type/:id"} component={Details} />
-
-				{/* AUTHENTICATION PAGES */}
-				<Route path={["/RegistrationPage", "/LoginPage", "/ResetPassword"]}>
-					<main id="main" className="authenticationPages">
-						<div
-							className="absolute inset-0 top-0 left-0 z-0 w-full h-full bg-cover "
-							style={{
-								backgroundImage: 'url("/heroSection-bg.jpg")',
-								backgroundSize: "cover",
-							}}
-						></div>
-						<Switch>
-							<Route path={"/RegistrationPage"}>
-								<RegistrationPage />
-							</Route>
-							<Route path={"/LoginPage"} component={LoginPage} />
-							<Route path={"/ResetPassword"} component={ResetPassword} />
-						</Switch>
-					</main>
-				</Route>
-			</Switch>
-
-			<ToastContainer
-				position="top-center"
-				autoClose={3000}
-				hideProgressBar={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				newestOnTop={true}
-				theme="dark"
-			/>
-		</div>
-	);
+      <ToastContainer position="bottom-center" autoClose={2600} hideProgressBar closeOnClick pauseOnFocusLoss pauseOnHover newestOnTop theme="dark" />
+    </>
+  );
 }
-
-export default App;

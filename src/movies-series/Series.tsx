@@ -1,37 +1,17 @@
-import { useRef } from "react";
+import Browse, { BrowseConfig } from "./Browse";
 
-import Header from "../components/Header";
-import MediaCategories from "./MediaCategories";
-
-type Props = {
-  /** Rendered inside another page (no header, no page title, no landmark) */
-  embedded?: boolean;
+const config: BrowseConfig = {
+  type: "tv",
+  label: "Series",
+  heroFrom: "popular",
+  strands: [
+    { key: "airing_today", title: "Airing today", blurb: "New episodes out today." },
+    { key: "on_the_air", title: "On air this week", blurb: "Shows with an episode in the next seven days." },
+    { key: "popular", title: "Popular right now", blurb: "What people are looking up on TMDB today." },
+    { key: "top_rated", title: "Top rated", blurb: "The highest-scoring series with enough votes to mean it." },
+  ],
 };
 
-const Series = ({ embedded = false }: Props) => {
-  const mainScreenRef = useRef<HTMLElement>(null);
-
-  const information = {
-    type: "tv",
-    url: "https://api.themoviedb.org/3/tv/",
-    categories: ["airing_today", "on_the_air", "popular", "top_rated"],
-    titles: ["airing today", "on the air", "popular", "top rated"],
-  };
-
-  if (embedded) {
-    return <MediaCategories information={information} />;
-  }
-
-  return (
-    <div>
-      <Header mainScreenRef={mainScreenRef} />
-
-      <main id="main" ref={mainScreenRef} className="pt-4 md:pt-[68px]">
-        <h1 className="px-5 md:px-10 pt-8 text-xl font-bold">Series</h1>
-        <MediaCategories information={information} />
-      </main>
-    </div>
-  );
-};
-
-export default Series;
+export default function Series() {
+  return <Browse config={config} />;
+}

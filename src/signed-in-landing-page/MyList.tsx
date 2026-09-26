@@ -1,181 +1,151 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { auth, db } from "../firebase-config/firebase";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
 
-import backArrow from "../assets/previous.svg";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Icon from "../components/Icon";
+import PosterCard from "../components/PosterCard";
+import { GRID, GridSkeleton } from "../components/PosterGrid";
+import Strand from "../components/Strand";
+import { useDocumentTitle } from "../hooks/useMotion";
+import { useTmdb } from "../hooks/useTmdb";
+import { Saved, useWatchlist } from "../hooks/useWatchlist";
+import { plural } from "../lib/format";
+import { MediaItem, Paged, titleOf } from "../lib/tmdb";
 
-type MediaItem = {
-  id: number;
-  mediaType: "movie" | "tv";
-};
+type Filter = "all" | "movie" | "tv";
 
-type detailedMediaItem = {
-  id: number;
-  mediaType: "movie" | "tv";
-  name: string;
-  title: string;
-  overview: string;
-  poster_path: string;
-};
+export default function MyList() {
+  const { user, authReady, items, listReady, listError, reload } = useWatchlist();
+  const [filter, setFilter] = useState<Filter>("all");
+  useDocumentTitle("My List");
 
-const HeartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-fg-subtle">
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-  </svg>
-);
-
-const MyList = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [fetchError, setFetchError] = useState<string>("");
-  const [likedMedia, setLikedMedia] = useState<MediaItem[]>([]);
-  const [detailedMedia, setDetailedMedia] = useState<detailedMediaItem[]>([]);
-  const tmdbBasePosterURL = "https://image.tmdb.org/t/p/w500/";
-
-  const fetchLikedMedia = async () => {
-    setIsLoading(true);
-    setFetchError("");
-    const user = auth.currentUser;
-
-    try {
-      if (user) {
-        const likedContentRef = collection(db, `users/${user.email}/LikedContent`);
-        const querySnapshot = await getDocs(likedContentRef);
-        const likedContent = querySnapshot.docs.map((doc) => {
-          const data = doc.data();
-          return { id: data.id, mediaType: data.mediaType };
-        });
-        setLikedMedia(likedContent);
-      }
-    } catch (err) {
-      setFetchError("Failed to load your list. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchMedia = async ({
-    id,
-    mediaType,
-  }: {
-    id: number;
-    mediaType: "movie" | "tv" | "person";
-  }) => {
-    const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-    const BASE_URL = "https://api.themoviedb.org/3";
-
-    const response = await axios.get(`${BASE_URL}/${mediaType}/${id}`, {
-      params: { language: "en-US" },
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    });
-
-    return { ...response.data, mediaType };
-  };
-
-  const fetchAllMedia = () => {
-    const promises = likedMedia.map((item) =>
-      fetchMedia({ id: item.id, mediaType: item.mediaType })
-    );
-    return Promise.all(promises);
-  };
-
-  useEffect(() => {
-    fetchLikedMedia();
-  }, []);
-
-  useEffect(() => {
-    if (likedMedia.length > 0) {
-      fetchAllMedia()
-        .then((mediaArray) => {
-          setDetailedMedia(mediaArray);
-        })
-        .catch(() => {
-          setFetchError("Failed to load media details. Please try again.");
-        });
-    }
-  }, [likedMedia]);
+  const shown = items.filter((s) => filter === "all" || s.mediaType === filter);
+  const films = items.filter((s) => s.mediaType === "movie").length;
 
   return (
-    <main id="main" className="myList">
-      <div className="flex flex-row items-center gap-4 mb-8">
-        <Link
-          to={"/"}
-          aria-label="Go back home"
-          className="inline-flex items-center justify-center w-11 h-11 -ml-2 rounded-full opacity-70 hover:opacity-100 hover:bg-white/5 transition-opacity"
-        >
-          <img src={backArrow} alt="" />
-        </Link>
-        <h1 className="text-xl font-bold capitalize">My List</h1>
-      </div>
-
-      {isLoading ? (
-        <div className="min-h-[60vh] flex justify-center items-center">
-          <CircularProgress aria-label="Loading" color="inherit" />
-        </div>
-      ) : fetchError ? (
-        <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-          <p className="text-fg-muted">{fetchError}</p>
-          <button
-            onClick={fetchLikedMedia}
-            className="px-6 py-2 bg-accent rounded-lg hover:bg-accent-deep transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      ) : detailedMedia.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {detailedMedia.map((media) => (
-            <Link
-              key={media.id}
-              to={`/Details/${media.mediaType}/${media.id}`}
-              className="flex flex-row gap-4 bg-surface rounded-xl p-3 hover:bg-surface-2 transition-colors duration-200 group"
-              aria-label={`View ${media.mediaType === "movie" ? media.title : media.name}`}
-            >
-              <img
-                src={tmdbBasePosterURL + media.poster_path}
-                alt={media.mediaType === "movie" ? media.title : media.name}
-                className="h-36 w-24 object-cover rounded-lg flex-shrink-0"
-                loading="lazy"
-              />
-
-              <div className="flex flex-col gap-1.5 overflow-hidden">
-                <h2 className="text-base font-bold leading-tight group-hover:text-purple-300 transition-colors">
-                  {media.mediaType === "movie" ? media.title : media.name}
-                </h2>
-                <span className="text-xs text-purple-400 capitalize font-medium">
-                  {media.mediaType === "tv" ? "Series" : media.mediaType}
-                </span>
-                <p className="text-sm text-fg-muted leading-relaxed line-clamp-3">
-                  {media.overview || "No description available."}
+    <>
+      <Header />
+      <main id="main" className="min-h-[70svh]">
+        <div className="wrap pt-[calc(var(--header-h)+2.5rem)]">
+          <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
+            <div>
+              <h1 className="t-display">My List</h1>
+              {user && listReady && items.length > 0 && (
+                <p className="t-micro text-paper-subtle mt-4 tnum">
+                  {[plural(films, "film"), plural(items.length - films, "series", "series")].join(" · ")}
                 </p>
+              )}
+            </div>
+            {user && items.length > 0 && (
+              <div role="group" aria-label="Show" className="flex gap-2">
+                {(["all", "movie", "tv"] as Filter[]).map((f) => (
+                  <button key={f} type="button" className="chip" aria-pressed={filter === f} onClick={() => setFilter(f)}>
+                    {f === "all" ? "Everything" : f === "movie" ? "Films" : "Series"}
+                  </button>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <div className="min-h-[60vh] flex flex-col items-center justify-center gap-5">
-          <HeartIcon />
-          <div className="text-center">
-            <p className="text-lg font-semibold text-fg">Your list is empty</p>
-            <p className="text-fg-subtle text-sm mt-2">
-              Like movies and series to save them here.
-            </p>
+            )}
           </div>
-          <Link
-            to={"/"}
-            className="px-6 py-2.5 bg-accent rounded-lg hover:bg-accent-deep transition-colors font-medium"
-          >
-            Browse Content
-          </Link>
         </div>
-      )}
-    </main>
-  );
-};
 
-export default MyList;
+        {!authReady || (user && !listReady) ? (
+          <div className="wrap">
+            <GridSkeleton count={6} />
+          </div>
+        ) : !user ? (
+          <SignedOut />
+        ) : listError ? (
+          <div className="wrap py-12 flex flex-col items-start gap-4">
+            <p className="text-paper-muted">Couldn't load your list. Check your connection and try again.</p>
+            <button type="button" className="btn btn-ghost" onClick={reload}>
+              Try again
+            </button>
+          </div>
+        ) : items.length === 0 ? (
+          <EmptyList />
+        ) : (
+          <ul className={`wrap ${GRID} dim-siblings`}>
+            {shown.map((s) => (
+              <SavedCard key={`${s.mediaType}-${s.id}`} saved={s} />
+            ))}
+          </ul>
+        )}
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function SavedCard({ saved }: { saved: Saved }) {
+  const { toggle, isBusy } = useWatchlist();
+  const { data, error } = useTmdb<MediaItem>(`/${saved.mediaType}/${saved.id}`);
+
+  if (error) return null;
+  if (!data) {
+    return (
+      <li aria-hidden="true">
+        <div className="skeleton aspect-[2/3]" />
+        <div className="skeleton h-3 mt-3 w-3/4" />
+      </li>
+    );
+  }
+
+  const title = titleOf(data);
+  return (
+    <li className="relative">
+      <PosterCard item={data} type={saved.mediaType} slot={`mylist-${saved.mediaType}-${saved.id}`} width="w-full" sizes="(min-width: 1200px) 15vw, (min-width: 768px) 22vw, 45vw" />
+      <button
+        type="button"
+        onClick={() => toggle(saved.mediaType, saved.id, title)}
+        disabled={isBusy(saved.mediaType, saved.id)}
+        className="mt-2 inline-flex items-center gap-1.5 t-micro text-paper-subtle hover:text-signal py-2 transition-colors"
+        aria-label={`Remove ${title} from My List`}
+      >
+        <Icon name="close" size={14} /> Remove
+      </button>
+    </li>
+  );
+}
+
+function SignedOut() {
+  return (
+    <div className="wrap pb-6">
+      <div className="strand-rule" />
+      <div className="grid gap-8 md:grid-cols-2 pt-6">
+        <p className="t-strand max-w-[18ch]">Log in to keep a list of what you want to watch.</p>
+        <div>
+          <p className="text-paper-muted max-w-[44ch]">
+            Your list is saved to your account, so it follows you to any device. It's free, and there's a guest login if you'd rather not register.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-6">
+            <Link to="/LoginPage?next=%2FMyList" className="btn btn-signal">
+              Log in
+            </Link>
+            <Link to="/RegistrationPage" className="btn btn-ghost">
+              Create a free account
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmptyList() {
+  const { data, loading } = useTmdb<Paged<MediaItem>>("/trending/all/week");
+  return (
+    <div className="flex flex-col gap-16">
+      <div className="wrap">
+        <div className="strand-rule" />
+        <div className="grid gap-6 md:grid-cols-2 pt-6">
+          <p className="t-strand max-w-[18ch]">Nothing saved yet.</p>
+          <p className="text-paper-muted max-w-[44ch]">
+            Open any film or series and choose <span className="text-paper">Save to My List</span>. Here's what everyone else is looking at this week.
+          </p>
+        </div>
+      </div>
+      <Strand title="Trending this week" items={data?.results.filter((r) => r.media_type !== "person")} type="movie" slot="mylist-trending" loading={loading} />
+    </div>
+  );
+}

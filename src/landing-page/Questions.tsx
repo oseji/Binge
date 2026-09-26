@@ -1,85 +1,69 @@
-import { useRef, useState } from "react";
-import { useReveal } from "../hooks/useReveal";
-
-import downArrow from "../assets/down-arrow.svg";
+import { useState } from "react";
+import Icon from "../components/Icon";
 
 const faqs = [
   {
     q: "How does Binge work?",
-    a: "Binge is a media discovery platform that lets you search, explore, and track thousands of movies and TV series. Find what to watch next, browse trailers and details, and keep a watchlist, all in one place.",
+    a: "Binge is a discovery app for films and series. Browse this week's programme, search by title or by person, open any title for its cast, trailer, where it's streaming and what to watch next, then save what you like to My List.",
   },
   {
     q: "Is Binge free?",
-    a: "Yes, all of it. Browsing, search and trailers work without an account, and a free account adds your watchlist. The pricing section is a design concept only; there is nothing to pay.",
+    a: "Yes, all of it. Browsing, search, trailers and where-to-watch work without an account, and a free account adds My List. The pricing section is a design concept only; there is nothing to pay.",
   },
   {
-    q: "Can I save movies and shows I want to watch?",
-    a: "Absolutely. You can add any title to your personal list with a single tap. Your list is saved to your account so you can access it from any device, so you never lose track of something you wanted to watch.",
+    q: "Can I watch films on Binge?",
+    a: "No. Binge plays trailers, not films. Each title page lists where it's streaming, renting or on sale in your country, with a link out to the full list of services.",
   },
   {
-    q: "What information does Binge show for each title?",
-    a: "Each title page includes the synopsis, genres, runtime or season count, country and language, plus the official trailer. People pages show a biography and where they were born.",
+    q: "How do I save something for later?",
+    a: "Open any title and choose Save to My List. Your list is stored with your account, so it's there on any device you sign in on. There's a guest login if you'd rather not register.",
   },
   {
     q: "Where does the data come from?",
-    a: "Titles, artwork and details come from The Movie Database (TMDB) and trailers are played from YouTube. Binge uses the TMDB API but is not endorsed or certified by TMDB.",
+    a: "Titles, artwork, cast and details come from The Movie Database (TMDB). Streaming availability comes from JustWatch through TMDB, and trailers play from YouTube. Binge uses the TMDB API but is not endorsed or certified by TMDB.",
   },
 ];
 
-const Questions = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-  const faqItemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useReveal({ heading: headingRef, sub: subRef, items: faqItemsRef, from: { x: -40, opacity: 0 } });
+export default function Questions() {
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="questionsSection">
-      <h2 className="sectionHeading" ref={headingRef}>
-        Common{" "}
-        <span className="text-gradient">Questions</span>
-      </h2>
-      <p className="sectionSubHeading mb-8" ref={subRef}>Everything you need to know about Binge.</p>
+    <section id="faq" aria-labelledby="faq-heading" className="wrap pt-[var(--section-y)] scroll-mt-16">
+      <div className="grid gap-10 lg:grid-cols-12">
+        <h2 id="faq-heading" className="t-title lg:col-span-4 lg:sticky lg:top-24 self-start">
+          Questions
+        </h2>
 
-      <div>
-        {faqs.map((faq, index) => {
-          const isOpen = openIndex === index;
-          const questionId = `faq-question-${index}`;
-          const answerId = `faq-answer-${index}`;
-          return (
-            <div className="questionGrp" key={index} ref={(el) => (faqItemsRef.current[index] = el)}>
-              <h3>
-                <button
-                  type="button"
-                  id={questionId}
-                  className="questionBox"
-                  aria-expanded={isOpen}
-                  aria-controls={answerId}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                >
-                  <span>{faq.q}</span>
-                  <img
-                    src={downArrow}
-                    alt=""
-                    className={isOpen ? "rotate-180" : ""}
-                  />
-                </button>
-              </h3>
-              <div
-                id={answerId}
-                role="region"
-                aria-labelledby={questionId}
-                className={`answer ${isOpen ? "" : "hideFaq"}`}
-              >
-                {faq.a}
+        <div className="lg:col-span-8 border-t-[3px] border-paper">
+          {faqs.map((faq, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={faq.q} className="border-b border-rule">
+                <h3>
+                  <button
+                    type="button"
+                    id={`faq-q-${i}`}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-a-${i}`}
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="faq-q w-full flex items-center justify-between gap-6 py-5 text-left"
+                  >
+                    <span className="t-head">{faq.q}</span>
+                    <span className="faq-icon flex-shrink-0 w-9 h-9 rounded-full border border-rule-strong flex items-center justify-center" data-open={isOpen}>
+                      <Icon name="plus" size={18} />
+                    </span>
+                  </button>
+                </h3>
+                <div id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`} className="faq-a" data-open={isOpen} {...(isOpen ? {} : { inert: "" })}>
+                  <div className="overflow-hidden">
+                    <p className="text-paper-muted leading-relaxed pb-6 pr-14 max-w-[68ch]">{faq.a}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
-};
-
-export default Questions;
+}
